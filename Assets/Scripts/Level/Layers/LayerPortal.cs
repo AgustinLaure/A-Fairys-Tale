@@ -41,7 +41,7 @@ public class LayerPortal : MonoBehaviour
 
         tp.EnterPortal(this);
 
-        eventBus.Raise<OnEnterLayerPortal>(target);
+        eventBus.Raise<OnEnterLayerPortal>(tp,target);
     }
 
     void OnTriggerExit(Collider other)

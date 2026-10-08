@@ -9,6 +9,7 @@ public class OnEnterLayerPortal : IEvent
     {
         tp = (Teletransportable)data[0];
         target = (Transform)data[1];
+        Debug.LogWarning("EnterPortalEvent: tp " + tp + " target " + target );
     }
     public void Reset()
     {

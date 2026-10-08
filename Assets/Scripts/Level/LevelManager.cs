@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private static float camTransitionTime = 1.0f;
     [SerializeField] private float camTransitionCurrentTimer = 0.0f;
 
-     public Transform DefaultCamPos { get { return defaultCamPos; }}
+    public Transform DefaultCamPos { get { return defaultCamPos; } }
 
     [SerializeField] private Camera cam;
 
@@ -36,8 +36,9 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
-    public float GetCamTransitionProgress() {
-        return (camTransitionCurrentTimer/camTransitionTime); 
+    public float GetCamTransitionProgress()
+    {
+        return (camTransitionCurrentTimer / camTransitionTime);
     }
 
     void Awake()
@@ -108,14 +109,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        if (currentLayerIndex > layerIndex)
-        {
-            layers[layerIndex].SetVisible(true);
-        }
-        else
-        {
-            layers[currentLayerIndex].SetVisible(false);
-        }
+        eventBus.Raise<OnLayerChange>(currentLayerIndex,layerIndex);
 
         currentLayerIndex = layerIndex;
 
@@ -133,7 +127,7 @@ public class LevelManager : MonoBehaviour
     {
         while (GetCamTransitionProgress() < 1.0f)
         {
-            cam.transform.position = Vector3.Lerp(currentCamPos.position, layers[currentLayerIndex].camPos.position,GetCamTransitionProgress());
+            cam.transform.position = Vector3.Lerp(currentCamPos.position, layers[currentLayerIndex].camPos.position, GetCamTransitionProgress());
             camTransitionCurrentTimer += Time.deltaTime;
             yield return null;
         }
