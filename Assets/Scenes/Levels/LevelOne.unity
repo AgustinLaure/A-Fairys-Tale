@@ -5218,6 +5218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathArea
       objectReference: {fileID: 0}
+    - target: {fileID: 1673773263600998920, guid: c9f3ba7215daef64fb053175b4735b24, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
