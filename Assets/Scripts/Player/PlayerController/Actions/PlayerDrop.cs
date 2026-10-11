@@ -8,6 +8,7 @@ public class PlayerDrop : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform dropPoint;
     [SerializeField] private PlayerInventory playerInventory;
+    private GameObject currentLayerGameObject;
     private InputHandler inputHandle;
     private InputAction dropAction;
     private EventBus eventBus;
@@ -24,6 +25,7 @@ public class PlayerDrop : MonoBehaviour
 
         eventBus.Subscribe<OnPlayerDropAnimFinished>((Action)HandlePlayerDropAnimFinish);
         eventBus.Subscribe<OnPlayerTryDrop>((Action)HandlePlayerTryDrop);
+        eventBus.Subscribe<OnPlayerReparented>((Action<OnPlayerReparented>)HandlePlayerReparent);
 
         inputHandle = serviceLocator.GetService<InputHandler>();
         dropAction = inputHandle.playerInput.actions["Drop"];
@@ -50,17 +52,20 @@ public class PlayerDrop : MonoBehaviour
 
         eventBus.Raise<OnPlayerDrop>();
 
+        Prop currentProp = playerInventory.GetCurrentProp;
+
         while (!dropAnimFinished)
         {
             yield return null;
-
-            Prop currentProp = playerInventory.GetCurrentProp;
 
             if (currentProp != null)
             {
                 currentProp.transform.position = dropPoint.transform.position;
             }
         }
+
+        //Sets current layer as parent assuming parent is Action and parent.parent is layer
+        currentProp.transform.SetParent(currentLayerGameObject.transform, true);
 
         dropCoroutine = null;
     }
@@ -90,6 +95,11 @@ public class PlayerDrop : MonoBehaviour
             dropAnimFinished = true;
             currentProp = null;
         }
+    }
+
+    private void HandlePlayerReparent(OnPlayerReparented data)
+    {
+        currentLayerGameObject = data.currentLayer;
     }
 
     private void OnDestroy()

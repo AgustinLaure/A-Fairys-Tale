@@ -74,7 +74,8 @@ public class Frog : Origami
 
         Enable();
         Launch();
-        transform.parent = null;
+
+        AddToCurrentLayer();
 
         dropCoroutine = null;
     }

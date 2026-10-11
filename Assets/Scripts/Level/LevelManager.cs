@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
 
     private EventBus eventBus;
 
+    [SerializeField] private GameObject playerGameObject;
+
     [SerializeField] private GameObject playerSpawnPoint;
     [SerializeField] private GameObject pausePanel;
 
@@ -38,6 +40,10 @@ public class LevelManager : MonoBehaviour
 
     private const string playerTag = "Player";
 
+    [SerializeField] private float playerRespawnForce = 0.3f;
+    private bool isPlayerRespawning = false;
+    private Coroutine respawnPlayerCoroutine = null;
+
     public float GetCamTransitionProgress()
     {
         return (camTransitionCurrentTimer / camTransitionTime);
@@ -53,6 +59,7 @@ public class LevelManager : MonoBehaviour
 
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
         eventBus.Subscribe<OnDeathAreaCollision>((Action<OnDeathAreaCollision>)HandleDeathAreaCollision);
+        eventBus.Subscribe<OnPlayerLanded>((Action)HandlePlayerLand);
 
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
         gameManager.SetActiveLevelManager(this);
@@ -82,6 +89,8 @@ public class LevelManager : MonoBehaviour
             layers[i].SetLayerIndex(i);
             layers[i].RecalculateIndexes();
         }
+
+        ReparentPlayer();
     }
 
     private void Update()
@@ -124,6 +133,13 @@ public class LevelManager : MonoBehaviour
         currentLayerIndex = layerIndex;
 
         MoveCameraTransition();
+        ReparentPlayer();
+    }
+
+    private void ReparentPlayer()
+    {
+        playerGameObject.transform.SetParent(layers[currentLayerIndex].transform, true);
+        eventBus.Raise<OnPlayerReparented>(layers[currentLayerIndex].gameObject);
     }
 
     void MoveCameraTransition()
@@ -165,12 +181,52 @@ public class LevelManager : MonoBehaviour
     {
         if (data.collider.CompareTag(playerTag))
         {
+            if (respawnPlayerCoroutine != null)
+            {
+                StopCoroutine(respawnPlayerCoroutine);
+            }
 
+            respawnPlayerCoroutine = StartCoroutine(RespawnPlayerCoroutine(data));
         }
-        else if ()
+        else if (data.collider.CompareTag(Prop.GetPropTag))
         {
+            Rigidbody rb = data.collider.attachedRigidbody;
 
+            rb.position = layers[currentLayerIndex].GetPropRespawnTransform().position;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.rotation = Quaternion.identity;
         }
-            layers[currentLayerIndex].GetPropRespawnTransform();
+    }
+
+    private void HandlePlayerLand()
+    {
+        isPlayerRespawning = false;
+    }
+
+    private IEnumerator RespawnPlayerCoroutine(OnDeathAreaCollision data)
+    {
+        isPlayerRespawning = true;
+
+        eventBus.Raise<OnActionLockStateChanged>(true);
+
+        Rigidbody rb = data.collider.attachedRigidbody;
+
+        rb.position = layers[currentLayerIndex].GetPlayerRespawnTransform().position;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        yield return new WaitForFixedUpdate();
+
+        eventBus.Raise<OnPushPlayer>(Vector3.down * playerRespawnForce);
+
+        while (isPlayerRespawning)
+        {
+            yield return null;
+        }
+
+        eventBus.Raise<OnActionLockStateChanged>(false);
+
+        respawnPlayerCoroutine = null;
     }
 }

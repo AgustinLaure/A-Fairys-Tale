@@ -16,6 +16,7 @@ public class PlayerCraft : MonoBehaviour
     private const int maxRecipes = 2;
 
     [Header("References")]
+    private GameObject currentLayerGameObject;
     [SerializeField] private Transform origamiSpawnPointTRS;
     private OrigamiPool origamiPool;
     private ServiceLocator serviceLocator;
@@ -70,7 +71,9 @@ public class PlayerCraft : MonoBehaviour
         toggleCraftAction = inputHandle.playerInput.actions["ToggleCraft"];
         craftMovesAction = inputHandle.playerInput.actions["CraftMoves"];
         dropAction = inputHandle.playerInput.actions["Drop"];
-        
+
+        eventBus.Subscribe<OnPlayerReparented>((Action<OnPlayerReparented>)HandlePlayerReparent);
+
         toggleCraftAction.performed += OnToggleCraft;
         craftMovesAction.performed += OnCraftMoves;
         dropAction.performed += OnDrop;
@@ -153,7 +156,10 @@ public class PlayerCraft : MonoBehaviour
             {
                 GameObject origami = origamiPool.GetOrigami(recipes[i].type, origamiSpawnPointTRS.position, transform.rotation, transform);
 
-                eventBus.Raise<OnPlayerCraftedOrigami>(origami.GetComponent<Origami>());
+                Origami origamiComp = origami.GetComponent<Origami>();
+                origamiComp.SetCurrentLayerGameObject = currentLayerGameObject;
+
+                eventBus.Raise<OnPlayerCraftedOrigami>(origamiComp);
 
                 isCrafting = false;
                 ResetCache();
@@ -195,6 +201,11 @@ public class PlayerCraft : MonoBehaviour
         }
 
         return matches;
+    }
+
+    private void HandlePlayerReparent(OnPlayerReparented data)
+    {
+        currentLayerGameObject = data.currentLayer;
     }
 
     private void OnDestroy()

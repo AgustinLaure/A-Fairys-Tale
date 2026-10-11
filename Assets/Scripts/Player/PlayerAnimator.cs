@@ -227,7 +227,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (playerAnimator.playerController.GetIsOnAirState)
+            if (playerAnimator.playerController.GetIsOnAir())
             {
                 if (playerAnimator.rb.linearVelocity.y < -fallStateChangeSpeed)
                 {
@@ -310,7 +310,7 @@ public class PlayerAnimator : MonoBehaviour
                 }
             }
 
-            if (playerAnimator.playerController.GetIsOnAirState)
+            if (playerAnimator.playerController.GetIsOnAir())
             {
                 if (playerAnimator.rb.linearVelocity.y < -fallStateChangeSpeed)
                 {
@@ -341,7 +341,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public void OnFall(OnPushPlayer data)
         {
-            //playerAnimator.fsm.TryChange<IdleToWalkState>(typeof(FallState));
+            playerAnimator.fsm.TryChange<IdleToWalkState>(typeof(FallState));
         }
     }
 
@@ -365,7 +365,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             horizontalInput = playerAnimator.moveAction.ReadValue<Vector2>().x;
 
-            if (playerAnimator.playerController.GetIsOnAirState)
+            if (playerAnimator.playerController.GetIsOnAir())
             {
                 if (playerAnimator.rb.linearVelocity.y < -fallStateChangeSpeed)
                 {
@@ -403,7 +403,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public void OnFall(OnPushPlayer data)
         {
-            //playerAnimator.fsm.TryChange<WalkState>(typeof(FallState));
+            playerAnimator.fsm.TryChange<WalkState>(typeof(FallState));
         }
     }
 
@@ -426,7 +426,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             horizontalInput = playerAnimator.moveAction.ReadValue<Vector2>().x;
 
-            if (playerAnimator.playerController.GetIsOnAirState)
+            if (playerAnimator.playerController.GetIsOnAir())
             {
                 if (playerAnimator.rb.linearVelocity.y < -fallStateChangeSpeed)
                 {
@@ -467,7 +467,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public void OnFall(OnPushPlayer data)
         {
-            //playerAnimator.fsm.TryChange<WalkToIdleState>(typeof(FallState));
+            playerAnimator.fsm.TryChange<WalkToIdleState>(typeof(FallState));
         }
 
         public void OnCraft(OnPlayerToggleCraft data)
@@ -496,7 +496,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             if (AnimationUtils.GetCurrentAnimationEnded(playerAnimator.animator, playerAnimator.statesAnimatorHash[State.Jump]))
             {
-                isOnAir = playerAnimator.playerController.GetIsOnAirState;
+                isOnAir = playerAnimator.playerController.GetIsOnAir();
                 horizontalInput = playerAnimator.moveAction.ReadValue<Vector2>().x;
 
                 if (isOnAir)
@@ -543,7 +543,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (!playerAnimator.playerController.GetIsOnAirState)
+            if (!playerAnimator.playerController.GetIsOnAir())
             {
                 playerAnimator.fsm.TryChange<FallState>(typeof(LandState));
             }
@@ -580,17 +580,27 @@ public class PlayerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(playerAnimator.animator, playerAnimator.statesAnimatorHash[State.Land]))
+            if (playerAnimator.playerController.GetIsOnAir())
             {
-                horizontalInput = playerAnimator.moveAction.ReadValue<Vector2>().x;
-
-                if (horizontalInput * horizontalInput > epsilon * epsilon)
+                if (playerAnimator.rb.linearVelocity.y < -fallStateChangeSpeed)
                 {
-                    playerAnimator.fsm.TryChange<LandState>(typeof(LandToWalkState));
+                    playerAnimator.fsm.TryChange<WalkState>(typeof(FallState));
                 }
-                else
+            }
+            else
+            {
+                if (AnimationUtils.GetCurrentAnimationEnded(playerAnimator.animator, playerAnimator.statesAnimatorHash[State.Land]))
                 {
-                    playerAnimator.fsm.TryChange<LandState>(typeof(LandToIdleState));
+                    horizontalInput = playerAnimator.moveAction.ReadValue<Vector2>().x;
+
+                    if (horizontalInput * horizontalInput > epsilon * epsilon)
+                    {
+                        playerAnimator.fsm.TryChange<LandState>(typeof(LandToWalkState));
+                    }
+                    else
+                    {
+                        playerAnimator.fsm.TryChange<LandState>(typeof(LandToIdleState));
+                    }
                 }
             }
         }
@@ -602,7 +612,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public void OnFall(OnPushPlayer data)
         {
-            //playerAnimator.fsm.TryChange<LandState>(typeof(FallState));
+            playerAnimator.fsm.TryChange<LandState>(typeof(FallState));
         }
     }
 
@@ -622,7 +632,14 @@ public class PlayerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(playerAnimator.animator, playerAnimator.statesAnimatorHash[State.LandToIdle]))
+            if (playerAnimator.playerController.GetIsOnAir())
+            {
+                if (playerAnimator.rb.linearVelocity.y < -fallStateChangeSpeed)
+                {
+                    playerAnimator.fsm.TryChange<WalkState>(typeof(FallState));
+                }
+            }
+            else if (AnimationUtils.GetCurrentAnimationEnded(playerAnimator.animator, playerAnimator.statesAnimatorHash[State.LandToIdle]))
             {
                 playerAnimator.fsm.TryChange<LandToIdleState>(typeof(IdleState));
             }
@@ -645,7 +662,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public void OnFall(OnPushPlayer data)
         {
-            // playerAnimator.fsm.TryChange<LandToIdleState>(typeof(FallState));
+            playerAnimator.fsm.TryChange<LandToIdleState>(typeof(FallState));
         }
     }
 
@@ -669,6 +686,10 @@ public class PlayerAnimator : MonoBehaviour
             {
                 playerAnimator.fsm.TryChange<LandToWalkState>(typeof(WalkState));
             }
+            if (true)
+            {
+
+            }
         }
         public override void Exit()
         {
@@ -681,7 +702,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public void OnFall(OnPushPlayer data)
         {
-            //playerAnimator.fsm.TryChange<LandToWalkState>(typeof(FallState));
+            playerAnimator.fsm.TryChange<LandToWalkState>(typeof(FallState));
         }
     }
 
