@@ -10,6 +10,7 @@ public abstract class Origami : Prop
     [SerializeField] protected GameObject baseForm;
     [SerializeField] private GameObject crumpledForm;
     [SerializeField] private Animator animator;
+    protected GameObject currentLayerGameObject = null;
 
     protected int baseLayer = 0;
     protected int noPlayerColLayer = 0;
@@ -20,6 +21,8 @@ public abstract class Origami : Prop
 
     private Coroutine crumpleCoroutine = null;
     protected float crumpleColliderSize = 1f;
+
+    public GameObject SetCurrentLayerGameObject { get { return currentLayerGameObject; } set { currentLayerGameObject = value; } }
 
     protected virtual void Crumple()
     {
@@ -45,5 +48,17 @@ public abstract class Origami : Prop
         sphereCollider.gameObject.layer = baseLayer;
 
         crumpleCoroutine = null;
+    }
+
+    protected void AddToCurrentLayer()
+    {
+        if (currentLayerGameObject != null)
+        {
+            transform.SetParent(currentLayerGameObject.transform, true);
+        }
+        else
+        {
+            transform.SetParent(null, true);
+        }
     }
 }

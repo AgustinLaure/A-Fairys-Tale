@@ -58,7 +58,7 @@ public class AreaTrigger : MonoBehaviour
         {
             if (passEnterCollisionData)
             {
-                genericTriggerEnterRaise.Invoke(eventBus, new object[] { other });
+                genericTriggerEnterRaise.Invoke(eventBus, new object[] { new object[] { other } });
             }
             else
             {
@@ -75,7 +75,7 @@ public class AreaTrigger : MonoBehaviour
         {
             if (passExitCollisionData)
             {
-                genericTriggerExitRaise.Invoke(eventBus, new object[] { other });
+                genericTriggerExitRaise.Invoke(eventBus, new object[] { new object[] { other } });
             }
             else
             {

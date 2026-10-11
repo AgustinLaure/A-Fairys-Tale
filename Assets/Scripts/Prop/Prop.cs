@@ -6,6 +6,10 @@ public abstract class Prop : MonoBehaviour, IPickable
 
     public bool GetIsPickable { get { return isPickable; } }
 
+    private static string propTag = "Prop";
+
+    public static string GetPropTag { get { return propTag; } }
+
     public virtual void Action()
     {
 

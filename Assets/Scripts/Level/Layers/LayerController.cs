@@ -16,6 +16,12 @@ public class LayerController : MonoBehaviour
     [SerializeField] private List<LayerPortal> portalList = new List<LayerPortal>();
     [SerializeField] private List<PortalTarget> portalTargets = new List<PortalTarget>();
 
+    [SerializeField] private Transform playerRespawnTransform;
+    [SerializeField] private List<Transform> propRespawnTransforms = new List<Transform>();
+    [SerializeField] private bool isRandomRespawn;
+
+    private int currentRespawnPointIndex = 0;
+
     private LevelManager levelManager;
 
     private int layerIndex = -1;
@@ -53,7 +59,7 @@ public class LayerController : MonoBehaviour
             if (transform.Find("Foreground")) foregroundObject = transform.Find("Foreground").gameObject;
         }
 
-        if(!overrideFadeColor)
+        if (!overrideFadeColor)
         {
             fadeColor = levelManager.defaultFadeColor;
             fadeLayerSprite.color = fadeColor;
@@ -84,22 +90,56 @@ public class LayerController : MonoBehaviour
         float progress = 0.0f;
 
         Debug.Log("FadeColor alpha " + fadeColor.a);
-        
+
         while (progress < 1.0f)
         {
-            alpha = Mathf.Lerp(0.0f,fadeColor.a, progress);
+            alpha = Mathf.Lerp(0.0f, fadeColor.a, progress);
             progress += Time.deltaTime;
             Debug.Log("Alpha " + alpha + " progress: " + progress);
 
             fadeLayerSprite.color = new Color(fadeLayerSprite.color.r, fadeLayerSprite.color.g, fadeLayerSprite.color.b, (visible ? alpha : (1.0f - alpha)));
         }
-        
+
 
         yield return null;
     }
 
+    public Transform GetPlayerRespawnTransform()
+    {
+        return playerRespawnTransform;
+    }
+
+    public Transform GetPropRespawnTransform()
+    {
+        Transform result = null;
+        if (propRespawnTransforms != null && propRespawnTransforms.Count > 0)
+        {
+            int transformsCount = propRespawnTransforms.Count;
+
+            if (isRandomRespawn)
+            {
+                result = propRespawnTransforms[Random.Range(0, transformsCount)];
+            }
+            else
+            {
+                result = propRespawnTransforms[currentRespawnPointIndex];
+
+                if (currentRespawnPointIndex + 1 < transformsCount)
+                {
+                    currentRespawnPointIndex++;
+                }
+                else
+                {
+                    currentRespawnPointIndex = 0;
+                }
+            }
+        }
+
+        return result;
+    }
+
     void Update()
     {
-        
+
     }
 }

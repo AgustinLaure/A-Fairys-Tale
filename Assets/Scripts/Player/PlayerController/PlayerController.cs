@@ -30,8 +30,6 @@ public class PlayerController : MonoBehaviour
 
     public State GetState { get { return fsm.GetCurrentState; } }
 
-    public bool GetIsOnAirState { get { return fsm.GetCurrentState is OnAirState; } }
-
 
     private void Start()
     {
@@ -61,6 +59,7 @@ public class PlayerController : MonoBehaviour
         eventBus.Subscribe<OnPlayerDrop>((Action)idleState.OnDrop);
         eventBus.Subscribe<OnPlayerToggleCraft>((Action<OnPlayerToggleCraft>)idleState.OnCraft);
         eventBus.Subscribe<OnPlayerAim>((Action)idleState.OnAircraftAim);
+        eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)idleState.OnActionLock);
 
         MoveState moveState = new MoveState(this);
         moveState.actions = new List<MonoBehaviour>()
@@ -71,12 +70,15 @@ public class PlayerController : MonoBehaviour
 
         eventBus.Subscribe<OnPlayerPickUp>((Action<OnPlayerPickUp>)moveState.OnPickUp);
         eventBus.Subscribe<OnPlayerDrop>((Action)moveState.OnDrop);
+        eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)moveState.OnActionLock);
 
         OnAirState onAirState = new OnAirState(this);
         onAirState.actions = new List<MonoBehaviour>()
         {
             playerHorizontalMovement
         };
+
+        eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)onAirState.OnActionLock);
 
         ActionLockState actionLockState = new ActionLockState(this);
         actionLockState.actions = new List<MonoBehaviour>()
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
         eventBus.Subscribe<OnPlayerDropToIdleAnimFinished>((Action)actionLockState.OnDropFinished);
         eventBus.Subscribe<OnPlayerPickUpAnimFinished>((Action)actionLockState.OnPickUpFinished);
         eventBus.Subscribe<OnPlayerStoppedCrafting>((Action)actionLockState.OnPlayerStoppedCrafting);
+        eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)actionLockState.OnActionLock);
 
         CraftState craftState = new CraftState(this);
         craftState.actions = new List<MonoBehaviour>()
@@ -135,7 +138,7 @@ public class PlayerController : MonoBehaviour
         pivot.rotation = data.rotation;
     }
 
-    private bool GetIsOnAir()
+    public bool GetIsOnAir()
     {
         return !Physics.CheckBox(floorDetection.bounds.center, floorDetection.bounds.extents, floorDetection.transform.rotation, groundLayer);
     }
@@ -202,6 +205,14 @@ public class PlayerController : MonoBehaviour
         {
             playerController.fsm.TryChange<IdleState>(typeof(AimState));
         }
+
+        public void OnActionLock(OnActionLockStateChanged data)
+        {
+            if (data.state)
+            {
+                playerController.fsm.TryChange<IdleState>(typeof(ActionLockState));
+            }
+        }
     }
 
     private class MoveState : State
@@ -248,6 +259,14 @@ public class PlayerController : MonoBehaviour
         {
             playerController.fsm.TryChange<MoveState>(typeof(ActionLockState));
         }
+
+        public void OnActionLock(OnActionLockStateChanged data)
+        {
+            if (data.state)
+            {
+                playerController.fsm.TryChange<MoveState>(typeof(ActionLockState));
+            }
+        }
     }
 
     private class OnAirState : State
@@ -276,6 +295,14 @@ public class PlayerController : MonoBehaviour
         {
 
         }
+
+        public void OnActionLock(OnActionLockStateChanged data)
+        {
+            if (data.state)
+            {
+                playerController.fsm.TryChange<OnAirState>(typeof(ActionLockState));
+            }
+        }
     }
 
     private class ActionLockState : State
@@ -296,7 +323,7 @@ public class PlayerController : MonoBehaviour
         {
             if (playerController.GetIsOnAir())
             {
-                playerController.fsm.TryChange<ActionLockState>(typeof(OnAirState));
+                //playerController.fsm.TryChange<ActionLockState>(typeof(OnAirState));
             }
         }
 
@@ -318,6 +345,14 @@ public class PlayerController : MonoBehaviour
         public void OnPlayerStoppedCrafting()
         {
             playerController.fsm.TryChange<ActionLockState>(typeof(IdleState));
+        }
+
+        public void OnActionLock(OnActionLockStateChanged data)
+        {
+            if (!data.state)
+            {
+                playerController.fsm.TryChange<ActionLockState>(typeof(IdleState));
+            }
         }
     }
 

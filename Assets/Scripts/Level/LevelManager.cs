@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
     private GameManager gameManager;
 
     private EventBus eventBus;
+
+    [SerializeField] private GameObject playerGameObject;
 
     [SerializeField] private GameObject playerSpawnPoint;
     [SerializeField] private GameObject pausePanel;
@@ -20,7 +22,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private static float camTransitionTime = 1.0f;
     [SerializeField] private float camTransitionCurrentTimer = 0.0f;
 
-     public Transform DefaultCamPos { get { return defaultCamPos; }}
+    public Transform DefaultCamPos { get { return defaultCamPos; } }
 
     [SerializeField] private Camera cam;
 
@@ -36,8 +38,15 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
-    public float GetCamTransitionProgress() {
-        return (camTransitionCurrentTimer/camTransitionTime); 
+    private const string playerTag = "Player";
+
+    [SerializeField] private float playerRespawnForce = 0.3f;
+    private bool isPlayerRespawning = false;
+    private Coroutine respawnPlayerCoroutine = null;
+
+    public float GetCamTransitionProgress()
+    {
+        return (camTransitionCurrentTimer / camTransitionTime);
     }
 
     void Awake()
@@ -49,6 +58,8 @@ public class LevelManager : MonoBehaviour
         }
 
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
+        eventBus.Subscribe<OnDeathAreaCollision>((Action<OnDeathAreaCollision>)HandleDeathAreaCollision);
+        eventBus.Subscribe<OnPlayerLanded>((Action)HandlePlayerLand);
 
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
         gameManager.SetActiveLevelManager(this);
@@ -78,6 +89,8 @@ public class LevelManager : MonoBehaviour
             layers[i].SetLayerIndex(i);
             layers[i].RecalculateIndexes();
         }
+
+        ReparentPlayer();
     }
 
     private void Update()
@@ -120,6 +133,13 @@ public class LevelManager : MonoBehaviour
         currentLayerIndex = layerIndex;
 
         MoveCameraTransition();
+        ReparentPlayer();
+    }
+
+    private void ReparentPlayer()
+    {
+        playerGameObject.transform.SetParent(layers[currentLayerIndex].transform, true);
+        eventBus.Raise<OnPlayerReparented>(layers[currentLayerIndex].gameObject);
     }
 
     void MoveCameraTransition()
@@ -133,7 +153,7 @@ public class LevelManager : MonoBehaviour
     {
         while (GetCamTransitionProgress() < 1.0f)
         {
-            cam.transform.position = Vector3.Lerp(currentCamPos.position, layers[currentLayerIndex].camPos.position,GetCamTransitionProgress());
+            cam.transform.position = Vector3.Lerp(currentCamPos.position, layers[currentLayerIndex].camPos.position, GetCamTransitionProgress());
             camTransitionCurrentTimer += Time.deltaTime;
             yield return null;
         }
@@ -155,5 +175,58 @@ public class LevelManager : MonoBehaviour
     public void OnLose()
     {
         eventBus.Raise<OnLose>();
+    }
+
+    private void HandleDeathAreaCollision(OnDeathAreaCollision data)
+    {
+        if (data.collider.CompareTag(playerTag))
+        {
+            if (respawnPlayerCoroutine != null)
+            {
+                StopCoroutine(respawnPlayerCoroutine);
+            }
+
+            respawnPlayerCoroutine = StartCoroutine(RespawnPlayerCoroutine(data));
+        }
+        else if (data.collider.CompareTag(Prop.GetPropTag))
+        {
+            Rigidbody rb = data.collider.attachedRigidbody;
+
+            rb.position = layers[currentLayerIndex].GetPropRespawnTransform().position;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.rotation = Quaternion.identity;
+        }
+    }
+
+    private void HandlePlayerLand()
+    {
+        isPlayerRespawning = false;
+    }
+
+    private IEnumerator RespawnPlayerCoroutine(OnDeathAreaCollision data)
+    {
+        isPlayerRespawning = true;
+
+        eventBus.Raise<OnActionLockStateChanged>(true);
+
+        Rigidbody rb = data.collider.attachedRigidbody;
+
+        rb.position = layers[currentLayerIndex].GetPlayerRespawnTransform().position;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        yield return new WaitForFixedUpdate();
+
+        eventBus.Raise<OnPushPlayer>(Vector3.down * playerRespawnForce);
+
+        while (isPlayerRespawning)
+        {
+            yield return null;
+        }
+
+        eventBus.Raise<OnActionLockStateChanged>(false);
+
+        respawnPlayerCoroutine = null;
     }
 }

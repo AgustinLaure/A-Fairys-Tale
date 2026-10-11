@@ -209,8 +209,10 @@ public class Aircraft : Origami
         eventBus.Raise<OnOrigamiUsed>();
 
         yield return new WaitForSeconds(timeToEnablePlayerCollision);
-        
+
         sphereCollider.gameObject.layer = baseLayer;
+
+        AddToCurrentLayer();
 
         throwCoroutine = null;
     }
