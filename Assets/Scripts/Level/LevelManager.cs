@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
         }
 
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
+        eventBus.Subscribe<OnDeathAreaCollision>((Action<OnDeathAreaCollision>)HandleDeathAreaCollision);
 
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
         gameManager.SetActiveLevelManager(this);
@@ -155,5 +156,10 @@ public class LevelManager : MonoBehaviour
     public void OnLose()
     {
         eventBus.Raise<OnLose>();
+    }
+
+    private void HandleDeathAreaCollision(OnDeathAreaCollision data)
+    {
+        Debug.Log(data.collider.tag);
     }
 }
