@@ -292,6 +292,7 @@ public class WaterFlowerAnimator : MonoBehaviour
         public override void Enter()
         {
             birdAnimator.animator.SetInteger(birdAnimator.animatorStateHash, (int)State.Phase3);
+            birdAnimator.eventBus.Raise<OnWaterFlowerFinalPhase>();
         }
 
         public override void Update()
