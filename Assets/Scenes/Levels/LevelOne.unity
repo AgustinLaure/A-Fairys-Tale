@@ -2662,7 +2662,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 3a34355c8bf4ca04fb361d5e8b95dc1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5352,6 +5352,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 26262017}
     m_Modifications:
+    - target: {fileID: 4143943513485430173, guid: 957f837356841bb498b785f484500cef, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4500185504214546505, guid: 957f837356841bb498b785f484500cef, type: 3}
       propertyPath: m_Name
       value: Branch1
