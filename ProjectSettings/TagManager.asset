@@ -8,6 +8,8 @@ TagManager:
   - Aircraft
   - Prop
   - Ground
+  - Water
+  - Origami
   layers:
   - Default
   - TransparentFX
