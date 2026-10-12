@@ -67,6 +67,8 @@ public class PlayerDrop : MonoBehaviour
         //Sets current layer as parent assuming parent is Action and parent.parent is layer
         currentProp.transform.SetParent(currentLayerGameObject.transform, true);
 
+        eventBus.Raise<OnPlayerDropped>();
+
         dropCoroutine = null;
     }
 
