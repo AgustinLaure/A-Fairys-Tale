@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +16,8 @@ public class PlayerHorizontalMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float acceleration;
     [SerializeField] private float terminalVelocity;
+    [SerializeField] private float icedMultiplier;
+    [SerializeField] private float timePushed;
 
     private const ForceMode walkForceMode = ForceMode.Acceleration;
 
@@ -25,11 +29,18 @@ public class PlayerHorizontalMovement : MonoBehaviour
     private readonly Quaternion facingLeftRotation = Quaternion.Euler(0f, 0, 0f);
     private readonly Quaternion facingRightRotation = Quaternion.Euler(0f, 180f, 0f);
 
+    private bool isOnIce = false;
+    private bool isPushed = false;
+
+    private Coroutine pushCoroutine = null;
+
     private void Start()
     {
         ServiceLocator serviceLocator = ServiceLocator.Instance;
 
         eventBus = serviceLocator.GetService<EventBus>();
+        eventBus.Subscribe<OnPlayerIcedChanged>((Action<OnPlayerIcedChanged>)HandleIsOnIceStateChanged);
+        eventBus.Subscribe<OnPushPlayer>((Action<OnPushPlayer>)HandlePlayerPush);
 
         moveAction = serviceLocator.GetService<InputHandler>().playerInput.actions["Move"];
 
@@ -49,7 +60,9 @@ public class PlayerHorizontalMovement : MonoBehaviour
         {
             if ((playerAxisInput.x > 0f && rb.linearVelocity.x < terminalVelocity) || (playerAxisInput.x < 0f && rb.linearVelocity.x > -terminalVelocity))
             {
-                rb.AddForce(new Vector3(playerAxisInput.x * acceleration, 0f, 0f), walkForceMode);
+                float trueAccel = isOnIce ? acceleration * icedMultiplier : acceleration;
+
+                rb.AddForce(new Vector3(playerAxisInput.x * trueAccel, 0f, 0f), walkForceMode);
                 eventBus.Raise<OnPlayerMovedHorizontally>(playerAxisInput.x);
             }
         }
@@ -58,7 +71,10 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
         if (playerAxisInput.magnitude <= 0f)
         {
-           SetLegsColliderSharedMaterial(originalLegsColliderMat);
+            if (!isOnIce && !isPushed)
+            {
+                SetLegsColliderSharedMaterial(originalLegsColliderMat);
+            }
         }
         else
         {
@@ -86,6 +102,34 @@ public class PlayerHorizontalMovement : MonoBehaviour
         {
             baseTransform.rotation = facingRightRotation;
         }
+    }
+
+    private void HandleIsOnIceStateChanged(OnPlayerIcedChanged data)
+    {
+        isOnIce = data.state;
+    }
+
+    private void HandlePlayerPush(OnPushPlayer data)
+    {
+        if (pushCoroutine != null)
+        {
+            StopCoroutine(pushCoroutine);
+        }
+
+        pushCoroutine = StartCoroutine(PushCoroutine());
+    }
+
+    private IEnumerator PushCoroutine()
+    {
+        isPushed = true;
+
+        SetLegsColliderSharedMaterial(noFrictionMat);
+
+        yield return new WaitForSeconds(timePushed);
+
+        isPushed = false;
+
+        pushCoroutine = null;
     }
 
     private void OnDisable()
