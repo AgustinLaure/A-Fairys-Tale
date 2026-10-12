@@ -1,20 +1,14 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class BasicProp : Prop
 {
     [Header("References")]
     [SerializeField] private GameObject rendererObject;
-    [SerializeField] private GameObject contourObject;
     [SerializeField] private GameObject colliderObject;
-    [SerializeField] private SpriteRenderer contourSpriteRenderer;
-    private Material contourMat;
 
     [Header("Configs")]
     [SerializeField] private float highlightTime = 2f;
-    [SerializeField] private float lowestThickness;
-    [SerializeField] private float highestThickness = 4.62f;
     [SerializeField] private float minTimeToHighlight = 10f;
     [SerializeField] private float maxTimeToHighlight = 20f;
 
@@ -27,7 +21,6 @@ public class BasicProp : Prop
 
     private Coroutine highlightCoroutine = null;
 
-    private const string thicknessReference = "_Thickness";
 
     private void Awake()
     {
@@ -43,14 +36,9 @@ public class BasicProp : Prop
         }
     }
 
-    private void Start()
-    {
-        contourMat = contourSpriteRenderer.material;
-    }
-
     private void Update()
     {
-        if (rendererObject.activeSelf && lowestThickness < highestThickness)
+        if (rendererObject.activeSelf && contourLowestThickness < contourHighestThickness)
         {
             if (highlightCoroutine == null)
             {
@@ -59,9 +47,21 @@ public class BasicProp : Prop
         }
     }
 
+    public override void SetHighlight(bool state)
+    {
+        base.SetHighlight(state);
+
+        if (highlightCoroutine != null)
+        {
+            StopCoroutine(highlightCoroutine);
+            highlightCoroutine = null;
+        }
+    }
     private IEnumerator HighlightCoroutine(float timeToHighlight)
     {
         yield return new WaitForSeconds(timeToHighlight);
+
+        isHighlighted = true;
 
         contourObject.SetActive(true);
 
@@ -71,26 +71,28 @@ public class BasicProp : Prop
         while (t < 1f)
         {
             t += Time.deltaTime / highlightTime;
-            currentThickness = Mathf.Lerp(lowestThickness, highestThickness, t);
-            contourMat.SetFloat(thicknessReference, currentThickness);
+            currentThickness = Mathf.Lerp(contourLowestThickness, contourHighestThickness, t);
+            contourMat.SetFloat(contourThicknessReference, currentThickness);
 
             yield return null;
         }
 
-        contourMat.SetFloat(thicknessReference, highestThickness);
+        contourMat.SetFloat(contourThicknessReference, contourHighestThickness);
 
         t = 1f;
 
         while (t > 0f)
         {
             t -= Time.deltaTime / highlightTime;
-            currentThickness = Mathf.Lerp(lowestThickness, highestThickness, t);
-            contourMat.SetFloat(thicknessReference, currentThickness);
+            currentThickness = Mathf.Lerp(contourLowestThickness, contourHighestThickness, t);
+            contourMat.SetFloat(contourThicknessReference, currentThickness);
 
             yield return null;
         }
 
-        contourMat.SetFloat(thicknessReference, lowestThickness);
+        contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
+
+        isHighlighted = false;
 
         highlightCoroutine = null;
     }

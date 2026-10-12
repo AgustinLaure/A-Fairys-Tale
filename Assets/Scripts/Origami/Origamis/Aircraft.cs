@@ -49,8 +49,10 @@ public class Aircraft : Origami
         crumpleColliderSize = 0.06f;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         baseLayer = LayerMask.NameToLayer("Prop");
         crumpleClipName = crumpleClipNameConst;
         mainCamera = Camera.main;

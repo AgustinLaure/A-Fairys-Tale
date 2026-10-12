@@ -32,8 +32,10 @@ public class Frog : Origami
         playerTrigger.OnTriggerEntered += HandlePlayerTrigger;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         baseLayer = LayerMask.NameToLayer("Prop");
 
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
