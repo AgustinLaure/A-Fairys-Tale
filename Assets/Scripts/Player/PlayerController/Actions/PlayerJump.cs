@@ -1,16 +1,18 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Rigidbody rb;
+
     [Header("Config")]
     [SerializeField] private float jumpImpulse;
     [SerializeField] private float delay;
     [SerializeField] private float jumpCooldown;
 
-    [Header("References")]
-    [SerializeField] private Rigidbody rb;
     private InputHandler inputHandle;
     private EventBus eventBus;
     private InputAction jumpAction;
@@ -23,11 +25,13 @@ public class PlayerJump : MonoBehaviour
 
     private Coroutine jumpCoroutine = null;
 
+    private bool isOnIce = false;
 
     private void Start()
     {
         ServiceLocator serviceLocator = ServiceLocator.Instance;
         eventBus = serviceLocator.GetService<EventBus>();
+        eventBus.Subscribe<OnPlayerIcedChanged>((Action<OnPlayerIcedChanged>)HandleIsOnIceStateChanged);
         inputHandle = serviceLocator.GetService<InputHandler>();
 
         jumpAction = inputHandle.playerInput.actions["Jump"];
@@ -59,10 +63,15 @@ public class PlayerJump : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext value)
     {
-        if (jumpCoroutine == null && enabled == true)
+        if (jumpCoroutine == null && enabled == true && !isOnIce)
         {
             jumpCoroutine = StartCoroutine(JumpCoroutine());
         }
+    }
+
+    private void HandleIsOnIceStateChanged(OnPlayerIcedChanged data)
+    {
+        isOnIce = data.state;
     }
 
     private void OnDestroy()
