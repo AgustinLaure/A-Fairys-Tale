@@ -33,7 +33,7 @@ public class Teletransportable : MonoBehaviour
     public void SetLayer(int newIndex)
     {
         layerIndex = newIndex;
-        //tpTransform.SetParent(levelManager.Layers[layerIndex].transform);
+         //tpTransform.SetParent(levelManager.Layers[layerIndex].transform);
     }
 
     public void EnterPortal(LayerPortal portal)

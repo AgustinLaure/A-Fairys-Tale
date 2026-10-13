@@ -706,7 +706,7 @@ Transform:
   m_GameObject: {fileID: 345309206}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1378,7 +1378,7 @@ Transform:
   m_GameObject: {fileID: 700962815}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   cam: {fileID: 946590316}
   currentLayerIndex: 0
   layers: []
-  defaultFadeColor: {r: 0, g: 0, b: 0, a: 0.4745098}
+  defaultFadeColor: {r: 0, g: 0, b: 0, a: 0.7058824}
   perspectiveAction: {fileID: 6957287607395745548, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &839613721
 Transform:
@@ -3851,7 +3851,7 @@ Transform:
   m_GameObject: {fileID: 1845410385}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.82, y: 4.67, z: 0}
+  m_LocalPosition: {x: -6.82, y: 6.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4058,7 +4058,7 @@ Transform:
   m_GameObject: {fileID: 1866375375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.38, y: 2.06, z: 0}
+  m_LocalPosition: {x: -5.048, y: 2.116, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

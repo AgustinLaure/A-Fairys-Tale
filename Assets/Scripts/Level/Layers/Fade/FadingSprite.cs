@@ -18,7 +18,6 @@ public class FadingSprite : MonoBehaviour
 
     private EventBus eventBus;
 
-
     void Awake()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
@@ -71,10 +70,6 @@ public class FadingSprite : MonoBehaviour
         fadeColor = controller.fadeColor;
 
         fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
-
-        //fadeLayerSprite.sortingOrder += layerIndex;
-
-        //fadeLayerSprite.sortingOrder *= layerIndex * (int)(Math.Sign(fadeLayerSprite.sortingOrder) >= 1 ? -1.0f : 1.0f);
     }
 
     void FadeTransition(OnLayerChange layerChange)
