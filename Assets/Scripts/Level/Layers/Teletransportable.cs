@@ -7,15 +7,21 @@ public class Teletransportable : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
 
+    private LevelManager levelManager;
+    
     public float telelporResetTime = 0.5f;
     
     private int layerIndex = -1;
     public int LayerIndex { get { return layerIndex; } }
-    public void SetLayerIndex(int newIndex) { layerIndex = newIndex; }
+
 
     private bool telelportReady = true;
     private bool reseting = false;
 
+    void Awake()
+    {
+        levelManager = ServiceLocator.Instance.GetService<LevelManager>();
+    }
     private void Start()
     {
         if (!tpTransform) tpTransform = transform;
@@ -23,6 +29,11 @@ public class Teletransportable : MonoBehaviour
         if (!rb) rb = tpTransform.GetComponent<Rigidbody>();
 
         if (!rb) Debug.LogWarning("No attached rigidbody to teleportable!");
+    }
+    public void SetLayer(int newIndex)
+    {
+        layerIndex = newIndex;
+         //tpTransform.SetParent(levelManager.Layers[layerIndex].transform);
     }
 
     public void EnterPortal(LayerPortal portal)
@@ -56,7 +67,9 @@ public class Teletransportable : MonoBehaviour
             rb.linearVelocity *= portal.multiplySpeedOnTeleport;
         }
 
-        SetLayerIndex(portal.target.LayerIndex);
+        SetLayer(portal.target.LayerIndex);
+
+        //spriteFader.FadeFromLayer(LayerIndex);
 
         ServiceLocator.Instance.GetService<GameManager>().levelManager.SetCurrentLayer(portal.target.LayerIndex);
     }

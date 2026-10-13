@@ -8,7 +8,6 @@ public class LayerController : MonoBehaviour
 
     [SerializeField] public GameObject terrainObject;
     [SerializeField] public GameObject foregroundObject;
-    [SerializeField] public SpriteRenderer fadeLayerSprite;
 
     [SerializeField] public bool overrideFadeColor;
     [SerializeField] public Color fadeColor;
@@ -62,7 +61,6 @@ public class LayerController : MonoBehaviour
         if (!overrideFadeColor)
         {
             fadeColor = levelManager.defaultFadeColor;
-            fadeLayerSprite.color = fadeColor;
         }
     }
 
