@@ -4,15 +4,20 @@ using UnityEngine;
 using System;
 
 
-[RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class FadingSprite : MonoBehaviour
 {
     [SerializeField] public SpriteRenderer fadeLayerSprite;
 
+    public bool teleportable = false;
+
     private int layerIndex = -1;
     private Color fadeColor;
 
+    private Coroutine activeFadeCoroutine;
+
     private EventBus eventBus;
+
 
     void Awake()
     {
@@ -23,18 +28,28 @@ public class FadingSprite : MonoBehaviour
     {
         eventBus.Subscribe<OnLayerChange>((Action<OnLayerChange>)FadeTransition);
 
+        eventBus.Subscribe<OnLevelManagerLateStart>((Action)LateStart);
+
         if (fadeLayerSprite == null)
         {
             fadeLayerSprite = GetComponent<SpriteRenderer>();
         }
-        if (fadeLayerSprite == null) Debug.LogError("Could not find sprite renderer");
 
+        if (fadeLayerSprite == null)
+        {
+            Debug.LogError("Could not find sprite renderer");
+            return;
+        }
+    }
+
+    void LateStart()
+    {
         Transform parentSearch = this.transform;
         bool found = false;
         while (parentSearch != null && !found)
         {
             parentSearch = parentSearch.parent;
-            Debug.Log("Looking at: " +  parentSearch.name);
+            //Debug.Log("Looking at: " + parentSearch.name);
             found = parentSearch.GetComponent<LayerController>() != null;
         }
 
@@ -46,42 +61,77 @@ public class FadingSprite : MonoBehaviour
 
         LayerController controller = parentSearch.GetComponent<LayerController>();
 
+        if (controller == null)
+        {
+            Debug.LogError("Could not find the layer controller for this sprite!");
+            return;
+        }
+
         layerIndex = controller.LayerIndex;
         fadeColor = controller.fadeColor;
+
+        fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
+
+        //fadeLayerSprite.sortingOrder += layerIndex;
+
+        //fadeLayerSprite.sortingOrder *= layerIndex * (int)(Math.Sign(fadeLayerSprite.sortingOrder) >= 1 ? -1.0f : 1.0f);
     }
 
     void FadeTransition(OnLayerChange layerChange)
     {
-        if (layerChange.newLayer == layerIndex || layerChange.lastLayer == layerIndex)
+        if (teleportable) return;
+
+        Debug.Log("Layer change event recieved on layer " + layerIndex);
+
+        FadeFromLayer(layerChange.newLayer);
+    }
+
+    public void FadeFromLayer(int newLayerIndex)
+    {
+        bool visible = (layerIndex >= newLayerIndex);
+
+        if (activeFadeCoroutine != null)
         {
-            Debug.Log("Layer change event accepted on layer " + layerIndex);
-            StartCoroutine(FadeCorroutine(layerChange.newLayer == layerIndex));
+            StopCoroutine(activeFadeCoroutine);
         }
+
+        activeFadeCoroutine = StartCoroutine(FadeCorroutine(visible));
     }
 
     IEnumerator FadeCorroutine(bool visible)
     {
-        float alpha = 0.0f;
-
         float progress = 0.0f;
+        float duration = 1.0f;
 
-        //Debug.Log("FadeColor alpha " + fadeColor.a);
+        float fullAlpha = 1.0f;
+        float halfAlpha = fadeColor.a;
+
+        float startAlpha = fadeLayerSprite.color.a;
+        float targetAlpha = visible ? fullAlpha : halfAlpha;
+
+        //if (Mathf.Approximately(startAlpha, targetAlpha))
+        //{
+        //    yield break;
+        //}
+
+        Color currentColor = fadeLayerSprite.color;
 
         while (progress < 1.0f)
         {
-            alpha = Mathf.Lerp(0.0f, fadeColor.a, progress);
-            progress += Time.deltaTime;
-            //Debug.Log("Alpha " + alpha + " progress: " + progress);
+            progress += Time.deltaTime / duration;
 
-            fadeLayerSprite.color = new Color(fadeLayerSprite.color.r, fadeLayerSprite.color.g, fadeLayerSprite.color.b, (visible ? alpha : (1.0f - alpha)));
+            currentColor.a = Mathf.Lerp(startAlpha, targetAlpha, progress);
+            fadeLayerSprite.color = currentColor;
+
+            yield return null;
         }
 
-        yield return null;
+        currentColor.a = targetAlpha;
+        fadeLayerSprite.color = currentColor;
     }
-
 
     void Update()
     {
-        
+
     }
 }

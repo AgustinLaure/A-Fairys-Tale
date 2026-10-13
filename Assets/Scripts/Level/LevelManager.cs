@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private List<LayerController> layers = new List<LayerController>();
 
+    public List<LayerController> Layers { get { return layers; } }
+
     [SerializeField] public Color defaultFadeColor = Color.clear;
 
     private bool isPaused = false;
@@ -65,7 +67,7 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        StartCoroutine(LateStart());
+        Coroutine lateStart = StartCoroutine(LateStart());
     }
 
     IEnumerator LateStart()
@@ -79,6 +81,8 @@ public class LevelManager : MonoBehaviour
             layers[i].SetLayerIndex(i);
             layers[i].RecalculateIndexes();
         }
+
+        eventBus.Raise<OnLevelManagerLateStart>();
     }
 
     private void Update()
@@ -108,10 +112,12 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Layer " + layerIndex + " is out of range!");
             return;
         }
-
-        eventBus.Raise<OnLayerChange>(currentLayerIndex,layerIndex);
-
+        
         currentLayerIndex = layerIndex;
+
+        Debug.Log("Raised Layer change event to " + layerIndex);
+
+        eventBus.Raise<OnLayerChange>(currentLayerIndex);
 
         MoveCameraTransition();
     }
