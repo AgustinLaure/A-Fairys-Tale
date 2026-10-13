@@ -1535,10 +1535,9 @@ MonoBehaviour:
   - {fileID: 542573194}
   portalTargets:
   - {fileID: 1142609827}
-  playerRespawnTransform: {fileID: 840772424}
-  propRespawnTransforms:
-  - {fileID: 2141327263}
-  isRandomRespawn: 1
+  playerRespawnTransform: {fileID: 0}
+  propRespawnTransforms: []
+  isRandomRespawn: 0
 --- !u!4 &698845365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4098311383573408323, guid: 5cd6dc6d7f835eb40b1ebc9d022554a6, type: 3}

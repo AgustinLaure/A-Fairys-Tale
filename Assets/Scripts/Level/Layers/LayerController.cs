@@ -76,32 +76,6 @@ public class LayerController : MonoBehaviour
         }
     }
 
-    public void SetVisible(bool visible)
-    {
-        StartCoroutine(FadeCorroutine(visible));
-    }
-
-    IEnumerator FadeCorroutine(bool visible)
-    {
-        float alpha = 0.0f;
-
-        float progress = 0.0f;
-
-        Debug.Log("FadeColor alpha " + fadeColor.a);
-
-        while (progress < 1.0f)
-        {
-            alpha = Mathf.Lerp(0.0f, fadeColor.a, progress);
-            progress += Time.deltaTime;
-            Debug.Log("Alpha " + alpha + " progress: " + progress);
-
-            fadeLayerSprite.color = new Color(fadeLayerSprite.color.r, fadeLayerSprite.color.g, fadeLayerSprite.color.b, (visible ? alpha : (1.0f - alpha)));
-        }
-
-
-        yield return null;
-    }
-
     public Transform GetPlayerRespawnTransform()
     {
         return playerRespawnTransform;
@@ -134,10 +108,5 @@ public class LayerController : MonoBehaviour
         }
 
         return result;
-    }
-
-    void Update()
-    {
-
     }
 }
