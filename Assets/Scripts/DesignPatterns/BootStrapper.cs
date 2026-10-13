@@ -15,7 +15,8 @@ public static class BootStrapper
 
         serviceLocator.AddServiceAsGameObject<InputHandler>(null);
         serviceLocator.AddServiceAsGameObject<GameManager>(null);
-        serviceLocator.AddServiceAsGameObject<CheatManager>(null);
+
+        CreateMonoSingletonGameObject<CheatManager>();
     }
 
     public static void CreateMonoSingletonGameObject<T>() where T : MonoBehaviour

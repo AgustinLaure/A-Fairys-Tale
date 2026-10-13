@@ -1,18 +1,48 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LayerCheat : Cheat
 {
-    override protected void Start()
+    [SerializeField] public Teletransportable tp;
+
+    [SerializeField] public InputActionReference nextLayer;
+    [SerializeField] public InputActionReference previousLayer;
+
+    public override void Initialize(CheatManager cheatManager)
     {
-        Debug.Log("Stated Layer cheat!");
+        base.Initialize(cheatManager);
+
+        if (tp == null)
+        {
+            Debug.LogError("Teletransportable is null!");
+            return;
+        }
+
+        if (nextLayer == null)
+        {
+            Debug.LogError("next layer action is null!");
+            return;
+        }
+
+        if (previousLayer == null)
+        {
+            Debug.LogError("previous layer action is null!");
+            return;
+        }
+
+        Debug.Log("Started Layer cheat!");
     }
 
-    override public void CheatLogic()
+    public override void LogicUpdate()
     {
-        Debug.Log("layer cheat logic applied " + this.active);
+        if (nextLayer.action.WasPerformedThisFrame())
+        {
+            Debug.Log("Layer cheat logic applied next layer");
+        }
 
-
-        base.CheatLogic();
+        if (previousLayer.action.WasPerformedThisFrame())
+        {
+            Debug.Log("Layer cheat logic applied previous layer");
+        }
     }
 }

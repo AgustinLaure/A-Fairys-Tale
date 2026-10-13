@@ -4,39 +4,30 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public abstract class Cheat
+public abstract class Cheat : MonoBehaviour
 {
-    [SerializeField] public string name;
-    [SerializeField] public InputActionReference action;
+    [SerializeField] public string cheatName;
+    [SerializeField] public bool active = true;
 
     private CheatManager manager;
 
-    protected bool active = false;
-
-    protected Cheat()
+    public virtual void Initialize(CheatManager cheatManager)
     {
-        if (name == null)
+        manager = cheatManager;
+
+        if (string.IsNullOrEmpty(cheatName))
         {
             Debug.LogWarning("You should name this cheat!");
-            name = this.ToString();
+            cheatName = this.name;
         }
-
-        manager = ServiceLocator.Instance.GetService<CheatManager>();
 
         if (manager == null)
         {
             Debug.LogError("Cheat couldnt find manager");
             return;
         }
-
-        manager.AddCheat(this);
-
-        Start();
     }
 
-    protected virtual void Start() { }
-    public virtual void CheatLogic() 
-    {
-        active = !active;
-    }
+    public virtual void LogicUpdate() { }
+    protected virtual void Update() { }
 }
