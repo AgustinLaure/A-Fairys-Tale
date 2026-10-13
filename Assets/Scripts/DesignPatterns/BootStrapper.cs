@@ -16,11 +16,18 @@ public static class BootStrapper
         serviceLocator.AddServiceAsGameObject<InputHandler>(null);
         serviceLocator.AddServiceAsGameObject<GameManager>(null);
 
-        CreateMonoSingletonGameObject<CheatManager>();
+        //CreateMonoSingletonGameObject<CheatManager>();
     }
 
     public static void CreateMonoSingletonGameObject<T>() where T : MonoBehaviour
     {
+        T existingInstance = UnityEngine.Object.FindFirstObjectByType<T>();
+        if (existingInstance != null)
+        {
+            Debug.Log($"{typeof(T)} already exists in the scene. Skipping bootstrapper creation.");
+            return;
+        }
+
         Debug.Log("Add MonoSingleton");
 
         GameObject gameObjectHandle = new GameObject();

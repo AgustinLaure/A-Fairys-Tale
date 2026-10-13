@@ -138,6 +138,7 @@ public class LevelManager : MonoBehaviour
     private void ReparentPlayer()
     {
         playerGameObject.transform.SetParent(layers[currentLayerIndex].transform, true);
+        playerGameObject.transform.GetComponentInChildren<Teletransportable>().SetLayer(currentLayerIndex);
         eventBus.Raise<OnPlayerReparented>(layers[currentLayerIndex].gameObject);
     }
 

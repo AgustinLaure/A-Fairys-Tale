@@ -11,7 +11,7 @@ public class Teletransportable : MonoBehaviour
     
     public float telelporResetTime = 0.5f;
     
-    private int layerIndex = -1;
+    public int layerIndex = -1;
     public int LayerIndex { get { return layerIndex; } }
 
 

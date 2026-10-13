@@ -3,8 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class LayerPortal : MonoBehaviour
 {
-    [SerializeField]
-    public PortalTarget target;
+    [SerializeField] public PortalTarget target;
 
     [SerializeField] public bool flipSpeedOnTeleport = true;
     [SerializeField] public float multiplySpeedOnTeleport = 1.0f;

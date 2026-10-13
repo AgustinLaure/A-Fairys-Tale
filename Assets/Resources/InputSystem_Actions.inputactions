@@ -1118,6 +1118,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Cheats",
+            "id": "c730ec14-4898-4597-81ab-c791e1fba88e",
+            "actions": [
+                {
+                    "name": "PlayerNextLayer",
+                    "type": "Button",
+                    "id": "e2e82c91-df07-4aeb-bcea-d125b8a987a3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlayerPreviousLayer",
+                    "type": "Button",
+                    "id": "3e650b12-835e-42c0-9769-3603819e7520",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b2233448-b306-4647-ad7f-e9c7536733c1",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerNextLayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bfc212e-78fc-4dd1-ae3c-8e8b43838b87",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerPreviousLayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
