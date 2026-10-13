@@ -31,7 +31,7 @@ public class ServiceLocator : Singleton<ServiceLocator>
 
     public void AddServiceAsGameObject<T>(Func<object[], bool> function, object[] param = null) where T : MonoBehaviour
     {
-        Debug.Log("Add GO");
+        Debug.Log("Add Game object as service");
 
         GameObject gameObjectHandle = new GameObject();
         gameObjectHandle.name = typeof(T).ToString();
@@ -55,7 +55,6 @@ public class ServiceLocator : Singleton<ServiceLocator>
         }
         return;
     }
-
 
     public void RemoveService<T>() where T : class
     {

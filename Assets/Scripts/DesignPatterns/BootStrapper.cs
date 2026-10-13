@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,5 +15,19 @@ public static class BootStrapper
 
         serviceLocator.AddServiceAsGameObject<InputHandler>(null);
         serviceLocator.AddServiceAsGameObject<GameManager>(null);
+        serviceLocator.AddServiceAsGameObject<CheatManager>(null);
+    }
+
+    public static void CreateMonoSingletonGameObject<T>() where T : MonoBehaviour
+    {
+        Debug.Log("Add MonoSingleton");
+
+        GameObject gameObjectHandle = new GameObject();
+        gameObjectHandle.name = typeof(T).ToString();
+        UnityEngine.Object.DontDestroyOnLoad(gameObjectHandle);
+
+        gameObjectHandle.AddComponent<T>();
+
+        return;
     }
 }

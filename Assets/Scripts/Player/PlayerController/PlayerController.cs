@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         fsm.Update();
-        Debug.Log(fsm.GetCurrentState);
+        //Debug.Log(fsm.GetCurrentState);
     }
 
     private void HandlePlayerPush(OnPushPlayer data)
