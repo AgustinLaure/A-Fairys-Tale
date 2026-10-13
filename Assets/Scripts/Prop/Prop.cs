@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 
 public abstract class Prop : MonoBehaviour, IPickable
 {
