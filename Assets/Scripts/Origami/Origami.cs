@@ -22,7 +22,18 @@ public abstract class Origami : Prop
     private Coroutine crumpleCoroutine = null;
     protected float crumpleColliderSize = 1f;
 
+    private const string waterTag = "Water";
+
     public GameObject SetCurrentLayerGameObject { get { return currentLayerGameObject; } set { currentLayerGameObject = value; } }
+
+    public static string GetOrigamiTag { get { return "Origami"; } }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        areaCollider.OnColliderEntered += HandleAreaCollision;
+    }
 
     protected virtual void Crumple()
     {
@@ -60,5 +71,18 @@ public abstract class Origami : Prop
         {
             transform.SetParent(null, true);
         }
+    }
+
+    private void HandleAreaCollision(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(waterTag))
+        {
+            Crumple();
+        }
+    }
+
+    protected virtual void OnDestroy()
+    {
+        areaCollider.OnColliderEntered -= HandleAreaCollision;
     }
 }

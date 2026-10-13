@@ -208,6 +208,16 @@ public class PlayerCraft : MonoBehaviour
         currentLayerGameObject = data.currentLayer;
     }
 
+    private void OnDisable()
+    {
+      if (isCrafting)
+      {
+          eventBus.Raise<OnPlayerToggleCraft>(false);
+          isCrafting = false;
+          ResetCache();
+      }
+    }
+
     private void OnDestroy()
     {
         serviceLocator.RemoveService<OrigamiPool>();

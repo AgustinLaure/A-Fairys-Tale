@@ -223,6 +223,7 @@ public class PlayerAnimator : MonoBehaviour
         public override void Enter()
         {
             playerAnimator.animator.SetInteger(playerAnimator.animatorStateHash, (int)State.Idle);
+            playerAnimator.eventBus.Raise<OnPlayerIdlePlay>();
         }
 
         public override void Update()
@@ -647,7 +648,7 @@ public class PlayerAnimator : MonoBehaviour
 
         public override void Exit()
         {
-
+            playerAnimator.eventBus.Raise<OnPlayerLandAnimFinished>();
         }
 
         public void OnJump()
@@ -686,15 +687,12 @@ public class PlayerAnimator : MonoBehaviour
             {
                 playerAnimator.fsm.TryChange<LandToWalkState>(typeof(WalkState));
             }
-            if (true)
-            {
-
-            }
         }
         public override void Exit()
         {
-
+            playerAnimator.eventBus.Raise<OnPlayerLandAnimFinished>();
         }
+
         public void OnJump()
         {
             playerAnimator.fsm.TryChange<LandToWalkState>(typeof(JumpState));

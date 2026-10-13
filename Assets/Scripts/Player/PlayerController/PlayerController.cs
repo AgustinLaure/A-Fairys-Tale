@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private EventBus eventBus;
     private FSM fsm;
+
+    private const float fallStateChangeSpeed = 5f;
 
     private const ForceMode pushForceMode = ForceMode.Impulse;
 
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour
         eventBus.Subscribe<OnPlayerToggleCraft>((Action<OnPlayerToggleCraft>)idleState.OnCraft);
         eventBus.Subscribe<OnPlayerAim>((Action)idleState.OnAircraftAim);
         eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)idleState.OnActionLock);
+        eventBus.Subscribe<OnPlayerIdlePlay>((Action)idleState.OnIdlePlay);
 
         MoveState moveState = new MoveState(this);
         moveState.actions = new List<MonoBehaviour>()
@@ -71,6 +75,8 @@ public class PlayerController : MonoBehaviour
         eventBus.Subscribe<OnPlayerPickUp>((Action<OnPlayerPickUp>)moveState.OnPickUp);
         eventBus.Subscribe<OnPlayerDrop>((Action)moveState.OnDrop);
         eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)moveState.OnActionLock);
+        eventBus.Subscribe<OnPlayerAim>((Action)moveState.OnAircraftAim);
+        eventBus.Subscribe<OnPlayerToggleCraft>((Action<OnPlayerToggleCraft>)moveState.OnCraft);
 
         OnAirState onAirState = new OnAirState(this);
         onAirState.actions = new List<MonoBehaviour>()
@@ -79,6 +85,7 @@ public class PlayerController : MonoBehaviour
         };
 
         eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)onAirState.OnActionLock);
+        //eventBus.Subscribe<OnPlayerLandAnimFinished>((Action)onAirState.OnLand);
 
         ActionLockState actionLockState = new ActionLockState(this);
         actionLockState.actions = new List<MonoBehaviour>()
@@ -105,7 +112,7 @@ public class PlayerController : MonoBehaviour
             playerUseProp
         };
 
-        eventBus.Subscribe<OnOrigamiUsed>((Action)aimState.OnAircraftLaunch);
+        eventBus.Subscribe<OnPlayerIdlePlay>((Action)aimState.OnAircraftLaunch);
 
         Dictionary<Type, State> states = new Dictionary<Type, State>()
         {
@@ -126,6 +133,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         fsm.Update();
+        Debug.Log(fsm.GetCurrentState);
     }
 
     private void HandlePlayerPush(OnPushPlayer data)
@@ -160,7 +168,10 @@ public class PlayerController : MonoBehaviour
 
         public override void Enter()
         {
-
+            playerController.playerPickUp.enabled = false;
+            playerController.playerDrop.enabled = false;
+            playerController.playerUseProp.enabled = false;
+           // playerController.playerCraft.enabled = false;
         }
 
         public override void Update()
@@ -212,6 +223,14 @@ public class PlayerController : MonoBehaviour
             {
                 playerController.fsm.TryChange<IdleState>(typeof(ActionLockState));
             }
+        }
+
+        public void OnIdlePlay()
+        {
+            playerController.playerPickUp.enabled = true;
+            playerController.playerDrop.enabled = true;
+            playerController.playerUseProp.enabled = true;
+           // playerController.playerCraft.enabled = true;
         }
     }
 
@@ -267,6 +286,19 @@ public class PlayerController : MonoBehaviour
                 playerController.fsm.TryChange<MoveState>(typeof(ActionLockState));
             }
         }
+
+        public void OnAircraftAim()
+        {
+            playerController.fsm.TryChange<MoveState>(typeof(AimState));
+        }
+
+        public void OnCraft(OnPlayerToggleCraft data)
+        {
+            if (data.isCrafting)
+            {
+                playerController.fsm.TryChange<MoveState>(typeof(CraftState));
+            }
+        }
     }
 
     private class OnAirState : State
@@ -303,6 +335,18 @@ public class PlayerController : MonoBehaviour
                 playerController.fsm.TryChange<OnAirState>(typeof(ActionLockState));
             }
         }
+
+        //public void OnLand()
+        //{
+        //    if (Mathf.Abs(playerController.moveAction.ReadValue<Vector2>().x) > 0f)
+        //    {
+        //        playerController.fsm.TryChange<OnAirState>(typeof(MoveState));
+        //    }
+        //    else
+        //    {
+        //        playerController.fsm.TryChange<OnAirState>(typeof(IdleState));
+        //    }
+        //}
     }
 
     private class ActionLockState : State
@@ -374,7 +418,7 @@ public class PlayerController : MonoBehaviour
         {
             if (playerController.GetIsOnAir())
             {
-                playerController.fsm.TryChange<IdleState>(typeof(OnAirState));
+                playerController.fsm.TryChange<CraftState>(typeof(OnAirState));
             }
         }
 
