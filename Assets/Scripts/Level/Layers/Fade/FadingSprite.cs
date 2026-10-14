@@ -54,7 +54,7 @@ public class FadingSprite : MonoBehaviour
         {
             parentSearch = parentSearch.parent;
             //Debug.Log("Looking at: " + parentSearch.name);
-            found = parentSearch.GetComponent<LayerController>() != null;
+            if(parentSearch != null) found = parentSearch.GetComponent<LayerController>() != null;
         }
 
         if (parentSearch == null)

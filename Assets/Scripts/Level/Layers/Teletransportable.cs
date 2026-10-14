@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,15 +9,16 @@ public class Teletransportable : MonoBehaviour
     [SerializeField] private Rigidbody rb;
 
     private LevelManager levelManager;
-    
+
     public float telelporResetTime = 0.5f;
-    
+
     public int layerIndex = -1;
     public int LayerIndex { get { return layerIndex; } }
 
-
     private bool telelportReady = true;
     private bool reseting = false;
+
+    public Action OnTeleport;
 
     void Awake()
     {
@@ -33,7 +35,7 @@ public class Teletransportable : MonoBehaviour
     public void SetLayer(int newIndex)
     {
         layerIndex = newIndex;
-         //tpTransform.SetParent(levelManager.Layers[layerIndex].transform);
+        //tpTransform.SetParent(levelManager.Layers[layerIndex].transform);
     }
 
     public void EnterPortal(LayerPortal portal)
@@ -54,7 +56,7 @@ public class Teletransportable : MonoBehaviour
                 Debug.LogError("tried flpping teleportable but no rigidbody was found!");
                 return;
             }
-            rb.linearVelocity *= new Vector2(-1.0f,1.0f);
+            rb.linearVelocity *= new Vector2(-1.0f, 1.0f);
         }
 
         if (portal.multiplySpeedOnTeleport != 1.0f)
@@ -69,9 +71,8 @@ public class Teletransportable : MonoBehaviour
 
         SetLayer(portal.target.LayerIndex);
 
-        //spriteFader.FadeFromLayer(LayerIndex);
-
-        ServiceLocator.Instance.GetService<GameManager>().levelManager.SetCurrentLayer(portal.target.LayerIndex);
+        OnTeleport?.Invoke();
+        //ServiceLocator.Instance.GetService<GameManager>().levelManager.SetCurrentLayer(portal.target.LayerIndex);
     }
 
     public void ExitPortal(LayerPortal portal)

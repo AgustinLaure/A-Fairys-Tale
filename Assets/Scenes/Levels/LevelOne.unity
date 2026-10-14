@@ -1769,6 +1769,7 @@ MonoBehaviour:
   pausePanel: {fileID: 1277559433}
   defaultCamPos: {fileID: 919194542}
   currentCamPos: {fileID: 0}
+  mainTeletransportable: {fileID: 958782405}
   camTransitionCurrentTimer: 0
   cam: {fileID: 946590316}
   currentLayerIndex: 0
@@ -2110,7 +2111,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: a196e472e5d19041000000008fc1573ca31a37d461c04249
+  m_ApplyToSortingLayers: a196e472000000008fc1573ca31a37d461c04249
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

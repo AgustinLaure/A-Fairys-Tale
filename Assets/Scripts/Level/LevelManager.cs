@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Transform defaultCamPos;
     [SerializeField] private Transform currentCamPos;
 
+    [SerializeField] private Teletransportable mainTeletransportable;
+
     [SerializeField] private static float camTransitionTime = 1.0f;
     [SerializeField] private float camTransitionCurrentTimer = 0.0f;
 
@@ -78,6 +80,13 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         Coroutine lateStart = StartCoroutine(LateStart());
+
+        if (mainTeletransportable == null)
+        {
+            Debug.LogError("No main teletransportable");
+        }
+
+        mainTeletransportable.OnTeleport += () => SetCurrentLayer(mainTeletransportable.LayerIndex);
     }
 
     IEnumerator LateStart()
@@ -110,6 +119,11 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         if (gameManager != null) gameManager.SetActiveLevelManager(null);
+
+        if (mainTeletransportable != null)
+        {
+            mainTeletransportable.OnTeleport -= () => SetCurrentLayer(mainTeletransportable.LayerIndex);
+        }
     }
 
     public void RegisterLayer(LayerController layer)
