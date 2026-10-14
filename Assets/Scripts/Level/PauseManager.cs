@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
 
     void Awake()
     {
-      levelManager = ServiceLocator.Instance.GetService<LevelManager>();
+      levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

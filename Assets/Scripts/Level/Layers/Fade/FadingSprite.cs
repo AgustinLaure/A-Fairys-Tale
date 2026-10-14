@@ -18,6 +18,11 @@ public class FadingSprite : MonoBehaviour
 
     private EventBus eventBus;
 
+    private void OnEnable()
+    {
+       if(layerIndex == -1) LateStart();
+    }
+
     void Awake()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
@@ -68,6 +73,8 @@ public class FadingSprite : MonoBehaviour
 
         layerIndex = controller.LayerIndex;
         fadeColor = controller.fadeColor;
+
+        if (layerIndex == -1) return;
 
         fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
     }
