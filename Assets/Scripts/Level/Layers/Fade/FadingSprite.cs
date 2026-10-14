@@ -83,14 +83,17 @@ public class FadingSprite : MonoBehaviour
 
     public void FadeFromLayer(int newLayerIndex)
     {
-        bool visible = (layerIndex >= newLayerIndex);
-
-        if (activeFadeCoroutine != null)
+        if (gameObject.activeInHierarchy)
         {
-            StopCoroutine(activeFadeCoroutine);
-        }
+            bool visible = (layerIndex >= newLayerIndex);
 
-        activeFadeCoroutine = StartCoroutine(FadeCorroutine(visible));
+            if (activeFadeCoroutine != null)
+            {
+                StopCoroutine(activeFadeCoroutine);
+            }
+
+            activeFadeCoroutine = StartCoroutine(FadeCorroutine(visible));
+        }
     }
 
     IEnumerator FadeCorroutine(bool visible)
