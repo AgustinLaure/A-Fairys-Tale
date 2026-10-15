@@ -12,6 +12,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float jumpImpulse;
     [SerializeField] private float delay;
     [SerializeField] private float jumpCooldown;
+    [SerializeField] private AK.Wwise.Event jump;
 
     private InputHandler inputHandle;
     private EventBus eventBus;
@@ -45,6 +46,8 @@ public class PlayerJump : MonoBehaviour
         {
             rb.AddForce(jumpDirection * jumpImpulse, forceMode);
             isJumpRequested = false;
+
+           //AkUnitySoundEngine.PostEvent(AK.EVENTS.PLAY_SLASH1,gameObject);
         }
     }
 

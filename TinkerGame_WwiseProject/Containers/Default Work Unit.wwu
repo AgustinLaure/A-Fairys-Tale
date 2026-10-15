@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{CF6DF254-CCC6-4394-8012-24F8EBBCFEAF}" SchemaVersion="133">
+	<Containers>
+		<WorkUnit Name="Default Work Unit" ID="{CF6DF254-CCC6-4394-8012-24F8EBBCFEAF}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Slash1" ID="{E747302D-6EED-4B3A-9031-FE8B2F66F67A}" ShortID="30783219">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Slash1" ID="{B740247D-F146-41B8-BF61-B7DCE704ABBE}">
+							<Language>SFX</Language>
+							<AudioFile>Slash1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="824244513"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Slash1" ID="{B740247D-F146-41B8-BF61-B7DCE704ABBE}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</Containers>
+</WwiseDocument>
