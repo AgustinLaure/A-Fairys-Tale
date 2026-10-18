@@ -424,7 +424,7 @@ namespace DragonBones
 
             if (!EditorApplication.isPlayingOrWillChangePlaymode && Selection.activeObject == _armatureComponent.gameObject)
             {
-                EditorUtility.SetDirty(_armatureComponent);
+                //EditorUtility.SetDirty(_armatureComponent);
                 SceneView.RepaintAll();
             }
         }

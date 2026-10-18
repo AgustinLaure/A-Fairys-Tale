@@ -1,3 +1,4 @@
+using DragonBones;
 using UnityEngine;
 
 public static class AnimationUtils
@@ -17,6 +18,37 @@ public static class AnimationUtils
     public static float GetCurrentAnimationLength(Animator animator)
     {
         return animator.GetCurrentAnimatorClipInfo(0).Length;
+    }
+
+    public static bool GetCurrentAnimationEnded(UnityArmatureComponent armature)
+    {
+        DragonBones.AnimationState animState = armature.animation.lastAnimationState;
+
+        float normalizedTime = animState.currentTime / animState.totalTime;
+
+        return normalizedTime >= 1f; //&& animatorInfo.shortNameHash == currentAnimHash;
+    }
+
+    public static bool GetAnimationEnded(UnityArmatureComponent armature, string name)
+    {
+        DragonBones.AnimationState animState = armature.animation.GetState(name);
+
+        return animState.isCompleted;
+    }
+
+    public static float GetCurrentAnimationNormalizedTime(UnityArmatureComponent armature)
+    {
+        DragonBones.AnimationState animState = armature.animation.lastAnimationState;
+
+        float normalizedTime = animState.currentTime / animState.totalTime;
+
+        return normalizedTime;
+    }
+
+    public static float GetCurrentAnimationLength(UnityArmatureComponent armature)
+    {
+        DragonBones.AnimationState animState = armature.animation.lastAnimationState;
+        return animState.totalTime;
     }
 
     //public static void AccelerateCurrentAnimation(Animator animator, float duration)
