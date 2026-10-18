@@ -98,11 +98,6 @@ public class PlayerAnimator : MonoBehaviour
 
     public global::State GetCurrentState { get { return fsm.GetCurrentState; } }
 
-    private void Awake()
-    {
-   
-    }
-
     private void Start()
     {
         ServiceLocator serviceLocator = ServiceLocator.Instance;
@@ -211,7 +206,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         fsm.Update();
-        Debug.Log("animator:" + fsm.GetCurrentState);
+        //Debug.Log("animator:" + fsm.GetCurrentState);
     }
 
     public class IdleState : global::State
