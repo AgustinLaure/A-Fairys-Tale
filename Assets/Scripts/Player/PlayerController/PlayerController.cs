@@ -185,6 +185,11 @@ public class PlayerController : MonoBehaviour
                 if (idleStateCast != null)
                 {
                     isIdleAnimRunning = true;
+
+                    playerController.playerPickUp.enabled = true;
+                    playerController.playerDrop.enabled = true;
+                    playerController.playerUseProp.enabled = true;
+                    // playerController.playerCraft.enabled = true;
                 }
             }
 

@@ -2456,6 +2456,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.8680387
       objectReference: {fileID: 0}
+    - target: {fileID: 6182944734772050192, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 1057253717}
     - target: {fileID: 6312058351867220088, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3116,6 +3120,17 @@ Transform:
   - {fileID: 1167901158}
   m_Father: {fileID: 908170253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057253717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5294801777565360123, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
+  m_PrefabInstance: {fileID: 887224760}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3269a897aaa74845abb4f9143383489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
 --- !u!4 &1068843233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8537126730378498953, guid: 66d91f53f2faf9c4585a715db2e8cb59, type: 3}
@@ -5131,7 +5146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.Addressables::AK.Wwise.Unity.WwiseAddressables.InitBankHolder
-  InitBank: {fileID: 11400000, guid: 5624566915a18f4428693a50a3df89e3, type: 2}
 --- !u!1 &1845410385
 GameObject:
   m_ObjectHideFlags: 0
