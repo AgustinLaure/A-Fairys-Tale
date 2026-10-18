@@ -36,6 +36,7 @@ public class Cobweb : MonoBehaviour
             collidedStick.GetAreaCollider.OnColliderEntered -= HandleAreaCollision;
 
             collidedStick.SetGravity(true);
+            collidedStick.SetKinematic(false);
 
             items.Remove(collidedStick);
         }
