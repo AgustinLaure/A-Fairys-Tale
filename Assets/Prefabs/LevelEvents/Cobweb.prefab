@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StickVariant1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 764033104004250687, guid: 3fe8d60cae2a52241a69b837d81c1556, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2550559186161026955, guid: 3fe8d60cae2a52241a69b837d81c1556, type: 3}
       propertyPath: startWithPhysics
       value: 0
@@ -242,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7471003547349015464, guid: 3fe8d60cae2a52241a69b837d81c1556, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -276,6 +280,10 @@ PrefabInstance:
     - target: {fileID: 764033104004250687, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
       propertyPath: m_Name
       value: Stick
+      objectReference: {fileID: 0}
+    - target: {fileID: 764033104004250687, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2550559186161026955, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
       propertyPath: startWithPhysics
@@ -327,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7471003547349015464, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

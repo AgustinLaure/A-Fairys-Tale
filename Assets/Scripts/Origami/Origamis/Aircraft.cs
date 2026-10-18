@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Aircraft : Origami
 {
     [Header("References")]
-
     private InputHandler inputHandle;
     private InputAction cursorPosAction;
     private InputAction usePropAction;
@@ -114,7 +113,9 @@ public class Aircraft : Origami
     private void Launch()
     {
         shouldLaunch = true;
-        transform.parent = null;
+
+        //Assumes player is child of layer and origami is child of pivot
+        transform.parent = transform.parent.parent.parent;
     }
 
     public override void Action()
