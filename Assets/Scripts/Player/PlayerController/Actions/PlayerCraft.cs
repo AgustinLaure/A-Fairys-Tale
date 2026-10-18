@@ -16,8 +16,9 @@ public class PlayerCraft : MonoBehaviour
     private const int maxRecipes = 2;
 
     [Header("References")]
-    private GameObject currentLayerGameObject;
+    [SerializeField] private Transform pivotTransform;
     [SerializeField] private Transform origamiSpawnPointTRS;
+    private GameObject currentLayerGameObject;
     private OrigamiPool origamiPool;
     private ServiceLocator serviceLocator;
 
@@ -154,7 +155,7 @@ public class PlayerCraft : MonoBehaviour
         {
             if (MatchesRecipe(recipes[i].moves, cachedMoves))
             {
-                GameObject origami = origamiPool.GetOrigami(recipes[i].type, origamiSpawnPointTRS.position, transform.rotation, transform);
+                GameObject origami = origamiPool.GetOrigami(recipes[i].type, origamiSpawnPointTRS.position, pivotTransform.rotation, pivotTransform);
 
                 Origami origamiComp = origami.GetComponent<Origami>();
                 origamiComp.SetCurrentLayerGameObject = currentLayerGameObject;
