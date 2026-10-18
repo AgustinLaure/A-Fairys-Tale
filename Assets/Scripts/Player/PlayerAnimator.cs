@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -94,6 +95,8 @@ public class PlayerAnimator : MonoBehaviour
         Craft,
         CraftToIdle
     }
+
+    public global::State GetCurrentState { get { return fsm.GetCurrentState; } }
 
     private void Awake()
     {
@@ -209,9 +212,10 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         fsm.Update();
+        Debug.Log("animator:" + fsm.GetCurrentState);
     }
 
-    private class IdleState : global::State
+    public class IdleState : global::State
     {
         private PlayerAnimator playerAnimator;
 
