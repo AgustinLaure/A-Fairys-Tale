@@ -149,6 +149,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleBookmark",
+                    "type": "Button",
+                    "id": "302bc36d-a43c-44c2-87c5-2b598191a357",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -578,6 +587,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "CursorPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c15986c-b865-4a5f-b9af-edc61242f519",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleBookmark",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
