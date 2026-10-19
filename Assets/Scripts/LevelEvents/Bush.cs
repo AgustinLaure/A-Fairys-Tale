@@ -59,12 +59,6 @@ public class Bush : PropSpawner
 
         shakeCoroutine = null;
     }
-
-    private void SpawnObject()
-    {
-
-    }
-
     private void OnDestroy()
     {
         areaCollider.OnColliderEntered -= HandleAircraftCollision;

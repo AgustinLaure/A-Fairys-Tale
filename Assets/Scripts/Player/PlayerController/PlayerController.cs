@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerDrop playerDrop;
     [SerializeField] private PlayerUseProp playerUseProp;
     [SerializeField] private PlayerCraft playerCraft;
+    [SerializeField] private PlayerAnimator playerAnimator;
+
     private InputHandler inputHandle;
     private InputAction moveAction;
 
@@ -63,7 +65,6 @@ public class PlayerController : MonoBehaviour
         eventBus.Subscribe<OnPlayerToggleCraft>((Action<OnPlayerToggleCraft>)idleState.OnCraft);
         eventBus.Subscribe<OnPlayerAim>((Action)idleState.OnAircraftAim);
         eventBus.Subscribe<OnActionLockStateChanged>((Action<OnActionLockStateChanged>)idleState.OnActionLock);
-        eventBus.Subscribe<OnPlayerIdlePlay>((Action)idleState.OnIdlePlay);
 
         MoveState moveState = new MoveState(this);
         moveState.actions = new List<MonoBehaviour>()
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour
     {
         private PlayerController playerController;
         private float horizontalInput = 0f;
+        private bool isIdleAnimRunning = false;
 
         public IdleState(PlayerController playerController)
         {
@@ -171,11 +173,26 @@ public class PlayerController : MonoBehaviour
             playerController.playerPickUp.enabled = false;
             playerController.playerDrop.enabled = false;
             playerController.playerUseProp.enabled = false;
-           // playerController.playerCraft.enabled = false;
+            // playerController.playerCraft.enabled = false;
         }
 
         public override void Update()
         {
+            if (!isIdleAnimRunning)
+            {
+                PlayerAnimator.IdleState idleStateCast = playerController.playerAnimator.GetCurrentState as PlayerAnimator.IdleState;
+
+                if (idleStateCast != null)
+                {
+                    isIdleAnimRunning = true;
+
+                    playerController.playerPickUp.enabled = true;
+                    playerController.playerDrop.enabled = true;
+                    playerController.playerUseProp.enabled = true;
+                    // playerController.playerCraft.enabled = true;
+                }
+            }
+
             if (playerController.GetIsOnAir())
             {
                 playerController.fsm.TryChange<IdleState>(typeof(OnAirState));
@@ -191,7 +208,7 @@ public class PlayerController : MonoBehaviour
 
         public override void Exit()
         {
-
+            isIdleAnimRunning = false;
         }
 
         public void OnPickUp(OnPlayerPickUp data)
@@ -223,14 +240,6 @@ public class PlayerController : MonoBehaviour
             {
                 playerController.fsm.TryChange<IdleState>(typeof(ActionLockState));
             }
-        }
-
-        public void OnIdlePlay()
-        {
-            playerController.playerPickUp.enabled = true;
-            playerController.playerDrop.enabled = true;
-            playerController.playerUseProp.enabled = true;
-           // playerController.playerCraft.enabled = true;
         }
     }
 

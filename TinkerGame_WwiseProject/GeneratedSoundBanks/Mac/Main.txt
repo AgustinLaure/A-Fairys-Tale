@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3387566218	Play_Slash1			\Default Work Unit\Play_Slash1	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	824244513	Slash1	.cache\FB\{FB2E6D35-AB2C-CB47-799C-BE064F2A0FD6}.wem		\Containers\Default Work Unit\Slash1		22022
+

@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
 
     private EventBus eventBus;
 
+    [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject playerGameObject;
 
     [SerializeField] private GameObject playerSpawnPoint;
@@ -55,6 +56,10 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        GameManager gm = ServiceLocator.Instance.GetService<GameManager>();
+        gm.SetActiveLevelManager(this);
+        gm.SetActiveLevelData(levelData);
+
         if (layers.Count > 0)
         {
             Debug.LogWarning("Dont fill the layers manually!");
