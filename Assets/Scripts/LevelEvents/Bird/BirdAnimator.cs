@@ -122,7 +122,7 @@ public class BirdAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.IdleToWet]))
+            if (AnimationUtils.GetAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.IdleToWet]))
             {
                 birdAnimator.fsm.TryChange<IdleToWetState>(typeof(WetState));
             }
@@ -175,7 +175,7 @@ public class BirdAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Flapping]))
+            if (AnimationUtils.GetAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Flapping]))
             {
                 birdAnimator.fsm.TryChange<FlappingState>(typeof(IdleState));
             }
