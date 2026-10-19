@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class AnimationUtils
 {
-    public static bool GetCurrentAnimationEnded(Animator animator, int currentAnimHash)
+    public static bool GetAnimationEnded(Animator animator, int currentAnimHash)
     {
         AnimatorStateInfo animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
 

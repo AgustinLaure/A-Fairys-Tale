@@ -22,7 +22,7 @@ public class PlayerCraft : MonoBehaviour
     private OrigamiPool origamiPool;
     private ServiceLocator serviceLocator;
 
-    private InputHandler inputHandle;
+    private InputHandler inputHandler;
     private InputAction toggleCraftAction;
     private InputAction craftMovesAction;
     private InputAction dropAction;
@@ -67,11 +67,11 @@ public class PlayerCraft : MonoBehaviour
         origamiPool = serviceLocator.GetService<OrigamiPool>();
 
         eventBus = serviceLocator.GetService<EventBus>();
-        inputHandle = serviceLocator.GetService<InputHandler>();
+        inputHandler = serviceLocator.GetService<InputHandler>();
 
-        toggleCraftAction = inputHandle.playerInput.actions["ToggleCraft"];
-        craftMovesAction = inputHandle.playerInput.actions["CraftMoves"];
-        dropAction = inputHandle.playerInput.actions["Drop"];
+        toggleCraftAction = inputHandler.playerInput.actions["ToggleCraft"];
+        craftMovesAction = inputHandler.playerInput.actions["CraftMoves"];
+        dropAction = inputHandler.playerInput.actions["Drop"];
 
         eventBus.Subscribe<OnPlayerReparented>((Action<OnPlayerReparented>)HandlePlayerReparent);
 
