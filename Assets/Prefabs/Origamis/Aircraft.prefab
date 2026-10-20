@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 2393072491211012998}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &1548125369824607528
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 6906300994684516807}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &3560317816690251242
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 2252484845012506447}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &3676085118666247488
 GameObject:
   m_ObjectHideFlags: 0

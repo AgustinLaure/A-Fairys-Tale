@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
+  m_Name: Hadaaa_Data
+  m_EditorClassIdentifier: Assembly-CSharp::DragonBones.UnityDragonBonesData
+  dataName: Hadaaa
+  dragonBonesJSON: {fileID: 4900000, guid: 223a1762d5fe53542b6cf06816ff7682, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 159e800b6706709449158222e78ba581, type: 3}
+    texture: {fileID: 2800000, guid: c9c12612aa8eb2843b7308f9ff3365b5, type: 3}
+    material: {fileID: 2100000, guid: e859397c45859104196880a3f2a6b5cf, type: 2}
+    uiMaterial: {fileID: 2100000, guid: e859397c45859104196880a3f2a6b5cf, type: 2}

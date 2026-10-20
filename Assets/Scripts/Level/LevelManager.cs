@@ -1,9 +1,12 @@
+using DragonBones;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
+using UnityEngine.Rendering;
+using static UnityEngine.LowLevelPhysics2D.PhysicsLayers;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,25 +14,27 @@ public class LevelManager : MonoBehaviour
 
     private EventBus eventBus;
 
+    [SerializeField] private SortingGroup playerSortingGroup;
+
     [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject playerGameObject;
 
     [SerializeField] private GameObject playerSpawnPoint;
     [SerializeField] private GameObject pausePanel;
 
-    [SerializeField] private Transform defaultCamPos;
-    [SerializeField] private Transform currentCamPos;
+    [SerializeField] private UnityEngine.Transform defaultCamPos;
+    [SerializeField] private UnityEngine.Transform currentCamPos;
 
     [SerializeField] private Teletransportable mainTeletransportable;
 
     [SerializeField] private static float camTransitionTime = 1.0f;
     [SerializeField] private float camTransitionCurrentTimer = 0.0f;
 
-    public Transform DefaultCamPos { get { return defaultCamPos; } }
+    public UnityEngine.Transform DefaultCamPos { get { return defaultCamPos; } }
 
     [SerializeField] private Camera cam;
 
-    [SerializeField] private int currentLayerIndex = 0;
+    [SerializeField] private int currentLayerIndex = 1;
 
     [SerializeField] private List<LayerController> layers = new List<LayerController>();
 
@@ -48,6 +53,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float playerRespawnForce = 0.3f;
     private bool isPlayerRespawning = false;
     private Coroutine respawnPlayerCoroutine = null;
+
+    [SerializeField] private string[] sortingLayers;
 
     public float GetCamTransitionProgress()
     {
@@ -108,6 +115,8 @@ public class LevelManager : MonoBehaviour
 
         ReparentPlayer();
 
+        playerSortingGroup.sortingLayerName = sortingLayers[currentLayerIndex];
+
         eventBus.Raise<OnLevelManagerLateStart>();
     }
 
@@ -143,12 +152,14 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Layer " + layerIndex + " is out of range!");
             return;
         }
-        
+
         currentLayerIndex = layerIndex;
 
         Debug.Log("Raised Layer change event to " + layerIndex);
 
         eventBus.Raise<OnLayerChange>(currentLayerIndex);
+
+        playerSortingGroup.sortingLayerName = sortingLayers[currentLayerIndex];
 
         MoveCameraTransition();
         ReparentPlayer();
