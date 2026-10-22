@@ -36,7 +36,6 @@ public class PauseManager : MonoBehaviour
     }
     public void OnExit()
     {
-        SceneManager.LoadSceneAsync("MainMenuTest");
+        SceneManager.LoadSceneAsync("MainMenu");
     }
-
 }
