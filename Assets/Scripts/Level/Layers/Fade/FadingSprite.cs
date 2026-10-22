@@ -20,7 +20,7 @@ public class FadingSprite : MonoBehaviour
 
     private void OnEnable()
     {
-       if(layerIndex == -1) LateStart();
+        if (layerIndex == -1) LateStart();
     }
 
     void Awake()
@@ -54,8 +54,8 @@ public class FadingSprite : MonoBehaviour
         {
             parentSearch = parentSearch.parent;
             //Debug.Log("Looking at: " + parentSearch.name);
-            if(parentSearch != null) found = parentSearch.GetComponent<LayerController>() != null;
-            }
+            if (parentSearch != null) found = parentSearch.GetComponent<LayerController>() != null;
+        }
 
         if (parentSearch == null)
         {
@@ -100,11 +100,17 @@ public class FadingSprite : MonoBehaviour
             }
 
             activeFadeCoroutine = StartCoroutine(FadeCorroutine(visible));
+
         }
     }
 
     IEnumerator FadeCorroutine(bool visible)
     {
+        if (visible)
+        {
+            fadeLayerSprite.enabled = true;
+        }
+
         float progress = 0.0f;
         float duration = 1.0f;
 
@@ -133,10 +139,17 @@ public class FadingSprite : MonoBehaviour
 
         currentColor.a = targetAlpha;
         fadeLayerSprite.color = currentColor;
+
+        fadeLayerSprite.enabled = visible;
     }
 
     void Update()
     {
 
+    }
+
+    private void OnDisable()
+    {
+        layerIndex = -1;
     }
 }

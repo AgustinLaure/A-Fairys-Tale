@@ -40,10 +40,21 @@ public class BasicProp : Prop
     {
         if (rendererObject.activeSelf && contourLowestThickness < contourHighestThickness)
         {
-            if (highlightCoroutine == null)
+            if (highlightCoroutine == null && contourSpriteRenderer.enabled)
             {
                 highlightCoroutine = StartCoroutine(HighlightCoroutine(Random.Range(minTimeToHighlight, maxTimeToHighlight)));
             }
+        }
+
+        if (!contourSpriteRenderer.enabled)
+        {
+            if (highlightCoroutine != null)
+            {
+                StopCoroutine(highlightCoroutine);
+                highlightCoroutine = null;
+            }
+
+            contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
         }
     }
 
@@ -63,7 +74,8 @@ public class BasicProp : Prop
 
         isHighlighted = true;
 
-        contourObject.SetActive(true);
+        contourSpriteRenderer.enabled = true;
+        //contourObject.SetActive(true);
 
         float t = 0f;
         float currentThickness = 0f;
@@ -121,7 +133,7 @@ public class BasicProp : Prop
     {
         DisableRigidBody(rb);
         rendererObject.SetActive(false);
-        colliderObject.SetActive(false);
+        contourSpriteRenderer.enabled = false;
     }
 
     public void SetGravity(bool state)
