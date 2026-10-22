@@ -122,6 +122,8 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) TogglePause();
+
         if (perspectiveAction.action.WasPressedThisFrame()) // temp
         {
             cam.orthographic = !cam.orthographic;

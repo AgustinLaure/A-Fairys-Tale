@@ -5,19 +5,16 @@ public class PauseManager : MonoBehaviour
 {
 
     private LevelManager levelManager;
-
+    
 
     void Awake()
     {
-      levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+      levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,6 +24,7 @@ public class PauseManager : MonoBehaviour
     {
         levelManager.TogglePause();
     }
+
     public void OnRetry()
     {
 

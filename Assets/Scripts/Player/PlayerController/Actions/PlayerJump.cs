@@ -47,6 +47,8 @@ public class PlayerJump : MonoBehaviour
             rb.AddForce(jumpDirection * jumpImpulse, forceMode);
             isJumpRequested = false;
 
+            Debug.Log("Fixed jump update");
+
            //AkUnitySoundEngine.PostEvent(AK.EVENTS.PLAY_SLASH1,gameObject);
         }
     }
