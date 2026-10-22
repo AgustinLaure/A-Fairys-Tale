@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject playerSpawnPoint;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject playerActions;
 
     [SerializeField] private UnityEngine.Transform defaultCamPos;
     [SerializeField] private UnityEngine.Transform currentCamPos;
@@ -122,6 +123,8 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) TogglePause();
+
         if (perspectiveAction.action.WasPressedThisFrame()) // temp
         {
             cam.orthographic = !cam.orthographic;
@@ -195,6 +198,7 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = isPaused ? 0.0f : 1.0f;
         eventBus.Raise<OnPause>(IsPaused);
         if (pausePanel != null) pausePanel.SetActive(IsPaused);
+        if (playerActions != null) playerActions.SetActive(!IsPaused);
         Debug.Log("Game is " + (IsPaused ? "Unp" : "P") + "aused");
     }
 
