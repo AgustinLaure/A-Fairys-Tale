@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject loadScreen;
 
-    private LevelManager activeLevelManager;
     private LevelData activeLevelData;
+    
+    private LevelManager activeLevelManager;
+    private FoldManager activeFoldManager;
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
@@ -47,6 +49,12 @@ public class GameManager : MonoBehaviour
             Debug.LogError("No level set! Cant start");
             return;
         }
+        if (activeLevelData.GetLevelType() == LevelType.None)
+        {
+            Debug.LogError("Level Data is invalid!");
+            return;
+        }
+
         Debug.Log("Started level " + activeLevelData.levelName);
 
         //GameObject loadScreenObject = Instantiate(loadScreen);
