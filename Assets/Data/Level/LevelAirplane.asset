@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LevelAirplane
   m_EditorClassIdentifier: Assembly-CSharp::FoldingLevelData
   levelName: Level Plane
-  sceneName: FoldLevelPlane
+  sceneName: FoldingLevelPlane
   foldinglevel: 0
