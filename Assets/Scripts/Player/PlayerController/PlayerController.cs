@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public State GetState { get { return fsm.GetCurrentState; } }
 
+    private LevelManager levelManager;
 
     private void Start()
     {
@@ -47,7 +48,11 @@ public class PlayerController : MonoBehaviour
 
         inputHandle = serviceLocator.GetService<InputHandler>();
 
+        levelManager = serviceLocator.GetService<GameManager>().levelManager;
+
         moveAction = inputHandle.playerInput.actions["Move"];
+
+        eventBus.Subscribe<OnPause>((Action<OnPause>)HandlePause);
 
         IdleState idleState = new IdleState(this);
         idleState.actions = new List<MonoBehaviour>()
@@ -59,6 +64,7 @@ public class PlayerController : MonoBehaviour
             playerUseProp,
             playerCraft
         };
+
 
         eventBus.Subscribe<OnPlayerPickUp>((Action<OnPlayerPickUp>)idleState.OnPickUp);
         eventBus.Subscribe<OnPlayerDrop>((Action)idleState.OnDrop);
@@ -130,6 +136,10 @@ public class PlayerController : MonoBehaviour
         fsm.SetInitialState(typeof(IdleState));
     }
 
+    private void HandlePause(OnPause pause)
+    {
+        fsm.GetCurrentState.SetActionState(!pause.IsPaused());
+    }
 
     private void Update()
     {
