@@ -673,7 +673,7 @@ MonoBehaviour:
   buttonContainer: {fileID: 875096127}
   buttonPrefab: {fileID: 4222822588463648534, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
   levels:
-  - {fileID: 11400000, guid: 60b7d1808a121f541943b0938e6d9fcb, type: 2}
+  - {fileID: 11400000, guid: 0cf7d24445b505e4e82059ab23f1251a, type: 2}
   - {fileID: 11400000, guid: 19674e3305563d644ba0a7a29c30f195, type: 2}
 --- !u!1 &1248113184
 GameObject:
@@ -911,7 +911,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.Addressables::AK.Wwise.Unity.WwiseAddressables.InitBankHolder
-  InitBank: {fileID: 11400000, guid: 5624566915a18f4428693a50a3df89e3, type: 2}
 --- !u!114 &1809044286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,9 +1150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebebe70bdf888b4aa403afc1b295701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestInput
-  dontDestroyOnLoad: 1
-  levelData1: {fileID: 11400000, guid: 60b7d1808a121f541943b0938e6d9fcb, type: 2}
-  levelData2: {fileID: 11400000, guid: 19674e3305563d644ba0a7a29c30f195, type: 2}
 --- !u!4 &1925599934
 Transform:
   m_ObjectHideFlags: 0

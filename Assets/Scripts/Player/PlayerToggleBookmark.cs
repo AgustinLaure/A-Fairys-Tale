@@ -64,7 +64,8 @@ public class PlayerToggleBookmark : MonoBehaviour
         inputHandler = serviceLocator.GetService<InputHandler>();
         toggleAction = inputHandler.playerInput.actions[toggleActionName];
 
-        int hashesAdd = (int)gameManager.levelData.level;
+        int hashesAdd = 0;
+        hashesAdd = (int)((GameplayLevelData)gameManager.levelData).level;
 
         noneState = new NoneState(this);
         toggleAction.performed += noneState.OnToggle;
