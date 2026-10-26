@@ -10,7 +10,6 @@ public class Aircraft : Origami
     private InputAction cursorPosAction;
     private InputAction usePropAction;
 
-    private Rigidbody rb;
     private EventBus eventBus;
     private bool aimAnimEnded = false;
     private bool throwAnimEnded = false;
@@ -122,7 +121,7 @@ public class Aircraft : Origami
     public override void Enable()
     {
         origamiRenderer.SetActive(true);
-        EnableRigidBody(rb);
+        EnableRigidBody();
     }
 
     private void HandleRotation()
@@ -145,7 +144,7 @@ public class Aircraft : Origami
     public override void Disable()
     {
         origamiRenderer.SetActive(false);
-        DisableRigidBody(rb);
+        DisableRigidBody();
     }
 
     public void HandleAimAnimFinish()

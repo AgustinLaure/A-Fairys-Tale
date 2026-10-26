@@ -112,6 +112,7 @@ MonoBehaviour:
   contourSpriteRenderer: {fileID: 4648743158134950679}
   contourLowestThickness: 0
   contourHighestThickness: 4.62
+  rb: {fileID: 6676194752817627792}
   rendererObject: {fileID: 896557991607445877}
   colliderObject: {fileID: 8982024436824200068}
   highlightTime: 1.5

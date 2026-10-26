@@ -10,6 +10,10 @@ public abstract class Origami : Prop
     [SerializeField] protected GameObject baseForm;
     [SerializeField] private GameObject crumpledForm;
     [SerializeField] private Animator animator;
+
+    [Header("Configs")]
+    [SerializeField] private bool isCrumpleable;
+
     protected GameObject currentLayerGameObject = null;
 
     protected OrigamiPool origamiPool;
@@ -34,6 +38,8 @@ public abstract class Origami : Prop
     public GameObject SetCurrentLayerGameObject { get { return currentLayerGameObject; } set { currentLayerGameObject = value; } }
 
     public static string GetOrigamiTag { get { return "Origami"; } }
+
+    public bool GetIsCrumpleable { get { return isCrumpleable; } }
 
     public OrigamiPool SetOrigamiPool { set { origamiPool = value; } }
 

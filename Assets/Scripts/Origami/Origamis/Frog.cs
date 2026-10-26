@@ -9,7 +9,6 @@ public class Frog : Origami
     [SerializeField] private AreaCollider bodyCollider;
     [SerializeField] private GameObject playerCollider;
     private EventBus eventBus;
-    private Rigidbody rb;
 
     [Header("Configs")]
     [SerializeField] private float selfLaunchForce;
@@ -91,13 +90,13 @@ public class Frog : Origami
     public override void Enable()
     {
         origamiRenderer.SetActive(true);
-        EnableRigidBody(rb);
+        EnableRigidBody();
     }
 
     public override void Disable()
     {
         origamiRenderer.SetActive(false);
-        DisableRigidBody(rb);
+        DisableRigidBody();
     }
 
     private IEnumerator PushPlayerCoroutine(Collider collider)

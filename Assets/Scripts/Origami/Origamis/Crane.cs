@@ -10,6 +10,7 @@ public class Crane : Origami
     [SerializeField] private AreaTrigger playerTrigger;
     [SerializeField] private Trace startPath;
     [SerializeField] private Trace endPath;
+    [SerializeField] private Transform propPoint;
     //[SerializeField] private Rigidbody rb;
 
 
@@ -43,9 +44,13 @@ public class Crane : Origami
     private Vector3 startObjectivePos = Vector3.zero;
     private Vector3 endObjectivePos = Vector3.zero;
 
+    private Prop currentProp = null;
+
     private Coroutine throwCoroutine = null;
 
     private Coroutine flyCoroutine = null;
+
+    private bool canPickUp = true;
 
     private void Awake()
     {
@@ -72,7 +77,10 @@ public class Crane : Origami
 
     private void Update()
     {
-
+        if (currentProp != null)
+        {
+            currentProp.transform.position = propPoint.position;
+        }
     }
 
     private void Launch()
@@ -138,7 +146,6 @@ public class Crane : Origami
         cursorPos = GetMouseWorldPosition();
         endObjectivePos = cursorPos;
         endPath.SetPoints(startObjectivePos, cursorPos);
-        endPath.SetVisibility(0, false);
         endPath.SetVisibility(true);
 
         currentTarget = startObjectivePos;
@@ -189,6 +196,13 @@ public class Crane : Origami
 
         pivot.transform.position = currentTarget;
 
+        if (currentProp != null)
+        {
+            currentProp.EnableRigidBody();
+            currentProp = null;
+            canPickUp = false;
+        }
+
         StartCoroutine(TraceFadeOut(endPath));
 
         Vector3 randomDirection = Vector3.up;
@@ -206,6 +220,8 @@ public class Crane : Origami
 
             yield return null;
         }
+
+        canPickUp = true;
 
         origamiPool.ReturnOrigami(gameObject, typeof(Crane));
 
@@ -233,7 +249,22 @@ public class Crane : Origami
 
     private void HandleTriggerEnter(Collider collider)
     {
-        //si es prop hace lo que tiene que hacer y si es agua crumplea
+        if (canPickUp)
+        {
+            if (collider.transform.IsChildOf(transform)) return;
+
+            if (currentProp == null)
+            {
+                Prop propAux = collider.GetComponentInParent<Prop>();
+
+                if (propAux != null)
+                {
+                    currentProp = propAux;
+                    currentProp.DisableRigidBody();
+                    currentProp.transform.position = propPoint.position;
+                }
+            }
+        }
     }
 
     public void HandleAimAnimFinish()

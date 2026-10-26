@@ -14,6 +14,7 @@ public class Trace : MonoBehaviour
     [Header("Configs")]
     [SerializeField] private float pointRadiusMult;
     [SerializeField] private float pointDistance;
+    [SerializeField] private bool isFirstVisible;
 
     private List<TracePoint> points = new List<TracePoint>();
 
@@ -105,6 +106,11 @@ public class Trace : MonoBehaviour
             currentPoint += direction * pointDistance;
 
             points.Add(currentPointObject.GetComponent<TracePoint>());
+        }
+
+        if (points.Count > 0)
+        {
+            points[0].enabled = isFirstVisible;
         }
 
         endGameObject.transform.localScale = new Vector3(pointRadiusMult, pointRadiusMult, pointRadiusMult);

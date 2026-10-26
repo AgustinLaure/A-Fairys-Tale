@@ -6,6 +6,7 @@ public abstract class Prop : MonoBehaviour, IPickable
     [SerializeField] protected SpriteRenderer contourSpriteRenderer;
     [SerializeField] protected float contourLowestThickness;
     [SerializeField] protected float contourHighestThickness = 4.62f;
+    [SerializeField] protected Rigidbody rb;
 
     protected Material contourMat;
 
@@ -49,18 +50,24 @@ public abstract class Prop : MonoBehaviour, IPickable
         isHighlighted = state;
     }
 
-    protected void EnableRigidBody(Rigidbody rb)
+    public void EnableRigidBody()
     {
-        rb.isKinematic = false;
-        rb.detectCollisions = true;
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+        }
     }
 
-    protected void DisableRigidBody(Rigidbody rb)
+    public void DisableRigidBody()
     {
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 
-        rb.isKinematic = true;
-        rb.detectCollisions = false;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+        }
     }
 }

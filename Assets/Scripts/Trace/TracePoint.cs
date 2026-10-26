@@ -7,6 +7,11 @@ public class TracePoint : MonoBehaviour
 
     public SpriteRenderer GetSpriteRenderer { get { return spriteRenderer; } }
 
+    private void OnEnable()
+    {
+        spriteRenderer.enabled = true;
+    }
+
     private void Awake()
     {
         areaTrigger.OnTriggerEntered += HandleAreaTrigger;
