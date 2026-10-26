@@ -7,6 +7,7 @@ public class OrigamiPool : MonoBehaviour
     [Header("References")]
     [SerializeField] private UnityPool aicraftUnityPool;
     [SerializeField] private UnityPool frogUnityPool;
+    [SerializeField] private UnityPool craneUnityPool;
     private EventBus eventBus;
 
     private Dictionary<Type, UnityPool> typeToPool;
@@ -16,7 +17,8 @@ public class OrigamiPool : MonoBehaviour
         typeToPool = new Dictionary<Type, UnityPool>()
         {
             [typeof(Aircraft)] = aicraftUnityPool,
-            [typeof(Frog)] = frogUnityPool
+            [typeof(Frog)] = frogUnityPool,
+            [typeof(Crane)] = craneUnityPool
         };
     }
 

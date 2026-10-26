@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5088463283425963645}
   - component: {fileID: 7431648197725779170}
   - component: {fileID: 7024279885120667650}
+  - component: {fileID: 2024565733544033997}
   m_Layer: 0
   m_Name: OrigamiPool
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OrigamiPool
   aicraftUnityPool: {fileID: 7431648197725779170}
   frogUnityPool: {fileID: 7024279885120667650}
+  craneUnityPool: {fileID: 2024565733544033997}
 --- !u!114 &7431648197725779170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,3 +76,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityPool
   prefab: {fileID: 4720311483658818617, guid: 1989f5dda6c009647adbd31d328437a0, type: 3}
+--- !u!114 &2024565733544033997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428087695349250809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 4720311483658818617, guid: 008469f501fc8ac4d80903df6e89108b, type: 3}

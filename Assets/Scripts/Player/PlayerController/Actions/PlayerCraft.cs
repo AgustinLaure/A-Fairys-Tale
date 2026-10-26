@@ -13,7 +13,7 @@ public class PlayerCraft : MonoBehaviour
         Right
     }
 
-    private const int maxRecipes = 2;
+    private const int maxRecipes = 3;
 
     [Header("References")]
     [SerializeField] private Transform pivotTransform;
@@ -33,6 +33,7 @@ public class PlayerCraft : MonoBehaviour
     [SerializeField] private const int maxPossibleMoves = 7;
     [SerializeField] private Move[] aicraftRecipe;
     [SerializeField] private Move[] frogRecipe;
+    [SerializeField] private Move[] craneRecipe;
 
     private struct Recipe
     {
@@ -56,6 +57,9 @@ public class PlayerCraft : MonoBehaviour
 
         recipes[1].moves = frogRecipe;
         recipes[1].type = typeof(Frog);
+
+        recipes[2].moves = craneRecipe;
+        recipes[2].type = typeof(Crane);
     }
 
     private void Start()
