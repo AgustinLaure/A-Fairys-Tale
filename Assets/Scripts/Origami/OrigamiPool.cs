@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 
 public class OrigamiPool : MonoBehaviour
 {
@@ -33,13 +34,13 @@ public class OrigamiPool : MonoBehaviour
     {
         if (typeToPool.TryGetValue(type, out UnityPool pool))
         {
-            return pool.GetItem(position,rotation,parent);
+            return pool.GetItem(position, rotation, parent);
         }
 
         return null;
     }
 
-    public GameObject GetOrigami(Type type) 
+    public GameObject GetOrigami(Type type)
     {
         if (typeToPool.TryGetValue(type, out UnityPool pool))
         {
@@ -47,6 +48,14 @@ public class OrigamiPool : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void ReturnOrigami(GameObject gameObject, Type type)
+    {
+        if (typeToPool.TryGetValue(type, out UnityPool pool))
+        {
+            pool.ReturnItem(gameObject);
+        }
     }
 
     private void HandleOrigamiDisable(OnDisableOrigami data)

@@ -12,6 +12,8 @@ public abstract class Origami : Prop
     [SerializeField] private Animator animator;
     protected GameObject currentLayerGameObject = null;
 
+    protected OrigamiPool origamiPool;
+
     protected int baseLayer = 0;
     protected int noPlayerColLayer = 0;
 
@@ -32,6 +34,8 @@ public abstract class Origami : Prop
     public GameObject SetCurrentLayerGameObject { get { return currentLayerGameObject; } set { currentLayerGameObject = value; } }
 
     public static string GetOrigamiTag { get { return "Origami"; } }
+
+    public OrigamiPool SetOrigamiPool { set { origamiPool = value; } }
 
     protected override void Start()
     {

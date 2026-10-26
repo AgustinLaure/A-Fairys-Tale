@@ -163,6 +163,7 @@ public class PlayerCraft : MonoBehaviour
 
                 Origami origamiComp = origami.GetComponent<Origami>();
                 origamiComp.SetCurrentLayerGameObject = currentLayerGameObject;
+                origamiComp.SetOrigamiPool = origamiPool;
 
                 eventBus.Raise<OnPlayerCraftedOrigami>(origamiComp);
 
@@ -215,12 +216,12 @@ public class PlayerCraft : MonoBehaviour
 
     private void OnDisable()
     {
-      if (isCrafting)
-      {
-          eventBus.Raise<OnPlayerToggleCraft>(false);
-          isCrafting = false;
-          ResetCache();
-      }
+        if (isCrafting)
+        {
+            eventBus.Raise<OnPlayerToggleCraft>(false);
+            isCrafting = false;
+            ResetCache();
+        }
     }
 
     private void OnDestroy()
