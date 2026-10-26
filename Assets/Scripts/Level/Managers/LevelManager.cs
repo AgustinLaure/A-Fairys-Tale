@@ -14,10 +14,9 @@ public class LevelManager : MonoBehaviour
 
     public bool IsPaused { get { return isPaused; } }
 
-    public void Awake()
-    {
-        Debug.LogWarning("Awake base");
 
+    public virtual void Awake()
+    {
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
 
         gameManager.SetActiveLevelManager(this);
@@ -33,7 +32,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void TogglePause()
+    public virtual void TogglePause()
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0.0f : 1.0f;

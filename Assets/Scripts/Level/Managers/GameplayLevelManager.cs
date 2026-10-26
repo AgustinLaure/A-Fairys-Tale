@@ -53,12 +53,9 @@ public class GameplayLevelManager : LevelManager
         return (camTransitionCurrentTimer / camTransitionTime);
     }
 
-    public void Awake()
+    public override void Awake()
     {
         base.Awake();
-
-        Debug.LogWarning("Awake up");
-
 
         if (layers.Count > 0)
         {
@@ -174,7 +171,7 @@ public class GameplayLevelManager : LevelManager
         }
     }
 
-    public void TogglePause()
+    public override void TogglePause()
     {
         base.TogglePause();
 
