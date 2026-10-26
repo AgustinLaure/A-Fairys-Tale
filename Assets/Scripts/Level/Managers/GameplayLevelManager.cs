@@ -114,12 +114,16 @@ public class GameplayLevelManager : LevelManager
     private void OnDestroy()
     {
         Time.timeScale = 1.0f;
-        if (gameManager != null) gameManager.SetActiveLevelManager(null);
+
+        eventBus.Unsubscribe<OnDeathAreaCollision>((Action<OnDeathAreaCollision>)HandleDeathAreaCollision);
+        eventBus.Unsubscribe<OnPlayerLanded>((Action)HandlePlayerLand);
 
         if (mainTeletransportable != null)
         {
             mainTeletransportable.OnTeleport -= () => SetCurrentLayer(mainTeletransportable.LayerIndex);
         }
+        
+        if (gameManager != null) gameManager.SetActiveLevelManager(null);
     }
 
     public void RegisterLayer(LayerController layer)
