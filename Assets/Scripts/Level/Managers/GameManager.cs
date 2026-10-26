@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     private LevelData activeLevelData;
     
     private LevelManager activeLevelManager;
-    private FoldManager activeFoldManager;
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }

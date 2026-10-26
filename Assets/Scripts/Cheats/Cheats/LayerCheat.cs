@@ -9,7 +9,7 @@ public class LayerCheat : Cheat
     [SerializeField] public InputActionReference nextLayer;
     [SerializeField] public InputActionReference previousLayer;
 
-    private LevelManager levelManager;
+    private GameplayLevelManager levelManager;
     private EventBus eventBus;
 
     private GameObject currentPortal = null;
@@ -19,7 +19,7 @@ public class LayerCheat : Cheat
     {
         base.Initialize(cheatManager);
 
-        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager;
+        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager as GameplayLevelManager;
 
         if(levelManager == null)
         {

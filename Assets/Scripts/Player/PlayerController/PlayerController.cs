@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public State GetState { get { return fsm.GetCurrentState; } }
 
-    private LevelManager levelManager;
+    private GameplayLevelManager levelManager;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
         inputHandle = serviceLocator.GetService<InputHandler>();
 
-        levelManager = serviceLocator.GetService<GameManager>().levelManager;
+        levelManager = serviceLocator.GetService<GameManager>().levelManager as GameplayLevelManager;
 
         moveAction = inputHandle.playerInput.actions["Move"];
 

@@ -8,15 +8,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using static UnityEngine.LowLevelPhysics2D.PhysicsLayers;
 
-public class LevelManager : MonoBehaviour
+public class GameplayLevelManager : LevelManager
 {
-    private GameManager gameManager;
-
-    private EventBus eventBus;
 
     [SerializeField] private SortingGroup playerSortingGroup;
 
-    [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject playerGameObject;
 
     [SerializeField] private GameObject playerSpawnPoint;
@@ -42,10 +38,6 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] public Color defaultFadeColor = Color.clear;
 
-    private bool isPaused = false;
-
-    public bool IsPaused { get { return isPaused; } }
-
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
     private const string playerTag = "Player";
@@ -61,11 +53,12 @@ public class LevelManager : MonoBehaviour
         return (camTransitionCurrentTimer / camTransitionTime);
     }
 
-    void Awake()
+    public void Awake()
     {
-        GameManager gm = ServiceLocator.Instance.GetService<GameManager>();
-        gm.SetActiveLevelManager(this);
-        gm.SetActiveLevelData(levelData);
+        base.Awake();
+
+        Debug.LogWarning("Awake up");
+
 
         if (layers.Count > 0)
         {
@@ -73,22 +66,12 @@ public class LevelManager : MonoBehaviour
             layers.Clear();
         }
 
-        eventBus = ServiceLocator.Instance.GetService<EventBus>();
         eventBus.Subscribe<OnDeathAreaCollision>((Action<OnDeathAreaCollision>)HandleDeathAreaCollision);
         eventBus.Subscribe<OnPlayerLanded>((Action)HandlePlayerLand);
-
-        gameManager = ServiceLocator.Instance.GetService<GameManager>();
-        gameManager.SetActiveLevelManager(this);
-
-        if (gameManager.levelManager == null)
-        {
-            Debug.LogWarning("Level should be started from gameManager!");
-            gameManager.SetActiveLevelManager(this);
-            Debug.LogWarning("Level data will be empty.");
-        }
-
+ 
         if (pausePanel != null) pausePanel.SetActive(false);
     }
+
     void Start()
     {
         Coroutine lateStart = StartCoroutine(LateStart());
@@ -193,11 +176,9 @@ public class LevelManager : MonoBehaviour
 
     public void TogglePause()
     {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0.0f : 1.0f;
-        eventBus.Raise<OnPause>(IsPaused);
+        base.TogglePause();
+
         if (pausePanel != null) pausePanel.SetActive(IsPaused);
-        Debug.Log("Game is " + (IsPaused ? "Unp" : "P") + "aused");
     }
 
     public void OnWin()
