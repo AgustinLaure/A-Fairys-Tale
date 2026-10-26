@@ -61,7 +61,7 @@ public class Trace : MonoBehaviour
         }
     }
 
-    public void Start()
+    private void Start()
     {
         if (startGameObject.position != Vector3.zero || endGameObject.position != Vector3.zero)
         {
@@ -106,5 +106,8 @@ public class Trace : MonoBehaviour
 
             points.Add(currentPointObject.GetComponent<TracePoint>());
         }
+
+        endGameObject.transform.localScale = new Vector3(pointRadiusMult, pointRadiusMult, pointRadiusMult);
+        endGameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, up);
     }
 }

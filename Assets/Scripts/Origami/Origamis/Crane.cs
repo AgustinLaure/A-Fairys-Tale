@@ -31,6 +31,8 @@ public class Crane : Origami
     private bool shouldLaunch = false;
     private const float epsilon = 1e-06f;
 
+    public const string CraneTag = "Crane";
+
     private readonly Quaternion facingLeftRotation = Quaternion.Euler(0f, 0, 0f);
     private readonly Quaternion facingRightRotation = Quaternion.Euler(0f, 180f, 0f);
     private Plane levelPlane = new Plane(Vector3.forward, Vector3.zero);
@@ -136,6 +138,7 @@ public class Crane : Origami
         cursorPos = GetMouseWorldPosition();
         endObjectivePos = cursorPos;
         endPath.SetPoints(startObjectivePos, cursorPos);
+        endPath.SetVisibility(0, false);
         endPath.SetVisibility(true);
 
         currentTarget = startObjectivePos;
@@ -204,11 +207,9 @@ public class Crane : Origami
             yield return null;
         }
 
-        pivot.transform.localPosition = Vector3.zero;
-
-        yield return null;
-
         origamiPool.ReturnOrigami(gameObject, typeof(Crane));
+
+        pivot.transform.localPosition = Vector3.zero;
 
         flyCoroutine = null;
     }

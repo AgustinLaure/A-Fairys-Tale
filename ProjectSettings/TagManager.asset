@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - Water
   - Origami
+  - Crane
   layers:
   - Default
   - TransparentFX
