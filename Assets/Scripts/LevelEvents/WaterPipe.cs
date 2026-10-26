@@ -20,7 +20,7 @@ public class WaterPipe : MonoBehaviour
     {
         Origami origami = collider.GetComponentInParent<Origami>();
 
-        if (origami != null)
+        if (origami != null && origami.GetIsCrumpleable)
         {
             collider.attachedRigidbody.linearVelocity = Vector3.zero;
             collider.attachedRigidbody.AddForce(new Vector3(0f, -torrentForce, 0f), torrentForceMode);

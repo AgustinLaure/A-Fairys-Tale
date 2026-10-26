@@ -10,8 +10,6 @@ public class Aircraft : Origami
     private InputAction cursorPosAction;
     private InputAction usePropAction;
 
-    private Camera mainCamera;
-    private Rigidbody rb;
     private EventBus eventBus;
     private bool aimAnimEnded = false;
     private bool throwAnimEnded = false;
@@ -29,16 +27,12 @@ public class Aircraft : Origami
 
     private float accelDurationTimer = 0f;
 
-    private Vector2 cursorPosition = Vector2.zero;
-
     private readonly Quaternion facingLeftRotation = Quaternion.Euler(0f, 0, 0f);
     private readonly Quaternion facingRightRotation = Quaternion.Euler(0f, 180f, 0f);
     private Plane levelPlane = new Plane(Vector3.forward, Vector3.zero);
 
     private const ForceMode launchForceMode = ForceMode.VelocityChange;
     private const ForceMode accelForceMode = ForceMode.Acceleration;
-
-    private const string crumpleClipNameConst = "Crumple";
 
     private void Awake()
     {
@@ -53,8 +47,6 @@ public class Aircraft : Origami
         base.Start();
 
         baseLayer = LayerMask.NameToLayer("Prop");
-        crumpleClipName = crumpleClipNameConst;
-        mainCamera = Camera.main;
 
         ServiceLocator serviceLocator = ServiceLocator.Instance;
 
@@ -129,23 +121,7 @@ public class Aircraft : Origami
     public override void Enable()
     {
         origamiRenderer.SetActive(true);
-        EnableRigidBody(rb);
-    }
-
-    public Vector3 GetMouseWorldPosition()
-    {
-        Vector2 screenPos = cursorPosition;
-
-        Ray ray = mainCamera.ScreenPointToRay(screenPos);
-
-        Plane currentLevelPlane = new Plane(Vector3.forward, new Vector3(0, 0, transform.position.z));
-
-        if (currentLevelPlane.Raycast(ray, out float enterDistance))
-        {
-            return ray.GetPoint(enterDistance);
-        }
-
-        return Vector3.zero;
+        EnableRigidBody();
     }
 
     private void HandleRotation()
@@ -168,7 +144,7 @@ public class Aircraft : Origami
     public override void Disable()
     {
         origamiRenderer.SetActive(false);
-        DisableRigidBody(rb);
+        DisableRigidBody();
     }
 
     public void HandleAimAnimFinish()
@@ -220,8 +196,9 @@ public class Aircraft : Origami
         throwCoroutine = null;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         areaCollider.OnColliderEntered -= HandleCollision;
     }
 }

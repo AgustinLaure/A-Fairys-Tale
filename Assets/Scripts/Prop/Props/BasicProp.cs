@@ -13,7 +13,6 @@ public class BasicProp : Prop
     [SerializeField] private float maxTimeToHighlight = 20f;
 
     private AreaCollider areaCollider;
-    private Rigidbody rb;
 
     private const ForceMode pushForceMode = ForceMode.Impulse;
 
@@ -111,7 +110,7 @@ public class BasicProp : Prop
 
     public override void Enable()
     {
-        EnableRigidBody(rb);
+        EnableRigidBody();
         rendererObject.SetActive(true);
         colliderObject.SetActive(true);
     }
@@ -131,7 +130,7 @@ public class BasicProp : Prop
 
     public override void Disable()
     {
-        DisableRigidBody(rb);
+        DisableRigidBody();
         rendererObject.SetActive(false);
         contourSpriteRenderer.enabled = false;
     }
@@ -148,11 +147,11 @@ public class BasicProp : Prop
 
     public void EnablePhysics()
     {
-        EnableRigidBody(rb);
+        EnableRigidBody();
     }
 
     public void DisablePhysics()
     {
-        DisableRigidBody(rb);
+        DisableRigidBody();
     }
 }

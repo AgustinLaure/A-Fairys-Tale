@@ -209,12 +209,14 @@ MonoBehaviour:
   contourSpriteRenderer: {fileID: 6197449394579645867}
   contourLowestThickness: 0
   contourHighestThickness: 4.62
+  rb: {fileID: 3904340358815610322}
   origamiRenderer: {fileID: 5597002408539844837}
   areaCollider: {fileID: 1012843883258360534}
   sphereCollider: {fileID: 33019397194163397}
   baseForm: {fileID: 1784571033639189772}
   crumpledForm: {fileID: 5759088641817726876}
   animator: {fileID: 7698021352420710269}
+  isCrumpleable: 1
   playerTrigger: {fileID: 4780579293889977955}
   bodyCollider: {fileID: 1012843883258360534}
   playerCollider: {fileID: 8895388687479053756}
