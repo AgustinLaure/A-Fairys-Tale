@@ -10,11 +10,17 @@ public class Fox : MonoBehaviour
     [SerializeField] private Transform bunnyLayerStartRunPoint;
     [SerializeField] private Transform bunnyLayerEndRunPoint;
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [SerializeField] private Prop key;
+    [SerializeField] private GameObject keyCollider;
+    [SerializeField] private SpriteRenderer keyRenderer;
+
     private EventBus eventBus;
 
     [Header("Configs")]
     [SerializeField] private float backLayerRunPointTime;
     [SerializeField] private float bunnyLayerRunPointTime;
+    [SerializeField] private float slipImpulse;
 
     private const string layer0Name = "Layer 0";
 
@@ -22,6 +28,7 @@ public class Fox : MonoBehaviour
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
         eventBus.Subscribe<OnFoxAlert>((Action)HandleAlert);
+        eventBus.Subscribe<OnFoxDropKey>((Action)HandleDropKey);
     }
 
     private IEnumerator ChaseCoroutine()
@@ -43,6 +50,7 @@ public class Fox : MonoBehaviour
         t = 0f;
         startPos = pivot.transform.position;
         spriteRenderer.sortingLayerName = layer0Name;
+        keyRenderer.sortingLayerName = layer0Name;
 
         while (t < 1f)
         {
@@ -59,5 +67,13 @@ public class Fox : MonoBehaviour
     private void HandleAlert()
     {
         StartCoroutine(ChaseCoroutine());
+    }
+
+    private void HandleDropKey()
+    {
+        key.EnableRigidBody();
+        keyCollider.SetActive(true);
+        key.gameObject.transform.SetParent(transform.parent.parent);
+        key.GetRigidbody.AddForce(Vector3.up * slipImpulse, ForceMode.VelocityChange);
     }
 }

@@ -23,6 +23,8 @@ public abstract class Prop : MonoBehaviour, IPickable
 
     public static string GetPropTag { get { return propTag; } }
 
+    public Rigidbody GetRigidbody { get { return rb; } }
+
     protected virtual void Start()
     {
         contourMat = contourSpriteRenderer.material;
@@ -56,6 +58,7 @@ public abstract class Prop : MonoBehaviour, IPickable
         {
             rb.isKinematic = false;
             rb.detectCollisions = true;
+            rb.useGravity = true;
         }
     }
 
