@@ -1,16 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FoldInstruction : MonoBehaviour
+[System.Serializable]
+public class LayerCheckpoint
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Vector2 position;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Min(0)]
+    public int requiredLayers = 1;
+}
+
+[System.Serializable]
+public class OrigamiObjective
+{
+    public string stepName = "New step";
+
+    public List<Vector2> targetShape = new List<Vector2>();
+
+    public List<LayerCheckpoint> layerCheckpoints = new List<LayerCheckpoint>();
+}
+
+[CreateAssetMenu(fileName = "NewOrigamiFoldData", menuName = "Origami/Fold Data")]
+public class OrigamiFigure : ScriptableObject
+{
+    public string figureName = "New Origami Fold";
+
+    public List<OrigamiObjective> steps = new List<OrigamiObjective>();
 }
