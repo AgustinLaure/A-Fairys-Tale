@@ -11,6 +11,8 @@ TagManager:
   - Water
   - Origami
   - Crane
+  - Carrot
+  - Fox
   layers:
   - Default
   - TransparentFX
