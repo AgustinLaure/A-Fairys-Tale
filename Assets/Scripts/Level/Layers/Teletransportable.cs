@@ -8,7 +8,7 @@ public class Teletransportable : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
 
-    private LevelManager levelManager;
+    private GameplayLevelManager levelManager;
 
     public float telelporResetTime = 0.5f;
 
@@ -22,7 +22,7 @@ public class Teletransportable : MonoBehaviour
 
     void Awake()
     {
-        levelManager = ServiceLocator.Instance.GetService<LevelManager>();
+        levelManager = ServiceLocator.Instance.GetService<GameplayLevelManager>();
     }
     private void Start()
     {

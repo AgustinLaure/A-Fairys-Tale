@@ -34,7 +34,7 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private Coroutine pushCoroutine = null;
 
-    private LevelManager levelManager;
+    private GameplayLevelManager levelManager;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
         originalLegsColliderMat = legsCollider.sharedMaterial;
 
-        levelManager = serviceLocator.GetService<GameManager>().levelManager;
+        levelManager = serviceLocator.GetService<GameManager>().levelManager as GameplayLevelManager;
     }
 
     private void Update()

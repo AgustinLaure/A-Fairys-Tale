@@ -21,7 +21,7 @@ public class LayerController : MonoBehaviour
 
     private int currentRespawnPointIndex = 0;
 
-    private LevelManager levelManager;
+    private GameplayLevelManager levelManager;
 
     private int layerIndex = -1;
 
@@ -30,7 +30,7 @@ public class LayerController : MonoBehaviour
 
     void Start()
     {
-        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager;
+        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager as GameplayLevelManager;
         levelManager.RegisterLayer(this);
 
         if (!camPos)
