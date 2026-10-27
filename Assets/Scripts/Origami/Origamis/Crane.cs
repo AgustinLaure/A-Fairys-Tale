@@ -205,6 +205,8 @@ public class Crane : Origami
 
         StartCoroutine(TraceFadeOut(endPath));
 
+        canPickUp = false;
+
         Vector3 randomDirection = Vector3.up;
 
         randomDirection.x = UnityEngine.Random.Range(-1f, 1f);
