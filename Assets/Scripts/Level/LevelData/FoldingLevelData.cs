@@ -9,4 +9,6 @@ public class FoldingLevelData : LevelData
     }
 
     public FoldingLevel foldinglevel;
+
+    public OrigamiFigure objectiveFigure;
 }

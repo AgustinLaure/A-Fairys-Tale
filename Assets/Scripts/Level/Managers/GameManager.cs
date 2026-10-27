@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     private LevelData activeLevelData;
     
     private LevelManager activeLevelManager;
-    private FoldManager activeFoldManager;
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
@@ -33,7 +32,13 @@ public class GameManager : MonoBehaviour
     public void SetActiveLevelManager(LevelManager levelManager)
     {
         activeLevelManager = levelManager;
-        if (activeLevelManager != null) Debug.Log("Added level manager" + activeLevelManager.name);
+        if (activeLevelManager == null)
+        {
+            Debug.Log("Leverl manager is null!");
+            return;
+        }
+        Debug.Log("Added level manager" + activeLevelManager.name);
+        Debug.Log("New " + (((levelManager is GameplayLevelManager)) ? "Gameplay ":"Folding " ));
     }
 
     public void SetActiveLevelData(LevelData levelData)
