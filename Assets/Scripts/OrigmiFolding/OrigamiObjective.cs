@@ -19,11 +19,3 @@ public class OrigamiObjective
 
     public List<LayerCheckpoint> layerCheckpoints = new List<LayerCheckpoint>();
 }
-
-[CreateAssetMenu(fileName = "NewOrigamiFoldData", menuName = "Origami/Fold Data")]
-public class OrigamiFigure : ScriptableObject
-{
-    public string figureName = "New Origami Fold";
-
-    public List<OrigamiObjective> steps = new List<OrigamiObjective>();
-}
