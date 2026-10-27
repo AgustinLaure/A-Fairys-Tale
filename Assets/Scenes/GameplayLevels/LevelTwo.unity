@@ -2276,8 +2276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf54f8d93720234eb313de2370bb222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  playerSortingGroup: {fileID: 2013426344}
   levelData: {fileID: 11400000, guid: 0cf7d24445b505e4e82059ab23f1251a, type: 2}
+  playerSortingGroup: {fileID: 2013426344}
   playerGameObject: {fileID: 1548855160}
   playerSpawnPoint: {fileID: 0}
   pausePanel: {fileID: 150044559}
