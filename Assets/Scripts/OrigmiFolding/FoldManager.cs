@@ -23,11 +23,23 @@ public class FoldManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        (ServiceLocator.Instance.GetService<GameManager>().levelManager as FoldingLevelManager).SetFoldManager(this);
     }
 
     private void Start()
+    {
+        StartUp();
+    }
+    public void StartUp()
     {
         if (activeFaces.Count == 0)
         {
