@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.8.0] - 2026-10-27
+
+### New
+
+- Folding level, with folding instructions and layer transitions.
+- Crane origami.
+- Trace for the crane origami.
+- Level two background, layout and main events.
+- Fox event for level two (placeholder art).
+- Bunny event for level two (placeholder art).
+
+### Changes
+
+- Objective figure now matches the loaded level.
+- Fixed wrong transparency when handling props.
+- Fixed the pause screen.
+- Fixed player pause handling.
+
 ## [0.7.0] - 2026-10-20
 
 ### New
