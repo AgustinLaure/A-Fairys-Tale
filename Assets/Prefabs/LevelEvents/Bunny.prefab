@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6794412658044933959}
   - component: {fileID: 7832439379005086396}
   - component: {fileID: 1006752355254242673}
+  - component: {fileID: 938721034622234908}
   m_Layer: 0
   m_Name: Conejo
   m_TagString: Untagged
@@ -78,9 +79,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1337726813
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 98fa3111738f9ed4691fd2962d7183d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -114,6 +115,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &938721034622234908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536207299176391691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
+  fadeLayerSprite: {fileID: 0}
+  teleportable: 0
 --- !u!1 &1207490521092546642
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +189,7 @@ Transform:
   m_GameObject: {fileID: 1766351057986897479}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0.23, y: 1, z: 0}
   m_LocalScale: {x: 0.38472316, y: 0.38472316, z: 0.38472316}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,7 +210,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766351057986897479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -320,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 4236763018962053823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.97, y: 0.87, z: 0}
+  m_LocalPosition: {x: 3.97, y: 1.39, z: 0}
   m_LocalScale: {x: 0.38472316, y: 0.38472316, z: 0.38472316}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -341,7 +356,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4236763018962053823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -504,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 5943888737202075514}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.32, y: 1.43, z: 0}
+  m_LocalPosition: {x: 17.14, y: 1.43, z: 0}
   m_LocalScale: {x: 0.38472316, y: 0.38472316, z: 0.38472316}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -525,7 +540,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5943888737202075514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -618,7 +633,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2433527, y: 19.232836, z: 25.63737}
+  m_LocalScale: {x: 0.47268108, y: 19.232836, z: 7.941813}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7492181759903122046}
@@ -747,7 +762,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.340088, y: 7.660768, z: 0.7332401}
+  m_LocalScale: {x: 6.340088, y: 7.660768, z: 0.6021368}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7492181759903122046}

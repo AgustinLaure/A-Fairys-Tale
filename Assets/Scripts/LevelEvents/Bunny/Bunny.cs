@@ -74,6 +74,7 @@ public class Bunny : MonoBehaviour
         }
 
         eventBus.Raise<OnBunnyWatch>();
+        eventBus.Raise<OnFoxAlert>();
 
         while (!isStartled)
         {
