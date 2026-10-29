@@ -10,12 +10,21 @@ public abstract class Origami : Prop
     [SerializeField] protected GameObject baseForm;
     [SerializeField] private GameObject crumpledForm;
     [SerializeField] private Animator animator;
+
+    [Header("Configs")]
+    [SerializeField] private bool isCrumpleable;
+
     protected GameObject currentLayerGameObject = null;
+
+    protected OrigamiPool origamiPool;
 
     protected int baseLayer = 0;
     protected int noPlayerColLayer = 0;
 
     protected string crumpleClipName;
+
+    protected Camera mainCamera;
+    protected Vector2 cursorPosition = Vector2.zero;
 
     protected bool isCrumpled = false;
 
@@ -24,13 +33,23 @@ public abstract class Origami : Prop
 
     private const string waterTag = "Water";
 
+    private const string crumpleClipNameConst = "Crumple";
+
     public GameObject SetCurrentLayerGameObject { get { return currentLayerGameObject; } set { currentLayerGameObject = value; } }
 
     public static string GetOrigamiTag { get { return "Origami"; } }
 
+    public bool GetIsCrumpleable { get { return isCrumpleable; } }
+
+    public OrigamiPool SetOrigamiPool { set { origamiPool = value; } }
+
     protected override void Start()
     {
         base.Start();
+
+        crumpleClipName = crumpleClipNameConst;
+
+        mainCamera = Camera.main;
 
         areaCollider.OnColliderEntered += HandleAreaCollision;
     }
@@ -71,6 +90,22 @@ public abstract class Origami : Prop
         {
             transform.SetParent(null, true);
         }
+    }
+
+    protected Vector3 GetMouseWorldPosition()
+    {
+        Vector2 screenPos = cursorPosition;
+
+        Ray ray = mainCamera.ScreenPointToRay(screenPos);
+
+        Plane currentLevelPlane = new Plane(Vector3.forward, new Vector3(0, 0, transform.position.z));
+
+        if (currentLevelPlane.Raycast(ray, out float enterDistance))
+        {
+            return ray.GetPoint(enterDistance);
+        }
+
+        return Vector3.zero;
     }
 
     private void HandleAreaCollision(Collision collision)

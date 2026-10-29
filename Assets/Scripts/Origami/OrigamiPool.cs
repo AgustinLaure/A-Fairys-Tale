@@ -1,12 +1,14 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 
 public class OrigamiPool : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private UnityPool aicraftUnityPool;
     [SerializeField] private UnityPool frogUnityPool;
+    [SerializeField] private UnityPool craneUnityPool;
     private EventBus eventBus;
 
     private Dictionary<Type, UnityPool> typeToPool;
@@ -16,7 +18,8 @@ public class OrigamiPool : MonoBehaviour
         typeToPool = new Dictionary<Type, UnityPool>()
         {
             [typeof(Aircraft)] = aicraftUnityPool,
-            [typeof(Frog)] = frogUnityPool
+            [typeof(Frog)] = frogUnityPool,
+            [typeof(Crane)] = craneUnityPool
         };
     }
 
@@ -31,13 +34,13 @@ public class OrigamiPool : MonoBehaviour
     {
         if (typeToPool.TryGetValue(type, out UnityPool pool))
         {
-            return pool.GetItem(position,rotation,parent);
+            return pool.GetItem(position, rotation, parent);
         }
 
         return null;
     }
 
-    public GameObject GetOrigami(Type type) 
+    public GameObject GetOrigami(Type type)
     {
         if (typeToPool.TryGetValue(type, out UnityPool pool))
         {
@@ -45,6 +48,14 @@ public class OrigamiPool : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void ReturnOrigami(GameObject gameObject, Type type)
+    {
+        if (typeToPool.TryGetValue(type, out UnityPool pool))
+        {
+            pool.ReturnItem(gameObject);
+        }
     }
 
     private void HandleOrigamiDisable(OnDisableOrigami data)

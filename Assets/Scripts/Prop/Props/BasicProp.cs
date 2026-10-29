@@ -13,7 +13,6 @@ public class BasicProp : Prop
     [SerializeField] private float maxTimeToHighlight = 20f;
 
     private AreaCollider areaCollider;
-    private Rigidbody rb;
 
     private const ForceMode pushForceMode = ForceMode.Impulse;
 
@@ -40,10 +39,21 @@ public class BasicProp : Prop
     {
         if (rendererObject.activeSelf && contourLowestThickness < contourHighestThickness)
         {
-            if (highlightCoroutine == null)
+            if (highlightCoroutine == null && contourSpriteRenderer.enabled)
             {
                 highlightCoroutine = StartCoroutine(HighlightCoroutine(Random.Range(minTimeToHighlight, maxTimeToHighlight)));
             }
+        }
+
+        if (!contourSpriteRenderer.enabled)
+        {
+            if (highlightCoroutine != null)
+            {
+                StopCoroutine(highlightCoroutine);
+                highlightCoroutine = null;
+            }
+
+            contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
         }
     }
 
@@ -63,7 +73,8 @@ public class BasicProp : Prop
 
         isHighlighted = true;
 
-        contourObject.SetActive(true);
+        contourSpriteRenderer.enabled = true;
+        //contourObject.SetActive(true);
 
         float t = 0f;
         float currentThickness = 0f;
@@ -99,7 +110,7 @@ public class BasicProp : Prop
 
     public override void Enable()
     {
-        EnableRigidBody(rb);
+        EnableRigidBody();
         rendererObject.SetActive(true);
         colliderObject.SetActive(true);
     }
@@ -119,9 +130,9 @@ public class BasicProp : Prop
 
     public override void Disable()
     {
-        DisableRigidBody(rb);
+        DisableRigidBody();
         rendererObject.SetActive(false);
-        colliderObject.SetActive(false);
+        contourSpriteRenderer.enabled = false;
     }
 
     public void SetGravity(bool state)
@@ -136,11 +147,11 @@ public class BasicProp : Prop
 
     public void EnablePhysics()
     {
-        EnableRigidBody(rb);
+        EnableRigidBody();
     }
 
     public void DisablePhysics()
     {
-        DisableRigidBody(rb);
+        DisableRigidBody();
     }
 }

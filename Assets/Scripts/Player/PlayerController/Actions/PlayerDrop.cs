@@ -66,7 +66,6 @@ public class PlayerDrop : MonoBehaviour
 
         if (currentLayerGameObject != null)
         {
-            //Sets current layer as parent assuming parent is Action and parent.parent is layer
             currentProp.transform.SetParent(currentLayerGameObject.transform, true);
         }
 

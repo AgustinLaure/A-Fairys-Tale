@@ -163,7 +163,7 @@ public class WaterFlowerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase1To2]))
+            if (AnimationUtils.GetAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase1To2]))
             {
                 birdAnimator.fsm.TryChange<Phase1To2>(typeof(Phase2));
             }
@@ -232,7 +232,7 @@ public class WaterFlowerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase2To1]))
+            if (AnimationUtils.GetAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase2To1]))
             {
                 birdAnimator.fsm.TryChange<Phase2To1>(typeof(Phase1));
             }
@@ -264,7 +264,7 @@ public class WaterFlowerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase2To3]))
+            if (AnimationUtils.GetAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase2To3]))
             {
                 birdAnimator.fsm.TryChange<Phase2To3>(typeof(Phase3));
             }
@@ -326,7 +326,7 @@ public class WaterFlowerAnimator : MonoBehaviour
 
         public override void Update()
         {
-            if (AnimationUtils.GetCurrentAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase3To1]))
+            if (AnimationUtils.GetAnimationEnded(birdAnimator.animator, birdAnimator.statesAnimatorHash[State.Phase3To1]))
             {
                 birdAnimator.fsm.TryChange<Phase3To1>(typeof(Phase1));
             }

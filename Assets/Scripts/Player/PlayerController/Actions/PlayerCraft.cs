@@ -13,15 +13,16 @@ public class PlayerCraft : MonoBehaviour
         Right
     }
 
-    private const int maxRecipes = 2;
+    private const int maxRecipes = 3;
 
     [Header("References")]
-    private GameObject currentLayerGameObject;
+    [SerializeField] private Transform pivotTransform;
     [SerializeField] private Transform origamiSpawnPointTRS;
+    private GameObject currentLayerGameObject;
     private OrigamiPool origamiPool;
     private ServiceLocator serviceLocator;
 
-    private InputHandler inputHandle;
+    private InputHandler inputHandler;
     private InputAction toggleCraftAction;
     private InputAction craftMovesAction;
     private InputAction dropAction;
@@ -32,6 +33,7 @@ public class PlayerCraft : MonoBehaviour
     [SerializeField] private const int maxPossibleMoves = 7;
     [SerializeField] private Move[] aicraftRecipe;
     [SerializeField] private Move[] frogRecipe;
+    [SerializeField] private Move[] craneRecipe;
 
     private struct Recipe
     {
@@ -55,6 +57,9 @@ public class PlayerCraft : MonoBehaviour
 
         recipes[1].moves = frogRecipe;
         recipes[1].type = typeof(Frog);
+
+        recipes[2].moves = craneRecipe;
+        recipes[2].type = typeof(Crane);
     }
 
     private void Start()
@@ -66,11 +71,11 @@ public class PlayerCraft : MonoBehaviour
         origamiPool = serviceLocator.GetService<OrigamiPool>();
 
         eventBus = serviceLocator.GetService<EventBus>();
-        inputHandle = serviceLocator.GetService<InputHandler>();
+        inputHandler = serviceLocator.GetService<InputHandler>();
 
-        toggleCraftAction = inputHandle.playerInput.actions["ToggleCraft"];
-        craftMovesAction = inputHandle.playerInput.actions["CraftMoves"];
-        dropAction = inputHandle.playerInput.actions["Drop"];
+        toggleCraftAction = inputHandler.playerInput.actions["ToggleCraft"];
+        craftMovesAction = inputHandler.playerInput.actions["CraftMoves"];
+        dropAction = inputHandler.playerInput.actions["Drop"];
 
         eventBus.Subscribe<OnPlayerReparented>((Action<OnPlayerReparented>)HandlePlayerReparent);
 
@@ -154,10 +159,11 @@ public class PlayerCraft : MonoBehaviour
         {
             if (MatchesRecipe(recipes[i].moves, cachedMoves))
             {
-                GameObject origami = origamiPool.GetOrigami(recipes[i].type, origamiSpawnPointTRS.position, transform.rotation, transform);
+                GameObject origami = origamiPool.GetOrigami(recipes[i].type, origamiSpawnPointTRS.position, pivotTransform.rotation, pivotTransform);
 
                 Origami origamiComp = origami.GetComponent<Origami>();
                 origamiComp.SetCurrentLayerGameObject = currentLayerGameObject;
+                origamiComp.SetOrigamiPool = origamiPool;
 
                 eventBus.Raise<OnPlayerCraftedOrigami>(origamiComp);
 
@@ -210,12 +216,12 @@ public class PlayerCraft : MonoBehaviour
 
     private void OnDisable()
     {
-      if (isCrafting)
-      {
-          eventBus.Raise<OnPlayerToggleCraft>(false);
-          isCrafting = false;
-          ResetCache();
-      }
+        if (isCrafting)
+        {
+            eventBus.Raise<OnPlayerToggleCraft>(false);
+            isCrafting = false;
+            ResetCache();
+        }
     }
 
     private void OnDestroy()

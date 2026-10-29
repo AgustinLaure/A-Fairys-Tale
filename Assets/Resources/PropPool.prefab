@@ -1,3 +1,89 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7f9b40aa41703a0370db70dc11f5c59262312f85522da95334f5057b152e297f
-size 3066
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3866369368814880467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6956108077358205453}
+  - component: {fileID: 1092004740009165999}
+  - component: {fileID: 6165558705536968548}
+  - component: {fileID: 6226539766115665395}
+  - component: {fileID: 3304115804661146377}
+  m_Layer: 0
+  m_Name: PropPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6956108077358205453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866369368814880467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.97936, y: 5.57645, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1092004740009165999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866369368814880467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 3476103493057452571, guid: 819ecc7d0340ac544b113578319b8a28, type: 3}
+--- !u!114 &6165558705536968548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866369368814880467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 764033104004250687, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
+--- !u!114 &6226539766115665395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866369368814880467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 764033104004250687, guid: 3fe8d60cae2a52241a69b837d81c1556, type: 3}
+--- !u!114 &3304115804661146377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866369368814880467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 764033104004250687, guid: 8e56ebbc5789a8542ada4d09e9d65514, type: 3}

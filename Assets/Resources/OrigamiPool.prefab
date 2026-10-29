@@ -1,3 +1,91 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cd76257a5e8e37f2cf2dfcbccba24c985bd1a9554bc20666128fab330ca246fe
-size 2540
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2428087695349250809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8659390288239488338}
+  - component: {fileID: 5088463283425963645}
+  - component: {fileID: 7431648197725779170}
+  - component: {fileID: 7024279885120667650}
+  - component: {fileID: 2024565733544033997}
+  m_Layer: 0
+  m_Name: OrigamiPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8659390288239488338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428087695349250809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.57414, y: 1.283, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5088463283425963645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428087695349250809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a7c3824050d2d43876c26c852ebe97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrigamiPool
+  aicraftUnityPool: {fileID: 7431648197725779170}
+  frogUnityPool: {fileID: 7024279885120667650}
+  craneUnityPool: {fileID: 2024565733544033997}
+--- !u!114 &7431648197725779170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428087695349250809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 6942000788410757184, guid: b06c650e5b7ddba449cd83b147d0791f, type: 3}
+--- !u!114 &7024279885120667650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428087695349250809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 4720311483658818617, guid: 1989f5dda6c009647adbd31d328437a0, type: 3}
+--- !u!114 &2024565733544033997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428087695349250809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26699ae8bca0e42428dba711567a3684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityPool
+  prefab: {fileID: 4720311483658818617, guid: 008469f501fc8ac4d80903df6e89108b, type: 3}

@@ -30,13 +30,20 @@ public class UnityPool : MonoBehaviour
         if (stack.Count > 0)
         {
             GameObject item = stack.Pop();
+            item.transform.position = position;
+            item.transform.rotation = rotation;
+            item.transform.SetParent(parent);
             item.SetActive(true);
 
             return item;
         }
         else
         {
-            return Instantiate(prefab, position, rotation, parent);
+            GameObject newObject = Instantiate(prefab, position, rotation);
+            newObject.transform.SetParent(parent, true);
+            newObject.SetActive(true);
+
+            return newObject;
         }
     }
 
