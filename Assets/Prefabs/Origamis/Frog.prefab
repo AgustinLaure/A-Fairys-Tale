@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 9036503030798017181}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &4720311483658818617
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +285,6 @@ GameObject:
   - component: {fileID: 8810095292725289584}
   - component: {fileID: 314974141402601704}
   - component: {fileID: 5737675005693517261}
-  - component: {fileID: 3939248913275023192}
   m_Layer: 9
   m_Name: Crumple
   m_TagString: Untagged
@@ -379,22 +378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
-  fadeLayerSprite: {fileID: 0}
-  teleportable: 0
---- !u!114 &3939248913275023192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5759088641817726876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 314974141402601704}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &6391290373599510479
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 6197449394579645867}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &8554481571181995059
 GameObject:
   m_ObjectHideFlags: 0

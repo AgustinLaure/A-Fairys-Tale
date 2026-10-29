@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 9036503030798017181}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &2659847004453762537
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 6197449394579645867}
-  teleportable: 1
+  teleportable: 0
 --- !u!1 &8554481571181995059
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,13 +910,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6685284729683927462, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 303696871298106938}
   m_SourcePrefab: {fileID: 100100000, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
 --- !u!4 &50591307534639299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1071807197143558677, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
   m_PrefabInstance: {fileID: 1039327046282627798}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &4755234738103265902 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5733525145010561208, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+  m_PrefabInstance: {fileID: 1039327046282627798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5956724621612329840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6685284729683927462, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+  m_PrefabInstance: {fileID: 1039327046282627798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &303696871298106938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956724621612329840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
+  fadeLayerSprite: {fileID: 4755234738103265902}
+  teleportable: 0
 --- !u!114 &8396579155023123758 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8857113924697038840, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
@@ -991,11 +1018,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6685284729683927462, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 121858921787156429}
   m_SourcePrefab: {fileID: 100100000, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
 --- !u!4 &1167256066700911932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1071807197143558677, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+  m_PrefabInstance: {fileID: 2228507496376586025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4768142985549655695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6685284729683927462, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+  m_PrefabInstance: {fileID: 2228507496376586025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &121858921787156429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768142985549655695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
+  fadeLayerSprite: {fileID: 5871758775958744977}
+  teleportable: 0
+--- !u!212 &5871758775958744977 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5733525145010561208, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
   m_PrefabInstance: {fileID: 2228507496376586025}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7208000151655928017 stripped
