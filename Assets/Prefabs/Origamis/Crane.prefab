@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 87b8a8db1faa3d24ca23d8a3734aa6fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -261,7 +261,7 @@ MonoBehaviour:
   contourHighestThickness: 4.62
   rb: {fileID: 0}
   origamiRenderer: {fileID: 5597002408539844837}
-  areaCollider: {fileID: 5047123552121383489}
+  areaCollider: {fileID: 8475628886595873923}
   sphereCollider: {fileID: 33019397194163397}
   baseForm: {fileID: 1784571033639189772}
   crumpledForm: {fileID: 5759088641817726876}
@@ -285,8 +285,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 894586016283452583}
-  - component: {fileID: 6725455309162583131}
-  - component: {fileID: 5047123552121383489}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Crane
@@ -313,49 +311,6 @@ Transform:
   - {fileID: 940073532084646812}
   m_Father: {fileID: 3368562782171729873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6725455309162583131
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5335689018709987466}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
---- !u!114 &5047123552121383489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5335689018709987466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 109571d02e7dbc54498bb8f10229665d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AreaCollider
-  colliderEnterEventClassName: 
-  colliderExitEventClassName: 
-  passEnterCollisionData: 0
-  passExitCollisionData: 0
 --- !u!1 &5597002408539844837
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +426,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 37a1e6e8e494cc1428812ebffb162e86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -667,7 +622,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 37a1e6e8e494cc1428812ebffb162e86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -705,6 +660,7 @@ GameObject:
   - component: {fileID: 4965547712488391623}
   - component: {fileID: 33019397194163397}
   - component: {fileID: 7938296881209758064}
+  - component: {fileID: 8475628886595873923}
   m_Layer: 9
   m_Name: Collider
   m_TagString: Crane
@@ -772,6 +728,22 @@ MonoBehaviour:
   rb: {fileID: 0}
   telelporResetTime: 0.5
   layerIndex: -1
+--- !u!114 &8475628886595873923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554481571181995059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109571d02e7dbc54498bb8f10229665d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaCollider
+  colliderEnterEventClassName: 
+  colliderExitEventClassName: 
+  passEnterCollisionData: 0
+  passExitCollisionData: 0
 --- !u!1 &8895388687479053756
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Crane : Origami
     [SerializeField] private Trace startPath;
     [SerializeField] private Trace endPath;
     [SerializeField] private Transform propPoint;
+    [SerializeField] private Trace trace;
     //[SerializeField] private Rigidbody rb;
 
 

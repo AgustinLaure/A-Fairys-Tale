@@ -21,7 +21,8 @@ public class TracePoint : MonoBehaviour
     {
         if (collider.CompareTag(Crane.CraneTag))
         {
-            gameObject.SetActive(false);
+            spriteRenderer.sprite = null;
+            spriteRenderer.enabled = false;
         }
     }
 
