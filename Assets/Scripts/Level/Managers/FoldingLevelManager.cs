@@ -4,17 +4,13 @@ public class FoldingLevelManager : LevelManager
 {
     private FoldManager activeFoldManager = null;
 
-    //public void SetFoldManager(FoldManager newFoldManager)
-    //{
-    //    activeFoldManager = newFoldManager;
-    //}
-
     public override void Awake()
     {
         base.Awake();
+
         activeFoldManager = BootStrapper.CreateMonoSingletonGameObject<FoldManager>();
 
-        if(activeFoldManager != null)
+        if (activeFoldManager != null)
         {
             Debug.Log("Created new fold manager!");
         }
@@ -39,6 +35,6 @@ public class FoldingLevelManager : LevelManager
 
     public void OnDestroy()
     {
-        Destroy(activeFoldManager);
+        Destroy(activeFoldManager.gameObject);
     }
 }
