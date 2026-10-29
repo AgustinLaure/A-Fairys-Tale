@@ -51,6 +51,7 @@ MonoBehaviour:
   pointPrefab: {fileID: 6409232428035357079, guid: 37ea4051edbf4604199ff6d6505c70f1, type: 3}
   pointRadiusMult: 1
   pointDistance: 0.3
+  isFirstVisible: 0
 --- !u!1 &2605414717746469331
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +61,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867230987332388711}
+  - component: {fileID: 439835576722114841}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -84,6 +86,19 @@ Transform:
   - {fileID: 455851828205900433}
   m_Father: {fileID: 1071807197143558677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &439835576722114841
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2605414717746469331}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &6685284729683927462
 GameObject:
   m_ObjectHideFlags: 0
