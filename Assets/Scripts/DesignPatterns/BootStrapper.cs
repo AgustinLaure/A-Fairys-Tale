@@ -6,7 +6,6 @@ public static class BootStrapper
 {
     private static ServiceLocator serviceLocator = ServiceLocator.Instance;
 
-
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Init()
     {
@@ -19,13 +18,13 @@ public static class BootStrapper
         //CreateMonoSingletonGameObject<CheatManager>();
     }
 
-    public static void CreateMonoSingletonGameObject<T>() where T : MonoBehaviour
+    public static T CreateMonoSingletonGameObject<T>() where T : MonoBehaviour
     {
         T existingInstance = UnityEngine.Object.FindFirstObjectByType<T>();
         if (existingInstance != null)
         {
             Debug.Log($"{typeof(T)} already exists in the scene. Skipping bootstrapper creation.");
-            return;
+            return existingInstance;
         }
 
         Debug.Log("Add MonoSingleton");
@@ -34,8 +33,8 @@ public static class BootStrapper
         gameObjectHandle.name = typeof(T).ToString();
         UnityEngine.Object.DontDestroyOnLoad(gameObjectHandle);
 
-        gameObjectHandle.AddComponent<T>();
+        T component = gameObjectHandle.AddComponent<T>();
 
-        return;
+        return component;
     }
 }

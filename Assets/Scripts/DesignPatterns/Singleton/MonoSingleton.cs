@@ -9,6 +9,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get { return instance; }
     }
+
     private void Awake()
     {
         if (instance == null || instance == this)

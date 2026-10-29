@@ -2,16 +2,26 @@ using UnityEngine;
 
 public class FoldingLevelManager : LevelManager
 {
-    private FoldManager activeFoldManager;
+    private FoldManager activeFoldManager = null;
 
-    public void SetFoldManager(FoldManager newFoldManager)
-    {
-        activeFoldManager = newFoldManager;
-    }
+    //public void SetFoldManager(FoldManager newFoldManager)
+    //{
+    //    activeFoldManager = newFoldManager;
+    //}
 
     public override void Awake()
     {
         base.Awake();
+        activeFoldManager = BootStrapper.CreateMonoSingletonGameObject<FoldManager>();
+
+        if(activeFoldManager != null)
+        {
+            Debug.Log("Created new fold manager!");
+        }
+        else
+        {
+            Debug.LogError("Cant create fold manager!");
+        }
     }
 
     public void Start()
@@ -25,5 +35,10 @@ public class FoldingLevelManager : LevelManager
     public override void TogglePause()
     {
         base.TogglePause();
+    }
+
+    public void OnDestroy()
+    {
+        Destroy(activeFoldManager);
     }
 }

@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static AkSurfaceReflector;
 
-public class FoldManager : MonoBehaviour
+public class FoldManager : MonoSingleton<FoldManager>
 {
-    public static FoldManager Instance { get; private set; }
-
     public Material paperMaterial;
     public List<PaperFace> activeFaces = new List<PaperFace>();
 
@@ -21,24 +18,16 @@ public class FoldManager : MonoBehaviour
 
     private List<GameObject> checkpointMarkers = new List<GameObject>();
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        (ServiceLocator.Instance.GetService<GameManager>().levelManager as FoldingLevelManager).SetFoldManager(this);
-    }
-
     private void Start()
     {
         StartUp();
     }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Fold manager desroyed!");
+    }
+
     public void StartUp()
     {
         if (activeFaces.Count == 0)
