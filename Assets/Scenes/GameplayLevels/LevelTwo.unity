@@ -9980,6 +9980,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3514839090362495411, guid: 9dd510831bff0504b9845b8b1a675d7b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 8821192366210657821, guid: 9dd510831bff0504b9845b8b1a675d7b, type: 3}
       propertyPath: m_Name
       value: LevelTwoTree

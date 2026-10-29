@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class Trace : MonoBehaviour
 {
@@ -7,9 +8,11 @@ public class Trace : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameObject rendererGameObject;
+    [SerializeField] private SpriteRenderer craneSpriteRenderer;
     [SerializeField] private Transform startGameObject;
     [SerializeField] private Transform endGameObject;
     [SerializeField] private GameObject pointPrefab;
+    [SerializeField] private SortingGroup rendererSortingGroup;
 
     [Header("Configs")]
     [SerializeField] private float pointRadiusMult;
@@ -17,6 +20,10 @@ public class Trace : MonoBehaviour
     [SerializeField] private bool isFirstVisible;
 
     private List<TracePoint> points = new List<TracePoint>();
+
+    [SerializeField] private int id;
+
+    private string craneLayerName = " ";
 
     public Vector3 SetStart
     {
@@ -36,7 +43,7 @@ public class Trace : MonoBehaviour
         }
     }
 
-    public void SetPoints(Vector3 start, Vector3 end)
+    public void SetPoints(Vector3 start, Vector3 end, int id)
     {
         startGameObject.transform.position = start;
         endGameObject.transform.position = end;
@@ -70,9 +77,25 @@ public class Trace : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        string craneCurrentLayerId = craneSpriteRenderer.sortingLayerName;
+
+        if (craneCurrentLayerId != craneLayerName)
+        {
+            craneLayerName = craneCurrentLayerId;
+            UpdatePointsLayer(craneLayerName);
+        }
+    }
+
     public void SetVisibility(bool state)
     {
         rendererGameObject.SetActive(state);
+    }
+
+    private void UpdatePointsLayer(string layerName)
+    {
+        rendererSortingGroup.sortingLayerName = layerName;
     }
 
     private void UpdateTrace()
@@ -105,12 +128,16 @@ public class Trace : MonoBehaviour
 
             currentPoint += direction * pointDistance;
 
-            points.Add(currentPointObject.GetComponent<TracePoint>());
+            TracePoint tracePoint = currentPointObject.GetComponent<TracePoint>();
+            tracePoint.SetId = id;
+            tracePoint.GetSpriteRenderer.sortingLayerName = craneLayerName;
+
+            points.Add(tracePoint);
         }
 
         if (points.Count > 0)
         {
-            points[0].enabled = isFirstVisible;
+            points[0].gameObject.SetActive(isFirstVisible);
         }
 
         endGameObject.transform.localScale = new Vector3(pointRadiusMult, pointRadiusMult, pointRadiusMult);

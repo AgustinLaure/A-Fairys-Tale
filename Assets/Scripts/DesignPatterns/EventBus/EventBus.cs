@@ -73,9 +73,17 @@ public class EventBus
         {
             if (data.Length <= 0)
             {
-                foreach (Delegate delegatesIter in delegates)
+                for (int i = delegates.Count - 1; i >= 0; i--)
                 {
-                    delegatesIter?.DynamicInvoke();
+                    Delegate delegateIter = delegates[i];
+
+                    if (delegateIter.Target is UnityEngine.Object unityObj && unityObj == null)
+                    {
+                        delegates.RemoveAt(i);
+                        continue;
+                    }
+
+                    delegateIter?.DynamicInvoke();
                 }
             }
             else
@@ -84,9 +92,17 @@ public class EventBus
 
                 newEvent.Set(data);
 
-                foreach (Delegate delegatesIter in delegates)
+                for (int i = delegates.Count - 1; i >= 0; i--)
                 {
-                    delegatesIter?.DynamicInvoke(newEvent);
+                    Delegate delegateIter = delegates[i];
+
+                    if (delegateIter.Target is UnityEngine.Object unityObj && unityObj == null)
+                    {
+                        delegates.RemoveAt(i);
+                        continue;
+                    }
+
+                    delegateIter?.DynamicInvoke(newEvent);
                 }
 
                 compositePool.ReturnItemFromPool(newEvent);

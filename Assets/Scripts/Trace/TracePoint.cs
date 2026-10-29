@@ -4,6 +4,11 @@ public class TracePoint : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AreaTrigger areaTrigger;
+    [SerializeField] private int id = 0;
+
+    public int GetId { get { return id; } }
+
+    public int SetId { set { id = value; } }
 
     public SpriteRenderer GetSpriteRenderer { get { return spriteRenderer; } }
 
@@ -21,7 +26,11 @@ public class TracePoint : MonoBehaviour
     {
         if (collider.CompareTag(Crane.CraneTag))
         {
-            gameObject.SetActive(false);
+            if (id < 0 || collider.GetComponentInParent<Crane>().GetCurrentId == id)
+            {
+                spriteRenderer.sprite = null;
+                spriteRenderer.enabled = false;
+            }
         }
     }
 

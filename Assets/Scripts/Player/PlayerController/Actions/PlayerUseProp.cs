@@ -8,6 +8,10 @@ public class PlayerUseProp : MonoBehaviour
     private InputHandler inputHandle;
     private InputAction usePropAction;
 
+#if UNITY_EDITOR
+    private bool isGameFocusedThisFrame = false;
+#endif
+
     private void Start()
     {
         inputHandle = ServiceLocator.Instance.GetService<InputHandler>();
@@ -16,13 +20,35 @@ public class PlayerUseProp : MonoBehaviour
         usePropAction.performed += OnUseProp;
     }
 
+#if UNITY_EDITOR
+    private void OnApplicationFocus(bool focus)
+    {
+        isGameFocusedThisFrame = focus;
+    }
+#endif
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (isGameFocusedThisFrame)
+        {
+            isGameFocusedThisFrame = false;
+        }
+#endif
+    }
+
     private void OnUseProp(InputAction.CallbackContext value)
     {
         if (enabled)
         {
             Prop currentProp = inventory.GetCurrentProp;
 
-            if (currentProp != null)
+            bool canPerformAction = currentProp != null;
+
+#if UNITY_EDITOR
+            canPerformAction = !isGameFocusedThisFrame && currentProp != null;
+#endif
+            if (canPerformAction)
             {
                 currentProp.Action();
             }

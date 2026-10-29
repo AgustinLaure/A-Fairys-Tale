@@ -166,7 +166,7 @@ public class Frog : Origami
         }
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         bodyCollider.OnColliderEntered -= HandleTouchFloor;
     }
