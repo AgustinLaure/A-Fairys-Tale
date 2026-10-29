@@ -15,4 +15,4 @@ MonoBehaviour:
   levelName: Level Plane
   sceneName: FoldingLevelPlane
   foldinglevel: 0
-  objectiveFigure: {fileID: 11400000, guid: b8a0d434431d42747ad8febf34111a1c, type: 2}
+  objectiveFigure: {fileID: 11400000, guid: 8e601703d2b99e84c82794c39d6d8d97, type: 2}
