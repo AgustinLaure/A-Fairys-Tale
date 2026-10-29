@@ -3,21 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-
     private LevelManager levelManager;
-    
 
-    void Awake()
-    {
-    }
     void Start()
     {
       levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager;
-    }
-
-    void Update()
-    {
-        
     }
 
     public void OnResume()
@@ -27,13 +17,19 @@ public class PauseManager : MonoBehaviour
 
     public void OnRetry()
     {
-
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
-    public void OnSettings()
+    public void OnToggleSound()
     {
 
     }
+
+    public void OnNextLevel()
+    {
+        Debug.LogError("Next level functionality not implemented!");
+    }
+
     public void OnExit()
     {
         SceneManager.LoadSceneAsync("MainMenu");
