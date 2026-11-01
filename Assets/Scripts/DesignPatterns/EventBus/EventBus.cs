@@ -63,7 +63,7 @@ public class EventBus
         }
         catch (FunctionNotFound exception)
         {
-            Debug.LogError(exception.Message);
+            Debug.LogWarning(exception.Message);
         }
     }
 

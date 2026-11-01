@@ -59,7 +59,7 @@ public class FadingSprite : MonoBehaviour
 
         if (parentSearch == null)
         {
-            Debug.LogError("Could not find the layer controller for this sprite!");
+            Debug.LogWarning("Could not find the layer controller for this sprite!");
             return;
         }
 

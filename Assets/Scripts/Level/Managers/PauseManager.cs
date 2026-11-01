@@ -17,6 +17,7 @@ public class PauseManager : MonoBehaviour
 
     public void OnRetry()
     {
+        BootStrapper.OnReset();
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
@@ -27,11 +28,13 @@ public class PauseManager : MonoBehaviour
 
     public void OnNextLevel()
     {
+        BootStrapper.OnReset();
         Debug.LogError("Next level functionality not implemented!");
     }
 
     public void OnExit()
     {
+        BootStrapper.OnReset();
         SceneManager.LoadSceneAsync("MainMenu");
     }
 }

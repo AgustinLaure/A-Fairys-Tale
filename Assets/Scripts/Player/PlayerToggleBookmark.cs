@@ -90,6 +90,7 @@ public class PlayerToggleBookmark : MonoBehaviour
     private void Update()
     {
         fsm.Update();
+        Debug.Log(fsm.GetCurrentState);
     }
 
     private void OnDestroy()

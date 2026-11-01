@@ -37,4 +37,10 @@ public static class BootStrapper
 
         return component;
     }
+
+    public static void OnReset()
+    {
+        serviceLocator.GetService<CompositePool>().Clear();
+        serviceLocator.GetService<EventBus>().Clear();
+    }
 }
