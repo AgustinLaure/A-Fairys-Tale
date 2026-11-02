@@ -25,15 +25,16 @@ public static class GeometryMath
         return new Vector2(x2, y2);
     }
 
-    public static bool GetIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, out Vector2 intersection)
+    public static bool GetIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, out Vector2 intersection, out float t)
     {
         intersection = Vector2.zero;
+        t = 0f;
 
         float denominator = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
 
         if (Mathf.Abs(denominator) < 0.0001f) return false;
 
-        float t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) / denominator;
+        t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) / denominator;
         float u = -((p1.x - p2.x) * (p1.y - p3.y) - (p1.y - p2.y) * (p1.x - p3.x)) / denominator;
 
         if (t >= 0 && t <= 1 && u >= 0 && u <= 1)

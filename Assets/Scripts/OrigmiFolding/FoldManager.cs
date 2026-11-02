@@ -145,6 +145,13 @@ public class FoldManager : MonoSingleton<FoldManager>
             topRight,
             new Vector2(topRight.x, bottomLeft.y)
         };
+        face.uvs = new List<Vector2>()
+        {
+            new Vector2(0, 0),
+            new Vector2(0, 1),
+            new Vector2(1, 1),
+            new Vector2(1, 0)
+        };
         face.UpdateMesh();
         activeFaces.Add(face);
     }
@@ -168,72 +175,123 @@ public class FoldManager : MonoSingleton<FoldManager>
         return topFace;
     }
 
-    public void ProcessFold(Vector2 startLine, Vector2 endLine, PaperFace targetFace = null)
+    public void ProcessFold(Vector2 startLine, Vector2 endLine)
     {
+        int layersToGrab = currentFigure.steps[currentObjectiveIndex].layersToGrab;
+
+        List<PaperFace> candidateFaces = new List<PaperFace>();
+        foreach (PaperFace face in activeFaces)
+        {
+            bool hasRight = false;
+            foreach (Vector2 v in face.vertices)
+            {
+                if (GeometryMath.PointLinePosition(v, startLine, endLine) < -0.001f)
+                {
+                    hasRight = true;
+                    break;
+                }
+            }
+            if (hasRight) candidateFaces.Add(face);
+        }
+
+        candidateFaces.Sort((a, b) => a.transform.position.z.CompareTo(b.transform.position.z));
+
+        HashSet<PaperFace> facesToProcess = new HashSet<PaperFace>();
+        if (layersToGrab != -1 && layersToGrab < candidateFaces.Count)
+        {
+            for (int i = 0; i < layersToGrab; i++)
+            {
+                facesToProcess.Add(candidateFaces[i]);
+            }
+        }
+        else
+        {
+            foreach (var face in candidateFaces) facesToProcess.Add(face);
+        }
+
         List<PaperFace> newFaces = new List<PaperFace>();
         List<PaperFace> facesToRemove = new List<PaperFace>();
 
         foreach (PaperFace face in activeFaces)
         {
-            if (targetFace != null && face != targetFace)
-            {
-                continue;
-            }
+            if (!facesToProcess.Contains(face)) continue;
 
             List<Vector2> leftVertices = new List<Vector2>();
             List<Vector2> rightVertices = new List<Vector2>();
+            List<Vector2> leftUVs = new List<Vector2>();
+            List<Vector2> rightUVs = new List<Vector2>();
 
             for (int i = 0; i < face.vertices.Count; i++)
             {
                 Vector2 currentPoint = face.vertices[i];
                 Vector2 nextPoint = face.vertices[(i + 1) % face.vertices.Count];
 
+                Vector2 currentUV = (face.uvs != null && face.uvs.Count > i) ? face.uvs[i] : Vector2.zero;
+                Vector2 nextUV = (face.uvs != null && face.uvs.Count > (i + 1) % face.vertices.Count) ? face.uvs[(i + 1) % face.vertices.Count] : Vector2.zero;
+
                 float side = GeometryMath.PointLinePosition(currentPoint, startLine, endLine);
 
-                if (side >= 0) leftVertices.Add(currentPoint);
-                else rightVertices.Add(currentPoint);
+                if (side >= 0)
+                {
+                    leftVertices.Add(currentPoint);
+                    leftUVs.Add(currentUV);
+                }
+                else
+                {
+                    rightVertices.Add(currentPoint);
+                    rightUVs.Add(currentUV);
+                }
 
                 Vector2 intersection;
+                float t;
                 Vector2 lineDir = (endLine - startLine).normalized;
                 Vector2 p3 = startLine - lineDir * 1000f;
                 Vector2 p4 = endLine + lineDir * 1000f;
 
-                if (GeometryMath.GetIntersection(currentPoint, nextPoint, p3, p4, out intersection))
+                if (GeometryMath.GetIntersection(currentPoint, nextPoint, p3, p4, out intersection, out t))
                 {
+                    Vector2 intersectionUV = Vector2.Lerp(currentUV, nextUV, t);
+
                     leftVertices.Add(intersection);
+                    leftUVs.Add(intersectionUV);
                     rightVertices.Add(intersection);
+                    rightUVs.Add(intersectionUV);
                 }
             }
 
             if (leftVertices.Count >= 3 && rightVertices.Count >= 3)
             {
                 facesToRemove.Add(face);
-                PaperFace leftFace = CreateNewFace(leftVertices, "Paper_Left");
+                PaperFace leftFace = CreateNewFace(leftVertices, leftUVs, "Paper_Left");
                 newFaces.Add(leftFace);
 
                 List<Vector2> foldedVertices = new List<Vector2>();
-                foreach (Vector2 v in rightVertices)
-                {
-                    foldedVertices.Add(GeometryMath.ReflectPoint(v, startLine, endLine));
-                }
-                foldedVertices.Reverse();
+                List<Vector2> foldedUVs = new List<Vector2>();
 
-                PaperFace rightFace = CreateNewFace(foldedVertices, "Paper_Right_Folded");
+                // Iterate backwards because folding flips the face (reverses winding order)
+                for (int i = rightVertices.Count - 1; i >= 0; i--)
+                {
+                    foldedVertices.Add(GeometryMath.ReflectPoint(rightVertices[i], startLine, endLine));
+                    foldedUVs.Add(rightUVs[i]);
+                }
+
+                PaperFace rightFace = CreateNewFace(foldedVertices, foldedUVs, "Paper_Right_Folded");
                 rightFace.transform.position = new Vector3(0, 0, -0.01f * (activeFaces.Count + newFaces.Count + 1));
                 newFaces.Add(rightFace);
             }
-
             else if (rightVertices.Count >= 3 && leftVertices.Count < 3)
             {
                 facesToRemove.Add(face);
                 List<Vector2> foldedVertices = new List<Vector2>();
-                foreach (Vector2 v in rightVertices)
-                {
-                    foldedVertices.Add(GeometryMath.ReflectPoint(v, startLine, endLine));
-                }
-                foldedVertices.Reverse();
+                List<Vector2> foldedUVs = new List<Vector2>();
 
-                PaperFace rightFace = CreateNewFace(foldedVertices, face.gameObject.name + "_Folded");
+                for (int i = rightVertices.Count - 1; i >= 0; i--)
+                {
+                    foldedVertices.Add(GeometryMath.ReflectPoint(rightVertices[i], startLine, endLine));
+                    foldedUVs.Add(rightUVs[i]);
+                }
+
+                PaperFace rightFace = CreateNewFace(foldedVertices, foldedUVs, face.gameObject.name + "_Folded");
                 rightFace.transform.position = new Vector3(0, 0, -0.01f * (activeFaces.Count + newFaces.Count + 1));
                 newFaces.Add(rightFace);
             }
@@ -249,13 +307,14 @@ public class FoldManager : MonoSingleton<FoldManager>
         CheckWinCondition();
     }
 
-    private PaperFace CreateNewFace(List<Vector2> verts, string name)
+    private PaperFace CreateNewFace(List<Vector2> verts, List<Vector2> uvs, string name)
     {
         GameObject go = new GameObject(name);
         go.transform.SetParent(transform);
         go.AddComponent<MeshRenderer>().material = paperMaterial;
         PaperFace face = go.AddComponent<PaperFace>();
         face.vertices = verts;
+        face.uvs = uvs;
         face.UpdateMesh();
         return face;
     }

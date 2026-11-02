@@ -1139,8 +1139,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1773707855}
   - component: {fileID: 1773707854}
-  - component: {fileID: 1773707853}
   - component: {fileID: 1773707852}
+  - component: {fileID: 1773707853}
   m_Layer: 0
   m_Name: FoldManager
   m_TagString: Untagged
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   gridSize: 5
   enablePointSnap: 1
   edgeDivisions: 3
-  snapRadius: 0.5
+  snapRadius: 1
   minPointDistance: 0.2
   enableAngleSnap: 1
   angleSnapStep: 15

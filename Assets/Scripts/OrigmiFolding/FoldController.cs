@@ -32,7 +32,6 @@ public class FoldController : MonoBehaviour
 
     private Vector2 startPos;
     private bool isDragging = false;
-    private PaperFace currentTargetFace;
 
     private GameObject startRealMarker;
     private GameObject startSnapMarker;
@@ -68,9 +67,6 @@ public class FoldController : MonoBehaviour
             isDragging = true;
 
             Vector2 rawStart = GetMouseWorldPosition();
-
-            currentTargetFace = FoldManager.Instance.GetTopFaceAt(rawStart);
-
             startPos = GetSnappedPosition(rawStart);
 
             endRealMarker.SetActive(false);
@@ -128,7 +124,7 @@ public class FoldController : MonoBehaviour
 
                 if (IsValidFold(foldStart, foldEnd))
                 {
-                    FoldManager.Instance.ProcessFold(foldStart, foldEnd, currentTargetFace);
+                    FoldManager.Instance.ProcessFold(foldStart, foldEnd);
                 }
                 else
                 {
@@ -154,18 +150,11 @@ public class FoldController : MonoBehaviour
     {
         if (FoldManager.Instance == null || FoldManager.Instance.activeFaces.Count == 0) return false;
 
-        if (currentTargetFace != null)
+        foreach (var face in FoldManager.Instance.activeFaces)
         {
-            return LineIntersectsOrTouchesFace(lineStart, lineEnd, currentTargetFace);
+            if (LineIntersectsOrTouchesFace(lineStart, lineEnd, face)) return true;
         }
-        else
-        {
-            foreach (var face in FoldManager.Instance.activeFaces)
-            {
-                if (LineIntersectsOrTouchesFace(lineStart, lineEnd, face)) return true;
-            }
-            return false;
-        }
+        return false;
     }
 
     private bool LineIntersectsOrTouchesFace(Vector2 lineStart, Vector2 lineEnd, PaperFace face)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PaperFace : MonoBehaviour
 {
     public List<Vector2> vertices = new List<Vector2>();
+    public List<Vector2> uvs = new List<Vector2>();
 
     private MeshFilter meshFilter;
     private Mesh mesh;
@@ -28,16 +29,23 @@ public class PaperFace : MonoBehaviour
 
         int[] triangles = GeometryMath.TriangulateConvex(vertices);
 
-        Vector2[] uvs = new Vector2[vertices.Count];
+        Vector2[] meshUVs = new Vector2[vertices.Count];
         for (int i = 0; i < vertices.Count; i++)
         {
-            uvs[i] = new Vector2(vertices[i].x, vertices[i].y);
+            if (uvs != null && i < uvs.Count)
+            {
+                meshUVs[i] = uvs[i];
+            }
+            else
+            {
+                meshUVs[i] = new Vector2(vertices[i].x, vertices[i].y);
+            }
         }
 
         mesh.Clear();
         mesh.vertices = vertices3D;
         mesh.triangles = triangles;
-        mesh.uv = uvs;
+        mesh.uv = meshUVs;
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
