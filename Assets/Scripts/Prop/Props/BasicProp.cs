@@ -113,6 +113,7 @@ public class BasicProp : Prop
         EnableRigidBody();
         rendererObject.SetActive(true);
         colliderObject.SetActive(true);
+        contourSpriteRenderer.enabled = true;
     }
 
     public void Push(Vector3 push, Vector3 torque)

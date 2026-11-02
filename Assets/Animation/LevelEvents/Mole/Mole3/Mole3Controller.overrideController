@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mole3Controller
+  m_Controller: {fileID: 9100000, guid: d33b53a13b2ccb24fa339d40b69a3238, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 4598937e8a1fe07469a5d13398da3ffb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6225d2313fc67e745ba7d0924b6acb24, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 874a7ac1aade511448b6a3f2d49090d1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 22f3c90963c5c9941a5a56fe11b2c8a4, type: 2}
