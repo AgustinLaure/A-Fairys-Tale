@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 4577397541284384045}
   - component: {fileID: 2616383809591334949}
   - component: {fileID: 3753892463492982643}
+  - component: {fileID: 2948968977513863025}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -366,6 +367,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2948968977513863025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5576767419959344342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
+  fadeLayerSprite: {fileID: 2616383809591334949}
+  teleportable: 0
 --- !u!1 &5603583647424850629
 GameObject:
   m_ObjectHideFlags: 0

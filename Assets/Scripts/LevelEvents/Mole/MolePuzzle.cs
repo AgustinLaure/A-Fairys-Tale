@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,15 +7,20 @@ public class MolePuzzle : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Mole[] moles;
+    [SerializeField] private Prop prize;
+    [SerializeField] private Transform prizeEndPos;
 
     [Header("Configs")]
     [SerializeField] private MolePuzzleConfig molePuzzleConfig;
     [SerializeField] private bool isPuzzleActive = false;
+    [SerializeField] private float prizeShowTime;
 
     private int currentActivateMole = 0;
     private int molesAnimFinished = 0;
 
     private const int maxMoles = 5;
+
+    private const ForceMode prizeForceMode = ForceMode.Force;
 
     private EventBus eventBus;
 
@@ -48,6 +54,8 @@ public class MolePuzzle : MonoBehaviour
 
     private void Start()
     {
+        prize.DisableRigidBody();
+
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
         eventBus.Subscribe<OnActivateMole>((Action)HandleActivateMole);
         eventBus.Subscribe<OnMoleSwapped>((Action<OnMoleSwapped>)HandleMoleSwapped);
@@ -103,16 +111,56 @@ public class MolePuzzle : MonoBehaviour
 
     private void HandleMoleSwapped(OnMoleSwapped data)
     {
-        if (!data.isMoleShown && !isPuzzleActive)
+        if (!data.isMoleShown)
         {
-            for (int i = 0; i < currentActivateMole; i++)
+            if (!isPuzzleActive)
             {
-                moles[i].SetState(false);
-            }
+                for (int i = 0; i < currentActivateMole; i++)
+                {
+                    moles[i].SetState(false);
+                }
 
-            currentActivateMole = 0;
-            molesAnimFinished = 0;
+                currentActivateMole = 0;
+                molesAnimFinished = 0;
+            }
+            else
+            {
+                CheckWon();
+            }
         }
+    }
+
+    private void CheckWon()
+    {
+        foreach (Mole mole in moles)
+        {
+            if (mole.GetIsShown)
+            {
+                return;
+            }
+        }
+
+        StartCoroutine(LaunchPropCoroutine());
+    }
+
+    private IEnumerator LaunchPropCoroutine()
+    {
+        float t = 0f;
+
+        Vector3 startPos = prize.transform.position;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / prizeShowTime;
+
+            prize.transform.position = Vector3.Lerp(startPos, prizeEndPos.position, t);
+
+            yield return null;
+        }
+
+        prize.transform.position = prizeEndPos.position;
+
+        prize.EnableRigidBody();
     }
 
     private void OnDestroy()
