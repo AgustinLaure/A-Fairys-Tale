@@ -46,10 +46,10 @@ public class MoleAnimator : MonoBehaviour
         eventBus = serviceLocator.GetService<EventBus>();
 
         ShowState showState = new ShowState(this);
-        eventBus.Subscribe<OnMoleSwapped>((Action<OnMoleSwapped>)showState.OnSwapped);
+        eventBus.Subscribe<OnMoleHide>((Action<OnMoleHide>)showState.OnSwapped);
 
         HideState hideState = new HideState(this);
-        eventBus.Subscribe<OnMoleSwapped>((Action<OnMoleSwapped>)hideState.OnSwapped);
+        eventBus.Subscribe<OnMoleShow>((Action<OnMoleShow>)hideState.OnSwapped);
 
         Dictionary<Type, global::State> states = new Dictionary<Type, global::State>()
         {
@@ -83,7 +83,7 @@ public class MoleAnimator : MonoBehaviour
 
         public override void Update()
         {
-
+           
         }
 
         public override void Exit()
@@ -91,7 +91,7 @@ public class MoleAnimator : MonoBehaviour
 
         }
 
-        public void OnSwapped(OnMoleSwapped data)
+        public void OnSwapped(OnMoleHide data)
         {
             if (data.mole == moleAnimator.selfMole)
             {
@@ -124,7 +124,7 @@ public class MoleAnimator : MonoBehaviour
 
         }
 
-        public void OnSwapped(OnMoleSwapped data)
+        public void OnSwapped(OnMoleShow data)
         {
             if (data.mole == moleAnimator.selfMole)
             {

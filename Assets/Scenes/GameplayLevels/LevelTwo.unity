@@ -1305,6 +1305,84 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405180885}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &422049735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 668569713}
+    m_Modifications:
+    - target: {fileID: 2194005251916013378, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: molePuzzleConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: b53c246e02905b042a8eb1014eff3d37, type: 2}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.17105712
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.17105712
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.17105712
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791043919445317850, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: m_Name
+      value: MolePuzzle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00790a9b520e26438015289032961c2, type: 3}
+--- !u!4 &422049736 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
+  m_PrefabInstance: {fileID: 422049735}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &430221143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,67 +1694,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
   teleportable: 0
---- !u!1001 &523456991
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2194005251916013378, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: molePuzzleConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: b53c246e02905b042a8eb1014eff3d37, type: 2}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7791043919445317850, guid: d00790a9b520e26438015289032961c2, type: 3}
-      propertyPath: m_Name
-      value: MolePuzzle
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d00790a9b520e26438015289032961c2, type: 3}
 --- !u!1 &531610920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2070,7 @@ Transform:
   - {fileID: 1714199488469411851}
   - {fileID: 970706698}
   - {fileID: 1982196633}
+  - {fileID: 422049736}
   m_Father: {fileID: 1937280571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &668569715
@@ -10235,4 +10253,3 @@ SceneRoots:
   - {fileID: 1884900449}
   - {fileID: 1833329044}
   - {fileID: 2123496296}
-  - {fileID: 523456991}

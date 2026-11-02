@@ -12,6 +12,7 @@ public class MolePuzzle : MonoBehaviour
     [SerializeField] private bool isPuzzleActive = false;
 
     private int currentActivateMole = 0;
+    private int molesAnimFinished = 0;
 
     private const int maxMoles = 5;
 
@@ -50,6 +51,7 @@ public class MolePuzzle : MonoBehaviour
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
         eventBus.Subscribe<OnActivateMole>((Action)HandleActivateMole);
         eventBus.Subscribe<OnMoleSwapped>((Action<OnMoleSwapped>)HandleMoleSwapped);
+        eventBus.Subscribe<OnMoleShowAnimFinished>((Action)HandleMoleShowAnimFinish);
     }
 
     //TEST
@@ -70,6 +72,19 @@ public class MolePuzzle : MonoBehaviour
 
             if (currentActivateMole >= maxMoles)
             {
+                eventBus.Unsubscribe<OnActivateMole>((Action)HandleActivateMole);
+            }
+        }
+    }
+
+    private void HandleMoleShowAnimFinish()
+    {
+        if (!isPuzzleActive)
+        {
+            molesAnimFinished++;
+
+            if (molesAnimFinished >= maxMoles)
+            {
                 foreach (Mole mole in moles)
                 {
                     mole.SwapState();
@@ -78,27 +93,25 @@ public class MolePuzzle : MonoBehaviour
                 for (int i = 0; i < moles.Length; i++)
                 {
                     moles[i].SetState(molePuzzleConfig.startActivatedMoles[i]);
+                    moles[i].SetShouldToggle = true;
                 }
 
                 isPuzzleActive = true;
-
-                eventBus.Unsubscribe<OnActivateMole>((Action)HandleActivateMole);
             }
         }
     }
 
     private void HandleMoleSwapped(OnMoleSwapped data)
     {
-        if (!data.isMoleShown)
+        if (!data.isMoleShown && !isPuzzleActive)
         {
-            if (!isPuzzleActive)
+            for (int i = 0; i < currentActivateMole; i++)
             {
-                for (int i = 0; i < currentActivateMole + 1; i++)
-                {
-                    moles[i].SetState(false);
-                    currentActivateMole = 0;
-                }
+                moles[i].SetState(false);
             }
+
+            currentActivateMole = 0;
+            molesAnimFinished = 0;
         }
     }
 
@@ -106,5 +119,6 @@ public class MolePuzzle : MonoBehaviour
     {
         eventBus.Unsubscribe<OnActivateMole>((Action)HandleActivateMole);
         eventBus.Unsubscribe<OnMoleSwapped>((Action<OnMoleSwapped>)HandleMoleSwapped);
+        eventBus.Unsubscribe<OnMoleShowAnimFinished>((Action)HandleMoleShowAnimFinish);
     }
 }
