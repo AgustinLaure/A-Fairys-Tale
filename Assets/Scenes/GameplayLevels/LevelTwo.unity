@@ -1627,7 +1627,7 @@ PrefabInstance:
     - target: {fileID: 2194005251916013378, guid: d00790a9b520e26438015289032961c2, type: 3}
       propertyPath: molePuzzleConfig
       value: 
-      objectReference: {fileID: 11400000, guid: b721334ae5824a74e854b4523c7c727e, type: 2}
+      objectReference: {fileID: 11400000, guid: b53c246e02905b042a8eb1014eff3d37, type: 2}
     - target: {fileID: 6870574242835405677, guid: d00790a9b520e26438015289032961c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

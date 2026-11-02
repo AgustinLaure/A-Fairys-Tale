@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46fb189c1b83ba47b688fcb588214ed, type: 3}
   m_Name: HardConfig
   m_EditorClassIdentifier: Assembly-CSharp::MolePuzzleConfig
-  startActivatedMoles: 
-  moleOneNeighbors: []
-  moleTwoNeighbors: []
-  moleThreeNeighbors: []
-  moleFourNeighbors: []
-  moleFiveNeighbors: []
+  startActivatedMoles: 0000010000
+  moleOneNeighbors: 0100000004000000
+  moleTwoNeighbors: 03000000
+  moleThreeNeighbors: 01000000
+  moleFourNeighbors: 0100000004000000
+  moleFiveNeighbors: 000000000100000002000000

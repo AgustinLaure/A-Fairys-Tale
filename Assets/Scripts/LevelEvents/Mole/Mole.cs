@@ -30,7 +30,10 @@ public class Mole : MonoBehaviour
     {
         if (Keyboard.current[toggleKey].wasPressedThisFrame)
         {
-            ToggleState();
+            if (isShown)
+            {
+                ToggleState();
+            }
         }
     }
 
