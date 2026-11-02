@@ -21,9 +21,17 @@ public class Fox : MonoBehaviour
     [SerializeField] private float backLayerRunPointTime;
     [SerializeField] private float bunnyLayerRunPointTime;
     [SerializeField] private float slipImpulse;
+    [SerializeField] private float slipTorque;
+    [SerializeField] private float standUpWaitTime;
 
     private const string layer0Name = "Layer 0";
 
+    private WaitForSeconds stanUpWait;
+
+    private void Awake()
+    {
+        stanUpWait = new WaitForSeconds(standUpWaitTime);
+    }
     private void Start()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
@@ -35,6 +43,8 @@ public class Fox : MonoBehaviour
     {
         float t = 0f;
         Vector3 startPos = pivot.transform.position;
+
+        yield return stanUpWait;
 
         while (t < 1f)
         {
@@ -74,6 +84,9 @@ public class Fox : MonoBehaviour
         key.EnableRigidBody();
         keyCollider.SetActive(true);
         key.gameObject.transform.SetParent(transform.parent.parent);
-        key.GetRigidbody.AddForce(Vector3.up * slipImpulse, ForceMode.VelocityChange);
+
+        Rigidbody keyRigidBody = key.GetRigidbody;
+        keyRigidBody.AddForce(Vector3.up * slipImpulse, ForceMode.VelocityChange);
+        keyRigidBody.AddTorque(Vector3.forward * slipTorque, ForceMode.VelocityChange);
     }
 }

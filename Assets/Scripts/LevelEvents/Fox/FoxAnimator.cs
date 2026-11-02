@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using NUnit.Framework.Interfaces;
+using System.Collections;
 
 public class FoxAnimator : MonoBehaviour
 {
@@ -36,6 +36,7 @@ public class FoxAnimator : MonoBehaviour
     private FSM fsm;
 
     private int animatorStateHash = 0;
+
 
     private void Awake()
     {
@@ -146,7 +147,7 @@ public class FoxAnimator : MonoBehaviour
 
         public override void Update()
         {
-            
+
         }
 
         public override void Exit()
