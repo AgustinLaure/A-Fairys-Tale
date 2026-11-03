@@ -4,6 +4,8 @@ public class FoldingLevelManager : LevelManager
 {
     private FoldManager activeFoldManager = null;
 
+    public FoldManager foldManager { get { return activeFoldManager; }}
+
     public override void Awake()
     {
         base.Awake();

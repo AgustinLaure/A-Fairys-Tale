@@ -60,12 +60,12 @@ MonoBehaviour:
   - stepName: Second Wing
     flipStep: 0
     targetShape:
-    - {x: -5, y: 0}
-    - {x: -1, y: 4}
-    - {x: -1, y: 5}
+    - {x: -4, y: 0}
     - {x: 0, y: 4}
-    - {x: 0, y: 0}
-    - {x: 0, y: -5}
-    - {x: -5, y: -5}
+    - {x: 0, y: 5}
+    - {x: 1, y: 4}
+    - {x: 1, y: 0}
+    - {x: 1, y: -5}
+    - {x: -4, y: -5}
     layersToGrab: -1
     layerCheckpoints: []

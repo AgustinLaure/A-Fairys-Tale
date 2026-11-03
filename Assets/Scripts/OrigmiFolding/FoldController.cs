@@ -5,15 +5,17 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(LineRenderer))]
 public class FoldController : MonoBehaviour
 {
+    [HideInInspector]
     public bool isInputBlocked = false;
 
     [Header("Snapping Settings")]
     [SerializeField] private bool enableGridSnap = true;
     [SerializeField] private float gridSpacing = 1f;
-    [SerializeField] private float gridSize = 5f;
     [SerializeField] private bool enablePointSnap = true;
     [Min(1)][SerializeField] private int edgeDivisions = 3;
     [SerializeField] private float minPointDistance = 0.2f;
+
+    [Header("Angle Snapping")]
     [SerializeField] private bool enableAngleSnap = true;
     [SerializeField] private float angleSnapStep = 15f;
     [SerializeField] private float angleSnapTolerance = 10f;
@@ -23,12 +25,13 @@ public class FoldController : MonoBehaviour
     [SerializeField] private float intersectionTolerance = 0.05f;
 
     [Header("Visuals")]
-    [SerializeField] private bool showSnapPoints = true;
     [SerializeField] private Color validLineColor = Color.white;
     [SerializeField] private Color invalidLineColor = Color.red;
 
     private Camera mainCam;
     private LineRenderer lineRenderer;
+
+    private FoldManager foldManager;
 
     private Vector2 startPos;
     private bool isDragging = false;
@@ -36,6 +39,8 @@ public class FoldController : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
+
+        foldManager = (ServiceLocator.Instance.GetService<GameManager>().levelManager as FoldingLevelManager).foldManager;
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 0;
@@ -46,7 +51,7 @@ public class FoldController : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current == null || isInputBlocked) return;
+        if (Mouse.current == null || (FoldManager.Instance != null && FoldManager.Instance.IsFlipping)) return;
 
         OrigamiDebugVisuals.Instance?.UpdateSnapPoints(GetAllValidSnapPoints());
         HandleInput();
@@ -114,7 +119,7 @@ public class FoldController : MonoBehaviour
 
             if (IsValidFold(foldStart, foldEnd))
             {
-                FoldManager.Instance.ProcessFold(foldStart, foldEnd);
+                foldManager.ProcessFold(foldStart, foldEnd);
             }
             else
             {
@@ -136,9 +141,7 @@ public class FoldController : MonoBehaviour
 
     private bool IsValidFold(Vector2 lineStart, Vector2 lineEnd)
     {
-        if (FoldManager.Instance == null || FoldManager.Instance.activeFaces.Count == 0) return false;
-
-        foreach (var face in FoldManager.Instance.activeFaces)
+        foreach (var face in foldManager.activeFaces)
         {
             if (LineIntersectsOrTouchesFace(lineStart, lineEnd, face)) return true;
         }
@@ -188,20 +191,27 @@ public class FoldController : MonoBehaviour
     {
         List<Vector2> points = new List<Vector2>();
 
+        if (foldManager == null)
+        {
+            Debug.LogError("No FoldingManager instance");
+            return points;
+        }
+
         if (enableGridSnap)
         {
-            for (float x = -gridSize; x <= gridSize; x += gridSpacing)
+            Vector2 extents = foldManager.paperSize / 2f;
+            for (float x = -extents.x; x <= extents.x; x += gridSpacing)
             {
-                for (float y = -gridSize; y <= gridSize; y += gridSpacing)
+                for (float y = -extents.y; y <= extents.y; y += gridSpacing)
                 {
                     TryAddSnapPoint(points, new Vector2(x, y));
                 }
             }
         }
 
-        if (enablePointSnap && FoldManager.Instance != null)
+        if (enablePointSnap)
         {
-            foreach (var face in FoldManager.Instance.activeFaces)
+            foreach (var face in foldManager.activeFaces)
             {
                 int vertCount = face.vertices.Count;
                 for (int i = 0; i < vertCount; i++)
@@ -215,11 +225,18 @@ public class FoldController : MonoBehaviour
                     }
                 }
             }
+
+            if (foldManager.CurrentTargetShape != null)
+            {
+                foreach (Vector2 targetPoint in foldManager.CurrentTargetShape)
+                {
+                    TryAddSnapPoint(points, targetPoint);
+                }
+            }
         }
 
         return points;
     }
-
     private void TryAddSnapPoint(List<Vector2> list, Vector2 newPoint)
     {
         float minSqrDist = minPointDistance * minPointDistance;
@@ -245,6 +262,7 @@ public class FoldController : MonoBehaviour
 
         return dir;
     }
+
     private Vector2 GetMouseWorldPosition()
     {
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();

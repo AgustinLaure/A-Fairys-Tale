@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class FoldManager : MonoSingleton<FoldManager>
 {
+    [Header("Settings")]
     public float foldTolerance = 0.2f;
+    public Vector2 paperSize = new Vector2(10f, 10f);
 
+    [Header("References")]
     public Material paperMaterial;
     public OrigamiFigure currentFigure;
+
+    [Header("State")]
     public List<PaperFace> activeFaces = new List<PaperFace>();
 
     private int currentObjectiveIndex = 0;
     private List<Vector2> currentTargetShape = new List<Vector2>();
     private EventBus eventBus;
+
+    public List<Vector2> CurrentTargetShape => currentTargetShape;
+    public bool IsFlipping { get; private set; }
 
     private void Awake()
     {
@@ -28,7 +36,16 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     public void StartUp()
     {
-        if (activeFaces.Count == 0) CreateInitialPaper(new Vector2(-5, -5), new Vector2(5, 5));
+        if (paperSize.x <= 0.1f || paperSize.y <= 0.1f)
+        {
+            paperSize = new Vector2(10f, 10f);
+        }
+
+        if (activeFaces.Count == 0)
+        {
+            Vector2 extents = paperSize / 2f;
+            CreateInitialPaper(new Vector2(-extents.x, -extents.y), new Vector2(extents.x, extents.y));
+        }
 
         if (currentFigure == null || currentFigure.steps.Count == 0)
         {
@@ -67,19 +84,9 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     private System.Collections.IEnumerator FlipPaperCoroutine()
     {
-        var controller = FindFirstObjectByType<FoldController>();
-        if (controller != null) controller.isInputBlocked = true;
+        IsFlipping = true;
 
-        float minX = float.MaxValue, maxX = float.MinValue;
-        foreach (var f in activeFaces)
-        {
-            foreach (var v in f.vertices)
-            {
-                if (v.x < minX) minX = v.x;
-                if (v.x > maxX) maxX = v.x;
-            }
-        }
-        float centerX = (minX + maxX) / 2f;
+        float centerX = 0f;
 
         GameObject pivot = new GameObject("FlipPivot");
         pivot.transform.position = new Vector3(centerX, 0, 0);
@@ -122,7 +129,7 @@ public class FoldManager : MonoSingleton<FoldManager>
 
         Destroy(pivot);
 
-        if (controller != null) controller.isInputBlocked = false;
+        IsFlipping = false;
 
         CompleteCurrentStep();
     }
