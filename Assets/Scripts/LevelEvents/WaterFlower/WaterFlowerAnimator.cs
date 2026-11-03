@@ -22,6 +22,7 @@ public class WaterFlowerAnimator : MonoBehaviour
     [Header("Configs")]
     [SerializeField] private float phase1To2Time;
     [SerializeField] private float phase2To3Time;
+    [SerializeField] private float phase3ToLoseTime;
 
     #region HashReferences
 
@@ -283,6 +284,8 @@ public class WaterFlowerAnimator : MonoBehaviour
     private class Phase3 : global::State
     {
         private WaterFlowerAnimator birdAnimator;
+        private float loseTimer = 0f;
+        private bool hasRaisedLoseEvent = false;
 
         public Phase3(WaterFlowerAnimator birdAnimator)
         {
@@ -293,11 +296,18 @@ public class WaterFlowerAnimator : MonoBehaviour
         {
             birdAnimator.animator.SetInteger(birdAnimator.animatorStateHash, (int)State.Phase3);
             birdAnimator.eventBus.Raise<OnWaterFlowerFinalPhase>();
+            loseTimer = 0f;
         }
 
         public override void Update()
         {
+            loseTimer += Time.deltaTime;
 
+            if (!hasRaisedLoseEvent && loseTimer >= birdAnimator.phase3ToLoseTime)
+            {
+                birdAnimator.eventBus.Raise<OnLose>();
+                hasRaisedLoseEvent = true;
+            }
         }
 
         public override void Exit()

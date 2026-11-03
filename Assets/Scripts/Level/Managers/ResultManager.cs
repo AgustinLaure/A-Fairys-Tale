@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
-using UnityEngine.Rendering.Universal;
-using Unity.Content;
-using Unity.VisualScripting.Dependencies.NCalc;
 
 public class ResultManager : MonoBehaviour
 {
@@ -54,7 +51,7 @@ public class ResultManager : MonoBehaviour
         gameObject.SetActive(true);
         winScreen.SetActive(true);
 
-        if ((int)(gameManager.levelData as GameplayLevelData).level >= gameManager.GetMaxLevels - 1)
+        if ((int)(gameManager.levelData as GameplayLevelData).levelId >= gameManager.GetMaxLevels - 1)
         {
             continueCanvasGroup.alpha = nonClickableAlpha;
             continueCanvasGroup.blocksRaycasts = false;
@@ -132,7 +129,11 @@ public class ResultManager : MonoBehaviour
     }
     private void HandleContinueButton()
     {
-
+        if (gameManager.levelData.levelId + 1 < gameManager.GetMaxLevels)
+        {
+            gameManager.SetActiveLevelData(gameManager.GetLevelAt(gameManager.levelData.levelId + 1));
+            gameManager.StartLevel();
+        }
     }
 
     private void OnDestroy()

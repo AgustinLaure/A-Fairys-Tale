@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc1f4967d5f1e44b7b7b20788f5819, type: 3}
   m_Name: LevelCrane
   m_EditorClassIdentifier: Assembly-CSharp::FoldingLevelData
+  levelId: -1
   levelName: Level Crane
   sceneName: FoldingLevel
   foldinglevel: 2

@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   loadScreen: {fileID: 7763126905733465470, guid: 3451fa684b66210438445686bb62aced, type: 3}
+  levels:
+  - {fileID: 11400000, guid: 0cf7d24445b505e4e82059ab23f1251a, type: 2}
+  - {fileID: 11400000, guid: 19674e3305563d644ba0a7a29c30f195, type: 2}

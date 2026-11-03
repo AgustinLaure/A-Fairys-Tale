@@ -9,6 +9,7 @@ public abstract class LevelData : ScriptableObject
         return LevelType;
     }
 
+    public int levelId = 0;
     public string levelName = "New Level";
     public string sceneName = "SCENE_NAME";
 }
