@@ -11,9 +11,13 @@ public class Fox : MonoBehaviour
     [SerializeField] private Transform bunnyLayerEndRunPoint;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private GameplayLevelManager gameplayLevelManager;
+    [SerializeField] private FadingSprite foxFadingSprite;
+
     [SerializeField] private Prop key;
     [SerializeField] private GameObject keyCollider;
     [SerializeField] private SpriteRenderer keyRenderer;
+    [SerializeField] private Transform layerZeroTrs;
 
     private EventBus eventBus;
 
@@ -21,12 +25,26 @@ public class Fox : MonoBehaviour
     [SerializeField] private float backLayerRunPointTime;
     [SerializeField] private float bunnyLayerRunPointTime;
     [SerializeField] private float slipImpulse;
+    [SerializeField] private float slipTorque;
+    [SerializeField] private float standUpWaitTime;
+    [SerializeField] private float reappearTime;
 
     private const string layer0Name = "Layer 0";
 
+    private WaitForSeconds standUpWait;
+    private WaitForSeconds reappearWait;
+
+    private void Awake()
+    {
+        standUpWait = new WaitForSeconds(standUpWaitTime);
+        reappearWait = new WaitForSeconds(reappearTime);
+    }
+
     private void Start()
     {
-        eventBus = ServiceLocator.Instance.GetService<EventBus>();
+        ServiceLocator serviceLocator = ServiceLocator.Instance;
+
+        eventBus = serviceLocator.GetService<EventBus>();
         eventBus.Subscribe<OnFoxAlert>((Action)HandleAlert);
         eventBus.Subscribe<OnFoxDropKey>((Action)HandleDropKey);
     }
@@ -35,6 +53,8 @@ public class Fox : MonoBehaviour
     {
         float t = 0f;
         Vector3 startPos = pivot.transform.position;
+
+        yield return standUpWait;
 
         while (t < 1f)
         {
@@ -51,6 +71,16 @@ public class Fox : MonoBehaviour
         startPos = pivot.transform.position;
         spriteRenderer.sortingLayerName = layer0Name;
         keyRenderer.sortingLayerName = layer0Name;
+
+        transform.SetParent(layerZeroTrs);
+        key.transform.SetParent(layerZeroTrs);
+
+        foxFadingSprite.enabled = false;
+        foxFadingSprite.enabled = true;
+
+        eventBus.Raise<OnLayerChange>(gameplayLevelManager.GetCurrentLayerIndex);
+
+        yield return reappearWait;
 
         while (t < 1f)
         {
@@ -74,6 +104,9 @@ public class Fox : MonoBehaviour
         key.EnableRigidBody();
         keyCollider.SetActive(true);
         key.gameObject.transform.SetParent(transform.parent.parent);
-        key.GetRigidbody.AddForce(Vector3.up * slipImpulse, ForceMode.VelocityChange);
+
+        Rigidbody keyRigidBody = key.GetRigidbody;
+        keyRigidBody.AddForce(Vector3.up * slipImpulse, ForceMode.VelocityChange);
+        keyRigidBody.AddTorque(Vector3.forward * slipTorque, ForceMode.VelocityChange);
     }
 }
