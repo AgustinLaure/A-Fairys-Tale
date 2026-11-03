@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GameplayLevels/LevelTwo.unity
     guid: 08965534fe2760f45915c9b18c5d2947
   - enabled: 1
-    path: Assets/Scenes/FoldingLevels/FoldingLevelPlane.unity
+    path: Assets/Scenes/FoldingLevels/FoldingLevel.unity
     guid: a133d219d8b80c443a35f2a7f316068b
   - enabled: 0
     path: Assets/Scenes/Tests/LevelEventsTest.unity
