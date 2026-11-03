@@ -38,3 +38,32 @@ MonoBehaviour:
     - {x: -2.5, y: -5}
     layersToGrab: -1
     layerCheckpoints: []
+  - stepName: Top left corner
+    flipStep: 0
+    targetShape:
+    - {x: -2.5, y: 0}
+    - {x: 2.5, y: 5}
+    - {x: 2.5, y: -5}
+    - {x: -2.5, y: -5}
+    layersToGrab: -1
+    layerCheckpoints: []
+  - stepName: Top right corner
+    flipStep: 0
+    targetShape:
+    - {x: -2.5, y: 0}
+    - {x: 0, y: 2.5}
+    - {x: 2.5, y: 0}
+    - {x: 2.5, y: -5}
+    - {x: -2.5, y: -5}
+    layersToGrab: -1
+    layerCheckpoints: []
+  - stepName: Bottom half
+    flipStep: 0
+    targetShape:
+    - {x: -2.5, y: 0}
+    - {x: 0, y: 2.5}
+    - {x: 2.5, y: 0}
+    - {x: 2.5, y: -2.5}
+    - {x: -2.5, y: -2.5}
+    layersToGrab: -1
+    layerCheckpoints: []

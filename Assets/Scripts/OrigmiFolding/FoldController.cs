@@ -51,9 +51,9 @@ public class FoldController : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current == null || foldManager != null ) return;
+        if (Mouse.current == null || foldManager == null ) return;
 
-        if (foldManager.IsFlipping || foldManager.IsFlipping.IsComplete) return;
+        if (foldManager.IsFlipping || foldManager.IsComplete) return;
 
         OrigamiDebugVisuals.Instance?.UpdateSnapPoints(GetAllValidSnapPoints());
         HandleInput();
