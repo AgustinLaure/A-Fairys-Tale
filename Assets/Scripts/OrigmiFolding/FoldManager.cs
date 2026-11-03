@@ -22,6 +22,8 @@ public class FoldManager : MonoSingleton<FoldManager>
     public List<Vector2> CurrentTargetShape => currentTargetShape;
     public bool IsFlipping { get; private set; }
 
+    private List<Mesh> previewMeshes = new List<Mesh>();
+
     private void Awake()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
@@ -32,6 +34,10 @@ public class FoldManager : MonoSingleton<FoldManager>
     private void OnDestroy()
     {
         activeFaces.Clear();
+        if (previewMeshes != null)
+        {
+            foreach (var m in previewMeshes) if (m != null) Destroy(m);
+        }
     }
 
     public void StartUp()
@@ -197,12 +203,90 @@ public class FoldManager : MonoSingleton<FoldManager>
         return candidates;
     }
 
+    public void DrawFoldPreview(Vector2 startLine, Vector2 endLine)
+    {
+        int meshIndex = 0;
+        var candidateFaces = GetTargetedFaces(startLine, endLine);
+
+        foreach (var face in activeFaces) face.GetComponent<MeshRenderer>().enabled = false;
+
+        foreach (var face in activeFaces)
+        {
+            if (candidateFaces.Contains(face))
+            {
+                if (CalculateSplit(face, startLine, endLine, out var leftV, out var leftUV, out var rightV, out var rightUV))
+                {
+                    if (leftV.Count >= 3)
+                    {
+                        UpdatePreviewMesh(meshIndex++, leftV, leftUV, face.transform.position.z);
+                    }
+                    if (rightV.Count >= 3)
+                    {
+                        UpdatePreviewMesh(meshIndex++, rightV, rightUV, face.transform.position.z - 0.01f * (activeFaces.Count + meshIndex));
+                    }
+                }
+                else
+                {
+                    UpdatePreviewMesh(meshIndex++, face.vertices, face.uvs, face.transform.position.z);
+                }
+            }
+            else
+            {
+                UpdatePreviewMesh(meshIndex++, face.vertices, face.uvs, face.transform.position.z);
+            }
+        }
+
+        for (int i = 0; i < meshIndex; i++)
+        {
+            Graphics.DrawMesh(previewMeshes[i], Matrix4x4.identity, paperMaterial, 0);
+        }
+    }
+
+    public void ClearPreview()
+    {
+        foreach (var face in activeFaces)
+        {
+            if (face != null && face.GetComponent<MeshRenderer>() != null)
+                face.GetComponent<MeshRenderer>().enabled = true;
+        }
+    }
+
+    private void UpdatePreviewMesh(int index, List<Vector2> verts, List<Vector2> uvs, float zPos)
+    {
+        while (previewMeshes.Count <= index)
+        {
+            previewMeshes.Add(new Mesh { name = "PreviewMesh" });
+        }
+
+        Mesh m = previewMeshes[index];
+        m.Clear();
+        m.vertices = verts.Select(v => new Vector3(v.x, v.y, zPos)).ToArray();
+        m.triangles = GeometryMath.TriangulateConvex(verts);
+        m.uv = verts.Select((v, i) => (uvs != null && i < uvs.Count) ? uvs[i] : v).ToArray();
+        m.RecalculateNormals();
+    }
+
     private bool TrySplitAndReflectFace(PaperFace face, Vector2 start, Vector2 end, out PaperFace leftFace, out PaperFace rightFace)
     {
         leftFace = null;
         rightFace = null;
 
-        var leftVerts = new List<Vector2>(); var leftUVs = new List<Vector2>();
+        if (!CalculateSplit(face, start, end, out var leftV, out var leftUV, out var foldedV, out var foldedUV))
+            return false;
+
+        if (leftV.Count >= 3)
+        {
+            leftFace = CreateNewFace(leftV, leftUV, $"{face.name}_Left");
+        }
+
+        rightFace = CreateNewFace(foldedV, foldedUV, $"{face.name}_Folded");
+        return true;
+    }
+
+    private bool CalculateSplit(PaperFace face, Vector2 start, Vector2 end, out List<Vector2> leftVerts, out List<Vector2> leftUVs, out List<Vector2> foldedVerts, out List<Vector2> foldedUVs)
+    {
+        leftVerts = new List<Vector2>(); leftUVs = new List<Vector2>();
+        foldedVerts = new List<Vector2>(); foldedUVs = new List<Vector2>();
         var rightVerts = new List<Vector2>(); var rightUVs = new List<Vector2>();
 
         Vector2 lineDir = (end - start).normalized;
@@ -235,21 +319,12 @@ public class FoldManager : MonoSingleton<FoldManager>
 
         if (rightVerts.Count < 3) return false;
 
-        if (leftVerts.Count >= 3)
-        {
-            leftFace = CreateNewFace(leftVerts, leftUVs, $"{face.name}_Left");
-        }
-
-        var foldedVerts = new List<Vector2>();
-        var foldedUVs = new List<Vector2>();
-
         for (int i = rightVerts.Count - 1; i >= 0; i--)
         {
             foldedVerts.Add(GeometryMath.ReflectPoint(rightVerts[i], start, end));
             foldedUVs.Add(rightUVs[i]);
         }
 
-        rightFace = CreateNewFace(foldedVerts, foldedUVs, $"{face.name}_Folded");
         return true;
     }
 
