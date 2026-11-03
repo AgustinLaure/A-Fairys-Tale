@@ -1,453 +1,390 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FoldManager : MonoSingleton<FoldManager>
 {
+    public float foldTolerance = 0.2f;
+
     public Material paperMaterial;
-    public List<PaperFace> activeFaces = new List<PaperFace>();
-
-    public Material targetLineMaterial;
-
     public OrigamiFigure currentFigure;
+    public List<PaperFace> activeFaces = new List<PaperFace>();
 
     private int currentObjectiveIndex = 0;
     private List<Vector2> currentTargetShape = new List<Vector2>();
+    private EventBus eventBus;
 
-    private LineRenderer maxLimitRenderer;
-    private LineRenderer minLimitRenderer;
-
-    private List<GameObject> checkpointMarkers = new List<GameObject>();
-
-    private void Start()
+    private void Awake()
     {
-        StartUp();
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
     }
+
+    private void Start() => StartUp();
 
     private void OnDestroy()
     {
-        Debug.Log("Fold manager desroyed!");
+        activeFaces.Clear();
     }
 
     public void StartUp()
     {
-        if (activeFaces.Count == 0)
-        {
-            CreateInitialPaper(new Vector2(-5, -5), new Vector2(5, 5));
-        }
+        if (activeFaces.Count == 0) CreateInitialPaper(new Vector2(-5, -5), new Vector2(5, 5));
 
         if (currentFigure == null || currentFigure.steps.Count == 0)
         {
             currentFigure = ScriptableObject.CreateInstance<OrigamiFigure>();
             currentFigure.figureName = "Diamond";
-
-            OrigamiObjective defaultDiamond = new OrigamiObjective();
-            defaultDiamond.stepName = "Step 1";
-            defaultDiamond.targetShape = new List<Vector2>()
+            currentFigure.steps.Add(new OrigamiObjective
             {
-                new Vector2(0, 5),   new Vector2(-5, 0),
-                new Vector2(0, -5),  new Vector2(5, 0)
-            };
-            currentFigure.steps.Add(defaultDiamond);
+                stepName = "Step 1",
+                targetShape = new List<Vector2> { new Vector2(0, 5), new Vector2(-5, 0), new Vector2(0, -5), new Vector2(5, 0) }
+            });
         }
 
-        SetupVisualRenderers();
-
         LoadObjective(0);
-    }
-
-    private void SetupVisualRenderers()
-    {
-        GameObject maxVisual = new GameObject("TargetMaxVisual");
-        maxVisual.transform.SetParent(transform);
-        maxLimitRenderer = maxVisual.AddComponent<LineRenderer>();
-        maxLimitRenderer.loop = true;
-        maxLimitRenderer.startWidth = 0.12f;
-        maxLimitRenderer.endWidth = 0.12f;
-        if (targetLineMaterial != null) maxLimitRenderer.material = targetLineMaterial;
-
-        GameObject minVisual = new GameObject("TargetMinVisual");
-        minVisual.transform.SetParent(transform);
-        minLimitRenderer = minVisual.AddComponent<LineRenderer>();
-        minLimitRenderer.loop = true;
-        minLimitRenderer.startWidth = 0.05f;
-        minLimitRenderer.endWidth = 0.05f;
-        if (targetLineMaterial != null) minLimitRenderer.material = targetLineMaterial;
     }
 
     private void LoadObjective(int index)
     {
         currentObjectiveIndex = index;
-        currentTargetShape = currentFigure.steps[index].targetShape;
+        OrigamiObjective step = currentFigure.steps[index];
+        currentTargetShape = step.targetShape;
 
-        Debug.Log($"Shape: {currentFigure.figureName}  Step {index + 1}: {currentFigure.steps[index].stepName}");
+        Debug.Log($"<color=#00FFFF>Loading Step {index + 1}: {step.stepName}</color>");
 
-        maxLimitRenderer.positionCount = currentTargetShape.Count;
-        minLimitRenderer.positionCount = currentTargetShape.Count;
-
-        for (int i = 0; i < currentTargetShape.Count; i++)
+        if (step.flipStep)
         {
-            maxLimitRenderer.SetPosition(i, new Vector3(currentTargetShape[i].x, currentTargetShape[i].y, -0.5f));
-            minLimitRenderer.SetPosition(i, new Vector3(currentTargetShape[i].x, currentTargetShape[i].y, 0.4f));
+            OrigamiDebugVisuals.Instance?.UpdateTargetLimits(null);
+            OrigamiDebugVisuals.Instance?.UpdateCheckpoints(null);
+            StartCoroutine(FlipPaperCoroutine());
+            return;
         }
 
-        maxLimitRenderer.startColor = Color.red; maxLimitRenderer.endColor = Color.red;
-        minLimitRenderer.startColor = Color.red; minLimitRenderer.endColor = Color.red;
-
-        UpdateCheckpointMarkers(currentFigure.steps[index].layerCheckpoints);
+        OrigamiDebugVisuals.Instance?.UpdateTargetLimits(currentTargetShape);
+        OrigamiDebugVisuals.Instance?.UpdateCheckpoints(step.layerCheckpoints);
+        OrigamiDebugVisuals.Instance?.SetTargetLimitColors(Color.red, Color.red);
     }
 
-    private void UpdateCheckpointMarkers(List<LayerCheckpoint> checkpoints)
+    private System.Collections.IEnumerator FlipPaperCoroutine()
     {
-        if (checkpoints == null) checkpoints = new List<LayerCheckpoint>();
+        var controller = FindFirstObjectByType<FoldController>();
+        if (controller != null) controller.isInputBlocked = true;
 
-        while (checkpointMarkers.Count < checkpoints.Count)
+        float minX = float.MaxValue, maxX = float.MinValue;
+        foreach (var f in activeFaces)
         {
-            GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            marker.name = "LayerCheckpointMarker";
-            Destroy(marker.GetComponent<Collider>());
-            marker.transform.SetParent(transform);
-            marker.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-
-            Renderer rend = marker.GetComponent<Renderer>();
-            Shader unlit = Shader.Find("Sprites/Default");
-            if (unlit != null) rend.material.shader = unlit;
-            rend.material.color = Color.yellow;
-
-            checkpointMarkers.Add(marker);
-        }
-
-        for (int i = 0; i < checkpointMarkers.Count; i++)
-        {
-            if (i < checkpoints.Count)
+            foreach (var v in f.vertices)
             {
-                checkpointMarkers[i].transform.position = new Vector3(checkpoints[i].position.x, checkpoints[i].position.y, -0.6f);
-                checkpointMarkers[i].GetComponent<Renderer>().material.color = Color.yellow;
-                checkpointMarkers[i].SetActive(true);
-            }
-            else
-            {
-                checkpointMarkers[i].SetActive(false);
+                if (v.x < minX) minX = v.x;
+                if (v.x > maxX) maxX = v.x;
             }
         }
+        float centerX = (minX + maxX) / 2f;
+
+        GameObject pivot = new GameObject("FlipPivot");
+        pivot.transform.position = new Vector3(centerX, 0, 0);
+
+        foreach (var face in activeFaces) face.transform.SetParent(pivot.transform, true);
+
+        float duration = 0.8f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+            pivot.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0, 180f, t), 0);
+            yield return null;
+        }
+
+        foreach (var face in activeFaces)
+        {
+            face.transform.SetParent(transform, true);
+            face.transform.rotation = Quaternion.identity;
+
+            for (int i = 0; i < face.vertices.Count; i++)
+            {
+                Vector2 v = face.vertices[i];
+                face.vertices[i] = new Vector2(centerX - (v.x - centerX), v.y);
+            }
+
+            face.vertices.Reverse();
+            if (face.uvs != null && face.uvs.Count > 0) face.uvs.Reverse();
+
+            face.UpdateMesh();
+        }
+
+        var sortedFaces = activeFaces.OrderByDescending(f => f.transform.position.z).ToList();
+        for (int i = 0; i < sortedFaces.Count; i++)
+        {
+            sortedFaces[i].transform.position = new Vector3(0, 0, -0.01f * (i + 1));
+        }
+
+        Destroy(pivot);
+
+        if (controller != null) controller.isInputBlocked = false;
+
+        CompleteCurrentStep();
     }
 
     private void CreateInitialPaper(Vector2 bottomLeft, Vector2 topRight)
     {
-        GameObject basePaper = new GameObject("BasePaper");
-        basePaper.transform.SetParent(transform);
-        basePaper.AddComponent<MeshRenderer>().material = paperMaterial;
-
-        PaperFace face = basePaper.AddComponent<PaperFace>();
-        face.vertices = new List<Vector2>()
-        {
-            bottomLeft,
-            new Vector2(bottomLeft.x, topRight.y),
-            topRight,
-            new Vector2(topRight.x, bottomLeft.y)
-        };
-        face.uvs = new List<Vector2>()
-        {
-            new Vector2(0, 0),
-            new Vector2(0, 1),
-            new Vector2(1, 1),
-            new Vector2(1, 0)
-        };
-        face.UpdateMesh();
-        activeFaces.Add(face);
+        activeFaces.Add(CreateNewFace(
+            new List<Vector2> { bottomLeft, new Vector2(bottomLeft.x, topRight.y), topRight, new Vector2(topRight.x, bottomLeft.y) },
+            new List<Vector2> { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) },
+            "BasePaper"
+        ));
     }
 
     public PaperFace GetTopFaceAt(Vector2 point)
     {
-        PaperFace topFace = null;
-        float minZ = float.MaxValue;
-
-        foreach (PaperFace face in activeFaces)
-        {
-            if (IsPointInsideConvexPolygon(point, face.vertices, 0.05f))
-            {
-                if (face.transform.position.z < minZ)
-                {
-                    minZ = face.transform.position.z;
-                    topFace = face;
-                }
-            }
-        }
-        return topFace;
+        return activeFaces
+            .Where(f => IsPointInsidePolygon(point, f.vertices, 0.05f))
+            .OrderBy(f => f.transform.position.z)
+            .FirstOrDefault();
     }
 
     public void ProcessFold(Vector2 startLine, Vector2 endLine)
     {
-        int layersToGrab = currentFigure.steps[currentObjectiveIndex].layersToGrab;
+        var candidateFaces = GetTargetedFaces(startLine, endLine);
+        var newFaces = new List<PaperFace>();
+        var facesToRemove = new List<PaperFace>();
 
-        List<PaperFace> candidateFaces = new List<PaperFace>();
-        foreach (PaperFace face in activeFaces)
+        foreach (var face in candidateFaces)
         {
-            bool hasRight = false;
-            foreach (Vector2 v in face.vertices)
-            {
-                if (GeometryMath.PointLinePosition(v, startLine, endLine) < -0.001f)
-                {
-                    hasRight = true;
-                    break;
-                }
-            }
-            if (hasRight) candidateFaces.Add(face);
-        }
-
-        candidateFaces.Sort((a, b) => a.transform.position.z.CompareTo(b.transform.position.z));
-
-        HashSet<PaperFace> facesToProcess = new HashSet<PaperFace>();
-        if (layersToGrab != -1 && layersToGrab < candidateFaces.Count)
-        {
-            for (int i = 0; i < layersToGrab; i++)
-            {
-                facesToProcess.Add(candidateFaces[i]);
-            }
-        }
-        else
-        {
-            foreach (var face in candidateFaces) facesToProcess.Add(face);
-        }
-
-        List<PaperFace> newFaces = new List<PaperFace>();
-        List<PaperFace> facesToRemove = new List<PaperFace>();
-
-        foreach (PaperFace face in activeFaces)
-        {
-            if (!facesToProcess.Contains(face)) continue;
-
-            List<Vector2> leftVertices = new List<Vector2>();
-            List<Vector2> rightVertices = new List<Vector2>();
-            List<Vector2> leftUVs = new List<Vector2>();
-            List<Vector2> rightUVs = new List<Vector2>();
-
-            for (int i = 0; i < face.vertices.Count; i++)
-            {
-                Vector2 currentPoint = face.vertices[i];
-                Vector2 nextPoint = face.vertices[(i + 1) % face.vertices.Count];
-
-                Vector2 currentUV = (face.uvs != null && face.uvs.Count > i) ? face.uvs[i] : Vector2.zero;
-                Vector2 nextUV = (face.uvs != null && face.uvs.Count > (i + 1) % face.vertices.Count) ? face.uvs[(i + 1) % face.vertices.Count] : Vector2.zero;
-
-                float side = GeometryMath.PointLinePosition(currentPoint, startLine, endLine);
-
-                if (side >= 0)
-                {
-                    leftVertices.Add(currentPoint);
-                    leftUVs.Add(currentUV);
-                }
-                else
-                {
-                    rightVertices.Add(currentPoint);
-                    rightUVs.Add(currentUV);
-                }
-
-                Vector2 intersection;
-                float t;
-                Vector2 lineDir = (endLine - startLine).normalized;
-                Vector2 p3 = startLine - lineDir * 1000f;
-                Vector2 p4 = endLine + lineDir * 1000f;
-
-                if (GeometryMath.GetIntersection(currentPoint, nextPoint, p3, p4, out intersection, out t))
-                {
-                    Vector2 intersectionUV = Vector2.Lerp(currentUV, nextUV, t);
-
-                    leftVertices.Add(intersection);
-                    leftUVs.Add(intersectionUV);
-                    rightVertices.Add(intersection);
-                    rightUVs.Add(intersectionUV);
-                }
-            }
-
-            if (leftVertices.Count >= 3 && rightVertices.Count >= 3)
+            if (TrySplitAndReflectFace(face, startLine, endLine, out PaperFace leftFace, out PaperFace rightFace))
             {
                 facesToRemove.Add(face);
-                PaperFace leftFace = CreateNewFace(leftVertices, leftUVs, "Paper_Left");
-                newFaces.Add(leftFace);
-
-                List<Vector2> foldedVertices = new List<Vector2>();
-                List<Vector2> foldedUVs = new List<Vector2>();
-
-                // Iterate backwards because folding flips the face (reverses winding order)
-                for (int i = rightVertices.Count - 1; i >= 0; i--)
+                if (leftFace != null) newFaces.Add(leftFace);
+                if (rightFace != null)
                 {
-                    foldedVertices.Add(GeometryMath.ReflectPoint(rightVertices[i], startLine, endLine));
-                    foldedUVs.Add(rightUVs[i]);
+                    rightFace.transform.position = new Vector3(0, 0, -0.01f * (activeFaces.Count + newFaces.Count + 1));
+                    newFaces.Add(rightFace);
                 }
-
-                PaperFace rightFace = CreateNewFace(foldedVertices, foldedUVs, "Paper_Right_Folded");
-                rightFace.transform.position = new Vector3(0, 0, -0.01f * (activeFaces.Count + newFaces.Count + 1));
-                newFaces.Add(rightFace);
-            }
-            else if (rightVertices.Count >= 3 && leftVertices.Count < 3)
-            {
-                facesToRemove.Add(face);
-                List<Vector2> foldedVertices = new List<Vector2>();
-                List<Vector2> foldedUVs = new List<Vector2>();
-
-                for (int i = rightVertices.Count - 1; i >= 0; i--)
-                {
-                    foldedVertices.Add(GeometryMath.ReflectPoint(rightVertices[i], startLine, endLine));
-                    foldedUVs.Add(rightUVs[i]);
-                }
-
-                PaperFace rightFace = CreateNewFace(foldedVertices, foldedUVs, face.gameObject.name + "_Folded");
-                rightFace.transform.position = new Vector3(0, 0, -0.01f * (activeFaces.Count + newFaces.Count + 1));
-                newFaces.Add(rightFace);
             }
         }
 
-        foreach (PaperFace oldFace in facesToRemove)
+        foreach (var oldFace in facesToRemove)
         {
             activeFaces.Remove(oldFace);
             Destroy(oldFace.gameObject);
         }
-        activeFaces.AddRange(newFaces);
 
-        CheckWinCondition();
+        activeFaces.AddRange(newFaces);
+        EvaluateWinCondition();
+    }
+
+    private List<PaperFace> GetTargetedFaces(Vector2 startLine, Vector2 endLine)
+    {
+        int layersToGrab = currentFigure.steps[currentObjectiveIndex].layersToGrab;
+
+        var candidates = activeFaces
+            .Where(f => f.vertices.Any(v => GeometryMath.PointLinePosition(v, startLine, endLine) < -0.001f))
+            .OrderBy(f => f.transform.position.z)
+            .ToList();
+
+        if (layersToGrab != -1 && layersToGrab < candidates.Count)
+        {
+            return candidates.Take(layersToGrab).ToList();
+        }
+        return candidates;
+    }
+
+    private bool TrySplitAndReflectFace(PaperFace face, Vector2 start, Vector2 end, out PaperFace leftFace, out PaperFace rightFace)
+    {
+        leftFace = null;
+        rightFace = null;
+
+        var leftVerts = new List<Vector2>(); var leftUVs = new List<Vector2>();
+        var rightVerts = new List<Vector2>(); var rightUVs = new List<Vector2>();
+
+        Vector2 lineDir = (end - start).normalized;
+        Vector2 p3 = start - lineDir * 1000f;
+        Vector2 p4 = end + lineDir * 1000f;
+
+        for (int i = 0; i < face.vertices.Count; i++)
+        {
+            int nextIdx = (i + 1) % face.vertices.Count;
+            Vector2 p1 = face.vertices[i], p2 = face.vertices[nextIdx];
+            Vector2 uv1 = (face.uvs != null && face.uvs.Count > i) ? face.uvs[i] : p1;
+            Vector2 uv2 = (face.uvs != null && face.uvs.Count > nextIdx) ? face.uvs[nextIdx] : p2;
+
+            if (GeometryMath.PointLinePosition(p1, start, end) >= 0)
+            {
+                leftVerts.Add(p1); leftUVs.Add(uv1);
+            }
+            else
+            {
+                rightVerts.Add(p1); rightUVs.Add(uv1);
+            }
+
+            if (GeometryMath.GetIntersection(p1, p2, p3, p4, out Vector2 intersect, out float t))
+            {
+                Vector2 intersectUV = Vector2.Lerp(uv1, uv2, t);
+                leftVerts.Add(intersect); leftUVs.Add(intersectUV);
+                rightVerts.Add(intersect); rightUVs.Add(intersectUV);
+            }
+        }
+
+        if (rightVerts.Count < 3) return false;
+
+        if (leftVerts.Count >= 3)
+        {
+            leftFace = CreateNewFace(leftVerts, leftUVs, $"{face.name}_Left");
+        }
+
+        var foldedVerts = new List<Vector2>();
+        var foldedUVs = new List<Vector2>();
+
+        for (int i = rightVerts.Count - 1; i >= 0; i--)
+        {
+            foldedVerts.Add(GeometryMath.ReflectPoint(rightVerts[i], start, end));
+            foldedUVs.Add(rightUVs[i]);
+        }
+
+        rightFace = CreateNewFace(foldedVerts, foldedUVs, $"{face.name}_Folded");
+        return true;
     }
 
     private PaperFace CreateNewFace(List<Vector2> verts, List<Vector2> uvs, string name)
     {
-        GameObject go = new GameObject(name);
+        var go = new GameObject(name);
         go.transform.SetParent(transform);
         go.AddComponent<MeshRenderer>().material = paperMaterial;
-        PaperFace face = go.AddComponent<PaperFace>();
+
+        var face = go.AddComponent<PaperFace>();
         face.vertices = verts;
         face.uvs = uvs;
         face.UpdateMesh();
+
         return face;
     }
 
-    private void CheckWinCondition()
+    private void EvaluateWinCondition()
     {
         if (currentObjectiveIndex >= currentFigure.steps.Count) return;
 
-        float tolerance = 0.2f;
-        OrigamiObjective currentStep = currentFigure.steps[currentObjectiveIndex];
+        OrigamiObjective step = currentFigure.steps[currentObjectiveIndex];
+        if (step.flipStep) return;
 
-        bool hasFailedUpperLimit = false;
-        foreach (PaperFace face in activeFaces)
+        bool failedUpper = HasFailedUpperLimit(foldTolerance);
+        bool failedLower = HasFailedLowerLimit(foldTolerance);
+        bool failedLayers = HasFailedLayerCheck(step.layerCheckpoints, foldTolerance);
+
+        Color maxColor = failedUpper ? Color.red : Color.green;
+        Color minColor = failedLower ? Color.red : Color.blue;
+
+        OrigamiDebugVisuals.Instance?.SetTargetLimitColors(maxColor, minColor);
+
+        if (!failedUpper && !failedLower && !failedLayers)
         {
-            foreach (Vector2 vertex in face.vertices)
-            {
-                if (!IsPointInsideConvexPolygon(vertex, currentTargetShape, tolerance))
-                {
-                    hasFailedUpperLimit = true;
-                    break;
-                }
-            }
-            if (hasFailedUpperLimit) break;
-        }
-
-        bool hasFailedLowerLimit = false;
-        foreach (Vector2 targetCorner in currentTargetShape)
-        {
-            bool cornerIsCovered = false;
-            foreach (PaperFace face in activeFaces)
-            {
-                if (IsPointInsideConvexPolygon(targetCorner, face.vertices, tolerance))
-                {
-                    cornerIsCovered = true;
-                    break;
-                }
-            }
-
-            if (!cornerIsCovered)
-            {
-                hasFailedLowerLimit = true;
-                break;
-            }
-        }
-
-        bool hasFailedLayerCheck = false;
-        if (currentStep.layerCheckpoints != null)
-        {
-            for (int i = 0; i < currentStep.layerCheckpoints.Count; i++)
-            {
-                LayerCheckpoint checkpoint = currentStep.layerCheckpoints[i];
-                int layerCount = 0;
-
-                foreach (PaperFace face in activeFaces)
-                {
-                    if (IsPointInsideConvexPolygon(checkpoint.position, face.vertices, tolerance))
-                    {
-                        layerCount++;
-                    }
-                }
-
-                bool isCorrect = (layerCount == checkpoint.requiredLayers);
-                if (i < checkpointMarkers.Count && checkpointMarkers[i].activeSelf)
-                {
-                    checkpointMarkers[i].GetComponent<Renderer>().material.color = isCorrect ? Color.green : Color.yellow;
-                }
-
-                if (!isCorrect)
-                {
-                    hasFailedLayerCheck = true;
-                }
-            }
-        }
-
-        if (maxLimitRenderer != null)
-        {
-            maxLimitRenderer.startColor = hasFailedUpperLimit ? Color.red : Color.green;
-            maxLimitRenderer.endColor = hasFailedUpperLimit ? Color.red : Color.green;
-        }
-        if (minLimitRenderer != null)
-        {
-            minLimitRenderer.startColor = hasFailedLowerLimit ? Color.red : Color.blue;
-            minLimitRenderer.endColor = hasFailedLowerLimit ? Color.red : Color.blue;
-        }
-
-        if (!hasFailedUpperLimit && !hasFailedLowerLimit && !hasFailedLayerCheck)
-        {
-            Debug.Log($"{currentStep.stepName} step done");
-
-            currentObjectiveIndex++;
-            if (currentObjectiveIndex < currentFigure.steps.Count)
-            {
-                LoadObjective(currentObjectiveIndex);
-            }
-            else
-            {
-                Debug.Log($"Shape done");
-                minLimitRenderer.startColor = Color.green; minLimitRenderer.endColor = Color.green;
-            }
+            CompleteCurrentStep();
         }
     }
 
-    public List<Vector2> GetAllVertices()
+    private void CompleteCurrentStep()
     {
-        List<Vector2> allVerts = new List<Vector2>();
-        foreach (PaperFace face in activeFaces)
+        Debug.Log($"<color=#00FF00>Step {currentObjectiveIndex + 1} Completed!</color>");
+
+        currentObjectiveIndex++;
+        if (currentObjectiveIndex < currentFigure.steps.Count)
         {
-            foreach (Vector2 v in face.vertices)
-            {
-                allVerts.Add(v);
-            }
+            LoadObjective(currentObjectiveIndex);
         }
-        return allVerts;
+        else
+        {
+            eventBus.Raise<OnOrigamiFolded>(currentFigure);
+            OrigamiDebugVisuals.Instance?.SetTargetLimitColors(Color.green, Color.green);
+            Debug.Log("<color=#FFFF00>Origami Figure Complete!</color>");
+        }
     }
 
-    private bool IsPointInsideConvexPolygon(Vector2 point, List<Vector2> polygon, float tolerance)
+    private bool HasFailedUpperLimit(float tolerance)
     {
-        if (polygon.Count < 3) return false;
+        return activeFaces.Any(face => face.vertices.Any(v => !IsPointInsidePolygon(v, currentTargetShape, tolerance)));
+    }
+
+    private bool HasFailedLowerLimit(float tolerance)
+    {
+        return currentTargetShape.Any(corner => !activeFaces.Any(f => IsPointInsidePolygon(corner, f.vertices, tolerance)));
+    }
+
+    private bool HasFailedLayerCheck(List<LayerCheckpoint> checkpoints, float tolerance)
+    {
+        if (checkpoints == null || checkpoints.Count == 0) return false;
+
+        bool failed = false;
+        for (int i = 0; i < checkpoints.Count; i++)
+        {
+            int layerCount = activeFaces.Count(f => IsPointInsidePolygon(checkpoints[i].position, f.vertices, tolerance));
+            bool isCorrect = (layerCount == checkpoints[i].requiredLayers);
+
+            OrigamiDebugVisuals.Instance?.SetCheckpointColor(i, isCorrect ? Color.green : Color.yellow);
+
+            if (!isCorrect)
+            {
+                Debug.LogWarning($"<color=#FFA500>Failed Layer Check [{i}] at {checkpoints[i].position}: Expected {checkpoints[i].requiredLayers} layers, Found {layerCount} layers.</color>");
+                failed = true;
+            }
+        }
+        return failed;
+    }
+
+    private bool IsPointInsidePolygon(Vector2 point, List<Vector2> polygon, float tolerance)
+    {
+        if (polygon == null || polygon.Count < 3) return false;
+
         bool hasPositive = false;
         bool hasNegative = false;
+        bool failedConvex = false;
 
         for (int i = 0; i < polygon.Count; i++)
         {
             Vector2 a = polygon[i];
             Vector2 b = polygon[(i + 1) % polygon.Count];
-
             float side = GeometryMath.PointLinePosition(point, a, b);
 
             if (side > tolerance) hasPositive = true;
             else if (side < -tolerance) hasNegative = true;
 
-            if (hasPositive && hasNegative) return false;
+            if (hasPositive && hasNegative)
+            {
+                failedConvex = true;
+                break;
+            }
         }
-        return true;
+
+        if (!failedConvex) return true;
+
+        bool isInside = false;
+        int j = polygon.Count - 1;
+
+        for (int i = 0; i < polygon.Count; i++)
+        {
+            Vector2 pi = polygon[i];
+            Vector2 pj = polygon[j];
+
+            if (((pi.y > point.y) != (pj.y > point.y)) &&
+                (point.x < (pj.x - pi.x) * (point.y - pi.y) / (pj.y - pi.y) + pi.x))
+            {
+                isInside = !isInside;
+            }
+            j = i;
+        }
+
+        if (isInside) return true;
+
+        if (tolerance > 0f)
+        {
+            float sqrTol = tolerance * tolerance;
+            for (int i = 0; i < polygon.Count; i++)
+            {
+                Vector2 a = polygon[i];
+                Vector2 b = polygon[(i + 1) % polygon.Count];
+                if (GeometryMath.SqrDistanceToSegment(point, a, b) <= sqrTol) return true;
+            }
+        }
+
+        return false;
     }
 }

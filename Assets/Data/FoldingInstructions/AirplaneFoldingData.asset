@@ -48,8 +48,10 @@ MonoBehaviour:
     - {x: 4, y: 0}
     - {x: 4, y: -5}
     - {x: -5, y: -5}
-    layersToGrab: -1
-    layerCheckpoints: []
+    layersToGrab: 1
+    layerCheckpoints:
+    - position: {x: -0.75, y: -4}
+      requiredLayers: 3
   - stepName: Flip
     flipStep: 1
     targetShape: []
@@ -59,10 +61,11 @@ MonoBehaviour:
     flipStep: 0
     targetShape:
     - {x: -5, y: 0}
-    - {x: 0, y: 5}
+    - {x: -1, y: 4}
+    - {x: -1, y: 5}
     - {x: 0, y: 4}
-    - {x: 4, y: 0}
-    - {x: 4, y: -5}
+    - {x: 0, y: 0}
+    - {x: 0, y: -5}
     - {x: -5, y: -5}
     layersToGrab: -1
     layerCheckpoints: []

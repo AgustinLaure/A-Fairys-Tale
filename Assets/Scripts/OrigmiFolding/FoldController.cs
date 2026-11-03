@@ -5,24 +5,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(LineRenderer))]
 public class FoldController : MonoBehaviour
 {
+    public bool isInputBlocked = false;
+
+    [Header("Snapping Settings")]
     [SerializeField] private bool enableGridSnap = true;
     [SerializeField] private float gridSpacing = 1f;
     [SerializeField] private float gridSize = 5f;
-
     [SerializeField] private bool enablePointSnap = true;
-    [Min(1)]
-    [SerializeField] private int edgeDivisions = 3;
-
-    [SerializeField] private float snapRadius = 0.5f;
+    [Min(1)][SerializeField] private int edgeDivisions = 3;
     [SerializeField] private float minPointDistance = 0.2f;
-
     [SerializeField] private bool enableAngleSnap = true;
     [SerializeField] private float angleSnapStep = 15f;
     [SerializeField] private float angleSnapTolerance = 10f;
 
+    [Header("Fold Settings")]
     [SerializeField] private float minDragDistance = 0.2f;
     [SerializeField] private float intersectionTolerance = 0.05f;
 
+    [Header("Visuals")]
     [SerializeField] private bool showSnapPoints = true;
     [SerializeField] private Color validLineColor = Color.white;
     [SerializeField] private Color invalidLineColor = Color.red;
@@ -33,103 +33,92 @@ public class FoldController : MonoBehaviour
     private Vector2 startPos;
     private bool isDragging = false;
 
-    private GameObject startRealMarker;
-    private GameObject startSnapMarker;
-    private GameObject endRealMarker;
-    private GameObject endSnapMarker;
-
-    private List<GameObject> magentaSnapMarkers = new List<GameObject>();
-
     private void Start()
     {
         mainCam = Camera.main;
-        lineRenderer = GetComponent<LineRenderer>();
 
+        lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 0;
         lineRenderer.startWidth = 0.05f;
         lineRenderer.endWidth = 0.05f;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-
-        startRealMarker = CreateMarker("StartReal", Color.blue);
-        startSnapMarker = CreateMarker("StartSnap", Color.green);
-        endRealMarker = CreateMarker("EndReal", Color.blue);
-        endSnapMarker = CreateMarker("EndSnap", Color.green);
     }
 
     private void Update()
     {
-        if (Mouse.current == null) return;
+        if (Mouse.current == null || isInputBlocked) return;
 
-        UpdateMagentaMarkers();
+        OrigamiDebugVisuals.Instance?.UpdateSnapPoints(GetAllValidSnapPoints());
+        HandleInput();
+    }
 
+    private void HandleInput()
+    {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            isDragging = true;
+            HandleDragStart();
+        }
+        else if (isDragging && Mouse.current.leftButton.isPressed)
+        {
+            HandleDragging();
+        }
+        else if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            HandleDragEnd();
+        }
+    }
 
-            Vector2 rawStart = GetMouseWorldPosition();
-            startPos = GetSnappedPosition(rawStart);
+    private void HandleDragStart()
+    {
+        isDragging = true;
+        Vector2 rawStart = GetMouseWorldPosition();
+        startPos = GetSnappedPosition(rawStart);
 
-            endRealMarker.SetActive(false);
-            endSnapMarker.SetActive(false);
+        OrigamiDebugVisuals.Instance?.SetDragMarkers(rawStart, startPos, true, true);
+        OrigamiDebugVisuals.Instance?.SetDragMarkers(Vector2.zero, Vector2.zero, false, false);
+    }
 
-            startRealMarker.transform.position = new Vector3(rawStart.x, rawStart.y, -2f);
-            startSnapMarker.transform.position = new Vector3(startPos.x, startPos.y, -2f);
+    private void HandleDragging()
+    {
+        Vector2 currentPos = GetSnappedPosition(GetMouseWorldPosition());
 
-            startRealMarker.SetActive(true);
-            startSnapMarker.SetActive(true);
+        if (Vector2.Distance(startPos, currentPos) <= minDragDistance)
+        {
+            lineRenderer.positionCount = 0;
+            return;
         }
 
-        if (isDragging && Mouse.current.leftButton.isPressed)
+        CalculateFoldLine(startPos, currentPos, out Vector2 foldStart, out Vector2 foldEnd);
+        bool isValid = IsValidFold(foldStart, foldEnd);
+
+        lineRenderer.startColor = isValid ? validLineColor : invalidLineColor;
+        lineRenderer.endColor = isValid ? validLineColor : invalidLineColor;
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, new Vector3(foldStart.x, foldStart.y, -1f));
+        lineRenderer.SetPosition(1, new Vector3(foldEnd.x, foldEnd.y, -1f));
+    }
+
+    private void HandleDragEnd()
+    {
+        isDragging = false;
+        lineRenderer.positionCount = 0;
+
+        Vector2 rawEnd = GetMouseWorldPosition();
+        Vector2 endPos = GetSnappedPosition(rawEnd);
+
+        OrigamiDebugVisuals.Instance?.SetDragMarkers(rawEnd, endPos, true, false);
+
+        if (Vector2.Distance(startPos, endPos) > minDragDistance)
         {
-            Vector2 currentPos = GetSnappedPosition(GetMouseWorldPosition());
+            CalculateFoldLine(startPos, endPos, out Vector2 foldStart, out Vector2 foldEnd);
 
-            if (Vector2.Distance(startPos, currentPos) > minDragDistance)
+            if (IsValidFold(foldStart, foldEnd))
             {
-                Vector2 foldStart, foldEnd;
-                CalculateFoldLine(startPos, currentPos, out foldStart, out foldEnd);
-
-                bool isValid = IsValidFold(foldStart, foldEnd);
-                lineRenderer.startColor = isValid ? validLineColor : invalidLineColor;
-                lineRenderer.endColor = isValid ? validLineColor : invalidLineColor;
-
-                lineRenderer.positionCount = 2;
-                lineRenderer.SetPosition(0, new Vector3(foldStart.x, foldStart.y, -1f));
-                lineRenderer.SetPosition(1, new Vector3(foldEnd.x, foldEnd.y, -1f));
+                FoldManager.Instance.ProcessFold(foldStart, foldEnd);
             }
             else
             {
-                lineRenderer.positionCount = 0;
-            }
-        }
-
-        if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            isDragging = false;
-
-            Vector2 rawEnd = GetMouseWorldPosition();
-            Vector2 endPos = GetSnappedPosition(rawEnd);
-
-            endRealMarker.transform.position = new Vector3(rawEnd.x, rawEnd.y, -2f);
-            endSnapMarker.transform.position = new Vector3(endPos.x, endPos.y, -2f);
-
-            endRealMarker.SetActive(true);
-            endSnapMarker.SetActive(true);
-
-            lineRenderer.positionCount = 0;
-
-            if (Vector2.Distance(startPos, endPos) > minDragDistance)
-            {
-                Vector2 foldStart, foldEnd;
-                CalculateFoldLine(startPos, endPos, out foldStart, out foldEnd);
-
-                if (IsValidFold(foldStart, foldEnd))
-                {
-                    FoldManager.Instance.ProcessFold(foldStart, foldEnd);
-                }
-                else
-                {
-                    Debug.LogWarning("Canceled");
-                }
+                Debug.LogWarning("Invalid Fold Canceled");
             }
         }
     }
@@ -137,13 +126,12 @@ public class FoldController : MonoBehaviour
     private void CalculateFoldLine(Vector2 dragStart, Vector2 dragEnd, out Vector2 lineStart, out Vector2 lineEnd)
     {
         Vector2 midPoint = (dragStart + dragEnd) / 2f;
-        Vector2 dragDir = (dragEnd - dragStart).normalized;
-        dragDir = SnapDirection(dragDir);
+        Vector2 dragDir = SnapDirection((dragEnd - dragStart).normalized);
 
-        Vector2 perpDir = new Vector2(dragDir.y, -dragDir.x);
-        float lineLength = 20f;
-        lineStart = midPoint - perpDir * lineLength;
-        lineEnd = midPoint + perpDir * lineLength;
+        Vector2 perpDir = new Vector2(dragDir.y, -dragDir.x) * 20f;
+
+        lineStart = midPoint - perpDir;
+        lineEnd = midPoint + perpDir;
     }
 
     private bool IsValidFold(Vector2 lineStart, Vector2 lineEnd)
@@ -159,25 +147,41 @@ public class FoldController : MonoBehaviour
 
     private bool LineIntersectsOrTouchesFace(Vector2 lineStart, Vector2 lineEnd, PaperFace face)
     {
-        int leftCount = 0;
-        int rightCount = 0;
+        bool hasLeft = false, hasRight = false;
         int zeroCount = 0;
 
-        for (int i = 0; i < face.vertices.Count; i++)
+        foreach (Vector2 vertex in face.vertices)
         {
-            float side = (face.vertices[i].x - lineStart.x) * (lineEnd.y - lineStart.y) -
-                         (face.vertices[i].y - lineStart.y) * (lineEnd.x - lineStart.x);
+            float side = GeometryMath.PointLinePosition(vertex, lineStart, lineEnd);
 
-            if (side > intersectionTolerance) leftCount++;
-            else if (side < -intersectionTolerance) rightCount++;
+            if (side > intersectionTolerance) hasLeft = true;
+            else if (side < -intersectionTolerance) hasRight = true;
             else zeroCount++;
         }
 
-        if (leftCount > 0 && rightCount > 0) return true;
+        return (hasLeft && hasRight) || zeroCount >= 2;
+    }
 
-        if (zeroCount >= 2) return true;
+    private Vector2 GetSnappedPosition(Vector2 originalPos)
+    {
+        if (!enablePointSnap && !enableGridSnap) return originalPos;
 
-        return false;
+        Vector2 closestPoint = originalPos;
+        float closestDistance = float.MaxValue;
+        bool foundSnap = false;
+
+        foreach (Vector2 snapCandidate in GetAllValidSnapPoints())
+        {
+            float dist = Vector2.SqrMagnitude(originalPos - snapCandidate);
+            if (dist < closestDistance)
+            {
+                closestDistance = dist;
+                closestPoint = snapCandidate;
+                foundSnap = true;
+            }
+        }
+
+        return foundSnap ? closestPoint : originalPos;
     }
 
     private List<Vector2> GetAllValidSnapPoints()
@@ -207,8 +211,7 @@ public class FoldController : MonoBehaviour
 
                     for (int d = 0; d < edgeDivisions; d++)
                     {
-                        float t = (float)d / edgeDivisions;
-                        TryAddSnapPoint(points, Vector2.Lerp(p1, p2, t));
+                        TryAddSnapPoint(points, Vector2.Lerp(p1, p2, (float)d / edgeDivisions));
                     }
                 }
             }
@@ -219,67 +222,12 @@ public class FoldController : MonoBehaviour
 
     private void TryAddSnapPoint(List<Vector2> list, Vector2 newPoint)
     {
+        float minSqrDist = minPointDistance * minPointDistance;
         foreach (Vector2 existingPoint in list)
         {
-            if (Vector2.Distance(existingPoint, newPoint) < minPointDistance)
-            {
-                return;
-            }
+            if (Vector2.SqrMagnitude(existingPoint - newPoint) < minSqrDist) return;
         }
         list.Add(newPoint);
-    }
-
-    private Vector2 GetSnappedPosition(Vector2 originalPos)
-    {
-        if (!enablePointSnap && !enableGridSnap) return originalPos;
-
-        Vector2 closestPoint = originalPos;
-        float closestDistance = snapRadius;
-        bool foundSnap = false;
-
-        List<Vector2> validPoints = GetAllValidSnapPoints();
-
-        foreach (Vector2 snapCandidate in validPoints)
-        {
-            float dist = Vector2.Distance(originalPos, snapCandidate);
-            if (dist < closestDistance)
-            {
-                closestDistance = dist;
-                closestPoint = snapCandidate;
-                foundSnap = true;
-            }
-        }
-
-        return foundSnap ? closestPoint : originalPos;
-    }
-
-    private void UpdateMagentaMarkers()
-    {
-        if (!showSnapPoints)
-        {
-            foreach (var m in magentaSnapMarkers) m.SetActive(false);
-            return;
-        }
-
-        List<Vector2> validPoints = GetAllValidSnapPoints();
-
-        while (magentaSnapMarkers.Count < validPoints.Count)
-        {
-            magentaSnapMarkers.Add(CreateMarker("MagentaSnap", Color.magenta, 0.15f));
-        }
-
-        for (int i = 0; i < magentaSnapMarkers.Count; i++)
-        {
-            if (i < validPoints.Count)
-            {
-                magentaSnapMarkers[i].transform.position = new Vector3(validPoints[i].x, validPoints[i].y, -1.5f);
-                magentaSnapMarkers[i].SetActive(true);
-            }
-            else
-            {
-                magentaSnapMarkers[i].SetActive(false);
-            }
-        }
     }
 
     private Vector2 SnapDirection(Vector2 dir)
@@ -297,27 +245,10 @@ public class FoldController : MonoBehaviour
 
         return dir;
     }
-
     private Vector2 GetMouseWorldPosition()
     {
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
         Vector3 worldPos = mainCam.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, Mathf.Abs(mainCam.transform.position.z)));
         return new Vector2(worldPos.x, worldPos.y);
-    }
-
-    private GameObject CreateMarker(string name, Color color, float size = 0.25f)
-    {
-        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        marker.name = name;
-        Destroy(marker.GetComponent<Collider>());
-        marker.transform.localScale = new Vector3(size, size, size);
-
-        Renderer rend = marker.GetComponent<Renderer>();
-        Shader unlit = Shader.Find("Sprites/Default");
-        if (unlit != null) rend.material.shader = unlit;
-        rend.material.color = color;
-
-        marker.SetActive(false);
-        return marker;
     }
 }
