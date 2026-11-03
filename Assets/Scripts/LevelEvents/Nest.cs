@@ -10,11 +10,15 @@ public class Nest : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] private float snapTime;
+    [SerializeField] private float sticksToWin;
+    [SerializeField] private float winWaitTime;
 
     private BasicProp[] sticks;
     private int stickCount = 0;
 
     private const string stickTag = "Stick";
+
+    private WaitForSeconds waitTimer;
 
     private void Awake()
     {
@@ -25,6 +29,8 @@ public class Nest : MonoBehaviour
     private void Start()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
+
+        waitTimer = new WaitForSeconds(winWaitTime);
     }
 
     private IEnumerator AddStickCoroutine(BasicProp prop, int transformIndex)
@@ -66,12 +72,25 @@ public class Nest : MonoBehaviour
                 StartCoroutine(AddStickCoroutine(collisionGameObject.GetComponentInParent<BasicProp>(), stickCount));
                 stickCount++;
 
+                if (stickCount > 0)
+                {
+                    eventBus.Raise<OnWin>();
+                    //StartCoroutine(WinCooldown());
+                }
+
                 if (stickCount == sticksTransform.Length)
                 {
-                    eventBus.Raise<OnNestCompleted>();
+                    //StartCoroutine(WinCooldown());
                 }
             }
         }
+    }
+
+    private IEnumerator WinCooldown()
+    {
+        yield return waitTimer;
+
+        eventBus.Raise<OnWin>();
     }
 
     private void OnDestroy()

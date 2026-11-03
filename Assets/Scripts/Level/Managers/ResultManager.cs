@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
-using UnityEngine.Rendering.Universal;
-using Unity.Content;
-using Unity.VisualScripting.Dependencies.NCalc;
 
 public class ResultManager : MonoBehaviour
 {
@@ -132,7 +129,11 @@ public class ResultManager : MonoBehaviour
     }
     private void HandleContinueButton()
     {
-
+        if (gameManager.levelData.levelId + 1 < gameManager.GetMaxLevels)
+        {
+            gameManager.SetActiveLevelData(gameManager.GetLevelAt(gameManager.levelData.levelId + 1));
+            gameManager.StartLevel();
+        }
     }
 
     private void OnDestroy()

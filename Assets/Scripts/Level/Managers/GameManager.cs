@@ -1,14 +1,12 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int maxLevels = 2;
-
     [SerializeField]
     private GameObject loadScreen;
+    [SerializeField] private List<LevelData> levels;
 
     private LevelData activeLevelData;
 
@@ -16,7 +14,8 @@ public class GameManager : MonoBehaviour
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
-    public int GetMaxLevels { get { return maxLevels; } }
+    public int GetMaxLevels { get { return levels.Count; } }
+
 
     private void Awake()
     {
@@ -50,6 +49,17 @@ public class GameManager : MonoBehaviour
         if (activeLevelData != null) Debug.Log("Changed level to " + activeLevelData.levelName);
     }
 
+    public LevelData GetLevelAt(int at)
+    {
+        if (at <= 0 || at >= levels.Count)
+        {
+            Debug.LogError("Tried to access a non existing level");
+            return null;
+        }
+
+        return levels[at];
+    }
+
     public void StartLevel()
     {
         if (activeLevelData == null)
@@ -70,6 +80,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Corroutine");
 
+        BootStrapper.OnReset();
         AsyncOperation operation = SceneManager.LoadSceneAsync(activeLevelData.sceneName);
         //StartCoroutine(HandleLoadScreen(operation, loadScreenObject));
     }

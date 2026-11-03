@@ -26,7 +26,7 @@ public class ServiceLocator : Singleton<ServiceLocator>
            UnityEngine.Object.DontDestroyOnLoad(gO);
        }
    
-       AddService(gO.GetComponent<OrigamiPool>());
+       AddService(gO.GetComponent<T>());
    }
 
     public void AddServiceAsGameObject<T>(Func<object[], bool> function, object[] param = null) where T : MonoBehaviour

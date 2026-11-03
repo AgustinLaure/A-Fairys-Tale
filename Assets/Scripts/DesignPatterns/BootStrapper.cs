@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public static class BootStrapper
 {
@@ -13,7 +11,9 @@ public static class BootStrapper
         serviceLocator.AddService(new EventBus());
 
         serviceLocator.AddServiceAsGameObject<InputHandler>(null);
-        serviceLocator.AddServiceAsGameObject<GameManager>(null);
+
+        serviceLocator.AddServiceFromPrefab<GameManager>(Resources.Load<GameObject>("GameManager"), true);
+        //serviceLocator.AddServiceAsGameObject<GameManager>(null);
 
         //CreateMonoSingletonGameObject<CheatManager>();
     }
