@@ -21,6 +21,7 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     public List<Vector2> CurrentTargetShape => currentTargetShape;
     public bool IsFlipping { get; private set; }
+    public bool IsComplete => currentFigure == null || currentObjectiveIndex >= currentFigure.steps.Count;
 
     private List<Mesh> previewMeshes = new List<Mesh>();
 
@@ -189,7 +190,7 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     private List<PaperFace> GetTargetedFaces(Vector2 startLine, Vector2 endLine)
     {
-        int layersToGrab = currentFigure.steps[currentObjectiveIndex].layersToGrab;
+        int layersToGrab = IsComplete ? -1 : currentFigure.steps[currentObjectiveIndex].layersToGrab;
 
         var candidates = activeFaces
             .Where(f => f.vertices.Any(v => GeometryMath.PointLinePosition(v, startLine, endLine) < -0.001f))
