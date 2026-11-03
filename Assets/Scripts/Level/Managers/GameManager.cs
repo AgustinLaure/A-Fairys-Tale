@@ -5,15 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private int maxLevels = 2;
+
     [SerializeField]
     private GameObject loadScreen;
 
     private LevelData activeLevelData;
-    
+
     private LevelManager activeLevelManager;
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
+    public int GetMaxLevels { get { return maxLevels; } }
 
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Debug.Log("Added level manager" + activeLevelManager.name);
-        Debug.Log("New " + (((levelManager is GameplayLevelManager)) ? "Gameplay ":"Folding " ));
+        Debug.Log("New " + (((levelManager is GameplayLevelManager)) ? "Gameplay " : "Folding "));
     }
 
     public void SetActiveLevelData(LevelData levelData)
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Started level " + activeLevelData.levelName);
 
         //GameObject loadScreenObject = Instantiate(loadScreen);
-       // DontDestroyOnLoad(loadScreenObject);
+        // DontDestroyOnLoad(loadScreenObject);
 
         Debug.Log("Corroutine");
 
