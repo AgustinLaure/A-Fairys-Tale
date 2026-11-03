@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trace
   rendererGameObject: {fileID: 2605414717746469331}
+  craneSpriteRenderer: {fileID: 0}
   startGameObject: {fileID: 8466708630363819274}
   endGameObject: {fileID: 455851828205900433}
   pointPrefab: {fileID: 6409232428035357079, guid: 37ea4051edbf4604199ff6d6505c70f1, type: 3}
+  rendererSortingGroup: {fileID: 439835576722114841}
   pointRadiusMult: 1
   pointDistance: 0.3
   isFirstVisible: 0

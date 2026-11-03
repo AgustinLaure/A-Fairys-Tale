@@ -69,6 +69,9 @@ public class PlayerDrop : MonoBehaviour
             currentProp.transform.SetParent(currentLayerGameObject.transform, true);
         }
 
+        currentProp.Disable();
+        currentProp.Enable();
+
         eventBus.Raise<OnPlayerDropped>();
 
         dropCoroutine = null;

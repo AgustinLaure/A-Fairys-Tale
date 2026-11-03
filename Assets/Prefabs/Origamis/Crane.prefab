@@ -272,6 +272,7 @@ MonoBehaviour:
   startPath: {fileID: 7208000151655928017}
   endPath: {fileID: 8396579155023123758}
   propPoint: {fileID: 5632890027483731970}
+  trace: {fileID: 0}
   flySpeed: 1.3
   flyAwaySpeed: 2
   timeToDisappear: 5
@@ -875,10 +876,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: EndPath
       objectReference: {fileID: 0}
+    - target: {fileID: 2702076095178530216, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: id
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220592118751937075, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: id
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857113924697038840, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8857113924697038840, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
       propertyPath: pointDistance
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 8857113924697038840, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: craneSpriteRenderer
+      value: 
+      objectReference: {fileID: 9036503030798017181}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -979,6 +996,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartPath
       objectReference: {fileID: 0}
+    - target: {fileID: 2702076095178530216, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: id
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220592118751937075, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: id
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8857113924697038840, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
       propertyPath: pointDistance
       value: 0.15
@@ -987,6 +1012,10 @@ PrefabInstance:
       propertyPath: isFirstVisible
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8857113924697038840, guid: 2a4b2afb0b6f4d04ab9bf848c237a8ca, type: 3}
+      propertyPath: craneSpriteRenderer
+      value: 
+      objectReference: {fileID: 9036503030798017181}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

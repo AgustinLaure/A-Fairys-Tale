@@ -53,6 +53,10 @@ public class Crane : Origami
 
     private bool canPickUp = true;
 
+    private int currentId = 0;
+
+    public int GetCurrentId { get { return currentId; } }
+
     private void Awake()
     {
         playerTrigger.OnTriggerEntered += HandleTriggerEnter;
@@ -80,6 +84,7 @@ public class Crane : Origami
     {
         if (currentProp != null)
         {
+            Debug.Log(gameObject.GetEntityId() + "lo muevo");
             currentProp.transform.position = propPoint.position;
         }
     }
@@ -130,7 +135,7 @@ public class Crane : Origami
         Vector3 cursorPos = GetMouseWorldPosition();
 
         startObjectivePos = cursorPos;
-        startPath.SetPoints(transform.position, cursorPos);
+        startPath.SetPoints(transform.position, cursorPos, 0);
         startPath.SetVisibility(true);
 
         hasClicked = false;
@@ -146,11 +151,12 @@ public class Crane : Origami
 
         cursorPos = GetMouseWorldPosition();
         endObjectivePos = cursorPos;
-        endPath.SetPoints(startObjectivePos, cursorPos);
+        endPath.SetPoints(startObjectivePos, cursorPos, 1);
         endPath.SetVisibility(true);
 
         currentTarget = startObjectivePos;
 
+        throwAnimEnded = false;
         eventBus.Raise<OnPlayerThrow>();
         yield return new WaitUntil(() => throwAnimEnded);
 
@@ -182,6 +188,8 @@ public class Crane : Origami
         }
 
         pivot.transform.position = currentTarget;
+
+        currentId = 1;
 
         StartCoroutine(TraceFadeOut(startPath));
 
@@ -224,11 +232,19 @@ public class Crane : Origami
             yield return null;
         }
 
+        currentId = 0;
+        shouldLaunch = false;
+        currentTarget = Vector3.zero;
+        startObjectivePos = Vector3.zero;
+        endObjectivePos = Vector3.zero;
+        throwCoroutine = null;
         canPickUp = true;
+        aimAnimEnded = false;
+        throwAnimEnded = false;
+        currentProp = null;
+        pivot.transform.localPosition = Vector3.zero;
 
         origamiPool.ReturnOrigami(gameObject, typeof(Crane));
-
-        pivot.transform.localPosition = Vector3.zero;
 
         flyCoroutine = null;
     }
@@ -254,13 +270,17 @@ public class Crane : Origami
     {
         if (canPickUp)
         {
-            if (collider.transform.IsChildOf(transform)) return;
+            if (collider.transform.IsChildOf(transform))
+            {
+                return;
+            }
 
             if (currentProp == null)
             {
                 Prop propAux = collider.GetComponentInParent<Prop>();
+                Origami origamiCheck = collider.GetComponentInParent<Origami>();
 
-                if (propAux != null)
+                if (propAux != null && origamiCheck == null)
                 {
                     currentProp = propAux;
                     currentProp.DisableRigidBody();
@@ -272,11 +292,21 @@ public class Crane : Origami
 
     public void HandleAimAnimFinish()
     {
+        if (throwCoroutine == null)
+        {
+            return;
+        }
+
         aimAnimEnded = true;
     }
 
     public void HandleThrowAnimFinish()
     {
+        if (throwCoroutine == null)
+        {
+            return;
+        }
+
         throwAnimEnded = true;
     }
 

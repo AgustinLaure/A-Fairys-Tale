@@ -158,6 +158,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UseKey",
+                    "type": "Button",
+                    "id": "9fe4533b-c3d7-498e-8401-fab30c5e6325",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -598,6 +607,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleBookmark",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "422eec5e-307a-48d8-9b93-7e4ac33cdfea",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "UseKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -47,6 +47,9 @@ public class GameplayLevelManager : LevelManager
 
     [SerializeField] private string[] sortingLayers;
 
+    public int GetCurrentLayerIndex { get { return currentLayerIndex; } }
+
+
     public float GetCamTransitionProgress()
     {
         return (camTransitionCurrentTimer / camTransitionTime);
@@ -64,7 +67,7 @@ public class GameplayLevelManager : LevelManager
 
         eventBus.Subscribe<OnDeathAreaCollision>((Action<OnDeathAreaCollision>)HandleDeathAreaCollision);
         eventBus.Subscribe<OnPlayerLanded>((Action)HandlePlayerLand);
- 
+
         if (pausePanel != null) pausePanel.SetActive(false);
     }
 
@@ -121,7 +124,7 @@ public class GameplayLevelManager : LevelManager
         {
             mainTeletransportable.OnTeleport -= () => SetCurrentLayer(mainTeletransportable.LayerIndex);
         }
-        
+
         if (gameManager != null) gameManager.SetActiveLevelManager(null);
     }
 
