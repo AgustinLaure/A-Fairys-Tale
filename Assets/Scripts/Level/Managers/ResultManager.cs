@@ -51,7 +51,7 @@ public class ResultManager : MonoBehaviour
         gameObject.SetActive(true);
         winScreen.SetActive(true);
 
-        if ((int)(gameManager.levelData as GameplayLevelData).levelId >= gameManager.GetMaxLevels - 1)
+        if (gameManager.levelData.nextLevel == null)
         {
             continueCanvasGroup.alpha = nonClickableAlpha;
             continueCanvasGroup.blocksRaycasts = false;
@@ -127,13 +127,10 @@ public class ResultManager : MonoBehaviour
         BootStrapper.OnReset();
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
+
     private void HandleContinueButton()
     {
-        if (gameManager.levelData.levelId + 1 < gameManager.GetMaxLevels)
-        {
-            gameManager.SetActiveLevelData(gameManager.GetLevelAt(gameManager.levelData.levelId + 1));
-            gameManager.StartLevel();
-        }
+        ServiceLocator.Instance.GetService<GameManager>().levelManager.GoToNextLevel();
     }
 
     private void OnDestroy()

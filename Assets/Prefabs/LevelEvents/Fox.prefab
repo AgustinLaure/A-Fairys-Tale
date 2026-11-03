@@ -168,15 +168,13 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5348779848936151720}
   gameplayLevelManager: {fileID: 0}
   foxFadingSprite: {fileID: 8358087562955971613}
-  keyFadingSprite: {fileID: 5530020301369017502}
-  keyContourFadingSprite: {fileID: 6361168632222262512}
   key: {fileID: 657798334024023838}
   keyCollider: {fileID: 6009792430304876762}
   keyRenderer: {fileID: 5054864389373513186}
   layerZeroTrs: {fileID: 0}
   backLayerRunPointTime: 2
   bunnyLayerRunPointTime: 4
-  slipImpulse: 1
+  slipImpulse: 0.3
   slipTorque: 0.15
   standUpWaitTime: 0.5
   reappearTime: 2
@@ -764,6 +762,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 764033104004250687, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4395484788125894263, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -853,17 +855,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7810346110756975991, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
   m_PrefabInstance: {fileID: 3045999093410478229}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5530020301369017502 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7420529360788536331, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
-  m_PrefabInstance: {fileID: 3045999093410478229}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
 --- !u!4 &5533152543557557228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7389321656086864761, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
@@ -874,14 +865,3 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8728682336809640015, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
   m_PrefabInstance: {fileID: 3045999093410478229}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6361168632222262512 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8215402596766293093, guid: d9aec169adb24ed4c83203cb386ccdb0, type: 3}
-  m_PrefabInstance: {fileID: 3045999093410478229}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2ed3e15d14c8f46bb9c36338ecf671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
