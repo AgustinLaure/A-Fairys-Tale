@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acc4712f66187d4d92873722a006985, type: 3}
   m_Name: LevelOne
   m_EditorClassIdentifier: Assembly-CSharp::GameplayLevelData
-  levelId: 1
+  levelId: 0
   levelName: LevelOne
   sceneName: LevelOne
   level: 1

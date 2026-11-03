@@ -51,7 +51,7 @@ public class ResultManager : MonoBehaviour
         gameObject.SetActive(true);
         winScreen.SetActive(true);
 
-        if ((int)(gameManager.levelData as GameplayLevelData).level >= gameManager.GetMaxLevels - 1)
+        if ((int)(gameManager.levelData as GameplayLevelData).levelId >= gameManager.GetMaxLevels - 1)
         {
             continueCanvasGroup.alpha = nonClickableAlpha;
             continueCanvasGroup.blocksRaycasts = false;

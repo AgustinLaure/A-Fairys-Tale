@@ -56,6 +56,11 @@ public class Trace : MonoBehaviour
         points[index].gameObject.SetActive(state);
     }
 
+    public void SetLayer()
+    {
+
+    }
+
     public void SetPointsAlpha(float alpha)
     {
         foreach (TracePoint tracePoint in points)

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc1f4967d5f1e44b7b7b20788f5819, type: 3}
   m_Name: LevelAirplane
   m_EditorClassIdentifier: Assembly-CSharp::FoldingLevelData
+  levelId: -1
   levelName: Level Plane
-  sceneName: FoldingLevelPlane
+  sceneName: FoldingLevel
   foldinglevel: 0
-  objectiveFigure: {fileID: 11400000, guid: b8a0d434431d42747ad8febf34111a1c, type: 2}
+  objectiveFigure: {fileID: 11400000, guid: 8e601703d2b99e84c82794c39d6d8d97, type: 2}

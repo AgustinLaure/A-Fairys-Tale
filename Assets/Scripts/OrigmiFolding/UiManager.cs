@@ -5,7 +5,7 @@ public class UiManager : MonoBehaviour
 {
     public void OnRetry()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Debug.LogError("Reloading scenes is currently broken");
     }
 

@@ -36,11 +36,11 @@ public class GameManager : MonoBehaviour
         activeLevelManager = levelManager;
         if (activeLevelManager == null)
         {
-            Debug.Log("Leverl manager is null!");
+            Debug.Log("Level manager is null!");
             return;
         }
         Debug.Log("Added level manager" + activeLevelManager.name);
-        Debug.Log("New " + (((levelManager is GameplayLevelManager)) ? "Gameplay " : "Folding "));
+        Debug.Log("Its a " + (((levelManager is GameplayLevelManager)) ? "Gameplay ":"Folding " + " manager"));
     }
 
     public void SetActiveLevelData(LevelData levelData)

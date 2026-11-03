@@ -1,43 +1,32 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class PaperFace : MonoBehaviour
 {
     public List<Vector2> vertices = new List<Vector2>();
+    public List<Vector2> uvs = new List<Vector2>();
 
     private MeshFilter meshFilter;
-    private Mesh mesh;
 
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
-        mesh = new Mesh();
-        meshFilter.mesh = mesh;
+        meshFilter.mesh = new Mesh { name = "PaperMesh" };
     }
 
     public void UpdateMesh()
     {
-        if (vertices.Count < 3) return;
+        if (vertices == null || vertices.Count < 3) return;
 
-        Vector3[] vertices3D = new Vector3[vertices.Count];
-        for (int i = 0; i < vertices.Count; i++)
-        {
-            vertices3D[i] = new Vector3(vertices[i].x, vertices[i].y, 0f);
-        }
-
-        int[] triangles = GeometryMath.TriangulateConvex(vertices);
-
-        Vector2[] uvs = new Vector2[vertices.Count];
-        for (int i = 0; i < vertices.Count; i++)
-        {
-            uvs[i] = new Vector2(vertices[i].x, vertices[i].y);
-        }
-
+        Mesh mesh = meshFilter.sharedMesh;
         mesh.Clear();
-        mesh.vertices = vertices3D;
-        mesh.triangles = triangles;
-        mesh.uv = uvs;
+
+        mesh.vertices = vertices.Select(v => new Vector3(v.x, v.y, 0f)).ToArray();
+        mesh.triangles = GeometryMath.TriangulateConvex(vertices);
+
+        mesh.uv = vertices.Select((v, i) => (uvs != null && i < uvs.Count) ? uvs[i] : v).ToArray();
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
