@@ -53,7 +53,13 @@ public class FoldController : MonoBehaviour
     {
         if (Mouse.current == null || foldManager == null ) return;
 
-        if (foldManager.IsFlipping || foldManager.IsComplete) return;
+        if (foldManager.IsFlipping || foldManager.IsComplete || !foldManager.IsLevelActive) return;
+
+        if (mainCam == null)
+        {
+            mainCam = Camera.main;
+            if (mainCam == null) return;
+        }
 
         OrigamiDebugVisuals.Instance?.UpdateSnapPoints(GetAllValidSnapPoints());
         HandleInput();

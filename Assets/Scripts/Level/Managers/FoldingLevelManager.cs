@@ -14,6 +14,7 @@ public class FoldingLevelManager : LevelManager
 
         if (activeFoldManager != null)
         {
+            ServiceLocator.Instance.AddService(activeFoldManager);
             Debug.Log("Created new fold manager!");
         }
         else
@@ -38,6 +39,9 @@ public class FoldingLevelManager : LevelManager
 
     public void OnDestroy()
     {
-        Destroy(activeFoldManager.gameObject);
+        if (activeFoldManager != null)
+        {
+            activeFoldManager.Deactivate();
+        }
     }
 }

@@ -22,6 +22,7 @@ public class FoldManager : MonoSingleton<FoldManager>
     public List<Vector2> CurrentTargetShape => currentTargetShape;
     public bool IsFlipping { get; private set; }
     public bool IsComplete => currentFigure == null || currentObjectiveIndex >= currentFigure.steps.Count;
+    public bool IsLevelActive { get; private set; }
 
     private List<Mesh> previewMeshes = new List<Mesh>();
 
@@ -43,6 +44,22 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     public void StartUp()
     {
+        currentObjectiveIndex = 0;
+        IsFlipping = false;
+        IsLevelActive = true;
+
+        foreach (var face in activeFaces)
+        {
+            if (face != null) Destroy(face.gameObject);
+        }
+        activeFaces.Clear();
+
+        if (previewMeshes != null)
+        {
+            foreach (var m in previewMeshes) if (m != null) Destroy(m);
+            previewMeshes.Clear();
+        }
+
         if (paperSize.x <= 0.1f || paperSize.y <= 0.1f)
         {
             paperSize = new Vector2(10f, 10f);
@@ -241,6 +258,27 @@ public class FoldManager : MonoSingleton<FoldManager>
         {
             Graphics.DrawMesh(previewMeshes[i], Matrix4x4.identity, paperMaterial, 0);
         }
+    }
+
+    public void Deactivate()
+    {
+        IsLevelActive = false;
+
+        foreach (var face in activeFaces)
+        {
+            if (face != null) Destroy(face.gameObject);
+        }
+        activeFaces.Clear();
+
+        if (previewMeshes != null)
+        {
+            foreach (var m in previewMeshes) if (m != null) Destroy(m);
+            previewMeshes.Clear();
+        }
+
+        OrigamiDebugVisuals.Instance?.UpdateTargetLimits(null);
+        OrigamiDebugVisuals.Instance?.UpdateCheckpoints(null);
+        OrigamiDebugVisuals.Instance?.UpdateSnapPoints(new List<Vector2>());
     }
 
     public void ClearPreview()
