@@ -162,6 +162,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6870574242835405677}
     m_Modifications:
     - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 349cf02ba1712044b82549e0916864c6, type: 3}
+    - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
@@ -177,6 +181,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 12060a065f544b04b81dca54d2fcb5aa, type: 2}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22218
+      objectReference: {fileID: 0}
     - target: {fileID: 5603583647424850629, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_Name
       value: Mole5
@@ -251,6 +267,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6870574242835405677}
     m_Modifications:
     - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 349cf02ba1712044b82549e0916864c6, type: 3}
+    - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
@@ -266,6 +286,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 0da3aab6d634eda498188d2bef12db1a, type: 2}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22218
+      objectReference: {fileID: 0}
     - target: {fileID: 5603583647424850629, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_Name
       value: Mole1
@@ -340,6 +372,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6870574242835405677}
     m_Modifications:
     - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 349cf02ba1712044b82549e0916864c6, type: 3}
+    - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
@@ -355,6 +391,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 9e0a9317704797641a618bd162e7ca05, type: 2}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22218
+      objectReference: {fileID: 0}
     - target: {fileID: 5603583647424850629, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_Name
       value: Mole2
@@ -429,6 +477,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6870574242835405677}
     m_Modifications:
     - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 349cf02ba1712044b82549e0916864c6, type: 3}
+    - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
@@ -444,6 +496,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 72e6b84ad10d4b8438fee5b1a2bd7697, type: 2}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22218
+      objectReference: {fileID: 0}
     - target: {fileID: 5603583647424850629, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_Name
       value: Mole3
@@ -603,6 +667,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6870574242835405677}
     m_Modifications:
     - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 349cf02ba1712044b82549e0916864c6, type: 3}
+    - target: {fileID: 2616383809591334949, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
@@ -618,6 +686,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: c8a547c14712a2248b074335cf03883f, type: 2}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577397541284384045, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22218
+      objectReference: {fileID: 0}
     - target: {fileID: 5603583647424850629, guid: 7ecccdeb9b906324a951d6aaec6b8e7f, type: 3}
       propertyPath: m_Name
       value: Mole4

@@ -62,15 +62,6 @@ public class MolePuzzle : MonoBehaviour
         eventBus.Subscribe<OnMoleShowAnimFinished>((Action)HandleMoleShowAnimFinish);
     }
 
-    //TEST
-    private void Update()
-    {
-        if (Keyboard.current.lKey.wasPressedThisFrame)
-        {
-            eventBus.Raise<OnActivateMole>();
-        }
-    }
-
     private void HandleActivateMole()
     {
         if (!isPuzzleActive)
