@@ -1,3 +1,6 @@
+
+using System;
+using UnityEditor;
 using UnityEngine;
 
 public static class BootStrapper
@@ -11,9 +14,7 @@ public static class BootStrapper
         serviceLocator.AddService(new EventBus());
 
         serviceLocator.AddServiceAsGameObject<InputHandler>(null);
-
-        serviceLocator.AddServiceFromPrefab<GameManager>(Resources.Load<GameObject>("GameManager"), true);
-        //serviceLocator.AddServiceAsGameObject<GameManager>(null);
+        serviceLocator.AddServiceAsGameObject<GameManager>(null);
 
         //CreateMonoSingletonGameObject<CheatManager>();
     }
@@ -24,6 +25,7 @@ public static class BootStrapper
         if (existingInstance != null)
         {
             Debug.Log($"{typeof(T)} already exists in the scene. Skipping bootstrapper creation.");
+
             return existingInstance;
         }
 

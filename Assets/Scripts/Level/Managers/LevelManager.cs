@@ -45,4 +45,14 @@ public class LevelManager : MonoBehaviour
         eventBus.Raise<OnPause>(IsPaused);
         Debug.Log("Game is " + (IsPaused ? "Unp" : "P") + "aused");
     }
+
+    public void GoToNextLevel()
+    {
+        if(levelData.nextLevel == null)
+        {
+            Debug.LogError("No next level selected for this level manager!");
+        }
+        gameManager.SetActiveLevelData(levelData.nextLevel);
+        gameManager.StartLevel();
+    }
 }

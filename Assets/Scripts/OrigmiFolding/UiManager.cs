@@ -16,7 +16,7 @@ public class UiManager : MonoBehaviour
 
     public void OnNextLevel()
     {
-        Debug.LogError("Next level functionality not implemented!");
+        ServiceLocator.Instance.GetService<GameManager>().levelManager.GoToNextLevel();
     }
 
     public void OnExit()
