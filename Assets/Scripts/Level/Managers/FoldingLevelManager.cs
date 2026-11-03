@@ -4,6 +4,8 @@ public class FoldingLevelManager : LevelManager
 {
     private FoldManager activeFoldManager = null;
 
+    public FoldManager foldManager { get { return activeFoldManager; }}
+
     public override void Awake()
     {
         base.Awake();
@@ -25,6 +27,7 @@ public class FoldingLevelManager : LevelManager
         if (activeFoldManager == null) Debug.LogError("No level manager setup");
 
         activeFoldManager.currentFigure = (levelData as FoldingLevelData).objectiveFigure;
+        Debug.Log($"Seting up objective figure: {activeFoldManager.currentFigure}");
         activeFoldManager.StartUp();
     }
 

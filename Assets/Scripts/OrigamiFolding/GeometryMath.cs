@@ -3,7 +3,6 @@ using UnityEngine;
 
 public static class GeometryMath
 {
-
     public static float PointLinePosition(Vector2 p, Vector2 a, Vector2 b)
     {
         return (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x);
@@ -11,53 +10,56 @@ public static class GeometryMath
 
     public static Vector2 ReflectPoint(Vector2 p, Vector2 a, Vector2 b)
     {
-        float dx = b.x - a.x;
-        float dy = b.y - a.y;
+        Vector2 lineDir = (b - a).normalized;
+        Vector2 normal = new Vector2(-lineDir.y, lineDir.x);
 
-        if (dx == 0 && dy == 0) return p;
+        float distToLine = Vector2.Dot(p - a, normal);
 
-        float a_param = (dx * dx - dy * dy) / (dx * dx + dy * dy);
-        float b_param = 2 * dx * dy / (dx * dx + dy * dy);
-
-        float x2 = a_param * (p.x - a.x) + b_param * (p.y - a.y) + a.x;
-        float y2 = b_param * (p.x - a.x) - a_param * (p.y - a.y) + a.y;
-
-        return new Vector2(x2, y2);
+        return p - 2f * distToLine * normal;
     }
 
-    public static bool GetIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, out Vector2 intersection)
+    public static bool GetIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, out Vector2 intersection, out float t)
     {
         intersection = Vector2.zero;
+        t = 0f;
 
-        float denominator = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
+        float denom = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x);
+        if (Mathf.Abs(denom) < 0.0001f) return false;
 
-        if (Mathf.Abs(denominator) < 0.0001f) return false;
+        t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) / denom;
+        float u = -((p1.x - p2.x) * (p1.y - p3.y) - (p1.y - p2.y) * (p1.x - p3.x)) / denom;
 
-        float t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) / denominator;
-        float u = -((p1.x - p2.x) * (p1.y - p3.y) - (p1.y - p2.y) * (p1.x - p3.x)) / denominator;
-
-        if (t >= 0 && t <= 1 && u >= 0 && u <= 1)
+        if (t >= 0f && t <= 1f && u >= 0f && u <= 1f)
         {
-            intersection = new Vector2(p1.x + t * (p2.x - p1.x), p1.y + t * (p2.y - p1.y));
+            intersection = Vector2.Lerp(p1, p2, t);
             return true;
         }
 
         return false;
     }
 
+    public static float SqrDistanceToSegment(Vector2 p, Vector2 a, Vector2 b)
+    {
+        Vector2 ab = b - a;
+        float l2 = ab.sqrMagnitude;
+        if (l2 == 0f) return (p - a).sqrMagnitude;
+
+        float t = Mathf.Clamp01(Vector2.Dot(p - a, ab) / l2);
+        Vector2 projection = a + t * ab;
+        return (p - projection).sqrMagnitude;
+    }
+
     public static int[] TriangulateConvex(List<Vector2> vertices)
     {
-        if (vertices.Count < 3) return new int[0];
+        if (vertices == null || vertices.Count < 3) return new int[0];
 
         int[] triangles = new int[(vertices.Count - 2) * 3];
-        int triIndex = 0;
-
         for (int i = 1; i < vertices.Count - 1; i++)
         {
+            int triIndex = (i - 1) * 3;
             triangles[triIndex] = 0;
             triangles[triIndex + 1] = i;
             triangles[triIndex + 2] = i + 1;
-            triIndex += 3;
         }
         return triangles;
     }

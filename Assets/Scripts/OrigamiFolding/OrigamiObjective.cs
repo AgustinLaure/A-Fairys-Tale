@@ -13,9 +13,14 @@ public class LayerCheckpoint
 [System.Serializable]
 public class OrigamiObjective
 {
-    public string stepName = "New step";
+    [SerializeField] public string stepName = "New step";
+
+    [SerializeField] public bool flipStep;
 
     public List<Vector2> targetShape = new List<Vector2>();
+
+    [Tooltip("-1 means all")]
+    public int layersToGrab = -1;
 
     public List<LayerCheckpoint> layerCheckpoints = new List<LayerCheckpoint>();
 }

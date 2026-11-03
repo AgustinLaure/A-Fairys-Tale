@@ -10,7 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621d4242ffde8454c9a89307ffaa4e4b, type: 3}
-  m_Name: AirplaneFoldData
+  m_Name: CraneFoldData
   m_EditorClassIdentifier: Assembly-CSharp::OrigamiFigure
-  figureName: New Origami Fold
-  steps: []
+  figureName: Crane Fold Instructions
+  startingShape:
+    stepName: New step
+    flipStep: 0
+    targetShape: []
+    layersToGrab: -1
+    layerCheckpoints: []
+  steps:
+  - stepName: square
+    flipStep: 0
+    targetShape:
+    - {x: -2, y: 2}
+    - {x: 2, y: 2}
+    - {x: 2, y: -2}
+    - {x: -2, y: -2}
+    layersToGrab: -1
+    layerCheckpoints: []

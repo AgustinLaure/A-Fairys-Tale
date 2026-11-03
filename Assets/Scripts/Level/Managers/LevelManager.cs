@@ -16,11 +16,19 @@ public class LevelManager : MonoBehaviour
     public virtual void Awake()
     {
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
 
         gameManager.SetActiveLevelManager(this);
-        gameManager.SetActiveLevelData(levelData);
 
-        eventBus = ServiceLocator.Instance.GetService<EventBus>();
+        if (gameManager.levelData != null)
+        {
+            levelData = gameManager.levelData;
+        }
+        else
+        {
+            Debug.LogWarning("Level started directly from scene! Using local LevelData fallback.");
+            gameManager.SetActiveLevelData(levelData);
+        }
 
         if (gameManager.levelManager == null)
         {

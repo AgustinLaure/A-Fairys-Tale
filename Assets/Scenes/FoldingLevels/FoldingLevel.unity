@@ -1138,9 +1138,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1773707855}
-  - component: {fileID: 1773707854}
-  - component: {fileID: 1773707853}
+  - component: {fileID: 1773707857}
   - component: {fileID: 1773707852}
+  - component: {fileID: 1773707856}
+  - component: {fileID: 1773707853}
   m_Layer: 0
   m_Name: FoldManager
   m_TagString: Untagged
@@ -1160,19 +1161,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6072f92367df9c649b273b7a5175b4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoldController
+  isInputBlocked: 0
   enableGridSnap: 1
   gridSpacing: 1
-  gridSize: 5
   enablePointSnap: 1
   edgeDivisions: 3
-  snapRadius: 0.5
   minPointDistance: 0.2
   enableAngleSnap: 1
   angleSnapStep: 15
   angleSnapTolerance: 10
   minDragDistance: 0.2
   intersectionTolerance: 0.05
-  showSnapPoints: 1
   validLineColor: {r: 1, g: 1, b: 1, a: 1}
   invalidLineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &1773707853
@@ -1285,23 +1284,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1773707854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773707851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6836d5a202423c419f83dbd7530e7ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FoldManager
-  dontDestroyOnLoad: 1
-  paperMaterial: {fileID: 2100000, guid: 8450716b1b28ec84197653e4872a8863, type: 2}
-  activeFaces: []
-  targetLineMaterial: {fileID: 2100000, guid: 8450716b1b28ec84197653e4872a8863, type: 2}
-  currentFigure: {fileID: 0}
 --- !u!4 &1773707855
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,6 +1299,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1773707856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773707851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6d9390541cba345b4360715737c81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrigamiDebugVisuals
+  dontDestroyOnLoad: 1
+  showSnapPoints: 1
+  showDragMarkers: 1
+  showTargetLimits: 1
+  showCheckpoints: 1
+  targetLineMaterial: {fileID: 2100000, guid: 8450716b1b28ec84197653e4872a8863, type: 2}
+--- !u!114 &1773707857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773707851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f6c8c9120c1124999e9f54fd7342fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoldManager
+  dontDestroyOnLoad: 1
+  foldTolerance: 0.2
+  paperSize: {x: 10, y: 10}
+  paperMaterial: {fileID: 2100000, guid: 8450716b1b28ec84197653e4872a8863, type: 2}
+  currentFigure: {fileID: 0}
+  activeFaces: []
 --- !u!1 &1792061565
 GameObject:
   m_ObjectHideFlags: 0
