@@ -333,6 +333,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9157825216363468506, guid: 4e165fe624359764fbdefe804198b384, type: 3}
   m_PrefabInstance: {fileID: 338411180}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &442421631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2414925196170274918, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+  m_PrefabInstance: {fileID: 653441727}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &472871245
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +641,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -77
       objectReference: {fileID: 0}
+    - target: {fileID: 4724855077523091507, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_Name
+      value: ControlsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 4786071864156108996, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_text
       value: Chapter 2
@@ -729,6 +744,39 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29dcc3a42bb258a4184b2cd4f1cfbd18, type: 3}
+--- !u!114 &688356531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2414925196170274918, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+  m_PrefabInstance: {fileID: 1240310866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &781207055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2414925196170274918, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+  m_PrefabInstance: {fileID: 5736957048807152291}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &909744094 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4698847132557437323, guid: 9ed4bd68e3c904d4b99b4b8271ca1cbd, type: 3}
+  m_PrefabInstance: {fileID: 643800824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &913615109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -739,7 +787,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4222822588463648534, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Name
-      value: LevelButtonPrefab (1)
+      value: BirdLevelButton
       objectReference: {fileID: 0}
     - target: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Pivot.x
@@ -851,6 +899,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
   m_PrefabInstance: {fileID: 913615109}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &913615111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524587513581360963, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+  m_PrefabInstance: {fileID: 913615109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &918178958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -861,7 +920,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4222822588463648534, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Name
-      value: LevelButtonPrefab (1)
+      value: CreditsButton
       objectReference: {fileID: 0}
     - target: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Pivot.x
@@ -963,6 +1022,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 72
       objectReference: {fileID: 0}
+    - target: {fileID: 8828963046298901051, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+      propertyPath: m_Name
+      value: CreditsButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -973,6 +1036,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
   m_PrefabInstance: {fileID: 918178958}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &918178960 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524587513581360963, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+  m_PrefabInstance: {fileID: 918178958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1028140024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,14 +1092,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d86bd00495d9b44494b9243bbe64d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  buttonContainer: {fileID: 0}
-  buttonPrefab: {fileID: 4222822588463648534, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
   levels:
   - {fileID: 11400000, guid: f655622c5c8d1fa4a94349f6b9303fa1, type: 2}
   - {fileID: 11400000, guid: 10acb512b65e5e54eb6525497ee6a1a0, type: 2}
   - {fileID: 11400000, guid: 0cf7d24445b505e4e82059ab23f1251a, type: 2}
   - {fileID: 11400000, guid: 842fbb3f8dbebd049a9112b55e2e54f1, type: 2}
   - {fileID: 11400000, guid: 19674e3305563d644ba0a7a29c30f195, type: 2}
+  levelButtons:
+  - {fileID: 781207055}
+  - {fileID: 688356531}
+  - {fileID: 913615111}
+  - {fileID: 1412959524}
+  - {fileID: 1064629113}
+  controlsButton: {fileID: 442421631}
+  creditsButton: {fileID: 918178960}
+  muteButton: {fileID: 909744094}
 --- !u!1001 &1064629111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1036,7 +1117,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4222822588463648534, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Name
-      value: LevelButtonPrefab (1)
+      value: FoxLevelButton
       objectReference: {fileID: 0}
     - target: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Pivot.x
@@ -1148,6 +1229,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
   m_PrefabInstance: {fileID: 1064629111}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1064629113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524587513581360963, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+  m_PrefabInstance: {fileID: 1064629111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1240310866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1264,6 +1356,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4724855077523091507, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_Name
+      value: FrogFoldButton
+      objectReference: {fileID: 0}
     - target: {fileID: 4786071864156108996, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_text
       value: Chapter 1
@@ -1365,6 +1461,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412959524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2414925196170274918, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+  m_PrefabInstance: {fileID: 1887433461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1662577682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,6 +1955,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4724855077523091507, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_Name
+      value: CraneFoldButton
+      objectReference: {fileID: 0}
     - target: {fileID: 4786071864156108996, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_text
       value: Chapter 2
@@ -2070,6 +2181,10 @@ PrefabInstance:
     - target: {fileID: 3132109143976658848, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4724855077523091507, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_Name
+      value: AircraftFoldButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
