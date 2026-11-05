@@ -5,7 +5,8 @@ public class UiManager : MonoBehaviour
 {
     public void OnRetry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        BootStrapper.OnReset();
+        ServiceLocator.Instance.GetService<GameManager>().LoadScene(SceneManager.GetActiveScene().name);
         Debug.LogError("Reloading scenes is currently broken");
     }
 
@@ -21,6 +22,7 @@ public class UiManager : MonoBehaviour
 
     public void OnExit()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        BootStrapper.OnReset();
+        ServiceLocator.Instance.GetService<GameManager>().LoadScene("MainMenu");
     }
 }

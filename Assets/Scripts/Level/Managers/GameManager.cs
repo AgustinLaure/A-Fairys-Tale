@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject loadScreen;
     [SerializeField] private List<LevelData> levels;
 
     private LevelData activeLevelData;
@@ -16,19 +15,31 @@ public class GameManager : MonoBehaviour
     public LevelData levelData { get { return activeLevelData; } }
     public int GetMaxLevels { get { return levels.Count; } }
 
+    private EventBus eventBus;
 
-    private void Awake()
+    public Action OnSceneChangeStart;
+
+
+    private bool loadSceneQueue = false;
+    private string queueSceneName = "";
+
+    public AsyncOperation currentOperation;
+
+    private void Start()
     {
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
     }
 
-    void Start()
+    private void Update()
     {
+        if (loadSceneQueue)
+        {
+            currentOperation = SceneManager.LoadSceneAsync(queueSceneName);
+            loadSceneQueue = false;
+            queueSceneName = "";
 
-    }
-
-    void Update()
-    {
-
+            //BootStrapper.OnReset();
+        }
     }
 
     public void SetActiveLevelManager(LevelManager levelManager)
@@ -75,34 +86,18 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Started level " + activeLevelData.levelName);
 
-        //GameObject loadScreenObject = Instantiate(loadScreen);
-        // DontDestroyOnLoad(loadScreenObject);
 
-        Debug.Log("Corroutine");
-
-        BootStrapper.OnReset();
-        AsyncOperation operation = SceneManager.LoadSceneAsync(activeLevelData.sceneName);
-        //StartCoroutine(HandleLoadScreen(operation, loadScreenObject));
+        LoadScene(activeLevelData.sceneName);
     }
 
-    //private IEnumerator HandleLoadScreen(AsyncOperation operation, GameObject loadScreenObject)
-    //{
-    //    TMP_Text loadingText = loadScreenObject.GetComponentInChildren<TMP_Text>();
-    //    if (loadingText == null)
-    //    {
-    //        Debug.LogError("Couldn't find the text!");
-    //        yield break;
-    //    }
+    public void LoadScene(string name)
+    {
+        Debug.Log("Load scene: " + name);
 
-    //    loadingText.text = "Loading... 0%";
+        OnSceneChangeStart?.Invoke();
+        //eventBus.Raise<OnSceneChange>(queueSceneName);
 
-    //    while (!operation.isDone)
-    //    {
-    //        loadingText.text = "Loading... " + (int)(operation.progress * 100.0f) + "%";
-
-    //        yield return null;
-    //    }
-
-    //    Destroy(loadScreenObject);
-    //}
+        queueSceneName = name;
+        loadSceneQueue = true;
+    }
 }

@@ -18,7 +18,7 @@ public class PauseManager : MonoBehaviour
     public void OnRetry()
     {
         BootStrapper.OnReset();
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        ServiceLocator.Instance.GetService<GameManager>().LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OnToggleSound()
@@ -35,6 +35,6 @@ public class PauseManager : MonoBehaviour
     public void OnExit()
     {
         BootStrapper.OnReset();
-        SceneManager.LoadSceneAsync("MainMenu");
+        ServiceLocator.Instance.GetService<GameManager>().LoadScene("MainMenu");
     }
 }
