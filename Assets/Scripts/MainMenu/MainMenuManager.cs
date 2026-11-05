@@ -21,22 +21,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void GenerateLevelButtons()
     {
-        foreach (LevelData level in levels)
-        {
-            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
-
-            newButton.name = level.name + "Button";
-
-            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
-            if (buttonText != null)
-            {
-                buttonText.text = level.levelName;
-            }
-
-            Button buttonComponent = newButton.GetComponent<Button>();
-
-            buttonComponent.onClick.AddListener(() => OnLevelButtonClicked(level));
-        }
+        //buttonComponent.onClick.AddListener(() => OnLevelButtonClicked(level));
     }
 
     private void OnLevelButtonClicked(LevelData clickedLevel)
