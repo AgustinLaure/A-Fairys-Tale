@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{EDA905B6-B650-44E5-A032-A63C4979B815}" SchemaVersion="133">
+	<Containers>
+		<WorkUnit Name="ARIA" ID="{EDA905B6-B650-44E5-A032-A63C4979B815}" PersistMode="Standalone"/>
+	</Containers>
+</WwiseDocument>
