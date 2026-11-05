@@ -35,7 +35,8 @@ public class GameplayLevelManager : LevelManager
 
     public List<LayerController> Layers { get { return layers; } }
 
-    [SerializeField] public Color defaultFadeColor = Color.clear;
+    [SerializeField] public Color defaultFrontFadeColor = Color.clear;
+    [SerializeField] public Color defaultBackFadeColor = new Color(50,50,50,200);
 
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
@@ -69,6 +70,8 @@ public class GameplayLevelManager : LevelManager
         eventBus.Subscribe<OnPlayerLanded>((Action)HandlePlayerLand);
 
         if (pausePanel != null) pausePanel.SetActive(false);
+
+        mainTeletransportable.OnTeleport += () => SetCurrentLayer(mainTeletransportable.LayerIndex);
     }
 
     void Start()
@@ -79,8 +82,6 @@ public class GameplayLevelManager : LevelManager
         {
             Debug.LogError("No main teletransportable");
         }
-
-        mainTeletransportable.OnTeleport += () => SetCurrentLayer(mainTeletransportable.LayerIndex);
     }
 
     IEnumerator LateStart()

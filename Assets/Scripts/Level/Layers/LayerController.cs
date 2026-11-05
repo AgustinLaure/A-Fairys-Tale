@@ -9,8 +9,9 @@ public class LayerController : MonoBehaviour
     [SerializeField] public GameObject terrainObject;
     [SerializeField] public GameObject foregroundObject;
 
-    [SerializeField] public bool overrideFadeColor;
-    [SerializeField] public Color fadeColor;
+    [SerializeField] public bool overrideFadeColor = false;
+    [SerializeField] public Color foreFadeColor;
+    [SerializeField] public Color backFadeColor;
 
     [SerializeField] private List<LayerPortal> portalList = new List<LayerPortal>();
     [SerializeField] private List<PortalTarget> portalTargets = new List<PortalTarget>();
@@ -60,7 +61,8 @@ public class LayerController : MonoBehaviour
 
         if (!overrideFadeColor)
         {
-            fadeColor = levelManager.defaultFadeColor;
+            foreFadeColor = levelManager.defaultFrontFadeColor;
+            backFadeColor = levelManager.defaultBackFadeColor;
         }
     }
 

@@ -12,11 +12,13 @@ public class FadingSprite : MonoBehaviour
     public bool teleportable = false;
 
     private int layerIndex = -1;
-    private Color fadeColor;
+    private Color foreFadeColor;
+    private Color backFadeColor;
 
     private Coroutine activeFadeCoroutine;
 
     private EventBus eventBus;
+    private GameplayLevelManager levelManager;
 
     private void OnEnable()
     {
@@ -30,6 +32,8 @@ public class FadingSprite : MonoBehaviour
 
     void Start()
     {
+        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager as GameplayLevelManager;
+
         eventBus.Subscribe<OnLayerChange>((Action<OnLayerChange>)FadeTransition);
 
         eventBus.Subscribe<OnLevelManagerLateStart>((Action)LateStart);
@@ -53,7 +57,6 @@ public class FadingSprite : MonoBehaviour
         while (parentSearch != null && !found)
         {
             parentSearch = parentSearch.parent;
-            //Debug.Log("Looking at: " + parentSearch.name);
             if (parentSearch != null) found = parentSearch.GetComponent<LayerController>() != null;
         }
 
@@ -72,11 +75,37 @@ public class FadingSprite : MonoBehaviour
         }
 
         layerIndex = controller.LayerIndex;
-        fadeColor = controller.fadeColor;
+
+        foreFadeColor = controller.foreFadeColor;
+        backFadeColor = controller.backFadeColor;
 
         if (layerIndex == -1) return;
 
         fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
+
+        Color targetColor = CalculateTargetColor(levelManager.GetCurrentLayerIndex);
+        fadeLayerSprite.color = targetColor;
+
+        fadeLayerSprite.enabled = (targetColor.a > 0.01f);
+    }
+
+    private Color CalculateTargetColor(int activeLayerIndex)
+    {
+        int distance = Mathf.Abs(layerIndex - activeLayerIndex);
+        float fadeMultiplier = levelManager.Layers.Count > 1 ? (float)distance / (levelManager.Layers.Count - 1) : 1f;
+
+        if (layerIndex == activeLayerIndex)
+        {
+            return Color.white;
+        }
+        else if (layerIndex < activeLayerIndex)
+        {
+            return Color.Lerp(Color.white, foreFadeColor, 1.0f);
+        }
+        else
+        {
+            return Color.Lerp(Color.white, backFadeColor, fadeMultiplier);
+        }
     }
 
     void FadeTransition(OnLayerChange layerChange)
@@ -92,55 +121,41 @@ public class FadingSprite : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
         {
-            bool visible = (layerIndex >= newLayerIndex);
+            Color targetColor = CalculateTargetColor(newLayerIndex);
 
             if (activeFadeCoroutine != null)
             {
                 StopCoroutine(activeFadeCoroutine);
             }
 
-            activeFadeCoroutine = StartCoroutine(FadeCorroutine(visible));
-
+            activeFadeCoroutine = StartCoroutine(FadeCoroutine(targetColor));
         }
     }
 
-    IEnumerator FadeCorroutine(bool visible)
+    IEnumerator FadeCoroutine(Color targetColor)
     {
-        if (visible)
-        {
-            fadeLayerSprite.enabled = true;
-        }
+        fadeLayerSprite.enabled = true;
 
         float progress = 0.0f;
         float duration = 1.0f;
 
-        float fullAlpha = 1.0f;
-        float halfAlpha = fadeColor.a;
-
-        float startAlpha = fadeLayerSprite.color.a;
-        float targetAlpha = visible ? fullAlpha : halfAlpha;
-
-        //if (Mathf.Approximately(startAlpha, targetAlpha))
-        //{
-        //    yield break;
-        //}
-
-        Color currentColor = fadeLayerSprite.color;
+        Color startColor = fadeLayerSprite.color;
 
         while (progress < 1.0f)
         {
             progress += Time.deltaTime / duration;
 
-            currentColor.a = Mathf.Lerp(startAlpha, targetAlpha, progress);
-            fadeLayerSprite.color = currentColor;
+            fadeLayerSprite.color = Color.Lerp(startColor, targetColor, progress);
 
             yield return null;
         }
 
-        currentColor.a = targetAlpha;
-        fadeLayerSprite.color = currentColor;
+        fadeLayerSprite.color = targetColor;
 
-        fadeLayerSprite.enabled = visible;
+        if (targetColor.a <= 0.01f)
+        {
+            fadeLayerSprite.enabled = false;
+        }
     }
 
     void Update()
