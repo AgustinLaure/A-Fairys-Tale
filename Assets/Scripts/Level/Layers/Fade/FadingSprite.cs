@@ -82,6 +82,30 @@ public class FadingSprite : MonoBehaviour
         if (layerIndex == -1) return;
 
         fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
+
+        Color targetColor = CalculateTargetColor(levelManager.GetCurrentLayerIndex);
+        fadeLayerSprite.color = targetColor;
+
+        fadeLayerSprite.enabled = (targetColor.a > 0.01f);
+    }
+
+    private Color CalculateTargetColor(int activeLayerIndex)
+    {
+        int distance = Mathf.Abs(layerIndex - activeLayerIndex);
+        float fadeMultiplier = levelManager.Layers.Count > 1 ? (float)distance / (levelManager.Layers.Count - 1) : 1f;
+
+        if (layerIndex == activeLayerIndex)
+        {
+            return Color.white;
+        }
+        else if (layerIndex < activeLayerIndex)
+        {
+            return Color.Lerp(Color.white, foreFadeColor, 1.0f);
+        }
+        else
+        {
+            return Color.Lerp(Color.white, backFadeColor, fadeMultiplier);
+        }
     }
 
     void FadeTransition(OnLayerChange layerChange)
@@ -97,24 +121,7 @@ public class FadingSprite : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
         {
-            Color targetColor;
-
-            int distance = Mathf.Abs(layerIndex - newLayerIndex);
-
-            float fadeMultiplier = levelManager.Layers.Count > 1 ? (float)distance / (levelManager.Layers.Count - 1) : 1f;
-
-            if (layerIndex == newLayerIndex)
-            {
-                targetColor = Color.white;
-            }
-            else if (layerIndex < newLayerIndex)
-            {
-                targetColor = Color.Lerp(Color.white, foreFadeColor, 1.0f);
-            }
-            else
-            {
-                targetColor = Color.Lerp(Color.white, backFadeColor, fadeMultiplier);
-            }
+            Color targetColor = CalculateTargetColor(newLayerIndex);
 
             if (activeFadeCoroutine != null)
             {
