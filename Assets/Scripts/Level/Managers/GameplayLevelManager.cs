@@ -35,7 +35,8 @@ public class GameplayLevelManager : LevelManager
 
     public List<LayerController> Layers { get { return layers; } }
 
-    [SerializeField] public Color defaultFadeColor = Color.clear;
+    [SerializeField] public Color defaultFrontFadeColor = Color.clear;
+    [SerializeField] public Color defaultBackFadeColor = new Color(50,50,50,200);
 
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
