@@ -2478,7 +2478,7 @@ MonoBehaviour:
   currentLayerIndex: 0
   layers: []
   defaultFrontFadeColor: {r: 0, g: 0, b: 0, a: 0}
-  defaultBackFadeColor: {r: 0.18431373, g: 0.18431373, b: 0.18431373, a: 200}
+  defaultBackFadeColor: {r: 0, g: 0, b: 0, a: 1}
   perspectiveAction: {fileID: 6957287607395745548, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   playerRespawnForce: 0.3
   sortingLayers:
