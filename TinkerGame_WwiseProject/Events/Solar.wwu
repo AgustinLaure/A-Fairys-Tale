@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" SchemaVersion="133">
+	<Events>
+		<WorkUnit Name="Solar" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Object_pickup" ID="{34040BAB-30DE-4842-91D8-A40A3AA41650}"/>
+				<Event Name="Level_change" ID="{CFA5F59B-6FD5-4995-BFE0-C5512E62BB1B}"/>
+				<Event Name="Plane_change" ID="{1BA7AA1B-B5C8-4C9B-8F12-E3811D91BECB}"/>
+				<Event Name="Narrator" ID="{EABD76AB-0E9D-4316-A40B-5B960A58DAD7}"/>
+				<Folder Name="UI" ID="{82B7A5D2-7DEB-4519-BF80-34FD3936A1DC}" ShortID="371631947">
+					<ChildrenList>
+						<Event Name="UI_filter" ID="{148E3FC3-D58B-4B75-9686-18E65A310789}"/>
+						<Event Name="UI_pagechange" ID="{2F80DB29-CF7A-400C-B09B-2E96F0D39899}"/>
+						<Event Name="UI_click" ID="{037E0EDB-75D4-414A-9EA6-1936391632FD}"/>
+						<Event Name="UI_hover" ID="{491A539D-B88E-42CB-AECD-0E4331A2F95C}"/>
+						<Event Name="UI_open" ID="{34DFCCC8-89A7-4E41-86F5-29BCF8810D2D}"/>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Crafts" ID="{763F29EF-5899-419A-86D5-25F90D788FF5}" ShortID="698608783">
+					<ChildrenList>
+						<Event Name="Frog" ID="{8B62E0C8-8178-4497-9AD5-DEE8D13ABC4D}"/>
+						<Event Name="Paperplane_hit" ID="{094F77A5-6BF4-42B3-99B8-5DAEB4A7C986}"/>
+						<Event Name="Paperplane" ID="{A44A651A-01A9-427B-8E48-F4A694BF8E4C}"/>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -52,6 +52,8 @@ public class FadingSprite : MonoBehaviour
 
     void LateStart()
     {
+        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager as GameplayLevelManager;
+
         Transform parentSearch = this.transform;
         bool found = false;
         while (parentSearch != null && !found)
