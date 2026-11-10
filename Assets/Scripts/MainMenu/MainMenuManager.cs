@@ -30,6 +30,8 @@ public class MainMenuManager : MonoBehaviour
 
     private WaitForSeconds creditsTimer;
 
+    private bool isMuted = false;
+
     private Coroutine fadeCoroutine = null;
     private Coroutine creditsCoroutine = null;
 
@@ -97,7 +99,16 @@ public class MainMenuManager : MonoBehaviour
 
     private void HandleMutePressed()
     {
-        Debug.Log("funcioino");
+        isMuted = !isMuted;
+
+        if (isMuted)
+        {
+            AkUnitySoundEngine.SetState("Global_Audio_State", "Muted");
+        }
+        else
+        {
+            AkUnitySoundEngine.SetState("Global_Audio_State", "Normal");
+        }
     }
 
     private IEnumerator CreditsPlayVideoCoroutine()
