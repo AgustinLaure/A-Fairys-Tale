@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 5560261053879722634}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &764033104004250687
 GameObject:
@@ -503,4 +504,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 5053367968866307032}
+  shouldntDarken: 1
   teleportable: 0

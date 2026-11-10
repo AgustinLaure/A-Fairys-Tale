@@ -8,6 +8,7 @@ using System;
 public class FadingSprite : MonoBehaviour
 {
     [SerializeField] public SpriteRenderer fadeLayerSprite;
+    [SerializeField] private bool shouldntDarken;
 
     public bool teleportable = false;
 
@@ -85,10 +86,13 @@ public class FadingSprite : MonoBehaviour
 
         fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
 
-        Color targetColor = CalculateTargetColor(levelManager.GetCurrentLayerIndex);
-        fadeLayerSprite.color = targetColor;
+        if (!shouldntDarken)
+        {
+            Color targetColor = CalculateTargetColor(levelManager.GetCurrentLayerIndex);
+            fadeLayerSprite.color = targetColor;
 
-        fadeLayerSprite.enabled = (targetColor.a > 0.01f);
+            fadeLayerSprite.enabled = (targetColor.a > 0.01f);
+        }
     }
 
     private Color CalculateTargetColor(int activeLayerIndex)

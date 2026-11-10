@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 5953651197985146899}
   - component: {fileID: 4427761482881322820}
   m_Layer: 0
-  m_Name: Bush
+  m_Name: GreenBush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,14 +409,8 @@ MonoBehaviour:
   - {fileID: 6579332547477814981}
   possibleDropPools:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   possibleDrops:
   - {fileID: 3476103493057452571, guid: 819ecc7d0340ac544b113578319b8a28, type: 3}
-  - {fileID: 764033104004250687, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
-  - {fileID: 764033104004250687, guid: 3fe8d60cae2a52241a69b837d81c1556, type: 3}
-  - {fileID: 764033104004250687, guid: 8e56ebbc5789a8542ada4d09e9d65514, type: 3}
   isRandomDrop: 0
   isRandomSpawnPoint: 1
   animator: {fileID: 6303210902987665489}
