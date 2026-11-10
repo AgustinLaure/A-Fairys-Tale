@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -19,12 +20,23 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private Image fade;
 
-    [Header("Config")]
-    [SerializeField] private float fadeTime;
+    [SerializeField] private VideoPlayer creditsVideoPlayer;
 
     private GameManager gameManager;
 
+    [Header("Config")]
+    [SerializeField] private float fadeTime;
+    [SerializeField] private float creditsTimeToPlayVideo;
+
+    private WaitForSeconds creditsTimer;
+
     private Coroutine fadeCoroutine = null;
+    private Coroutine creditsCoroutine = null;
+
+    private void Awake()
+    {
+        creditsTimer = new WaitForSeconds(creditsTimeToPlayVideo);
+    }
 
     private void Start()
     {
@@ -57,6 +69,13 @@ public class MainMenuManager : MonoBehaviour
         if (fadeCoroutine == null)
         {
             StartCoroutine(FadeCoroutine(mainMenuCanvasGroup, creditsCanvasGroup));
+
+            if (creditsCoroutine != null)
+            {
+                StopCoroutine(creditsCoroutine);
+            }
+
+            StartCoroutine(CreditsPlayVideoCoroutine());
         }
     }
 
@@ -79,6 +98,17 @@ public class MainMenuManager : MonoBehaviour
     private void HandleMutePressed()
     {
         Debug.Log("funcioino");
+    }
+
+    private IEnumerator CreditsPlayVideoCoroutine()
+    {
+        creditsVideoPlayer.time = 0f;
+
+        yield return creditsTimer;
+
+        creditsVideoPlayer.Play();
+
+        creditsCoroutine = null;
     }
 
     private IEnumerator FadeCoroutine(CanvasGroup from, CanvasGroup to)
