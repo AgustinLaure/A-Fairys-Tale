@@ -4038,6 +4038,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 153825654}
     m_Modifications:
+    - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: d1d946132498661468528af741b4af78, type: 3}
+    - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_ControlledAudioTrackCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_DirectAudioMutes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_TargetAudioSources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3966138806529637381, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4117,6 +4141,18 @@ PrefabInstance:
     - target: {fileID: 3966138806529637381, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605141825892329372, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584805933368880741, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 162
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584805933368880741, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 6842894267154625610, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
       propertyPath: m_Name

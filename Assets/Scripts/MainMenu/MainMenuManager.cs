@@ -65,6 +65,9 @@ public class MainMenuManager : MonoBehaviour
         foxPlayButton.onClick.AddListener(HandleFoxPlay);
         birdContinueButton.onClick.AddListener(HandleBirdContinueButton);
         foxCotinueButton.onClick.AddListener(HandleFoxContinueButton);
+
+        creditsVideoPlayer.Play();
+        creditsVideoPlayer.Stop();
     }
 
     private void HandleBirdPlay()
