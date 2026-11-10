@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{47B80597-BA6C-4E62-90EC-9E0DBA4F0246}" SchemaVersion="133" RootDocumentID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}" ParentDocumentID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}">
+	<Events>
+		<WorkUnit Name="ARIA" ID="{47B80597-BA6C-4E62-90EC-9E0DBA4F0246}" OwnerID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}" PersistMode="Nested">
+			<ChildrenList>
+				<Event Name="Jump" ID="{27BBF5CD-C26A-434D-AC5C-E030D6A84701}"/>
+				<Event Name="Landing_character" ID="{1BD35A79-4065-4A2F-A9BB-67194E27B2E1}"/>
+				<Event Name="Falling_object" ID="{F0D88B5B-DE4B-4E3F-A37C-5161579D354C}"/>
+				<Event Name="Landing_object" ID="{444BC9F3-19CD-48CD-A35F-F18FDEDE3146}"/>
+				<Event Name="Step" ID="{17FEE182-0336-469D-BFAF-AD719469A638}"/>
+				<Event Name="Bag" ID="{17ED814D-3DC4-4BD2-94C5-8C02670C7F36}"/>
+				<Event Name="Down_arrow" ID="{09E0467C-ECF8-4F78-94F0-92542D29EAB2}"/>
+				<Event Name="Left_arrow" ID="{070DD6AD-D531-46C0-8CDE-EB00F7C96A5F}"/>
+				<Event Name="Right_arrow" ID="{3F632FE2-1361-4E95-A3EA-CE469FFEF4A6}"/>
+				<Event Name="Up_arrow" ID="{277E7289-ED8B-49A2-AC49-20580C5ADB16}"/>
+				<Event Name="Confirm_craft" ID="{2F29C033-7397-491C-93B6-D12FF75CD434}"/>
+				<Event Name="Failed_craft" ID="{ADB41A97-C11A-448E-9C6F-79CA44D00F14}"/>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

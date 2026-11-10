@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public LevelData levelData { get { return activeLevelData; } }
     public int GetMaxLevels { get { return levels.Count; } }
 
+    public bool IsMuted { set; get; }
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Debug.Log("Added level manager" + activeLevelManager.name);
-        Debug.Log("Its a " + (((levelManager is GameplayLevelManager)) ? "Gameplay ":"Folding " + " manager"));
+        Debug.Log("Its a " + (((levelManager is GameplayLevelManager)) ? "Gameplay " : "Folding " + " manager"));
     }
 
     public void SetActiveLevelData(LevelData levelData)
