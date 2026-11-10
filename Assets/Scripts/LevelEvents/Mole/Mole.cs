@@ -19,6 +19,8 @@ public class Mole : MonoBehaviour
     [SerializeField] private float moveTime;
     [SerializeField] private bool isShown;
 
+    private bool isMovingUp = false;
+
     private List<Mole> neighbors = new List<Mole>();
 
     private const string playerTag = "Player";
@@ -28,6 +30,8 @@ public class Mole : MonoBehaviour
     private bool shouldToggle = false;
 
     public bool GetIsShown { get { return isShown; } }
+
+    public bool GetIsMovingUp { get { return isMovingUp; } }
 
     public bool SetShouldToggle { set { shouldToggle = value; } }
 
@@ -44,10 +48,7 @@ public class Mole : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-        {
-            Debug.Log(isShown);
-        }
+        Debug.Log(isMovingUp);
     }
 
     public void AddNeighbor(Mole mole)
@@ -96,6 +97,10 @@ public class Mole : MonoBehaviour
             eventBus.Raise<OnMoleShowAnimFinished>();
         }
 
+        eventBus.Raise<OnMoleSwapped>(isShown, this);
+
+        isMovingUp = false;
+
         moveCoroutine = null;
     }
 
@@ -104,7 +109,10 @@ public class Mole : MonoBehaviour
     {
         isShown = !isShown;
 
-        eventBus.Raise<OnMoleSwapped>(isShown, this);
+        if (isShown)
+        {
+            isMovingUp = true;
+        }
 
         if (isShown)
         {

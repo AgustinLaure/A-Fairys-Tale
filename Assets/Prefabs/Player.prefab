@@ -574,6 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCraft
   pivotTransform: {fileID: 2900543731276584954}
   origamiSpawnPointTRS: {fileID: 6119793402065016251}
+  playerInventory: {fileID: 3260028874548462281}
   aicraftRecipe: 02000000030000000200000003000000
   frogRecipe: 0100000001000000
   craneRecipe: 0000000000000000
