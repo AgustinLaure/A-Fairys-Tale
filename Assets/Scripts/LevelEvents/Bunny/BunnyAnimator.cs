@@ -80,7 +80,7 @@ public class BunnyAnimator : MonoBehaviour
 
         fsm = new FSM(states);
 
-        fsm.SetInitialState(typeof(IdleState));
+        fsm.SetInitialState(typeof(WalkState));
     }
 
     private void Update()

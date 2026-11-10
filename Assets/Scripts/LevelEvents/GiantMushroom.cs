@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 public class GiantMushroom : MonoBehaviour
 {
@@ -41,16 +42,30 @@ public class GiantMushroom : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(playerTag) && !activationCooldown)
         {
-            eventBus.Raise<OnActivateMole>();
+            bool isValid = false;
 
-            if (shakeCoroutine != null)
+            foreach (ContactPoint contact in collision.contacts)
             {
-                StopCoroutine(shakeCoroutine);
+                if (contact.normal.y < -0.5f)
+                {
+                    isValid = true;
+                    break;
+                }
             }
 
-            shakeCoroutine = StartCoroutine(ShakeCoroutine());
+            if (isValid)
+            {
+                eventBus.Raise<OnActivateMole>();
 
-            activationCooldown = true;
+                if (shakeCoroutine != null)
+                {
+                    StopCoroutine(shakeCoroutine);
+                }
+
+                shakeCoroutine = StartCoroutine(ShakeCoroutine());
+
+                activationCooldown = true;
+            }
         }
     }
 

@@ -73,12 +73,14 @@ public class Fox : MonoBehaviour
         keyRenderer.sortingLayerName = layer0Name;
 
         transform.SetParent(layerZeroTrs);
-        key.transform.SetParent(layerZeroTrs);
 
         foxFadingSprite.enabled = false;
         foxFadingSprite.enabled = true;
 
-        eventBus.Raise<OnLayerChange>(gameplayLevelManager.GetCurrentLayerIndex);
+        if (gameplayLevelManager.GetCurrentLayerIndex != 0)
+        {
+            eventBus.Raise<OnLayerChange>(gameplayLevelManager.GetCurrentLayerIndex);
+        }
 
         yield return reappearWait;
 
@@ -101,12 +103,14 @@ public class Fox : MonoBehaviour
 
     private void HandleDropKey()
     {
+        key.transform.SetParent(layerZeroTrs);
+        key.gameObject.SetActive(true);
         key.EnableRigidBody();
         keyCollider.SetActive(true);
         key.gameObject.transform.SetParent(transform.parent.parent);
 
         Rigidbody keyRigidBody = key.GetRigidbody;
-        keyRigidBody.AddForce(Vector3.up * slipImpulse, ForceMode.VelocityChange);
+        keyRigidBody.AddForce(new Vector3(-1f, 1f, 0f).normalized * slipImpulse, ForceMode.VelocityChange);
         keyRigidBody.AddTorque(Vector3.forward * slipTorque, ForceMode.VelocityChange);
     }
 }

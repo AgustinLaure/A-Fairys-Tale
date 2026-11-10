@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.9.0] - 2026-11-03
+
+### New
+
+- Win and lose screens.
+- Per-level win and lose conditions.
+- Mole puzzle, with a harder difficulty.
+- Big mushroom.
+- Dynamic shape folding, including folding the crane.
+- Frog level added to the main menu.
+- Aircraft folding instructions.
+- Animations for the bunny, fox and mushroom.
+
+### Changes
+
+- Updated fold input.
+- Updated the folding scene background.
+- Version info moved to the main menu.
+- Fixed folding end crash.
+- Fixed crane visual bugs.
+- Fixed reload scene bug.
+
 ## [0.8.0] - 2026-10-27
 
 ### New
