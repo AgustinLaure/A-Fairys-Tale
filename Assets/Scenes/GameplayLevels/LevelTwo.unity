@@ -1090,7 +1090,8 @@ MonoBehaviour:
   terrainObject: {fileID: 0}
   foregroundObject: {fileID: 0}
   overrideFadeColor: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  foreFadeColor: {r: 0, g: 0, b: 0, a: 0}
+  backFadeColor: {r: 0, g: 0, b: 0, a: 0}
   portalList:
   - {fileID: 1658000090}
   - {fileID: 1822934842}
@@ -2116,7 +2117,8 @@ MonoBehaviour:
   terrainObject: {fileID: 0}
   foregroundObject: {fileID: 0}
   overrideFadeColor: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  foreFadeColor: {r: 0, g: 0, b: 0, a: 0}
+  backFadeColor: {r: 0, g: 0, b: 0, a: 0}
   portalList:
   - {fileID: 542573194}
   portalTargets:
@@ -2259,7 +2261,8 @@ MonoBehaviour:
   terrainObject: {fileID: 0}
   foregroundObject: {fileID: 0}
   overrideFadeColor: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  foreFadeColor: {r: 0, g: 0, b: 0, a: 0}
+  backFadeColor: {r: 0, g: 0, b: 0, a: 0}
   portalList:
   - {fileID: 1845410387}
   portalTargets:
@@ -2474,7 +2477,8 @@ MonoBehaviour:
   cam: {fileID: 946590316}
   currentLayerIndex: 0
   layers: []
-  defaultFadeColor: {r: 0, g: 0, b: 0, a: 0.7058824}
+  defaultFrontFadeColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultBackFadeColor: {r: 0.18431373, g: 0.18431373, b: 0.18431373, a: 200}
   perspectiveAction: {fileID: 6957287607395745548, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   playerRespawnForce: 0.3
   sortingLayers:
