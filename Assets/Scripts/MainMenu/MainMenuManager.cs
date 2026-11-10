@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,22 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button[] levelButtons;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button creditsButton;
+    [SerializeField] private Button creditsBackButton;
+    [SerializeField] private Button controlsBackButton;
     [SerializeField] private Button muteButton;
 
+    [SerializeField] private CanvasGroup mainMenuCanvasGroup;
+    [SerializeField] private CanvasGroup creditsCanvasGroup;
+    [SerializeField] private CanvasGroup controlsCanvasGroup;
+
+    [SerializeField] private Image fade;
+
+    [Header("Config")]
+    [SerializeField] private float fadeTime;
+
     private GameManager gameManager;
+
+    private Coroutine fadeCoroutine = null;
 
     private void Start()
     {
@@ -26,21 +40,82 @@ public class MainMenuManager : MonoBehaviour
         controlsButton.onClick.AddListener(HandleControlsPressed);
         creditsButton.onClick.AddListener(HandleCreditsPressed);
         muteButton.onClick.AddListener(HandleMutePressed);
+        creditsBackButton.onClick.AddListener(HandleCreditsBackPressed);
+        controlsBackButton.onClick.AddListener(HandleControlsBackPressed);
     }
 
     private void HandleControlsPressed()
     {
-        Debug.Log("funcioino");
+        if (fadeCoroutine == null)
+        {
+            StartCoroutine(FadeCoroutine(mainMenuCanvasGroup, controlsCanvasGroup));
+        }
     }
 
     private void HandleCreditsPressed()
     {
-        Debug.Log("funcioino");
+        if (fadeCoroutine == null)
+        {
+            StartCoroutine(FadeCoroutine(mainMenuCanvasGroup, creditsCanvasGroup));
+        }
+    }
+
+    private void HandleControlsBackPressed()
+    {
+        if (fadeCoroutine == null)
+        {
+            StartCoroutine(FadeCoroutine(controlsCanvasGroup, mainMenuCanvasGroup));
+        }
+    }
+
+    private void HandleCreditsBackPressed()
+    {
+        if (fadeCoroutine == null)
+        {
+            StartCoroutine(FadeCoroutine(creditsCanvasGroup, mainMenuCanvasGroup));
+        }
     }
 
     private void HandleMutePressed()
     {
         Debug.Log("funcioino");
+    }
+
+    private IEnumerator FadeCoroutine(CanvasGroup from, CanvasGroup to)
+    {
+        float t = 0f;
+
+        Color startingColor = fade.color;
+        startingColor.a = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / fadeTime;
+            startingColor.a = t;
+            fade.color = startingColor;
+
+            yield return null;
+        }
+
+        fade.color = startingColor;
+
+        UiUtils.SetCanvasActive(from, false);
+        UiUtils.SetCanvasActive(to, true);
+
+        t = 1f;
+
+        while (t > 0f)
+        {
+            t -= Time.deltaTime / fadeTime;
+            startingColor.a = t;
+            fade.color = startingColor;
+
+            yield return null;
+        }
+
+        fade.color = startingColor;
+
+        fadeCoroutine = null;
     }
 
     private void OnLevelButtonClicked(LevelData clickedLevel)
@@ -54,5 +129,7 @@ public class MainMenuManager : MonoBehaviour
         controlsButton.onClick.RemoveListener(HandleControlsPressed);
         creditsButton.onClick.RemoveListener(HandleCreditsPressed);
         muteButton.onClick.RemoveListener(HandleMutePressed);
+        creditsBackButton.onClick.RemoveListener(HandleCreditsBackPressed);
+        controlsBackButton.onClick.RemoveListener(HandleControlsBackPressed);
     }
 }
