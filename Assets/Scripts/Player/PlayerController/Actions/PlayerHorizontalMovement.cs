@@ -17,7 +17,6 @@ public class PlayerHorizontalMovement : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float terminalVelocity;
     [SerializeField] private float icedMultiplier;
-    [SerializeField] private float timePushed;
 
     private const ForceMode walkForceMode = ForceMode.Acceleration;
 
@@ -60,7 +59,7 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerAxisInput.x != 0f)
+        if (playerAxisInput.x != 0f && !isPushed)
         {
             if ((playerAxisInput.x > 0f && rb.linearVelocity.x < terminalVelocity) || (playerAxisInput.x < 0f && rb.linearVelocity.x > -terminalVelocity))
             {
@@ -120,16 +119,16 @@ public class PlayerHorizontalMovement : MonoBehaviour
             StopCoroutine(pushCoroutine);
         }
 
-        pushCoroutine = StartCoroutine(PushCoroutine());
+        pushCoroutine = StartCoroutine(PushCoroutine(data));
     }
 
-    private IEnumerator PushCoroutine()
+    private IEnumerator PushCoroutine(OnPushPlayer data)
     {
         isPushed = true;
 
         SetLegsColliderSharedMaterial(noFrictionMat);
 
-        yield return new WaitForSeconds(timePushed);
+        yield return new WaitForSeconds(data.pushTime);
 
         isPushed = false;
 

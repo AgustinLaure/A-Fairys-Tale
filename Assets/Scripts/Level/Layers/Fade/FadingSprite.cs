@@ -140,7 +140,10 @@ public class FadingSprite : MonoBehaviour
 
     IEnumerator FadeCoroutine(Color targetColor)
     {
-        fadeLayerSprite.enabled = true;
+        if (!shouldntDarken)
+        {
+            fadeLayerSprite.enabled = true;
+        }
 
         float progress = 0.0f;
         float duration = 1.0f;

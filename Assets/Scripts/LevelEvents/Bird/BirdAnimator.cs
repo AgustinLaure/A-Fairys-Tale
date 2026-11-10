@@ -71,6 +71,11 @@ public class BirdAnimator : MonoBehaviour
         fsm.SetInitialState(typeof(IdleState));
     }
 
+    private void Update()
+    {
+        fsm.Update();
+    }
+
     private class IdleState : global::State
     {
         private BirdAnimator birdAnimator;
