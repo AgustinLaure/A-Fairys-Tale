@@ -6,17 +6,24 @@ using UnityEngine.Video;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private LevelData[] foldLevels;
     [SerializeField] private LevelData[] levels;
-    [SerializeField] private Button[] levelButtons;
+    [SerializeField] private Button[] foldLevelButtons;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button creditsButton;
     [SerializeField] private Button creditsBackButton;
     [SerializeField] private Button controlsBackButton;
+    [SerializeField] private Button birdPlayButton;
+    [SerializeField] private Button foxPlayButton;
+    [SerializeField] private Button birdContinueButton;
+    [SerializeField] private Button foxCotinueButton;
     [SerializeField] private Button muteButton;
 
     [SerializeField] private CanvasGroup mainMenuCanvasGroup;
     [SerializeField] private CanvasGroup creditsCanvasGroup;
     [SerializeField] private CanvasGroup controlsCanvasGroup;
+    [SerializeField] private CanvasGroup birdCanvasGroup;
+    [SerializeField] private CanvasGroup foxCanvasGroup;
 
     [SerializeField] private Image fade;
 
@@ -42,20 +49,40 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = ServiceLocator.Instance.GetService<GameManager>();
-
-        for (int i = 0; i < levels.Length; i++)
+        for (int i = 0; i < foldLevels.Length; i++)
         {
-            LevelData currentLevel = levels[i];
+            LevelData currentLevel = foldLevels[i];
 
-            levelButtons[i].onClick.AddListener(() => OnLevelButtonClicked(currentLevel));
+            foldLevelButtons[i].onClick.AddListener(() => OnLevelButtonClicked(currentLevel));
         }
+
+        gameManager = ServiceLocator.Instance.GetService<GameManager>();
 
         controlsButton.onClick.AddListener(HandleControlsPressed);
         creditsButton.onClick.AddListener(HandleCreditsPressed);
         muteButton.onClick.AddListener(HandleMutePressed);
         creditsBackButton.onClick.AddListener(HandleCreditsBackPressed);
         controlsBackButton.onClick.AddListener(HandleControlsBackPressed);
+        birdPlayButton.onClick.AddListener(HandleBirdPlay);
+        foxPlayButton.onClick.AddListener(HandleFoxPlay);
+        birdContinueButton.onClick.AddListener(HandleBirdContinueButton);
+        foxCotinueButton.onClick.AddListener(HandleFoxContinueButton);
+    }
+
+    private void HandleBirdPlay()
+    {
+        if (fadeCoroutine == null)
+        {
+            StartCoroutine(FadeCoroutine(mainMenuCanvasGroup, birdCanvasGroup));
+        }
+    }
+
+    private void HandleFoxPlay()
+    {
+        if (fadeCoroutine == null)
+        {
+            StartCoroutine(FadeCoroutine(mainMenuCanvasGroup, foxCanvasGroup));
+        }
     }
 
     private void HandleControlsPressed()
@@ -95,6 +122,16 @@ public class MainMenuManager : MonoBehaviour
         {
             StartCoroutine(FadeCoroutine(creditsCanvasGroup, mainMenuCanvasGroup));
         }
+    }
+
+    private void HandleBirdContinueButton()
+    {
+        OnLevelButtonClicked(levels[0]);
+    }
+
+    private void HandleFoxContinueButton()
+    {
+        OnLevelButtonClicked(levels[1]);
     }
 
     private void HandleMutePressed()
@@ -172,5 +209,9 @@ public class MainMenuManager : MonoBehaviour
         muteButton.onClick.RemoveListener(HandleMutePressed);
         creditsBackButton.onClick.RemoveListener(HandleCreditsBackPressed);
         controlsBackButton.onClick.RemoveListener(HandleControlsBackPressed);
+        birdPlayButton.onClick.RemoveListener(HandleBirdPlay);
+        foxPlayButton.onClick.RemoveListener(HandleFoxPlay);
+        birdContinueButton.onClick.RemoveListener(HandleBirdContinueButton);
+        foxCotinueButton.onClick.RemoveListener(HandleFoxContinueButton);
     }
 }
