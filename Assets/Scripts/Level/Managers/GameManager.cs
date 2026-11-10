@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] private List<LevelData> levels;
+    //[SerializeField] private List<LevelData> levels;
 
     private LevelData activeLevelData;
 
@@ -13,34 +14,17 @@ public class GameManager : MonoBehaviour
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
-    public int GetMaxLevels { get { return levels.Count; } }
 
     public bool IsMuted { set; get; }
     private EventBus eventBus;
 
     public Action OnSceneChangeStart;
 
-
-    private bool loadSceneQueue = false;
-    private string queueSceneName = "";
-
-    public AsyncOperation currentOperation;
+    public LoadingScreen loadingScreen;
 
     private void Start()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
-    }
-
-    private void Update()
-    {
-        if (loadSceneQueue)
-        {
-            currentOperation = SceneManager.LoadSceneAsync(queueSceneName);
-            loadSceneQueue = false;
-            queueSceneName = "";
-
-            //BootStrapper.OnReset();
-        }
     }
 
     public void SetActiveLevelManager(LevelManager levelManager)
@@ -59,17 +43,6 @@ public class GameManager : MonoBehaviour
     {
         activeLevelData = levelData;
         if (activeLevelData != null) Debug.Log("Changed level to " + activeLevelData.levelName);
-    }
-
-    public LevelData GetLevelAt(int at)
-    {
-        if (at <= 0 || at >= levels.Count)
-        {
-            Debug.LogError("Tried to access a non existing level");
-            return null;
-        }
-
-        return levels[at];
     }
 
     public void StartLevel()
@@ -95,10 +68,23 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Load scene: " + name);
 
-        OnSceneChangeStart?.Invoke();
-        //eventBus.Raise<OnSceneChange>(queueSceneName);
+        StartCoroutine(LoadSceneAsync(name));
+    }
 
-        queueSceneName = name;
-        loadSceneQueue = true;
+    IEnumerator LoadSceneAsync(string name)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
+        loadingScreen.Show();
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+
+            loadingScreen.UpdateProgress(progress);
+
+            yield return null;
+        }
+
+        loadingScreen.Hide();
     }
 }

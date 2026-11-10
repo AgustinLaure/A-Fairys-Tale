@@ -48,7 +48,7 @@ public class Mole : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isMovingUp);
+        //Debug.Log(isMovingUp);
     }
 
     public void AddNeighbor(Mole mole)
