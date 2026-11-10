@@ -111,6 +111,6 @@ public class PauseManager : MonoBehaviour
     public void OnExit()
     {
         BootStrapper.OnReset();
-        SceneManager.LoadSceneAsync("MainMenu");
+        ServiceLocator.Instance.GetService<GameManager>().LoadScene("MainMenu");
     }
 }
