@@ -128,13 +128,13 @@ public class Frog : Origami
         if (collider.GetComponentInParent<PlayerController>().GetIsOnAir())
         {
             direction = Vector3.up;
-            eventBus.Raise<OnPushPlayer>(direction * playerVerticalPushForce);
+            eventBus.Raise<OnPushPlayer>(direction * playerVerticalPushForce, 0f);
             eventBus.Raise<OnPlayerJump>();
         }
         else
         {
             direction.x = Mathf.Sign(transform.position.x - collider.transform.position.x);
-            eventBus.Raise<OnPushPlayer>(direction * playerHorizontalPushForce);
+            eventBus.Raise<OnPushPlayer>(direction * playerHorizontalPushForce, 0f);
         }
 
         yield return new WaitForSeconds(pushPlayerCooldown);

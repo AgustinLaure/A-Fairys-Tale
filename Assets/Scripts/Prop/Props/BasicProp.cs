@@ -39,22 +39,30 @@ public class BasicProp : Prop
     {
         if (rendererObject.activeSelf && contourLowestThickness < contourHighestThickness)
         {
-            if (highlightCoroutine == null && contourSpriteRenderer.enabled)
+            if (highlightCoroutine == null && !isHighlighted)
             {
                 highlightCoroutine = StartCoroutine(HighlightCoroutine(Random.Range(minTimeToHighlight, maxTimeToHighlight)));
             }
         }
 
-        if (!contourSpriteRenderer.enabled)
-        {
-            if (highlightCoroutine != null)
-            {
-                StopCoroutine(highlightCoroutine);
-                highlightCoroutine = null;
-            }
-
-            contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
-        }
+       //if (rendererObject.activeSelf && contourLowestThickness < contourHighestThickness)
+       //{
+       //    if (highlightCoroutine == null && contourSpriteRenderer.enabled)
+       //    {
+       //        highlightCoroutine = StartCoroutine(HighlightCoroutine(Random.Range(minTimeToHighlight, maxTimeToHighlight)));
+       //    }
+       //}
+       //
+       //if (!contourSpriteRenderer.enabled)
+       //{
+       //    if (highlightCoroutine != null)
+       //    {
+       //        StopCoroutine(highlightCoroutine);
+       //        highlightCoroutine = null;
+       //    }
+       //
+       //    contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
+       //}
     }
 
     public override void SetHighlight(bool state)
@@ -104,7 +112,6 @@ public class BasicProp : Prop
         contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
 
         isHighlighted = false;
-
         highlightCoroutine = null;
     }
 

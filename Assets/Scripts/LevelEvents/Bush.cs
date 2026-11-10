@@ -10,10 +10,15 @@ public class Bush : PropSpawner
     [Header("Config")]
     [SerializeField] private float shakeCooldown;
     [SerializeField] private bool summonsSquirrel;
+    [SerializeField] private int maxDrops;
 
     private AreaCollider areaCollider;
 
     private const string shakeAnimName = "Shake";
+
+    private int drops = 0;
+
+    private bool wasSquirrelSummoned = false;
 
     private Coroutine shakeCoroutine = null;
 
@@ -46,13 +51,18 @@ public class Bush : PropSpawner
     {
         animator.Play(shakeAnimName);
 
-        Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0, 361));
+        if (drops < maxDrops && !summonsSquirrel)
+        {
+            Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0, 361));
+            Spawn(randomRotation);
 
-        Spawn(randomRotation);
+            drops++;
+        }
 
-        if (summonsSquirrel)
+        if (summonsSquirrel && !wasSquirrelSummoned)
         {
             eventBus.Raise<OnSummonSquirrel>();
+            wasSquirrelSummoned = true;
         }
 
         yield return new WaitForSeconds(shakeCooldown);

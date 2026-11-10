@@ -36,7 +36,7 @@ public class GameplayLevelManager : LevelManager
     public List<LayerController> Layers { get { return layers; } }
 
     [SerializeField] public Color defaultFrontFadeColor = Color.clear;
-    [SerializeField] public Color defaultBackFadeColor = new Color(50,50,50,200);
+    [SerializeField] public Color defaultBackFadeColor = new Color(50, 50, 50, 200);
 
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
@@ -229,7 +229,7 @@ public class GameplayLevelManager : LevelManager
 
         yield return new WaitForFixedUpdate();
 
-        eventBus.Raise<OnPushPlayer>(Vector3.down * playerRespawnForce);
+        eventBus.Raise<OnPushPlayer>(Vector3.down * playerRespawnForce, 0f);
 
         while (isPlayerRespawning)
         {
