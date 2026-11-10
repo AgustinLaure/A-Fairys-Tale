@@ -1273,6 +1273,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.8649995
       objectReference: {fileID: 0}
+    - target: {fileID: 2194005251916013378, guid: d00790a9b520e26438015289032961c2, type: 3}
+      propertyPath: isPuzzleActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2626632543059922112, guid: d00790a9b520e26438015289032961c2, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -2096,9 +2100,9 @@ Transform:
   - {fileID: 237435092}
   - {fileID: 1163958210}
   - {fileID: 1714199488469411851}
-  - {fileID: 970706698}
   - {fileID: 1982196633}
   - {fileID: 690330072}
+  - {fileID: 970706698}
   m_Father: {fileID: 1937280571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &668569715
@@ -4665,11 +4669,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9016435439561167862, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.713
       objectReference: {fileID: 0}
     - target: {fileID: 9016435439561167862, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.78
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 9016435439561167862, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
       propertyPath: m_LocalPosition.z

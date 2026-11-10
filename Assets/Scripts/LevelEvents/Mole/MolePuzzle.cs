@@ -60,6 +60,22 @@ public class MolePuzzle : MonoBehaviour
         eventBus.Subscribe<OnActivateMole>((Action)HandleActivateMole);
         eventBus.Subscribe<OnMoleSwapped>((Action<OnMoleSwapped>)HandleMoleSwapped);
         eventBus.Subscribe<OnMoleShowAnimFinished>((Action)HandleMoleShowAnimFinish);
+
+        if (isPuzzleActive)
+        {
+            foreach (Mole mole in moles)
+            {
+                mole.SwapState();
+            }
+
+            for (int i = 0; i < moles.Length; i++)
+            {
+                moles[i].SetState(molePuzzleConfig.startActivatedMoles[i]);
+                moles[i].SetShouldToggle = true;
+            }
+
+            isPuzzleActive = true;
+        }
     }
 
     private void HandleActivateMole()
@@ -123,15 +139,24 @@ public class MolePuzzle : MonoBehaviour
 
     private void CheckWon()
     {
+        int movingMoles = 0;
+
         foreach (Mole mole in moles)
         {
             if (mole.GetIsShown)
             {
                 return;
             }
+            else if (mole.GetIsMovingUp)
+            {
+                movingMoles++;
+            }
         }
 
-        StartCoroutine(LaunchPropCoroutine());
+        if (movingMoles == 0)
+        {
+            StartCoroutine(LaunchPropCoroutine());
+        }
     }
 
     private IEnumerator LaunchPropCoroutine()
