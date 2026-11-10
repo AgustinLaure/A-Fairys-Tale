@@ -37,8 +37,6 @@ public class MainMenuManager : MonoBehaviour
 
     private WaitForSeconds creditsTimer;
 
-    private bool isMuted = false;
-
     private Coroutine fadeCoroutine = null;
     private Coroutine creditsCoroutine = null;
 
@@ -136,15 +134,15 @@ public class MainMenuManager : MonoBehaviour
 
     private void HandleMutePressed()
     {
-        isMuted = !isMuted;
+        gameManager.IsMuted = !gameManager.IsMuted;
 
-        if (isMuted)
+        if (gameManager.IsMuted)
         {
-            AkUnitySoundEngine.SetState("Global_Audio_State", "Muted");
+            //AkUnitySoundEngine.SetState("Global_Audio_State", "Muted");
         }
         else
         {
-            AkUnitySoundEngine.SetState("Global_Audio_State", "Normal");
+            //AkUnitySoundEngine.SetState("Global_Audio_State", "Normal");
         }
     }
 
