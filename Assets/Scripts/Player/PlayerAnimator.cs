@@ -497,18 +497,19 @@ public class PlayerAnimator : MonoBehaviour
 
         public override void Update()
         {
+            isOnAir = playerAnimator.playerController.GetIsOnAir();
+
+            if (isOnAir)
+            {
+                if (playerAnimator.rb.linearVelocity.y < 0f)
+                {
+                    playerAnimator.fsm.TryChange<JumpState>(typeof(FallState));
+                }
+            }
+
             if (AnimationUtils.GetAnimationEnded(playerAnimator.armature, PlayerAnimator.jumpAnim))
             {
-                isOnAir = playerAnimator.playerController.GetIsOnAir();
                 horizontalInput = playerAnimator.moveAction.ReadValue<Vector2>().x;
-
-                if (isOnAir)
-                {
-                    if (playerAnimator.rb.linearVelocity.y < 0f)
-                    {
-                        playerAnimator.fsm.TryChange<JumpState>(typeof(FallState));
-                    }
-                }
 
                 if (horizontalInput * horizontalInput < epsilon * epsilon)
                 {
