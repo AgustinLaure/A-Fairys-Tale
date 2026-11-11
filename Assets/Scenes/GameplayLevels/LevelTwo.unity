@@ -1725,6 +1725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &531610920
 GameObject:
@@ -2440,6 +2441,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810225869}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &821430019
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939352708626583075, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_Name
+      value: Narrator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
 --- !u!1 &839613719
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,6 +6066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!114 &1336252310
 MonoBehaviour:
@@ -6022,6 +6081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!114 &1336252311
 MonoBehaviour:
@@ -6036,6 +6096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &1343493091
 GameObject:
@@ -8834,6 +8895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!210 &2013426344 stripped
 SortingGroup:
@@ -11034,3 +11096,4 @@ SceneRoots:
   - {fileID: 1833329044}
   - {fileID: 2123496296}
   - {fileID: 2127084708062225907}
+  - {fileID: 821430019}

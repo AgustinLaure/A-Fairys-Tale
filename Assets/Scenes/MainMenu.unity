@@ -1793,7 +1793,7 @@ MonoBehaviour:
   fade: {fileID: 2034821823}
   creditsVideoPlayer: {fileID: 1414526818}
   fadeTime: 0.5
-  creditsTimeToPlayVideo: 0.5
+  creditsTimeToPlayVideo: 0
 --- !u!1 &1033301330
 GameObject:
   m_ObjectHideFlags: 0
