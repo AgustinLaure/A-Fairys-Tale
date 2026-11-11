@@ -8,6 +8,8 @@ public class Teletransportable : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
 
+    private EventBus eventBus;
+
     public float telelporResetTime = 0.5f;
 
     public int layerIndex = -1;
@@ -20,6 +22,8 @@ public class Teletransportable : MonoBehaviour
 
     private void Start()
     {
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
+
         if (!tpTransform) tpTransform = transform;
 
         if (!rb) rb = tpTransform.GetComponent<Rigidbody>();
@@ -32,14 +36,15 @@ public class Teletransportable : MonoBehaviour
         layerIndex = newIndex;
     }
 
-    public void EnterPortal(LayerPortal portal)
+    public void EnterPortal(LayerPortal portal, bool shouldFaceLeft)
     {
         if (!telelportReady) return;
         telelportReady = false;
 
-        Vector3 newPos = portal.target.transform.position;
+        float relativeY = tpTransform.position.y - portal.transform.position.y;
 
-        newPos.y += portal.transform.position.y - tpTransform.position.y;
+        Vector3 newPos = portal.target.transform.position;
+        newPos.y += relativeY;
 
         tpTransform.position = newPos;
 
@@ -62,6 +67,10 @@ public class Teletransportable : MonoBehaviour
             }
             rb.linearVelocity *= portal.multiplySpeedOnTeleport;
         }
+
+        Physics.SyncTransforms();
+
+        eventBus.Raise<OnPortalUsed>(gameObject,shouldFaceLeft);
 
         SetLayer(portal.target.LayerIndex);
 
