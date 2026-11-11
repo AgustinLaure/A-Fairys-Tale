@@ -925,6 +925,7 @@ MonoBehaviour:
   target: {fileID: 46381618}
   flipSpeedOnTeleport: 1
   multiplySpeedOnTeleport: 2
+  shouldFaceLeft: 0
 --- !u!65 &96662926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1717,6 +1718,7 @@ MonoBehaviour:
   target: {fileID: 389820554}
   flipSpeedOnTeleport: 1
   multiplySpeedOnTeleport: 1
+  shouldFaceLeft: 0
 --- !u!65 &222400533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3302,6 +3304,7 @@ MonoBehaviour:
   target: {fileID: 1476896044}
   flipSpeedOnTeleport: 0
   multiplySpeedOnTeleport: 0
+  shouldFaceLeft: 0
 --- !u!65 &542573195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10833,6 +10836,7 @@ MonoBehaviour:
   target: {fileID: 1167901157}
   flipSpeedOnTeleport: 1
   multiplySpeedOnTeleport: 1
+  shouldFaceLeft: 0
 --- !u!65 &1658000091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12054,6 +12058,7 @@ MonoBehaviour:
   target: {fileID: 1142609827}
   flipSpeedOnTeleport: 0
   multiplySpeedOnTeleport: 2
+  shouldFaceLeft: 0
 --- !u!65 &1822934843
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12495,6 +12500,7 @@ MonoBehaviour:
   target: {fileID: 1866375376}
   flipSpeedOnTeleport: 1
   multiplySpeedOnTeleport: 2
+  shouldFaceLeft: 0
 --- !u!65 &1845410388
 BoxCollider:
   m_ObjectHideFlags: 0
