@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.10.0] - 2026-11-11
+
+### New
+
+- Splash screen.
+- Narrative levels.
+- Narrator.
+- Game logo and company name.
+- Credits video.
+- Controls screen.
+- Loading screen.
+- Audio mute toggle.
+- Menu music (placeholder).
+- Brown bush art.
+
+### Changes
+
+- Rebuilt the pause screen.
+- Redesigned main menu layout.
+- Level buttons added to the main menu.
+- Refreshed event and level art.
+- Adjusted transparency in level two.
+- Adjusted level and limit colliders.
+- Adjusted moss zones.
+- Adjusted bush drops.
+- Fixed level two portals.
+- Fixed player drift.
+- Fixed an inventory bug.
+- Fixed a mole puzzle bug.
+- Fixed UI scaling at different resolutions.
+
 ## [0.9.0] - 2026-11-03
 
 ### New
