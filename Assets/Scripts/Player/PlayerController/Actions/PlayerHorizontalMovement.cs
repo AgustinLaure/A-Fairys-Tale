@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerHorizontalMovement : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private GameplayLevelManager levelManager;
 
+    private bool isInputCut = false;
+
     private void Start()
     {
         ServiceLocator serviceLocator = ServiceLocator.Instance;
@@ -53,6 +56,16 @@ public class PlayerHorizontalMovement : MonoBehaviour
     private void Update()
     {
         playerAxisInput = moveAction.ReadValue<Vector2>();
+
+        if (isInputCut && playerAxisInput == Vector2.zero)
+        {
+            isInputCut = false;
+        }
+
+        if (isInputCut)
+        {
+            playerAxisInput = Vector2.zero;
+        }
 
         UpdateFacingDirection();
     }
@@ -85,6 +98,11 @@ public class PlayerHorizontalMovement : MonoBehaviour
         }
     }
 
+    public void CutInput()
+    {
+        isInputCut = true;
+    }
+
     private void SetLegsColliderSharedMaterial(PhysicsMaterial physicsMaterial)
     {
         if (legsCollider.sharedMaterial != physicsMaterial)
@@ -102,6 +120,18 @@ public class PlayerHorizontalMovement : MonoBehaviour
             baseTransform.rotation = facingLeftRotation;
         }
         else if (horizontalInput < 0)
+        {
+            baseTransform.rotation = facingRightRotation;
+        }
+    }
+
+    public void SetFaceDirection(bool isLeft)
+    {
+        if (isLeft)
+        {
+            baseTransform.rotation = facingLeftRotation;
+        }
+        else
         {
             baseTransform.rotation = facingRightRotation;
         }

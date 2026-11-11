@@ -7,6 +7,7 @@ public class LayerPortal : MonoBehaviour
 
     [SerializeField] public bool flipSpeedOnTeleport = true;
     [SerializeField] public float multiplySpeedOnTeleport = 1.0f;
+    [SerializeField] private bool shouldFaceLeft;
 
     private BoxCollider portalCollider;
 
@@ -38,9 +39,9 @@ public class LayerPortal : MonoBehaviour
             return;
         }
 
-        tp.EnterPortal(this);
+        tp.EnterPortal(this, shouldFaceLeft);
 
-        eventBus.Raise<OnEnterLayerPortal>(tp,target);
+        eventBus.Raise<OnEnterLayerPortal>(tp, target);
     }
 
     void OnTriggerExit(Collider other)
