@@ -1516,9 +1516,9 @@ MonoBehaviour:
   lineMaterial: {fileID: 2100000, guid: 32deb9407bf78bd4fb810f2d1c4d5eaf, type: 2}
   paperMaterial: {fileID: 2100000, guid: 8450716b1b28ec84197653e4872a8863, type: 2}
   fillAlphaMultiplier: 0.6
-  pendingColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  pendingColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.74509805}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
-  completedColor: {r: 0, g: 1, b: 0, a: 1}
+  completedColor: {r: 0, g: 0, b: 0, a: 0.11764706}
 --- !u!1 &2060137290
 GameObject:
   m_ObjectHideFlags: 0
