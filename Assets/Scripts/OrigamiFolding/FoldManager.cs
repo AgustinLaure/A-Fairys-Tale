@@ -104,6 +104,8 @@ public class FoldManager : MonoSingleton<FoldManager>
         OrigamiDebugVisuals.Instance?.UpdateTargetLimits(currentTargetShape);
         OrigamiDebugVisuals.Instance?.UpdateCheckpoints(step.layerCheckpoints);
         OrigamiDebugVisuals.Instance?.SetTargetLimitColors(Color.red, Color.red);
+
+        StepSequenceDisplay.Instance?.RenderSequence(currentFigure, currentObjectiveIndex);
     }
 
     private System.Collections.IEnumerator FlipPaperCoroutine()
@@ -279,6 +281,8 @@ public class FoldManager : MonoSingleton<FoldManager>
         OrigamiDebugVisuals.Instance?.UpdateTargetLimits(null);
         OrigamiDebugVisuals.Instance?.UpdateCheckpoints(null);
         OrigamiDebugVisuals.Instance?.UpdateSnapPoints(new List<Vector2>());
+
+        StepSequenceDisplay.Instance?.ClearSequence();
     }
 
     public void ClearPreview()
@@ -416,6 +420,9 @@ public class FoldManager : MonoSingleton<FoldManager>
         {
             eventBus.Raise<OnOrigamiFolded>(currentFigure);
             OrigamiDebugVisuals.Instance?.SetTargetLimitColors(Color.green, Color.green);
+
+            StepSequenceDisplay.Instance?.RenderSequence(currentFigure, currentFigure.steps.Count);
+
             Debug.Log("<color=#FFFF00>Origami Figure Complete!</color>");
         }
     }

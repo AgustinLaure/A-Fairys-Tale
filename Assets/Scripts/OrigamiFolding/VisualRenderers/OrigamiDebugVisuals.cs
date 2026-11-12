@@ -13,8 +13,8 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
     public Material targetLineMaterial;
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-    private LineRenderer maxLimitRenderer;
-    private LineRenderer minLimitRenderer;
+    private ShapeBorderRenderer maxLimitRenderer;
+    private ShapeBorderRenderer minLimitRenderer;
     private List<GameObject> checkpointMarkers = new List<GameObject>();
     private List<GameObject> snapMarkers = new List<GameObject>();
     private GameObject startRawMarker, startSnapMarker, endRawMarker, endSnapMarker;
@@ -25,8 +25,8 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
         if (isInitialized) return;
         isInitialized = true;
 
-        maxLimitRenderer = CreateLimitRenderer("TargetMaxVisual", 0.12f);
-        minLimitRenderer = CreateLimitRenderer("TargetMinVisual", 0.05f);
+        maxLimitRenderer = CreateLimitRenderer("TargetMaxVisual", 0.12f, -0.5f);
+        minLimitRenderer = CreateLimitRenderer("TargetMinVisual", 0.05f, -0.4f);
 
         startRawMarker = CreateMarker("StartRaw", Color.blue, 0.25f);
         startSnapMarker = CreateMarker("StartSnap", Color.green, 0.25f);
@@ -34,20 +34,17 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
         endSnapMarker = CreateMarker("EndSnap", Color.green, 0.25f);
     }
 
-    private void Start()
-    {
-        InitIfNeeded();
-    }
+    private void Start() => InitIfNeeded();
 
-    private LineRenderer CreateLimitRenderer(string name, float width)
+    private ShapeBorderRenderer CreateLimitRenderer(string name, float width, float zDepth)
     {
         var go = new GameObject(name);
         go.transform.SetParent(transform);
-        var lr = go.AddComponent<LineRenderer>();
-        lr.loop = true;
-        lr.startWidth = lr.endWidth = width;
-        if (targetLineMaterial != null) lr.material = targetLineMaterial;
-        return lr;
+        go.transform.localPosition = new Vector3(0, 0, zDepth);
+
+        var sbr = go.AddComponent<ShapeBorderRenderer>();
+        sbr.Setup(width, targetLineMaterial);
+        return sbr;
     }
 
     private GameObject CreateMarker(string name, Color color, float size)
@@ -69,8 +66,8 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
 
     private void Update()
     {
-        if (maxLimitRenderer != null) maxLimitRenderer.enabled = showTargetLimits;
-        if (minLimitRenderer != null) minLimitRenderer.enabled = showTargetLimits;
+        if (maxLimitRenderer != null) maxLimitRenderer.gameObject.SetActive(showTargetLimits);
+        if (minLimitRenderer != null) minLimitRenderer.gameObject.SetActive(showTargetLimits);
 
         if (!showSnapPoints) snapMarkers.ForEach(m => m.SetActive(false));
         if (!showDragMarkers)
@@ -86,18 +83,8 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
     {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
-        if (shape == null || shape.Count == 0)
-        {
-            maxLimitRenderer.positionCount = minLimitRenderer.positionCount = 0;
-            return;
-        }
-
-        maxLimitRenderer.positionCount = minLimitRenderer.positionCount = shape.Count;
-        for (int i = 0; i < shape.Count; i++)
-        {
-            maxLimitRenderer.SetPosition(i, new Vector3(shape[i].x, shape[i].y, -0.5f));
-            minLimitRenderer.SetPosition(i, new Vector3(shape[i].x, shape[i].y, -0.4f));
-        }
+        maxLimitRenderer.DrawShape(shape);
+        minLimitRenderer.DrawShape(shape);
 #endif
     }
 
@@ -105,8 +92,8 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
     {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
-        maxLimitRenderer.startColor = maxLimitRenderer.endColor = max;
-        minLimitRenderer.startColor = minLimitRenderer.endColor = min;
+        maxLimitRenderer.SetColor(max);
+        minLimitRenderer.SetColor(min);
 #endif
     }
 
