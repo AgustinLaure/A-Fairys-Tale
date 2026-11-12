@@ -20,12 +20,57 @@ MonoBehaviour:
     layersToGrab: -1
     layerCheckpoints: []
   steps:
-  - stepName: square
+  - stepName: Preliminary Triangle
     flipStep: 0
     targetShape:
-    - {x: -2, y: 2}
-    - {x: 2, y: 2}
-    - {x: 2, y: -2}
-    - {x: -2, y: -2}
+    - {x: -5, y: 5}
+    - {x: 5, y: 5}
+    - {x: 5, y: -5}
     layersToGrab: -1
     layerCheckpoints: []
+  - stepName: Bird Base Prep
+    flipStep: 0
+    targetShape:
+    - {x: 0, y: 0}
+    - {x: 5, y: 5}
+    - {x: 5, y: -5}
+    layersToGrab: -1
+    layerCheckpoints: []
+  - stepName: Simulate Squash (Wings)
+    flipStep: 0
+    targetShape:
+    - {x: -5, y: 5}
+    - {x: 5, y: 5}
+    - {x: 5, y: -5}
+    - {x: 0, y: 0}
+    layersToGrab: 2
+    layerCheckpoints:
+    - position: {x: -2, y: 4}
+      requiredLayers: 2
+  - stepName: Reverse Fold Neck
+    flipStep: 0
+    targetShape:
+    - {x: 0, y: 0}
+    - {x: 5, y: -5}
+    - {x: 5, y: 5}
+    - {x: -3, y: 5}
+    - {x: -3, y: 7}
+    - {x: -5, y: 3}
+    layersToGrab: 2
+    layerCheckpoints:
+    - position: {x: -3.5, y: 5.5}
+      requiredLayers: 2
+  - stepName: Reverse Fold Tail
+    flipStep: 0
+    targetShape:
+    - {x: 0, y: 0}
+    - {x: 2, y: -2}
+    - {x: 5, y: 1}
+    - {x: 5, y: 5}
+    - {x: -3, y: 5}
+    - {x: -3, y: 7}
+    - {x: -5, y: 3}
+    layersToGrab: 2
+    layerCheckpoints:
+    - position: {x: 4.5, y: 0}
+      requiredLayers: 2

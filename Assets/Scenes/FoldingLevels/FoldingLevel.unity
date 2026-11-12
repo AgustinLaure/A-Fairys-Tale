@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6d9390541cba345b4360715737c81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrigamiDebugVisuals
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
   toggleSnapPointsAction: {fileID: 5924862531342868968, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   toggleDragMarkersAction: {fileID: 4327589686707688481, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   toggleTargetLimitsAction: {fileID: -7233540983644431322, guid: 052faaac586de48259a63d0c4782560b, type: 3}
