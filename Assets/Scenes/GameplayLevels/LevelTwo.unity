@@ -2943,6 +2943,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b233dc0356d0cc0438801b39d59ffd6e, type: 2}
+    - target: {fileID: 273768111006468319, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 302357052768624451, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
