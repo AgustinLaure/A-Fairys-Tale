@@ -1,18 +1,76 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
 {
-    [Header("Toggles")]
-    public bool showSnapPoints = true;
-    public bool showDragMarkers = true;
-    public bool showTargetLimits = true;
-    public bool showCheckpoints = true;
+    [Header("Debug Action Toggles")]
+    public InputActionReference toggleSnapPointsAction;
+    public InputActionReference toggleDragMarkersAction;
+    public InputActionReference toggleTargetLimitsAction;
+    public InputActionReference toggleCheckpointsAction;
 
     [Header("Materials/Settings")]
     public Material targetLineMaterial;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    private bool showSnapPoints = false;
+    private bool showDragMarkers = false;
+    private bool showTargetLimits = false;
+    private bool showCheckpoints = false;
+
+    private void OnEnable()
+    {
+        if (toggleSnapPointsAction != null)
+        {
+            toggleSnapPointsAction.action.performed += ToggleSnapPoints;
+            toggleSnapPointsAction.action.Enable();
+        }
+        if (toggleDragMarkersAction != null)
+        {
+            toggleDragMarkersAction.action.performed += ToggleDragMarkers;
+            toggleDragMarkersAction.action.Enable();
+        }
+        if (toggleTargetLimitsAction != null)
+        {
+            toggleTargetLimitsAction.action.performed += ToggleTargetLimits;
+            toggleTargetLimitsAction.action.Enable();
+        }
+        if (toggleCheckpointsAction != null)
+        {
+            toggleCheckpointsAction.action.performed += ToggleCheckpoints;
+            toggleCheckpointsAction.action.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (toggleSnapPointsAction != null)
+        {
+            toggleSnapPointsAction.action.performed -= ToggleSnapPoints;
+            toggleSnapPointsAction.action.Disable();
+        }
+        if (toggleDragMarkersAction != null)
+        {
+            toggleDragMarkersAction.action.performed -= ToggleDragMarkers;
+            toggleDragMarkersAction.action.Disable();
+        }
+        if (toggleTargetLimitsAction != null)
+        {
+            toggleTargetLimitsAction.action.performed -= ToggleTargetLimits;
+            toggleTargetLimitsAction.action.Disable();
+        }
+        if (toggleCheckpointsAction != null)
+        {
+            toggleCheckpointsAction.action.performed -= ToggleCheckpoints;
+            toggleCheckpointsAction.action.Disable();
+        }
+    }
+
+    private void ToggleSnapPoints(InputAction.CallbackContext context) => showSnapPoints = !showSnapPoints;
+    private void ToggleDragMarkers(InputAction.CallbackContext context) => showDragMarkers = !showDragMarkers;
+    private void ToggleTargetLimits(InputAction.CallbackContext context) => showTargetLimits = !showTargetLimits;
+    private void ToggleCheckpoints(InputAction.CallbackContext context) => showCheckpoints = !showCheckpoints;
+
     private ShapeBorderRenderer maxLimitRenderer;
     private ShapeBorderRenderer minLimitRenderer;
     private List<GameObject> checkpointMarkers = new List<GameObject>();
@@ -77,29 +135,23 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
         }
         if (!showCheckpoints) checkpointMarkers.ForEach(m => m.SetActive(false));
     }
-#endif
 
     public void UpdateTargetLimits(List<Vector2> shape)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
         maxLimitRenderer.DrawShape(shape);
         minLimitRenderer.DrawShape(shape);
-#endif
     }
 
     public void SetTargetLimitColors(Color max, Color min)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
         maxLimitRenderer.SetColor(max);
         minLimitRenderer.SetColor(min);
-#endif
     }
 
     public void UpdateCheckpoints(List<LayerCheckpoint> checkpoints)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
         checkpoints = checkpoints ?? new List<LayerCheckpoint>();
         while (checkpointMarkers.Count < checkpoints.Count)
@@ -113,21 +165,17 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
             if (isActive)
                 checkpointMarkers[i].transform.position = new Vector3(checkpoints[i].position.x, checkpoints[i].position.y, -0.6f);
         }
-#endif
     }
 
     public void SetCheckpointColor(int index, Color color)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
         if (index >= 0 && index < checkpointMarkers.Count)
             checkpointMarkers[index].GetComponent<Renderer>().material.color = color;
-#endif
     }
 
     public void UpdateSnapPoints(List<Vector2> points)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
         if (!showSnapPoints) return;
         while (snapMarkers.Count < points.Count) snapMarkers.Add(CreateMarker("SnapMarker", Color.magenta, 0.15f));
@@ -138,12 +186,10 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
             snapMarkers[i].SetActive(isActive);
             if (isActive) snapMarkers[i].transform.position = new Vector3(points[i].x, points[i].y, -1.5f);
         }
-#endif
     }
 
     public void SetDragMarkers(Vector2 rawPos, Vector2 snapPos, bool active, bool isStart)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         InitIfNeeded();
         if (!showDragMarkers) return;
         var raw = isStart ? startRawMarker : endRawMarker;
@@ -155,6 +201,5 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
             raw.transform.position = new Vector3(rawPos.x, rawPos.y, -2f);
             snap.transform.position = new Vector3(snapPos.x, snapPos.y, -2f);
         }
-#endif
     }
 }
