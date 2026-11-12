@@ -10,6 +10,9 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
     public InputActionReference toggleTargetLimitsAction;
     public InputActionReference toggleCheckpointsAction;
 
+    [Header("UI")]
+    public TMPro.TextMeshProUGUI debugModeText;
+
     [Header("Materials/Settings")]
     public Material targetLineMaterial;
 
@@ -17,6 +20,13 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
     private bool showDragMarkers = false;
     private bool showTargetLimits = false;
     private bool showCheckpoints = false;
+
+    private ShapeBorderRenderer maxLimitRenderer;
+    private ShapeBorderRenderer minLimitRenderer;
+    private List<GameObject> checkpointMarkers = new List<GameObject>();
+    private List<GameObject> snapMarkers = new List<GameObject>();
+    private GameObject startRawMarker, startSnapMarker, endRawMarker, endSnapMarker;
+    private bool isInitialized = false;
 
     private void OnEnable()
     {
@@ -66,17 +76,27 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
         }
     }
 
-    private void ToggleSnapPoints(InputAction.CallbackContext context) => showSnapPoints = !showSnapPoints;
-    private void ToggleDragMarkers(InputAction.CallbackContext context) => showDragMarkers = !showDragMarkers;
-    private void ToggleTargetLimits(InputAction.CallbackContext context) => showTargetLimits = !showTargetLimits;
-    private void ToggleCheckpoints(InputAction.CallbackContext context) => showCheckpoints = !showCheckpoints;
+    private void ToggleSnapPoints(InputAction.CallbackContext context) { showSnapPoints = !showSnapPoints; RefreshUI(); }
+    private void ToggleDragMarkers(InputAction.CallbackContext context) { showDragMarkers = !showDragMarkers; RefreshUI(); }
+    private void ToggleTargetLimits(InputAction.CallbackContext context) { showTargetLimits = !showTargetLimits; RefreshUI(); }
+    private void ToggleCheckpoints(InputAction.CallbackContext context) { showCheckpoints = !showCheckpoints; RefreshUI(); }
 
-    private ShapeBorderRenderer maxLimitRenderer;
-    private ShapeBorderRenderer minLimitRenderer;
-    private List<GameObject> checkpointMarkers = new List<GameObject>();
-    private List<GameObject> snapMarkers = new List<GameObject>();
-    private GameObject startRawMarker, startSnapMarker, endRawMarker, endSnapMarker;
-    private bool isInitialized = false;
+    private void RefreshUI()
+    {
+        if (debugModeText == null) return;
+
+        if(!showSnapPoints && !showDragMarkers && !showTargetLimits && !showCheckpoints)
+        {
+            debugModeText.text = "";
+            return;
+        }
+
+        debugModeText.text = "<color=yellow><b>Debug Modes:</b></color>\n" +
+                             $"Snap Points: {(showSnapPoints ? "<color=green>On</color>" : "<color=red>Off</color>")}\n" +
+                             $"Drag Markers: {(showDragMarkers ? "<color=green>On</color>" : "<color=red>Off</color>")}\n" +
+                             $"Target Limits: {(showTargetLimits ? "<color=green>On</color>" : "<color=red>Off</color>")}\n" +
+                             $"Checkpoints: {(showCheckpoints ? "<color=green>On</color>" : "<color=red>Off</color>")}";
+    }
 
     private void InitIfNeeded()
     {
@@ -90,6 +110,8 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
         startSnapMarker = CreateMarker("StartSnap", Color.green, 0.25f);
         endRawMarker = CreateMarker("EndRaw", Color.blue, 0.25f);
         endSnapMarker = CreateMarker("EndSnap", Color.green, 0.25f);
+
+        RefreshUI();
     }
 
     private void Start() => InitIfNeeded();
