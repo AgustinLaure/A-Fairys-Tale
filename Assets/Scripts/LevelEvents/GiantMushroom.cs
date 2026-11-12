@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 public class GiantMushroom : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private AreaCollider areaCollider;
+    [SerializeField] private Transform headCenter;
     private EventBus eventBus;
+
+    [Header("Config")]
+    [SerializeField] private float pushImpulse;
 
     private const string idleAnimName = "Idle";
     private const string shakeAnimName = "Shake";
@@ -49,6 +52,10 @@ public class GiantMushroom : MonoBehaviour
                 if (contact.normal.y < -0.5f)
                 {
                     isValid = true;
+
+                    Vector3 direction = (collision.transform.position - headCenter.position).normalized;
+                    eventBus.Raise<OnPushPlayer>(direction * pushImpulse, 0f);
+
                     break;
                 }
             }
