@@ -16,4 +16,8 @@ MonoBehaviour:
   levelId: 0
   levelName: LevelOne
   sceneName: LevelOne
+  narratorPhrases:
+  - Phrase1
+  - Phrase2
+  - Phrase3
   level: 1

@@ -1,34 +1,28 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+using System;
+using System.Collections;
+using UnityEngine.SocialPlatforms.GameCenter;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField]
-    private GameObject loadScreen;
-    [SerializeField] private List<LevelData> levels;
-
     private LevelData activeLevelData;
 
     private LevelManager activeLevelManager;
 
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
-    public int GetMaxLevels { get { return levels.Count; } }
 
+    public bool IsMuted { set; get; }
+    private EventBus eventBus;
 
-    private void Awake()
+    public Action OnSceneChangeStart;
+
+    public LoadingScreen loadingScreen;
+
+    private void Start()
     {
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
     }
 
     public void SetActiveLevelManager(LevelManager levelManager)
@@ -40,24 +34,13 @@ public class GameManager : MonoBehaviour
             return;
         }
         Debug.Log("Added level manager" + activeLevelManager.name);
-        Debug.Log("Its a " + (((levelManager is GameplayLevelManager)) ? "Gameplay ":"Folding " + " manager"));
+        Debug.Log("Its a " + (((levelManager is GameplayLevelManager)) ? "Gameplay " : "Folding " + " manager"));
     }
 
     public void SetActiveLevelData(LevelData levelData)
     {
         activeLevelData = levelData;
         if (activeLevelData != null) Debug.Log("Changed level to " + activeLevelData.levelName);
-    }
-
-    public LevelData GetLevelAt(int at)
-    {
-        if (at <= 0 || at >= levels.Count)
-        {
-            Debug.LogError("Tried to access a non existing level");
-            return null;
-        }
-
-        return levels[at];
     }
 
     public void StartLevel()
@@ -75,34 +58,33 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Started level " + activeLevelData.levelName);
 
-        //GameObject loadScreenObject = Instantiate(loadScreen);
-        // DontDestroyOnLoad(loadScreenObject);
 
-        Debug.Log("Corroutine");
-
-        BootStrapper.OnReset();
-        AsyncOperation operation = SceneManager.LoadSceneAsync(activeLevelData.sceneName);
-        //StartCoroutine(HandleLoadScreen(operation, loadScreenObject));
+        LoadScene(activeLevelData.sceneName, (activeLevelData.GetLevelType() == LevelType.Gameplay) ? GameplayLevelManager.extraLevelLoadTime : 0.0f);
     }
 
-    //private IEnumerator HandleLoadScreen(AsyncOperation operation, GameObject loadScreenObject)
-    //{
-    //    TMP_Text loadingText = loadScreenObject.GetComponentInChildren<TMP_Text>();
-    //    if (loadingText == null)
-    //    {
-    //        Debug.LogError("Couldn't find the text!");
-    //        yield break;
-    //    }
+    public void LoadScene(string name, float loadTime = 0.0f)
+    {
+        Debug.Log("Load scene: " + name);
 
-    //    loadingText.text = "Loading... 0%";
+        loadingScreen.extraLoadTime = loadTime;
 
-    //    while (!operation.isDone)
-    //    {
-    //        loadingText.text = "Loading... " + (int)(operation.progress * 100.0f) + "%";
+        StartCoroutine(LoadSceneAsync(name));
+    }
 
-    //        yield return null;
-    //    }
+    IEnumerator LoadSceneAsync(string name)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
+        loadingScreen.Show();
 
-    //    Destroy(loadScreenObject);
-    //}
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+
+            loadingScreen.UpdateProgress(progress);
+
+            yield return null;
+        }
+
+        loadingScreen.Hide();
+    }
 }

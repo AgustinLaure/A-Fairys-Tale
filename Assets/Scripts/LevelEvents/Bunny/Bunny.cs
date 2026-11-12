@@ -22,6 +22,8 @@ public class Bunny : MonoBehaviour
 
     private bool isStartled = false;
 
+    private bool hasSmelledCarrot = false;
+
     private const string carrotTag = "Carrot";
     private const string foxTag = "Fox";
 
@@ -100,8 +102,9 @@ public class Bunny : MonoBehaviour
 
     private void HandleCarrotTrigger(Collider collider)
     {
-        if (collider.CompareTag(carrotTag))
+        if (collider.CompareTag(carrotTag) && !hasSmelledCarrot)
         {
+            hasSmelledCarrot = true;
             StartCoroutine(SequenceCoroutine());
         }
     }

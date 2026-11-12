@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerHorizontalMovement : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class PlayerHorizontalMovement : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float terminalVelocity;
     [SerializeField] private float icedMultiplier;
-    [SerializeField] private float timePushed;
 
     private const ForceMode walkForceMode = ForceMode.Acceleration;
 
@@ -35,6 +35,8 @@ public class PlayerHorizontalMovement : MonoBehaviour
     private Coroutine pushCoroutine = null;
 
     private GameplayLevelManager levelManager;
+
+    private bool isInputCut = false;
 
     private void Start()
     {
@@ -55,12 +57,22 @@ public class PlayerHorizontalMovement : MonoBehaviour
     {
         playerAxisInput = moveAction.ReadValue<Vector2>();
 
+        if (isInputCut && playerAxisInput == Vector2.zero)
+        {
+            isInputCut = false;
+        }
+
+        if (isInputCut)
+        {
+            playerAxisInput = Vector2.zero;
+        }
+
         UpdateFacingDirection();
     }
 
     private void FixedUpdate()
     {
-        if (playerAxisInput.x != 0f)
+        if (playerAxisInput.x != 0f && !isPushed)
         {
             if ((playerAxisInput.x > 0f && rb.linearVelocity.x < terminalVelocity) || (playerAxisInput.x < 0f && rb.linearVelocity.x > -terminalVelocity))
             {
@@ -86,6 +98,11 @@ public class PlayerHorizontalMovement : MonoBehaviour
         }
     }
 
+    public void CutInput()
+    {
+        isInputCut = true;
+    }
+
     private void SetLegsColliderSharedMaterial(PhysicsMaterial physicsMaterial)
     {
         if (legsCollider.sharedMaterial != physicsMaterial)
@@ -108,6 +125,18 @@ public class PlayerHorizontalMovement : MonoBehaviour
         }
     }
 
+    public void SetFaceDirection(bool isLeft)
+    {
+        if (isLeft)
+        {
+            baseTransform.rotation = facingLeftRotation;
+        }
+        else
+        {
+            baseTransform.rotation = facingRightRotation;
+        }
+    }
+
     private void HandleIsOnIceStateChanged(OnPlayerIcedChanged data)
     {
         isOnIce = data.state;
@@ -120,16 +149,16 @@ public class PlayerHorizontalMovement : MonoBehaviour
             StopCoroutine(pushCoroutine);
         }
 
-        pushCoroutine = StartCoroutine(PushCoroutine());
+        pushCoroutine = StartCoroutine(PushCoroutine(data));
     }
 
-    private IEnumerator PushCoroutine()
+    private IEnumerator PushCoroutine(OnPushPlayer data)
     {
         isPushed = true;
 
         SetLegsColliderSharedMaterial(noFrictionMat);
 
-        yield return new WaitForSeconds(timePushed);
+        yield return new WaitForSeconds(data.pushTime);
 
         isPushed = false;
 

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,6 +30,9 @@ public class PlayerController : MonoBehaviour
 
     private const float fallStateChangeSpeed = 5f;
 
+
+    private Quaternion facingDirection;
+
     private const ForceMode pushForceMode = ForceMode.Impulse;
 
     public State GetState { get { return fsm.GetCurrentState; } }
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
         moveAction = inputHandle.playerInput.actions["Move"];
 
+        eventBus.Subscribe<OnPortalUsed>((Action<OnPortalUsed>)HandlePortalUsed);
         eventBus.Subscribe<OnPause>((Action<OnPause>)HandlePause);
 
         IdleState idleState = new IdleState(this);
@@ -134,6 +137,15 @@ public class PlayerController : MonoBehaviour
         fsm = new FSM(states);
 
         fsm.SetInitialState(typeof(IdleState));
+    }
+
+    private void HandlePortalUsed(OnPortalUsed data)
+    {
+        if (data.user.GetComponentInParent<PlayerController>())
+        {
+            //playerHorizontalMovement.CutInput();
+            //playerHorizontalMovement.SetFaceDirection(data.shouldFaceLeft);
+        }
     }
 
     private void HandlePause(OnPause pause)

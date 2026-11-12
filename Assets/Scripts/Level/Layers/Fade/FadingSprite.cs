@@ -8,6 +8,7 @@ using System;
 public class FadingSprite : MonoBehaviour
 {
     [SerializeField] public SpriteRenderer fadeLayerSprite;
+    [SerializeField] private bool shouldntDarken;
 
     public bool teleportable = false;
 
@@ -52,6 +53,8 @@ public class FadingSprite : MonoBehaviour
 
     void LateStart()
     {
+        levelManager = ServiceLocator.Instance.GetService<GameManager>().levelManager as GameplayLevelManager;
+
         Transform parentSearch = this.transform;
         bool found = false;
         while (parentSearch != null && !found)
@@ -83,10 +86,13 @@ public class FadingSprite : MonoBehaviour
 
         fadeLayerSprite.sortingLayerID = SortingLayer.NameToID("Layer " + layerIndex);
 
-        Color targetColor = CalculateTargetColor(levelManager.GetCurrentLayerIndex);
-        fadeLayerSprite.color = targetColor;
+        if (!shouldntDarken)
+        {
+            Color targetColor = CalculateTargetColor(levelManager.GetCurrentLayerIndex);
+            fadeLayerSprite.color = targetColor;
 
-        fadeLayerSprite.enabled = (targetColor.a > 0.01f);
+            fadeLayerSprite.enabled = (targetColor.a > 0.01f);
+        }
     }
 
     private Color CalculateTargetColor(int activeLayerIndex)
@@ -134,7 +140,10 @@ public class FadingSprite : MonoBehaviour
 
     IEnumerator FadeCoroutine(Color targetColor)
     {
-        fadeLayerSprite.enabled = true;
+        if (!shouldntDarken)
+        {
+            fadeLayerSprite.enabled = true;
+        }
 
         float progress = 0.0f;
         float duration = 1.0f;

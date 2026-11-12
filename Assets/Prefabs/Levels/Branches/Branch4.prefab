@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 0}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1001 &3764444076626926400
 PrefabInstance:

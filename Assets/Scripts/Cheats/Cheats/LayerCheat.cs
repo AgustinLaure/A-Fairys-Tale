@@ -107,7 +107,7 @@ public class LayerCheat : Cheat
 
         portal.target = target;
 
-        tp.EnterPortal(portal);
+        //tp.EnterPortal(portal);
 
         eventBus.Raise<OnEnterLayerPortal>(tp, target);
     }

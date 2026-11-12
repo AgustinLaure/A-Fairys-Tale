@@ -18,6 +18,7 @@ public class PlayerCraft : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform pivotTransform;
     [SerializeField] private Transform origamiSpawnPointTRS;
+    [SerializeField] private PlayerInventory playerInventory;
     private GameObject currentLayerGameObject;
     private OrigamiPool origamiPool;
     private ServiceLocator serviceLocator;
@@ -86,7 +87,7 @@ public class PlayerCraft : MonoBehaviour
 
     private void OnToggleCraft(InputAction.CallbackContext value)
     {
-        if (enabled)
+        if (enabled && !playerInventory.HasProp)
         {
             isCrafting = !isCrafting;
 

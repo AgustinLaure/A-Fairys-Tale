@@ -9,6 +9,8 @@ public class PlayerInventory : MonoBehaviour
 
     public Prop GetCurrentProp { get { return currentProp; } }
 
+    public bool HasProp { get { return currentProp != null; } }
+
     private void Start()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
