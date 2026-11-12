@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    //[SerializeField] private List<LevelData> levels;
-
     private LevelData activeLevelData;
 
     private LevelManager activeLevelManager;
@@ -60,12 +59,14 @@ public class GameManager : MonoSingleton<GameManager>
         Debug.Log("Started level " + activeLevelData.levelName);
 
 
-        LoadScene(activeLevelData.sceneName);
+        LoadScene(activeLevelData.sceneName, (activeLevelData.GetLevelType() == LevelType.Gameplay) ? GameplayLevelManager.extraLevelLoadTime : 0.0f);
     }
 
-    public void LoadScene(string name)
+    public void LoadScene(string name, float loadTime = 0.0f)
     {
         Debug.Log("Load scene: " + name);
+
+        loadingScreen.extraLoadTime = loadTime;
 
         StartCoroutine(LoadSceneAsync(name));
     }

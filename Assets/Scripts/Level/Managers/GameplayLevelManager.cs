@@ -38,6 +38,8 @@ public class GameplayLevelManager : LevelManager
     [SerializeField] public Color defaultFrontFadeColor = Color.clear;
     [SerializeField] public Color defaultBackFadeColor = new Color(50, 50, 50, 200);
 
+    static public float extraLevelLoadTime = 3.0f;
+
     [SerializeField] private InputActionReference perspectiveAction; // temp
 
     private const string playerTag = "Player";
