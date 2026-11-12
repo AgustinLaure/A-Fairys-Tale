@@ -742,6 +742,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2550559186161026955, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
+      propertyPath: fixPositionForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550559186161026955, guid: d24eb78c15c15534db3cb6dfe93de2b0, type: 3}
       propertyPath: startWithPhysics
       value: 0
       objectReference: {fileID: 0}
@@ -6046,6 +6050,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1057253717}
+    - target: {fileID: 6182944734772050192, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 6194435783285857223, guid: 84b4ce79e40ce50408a197dc98d694ed, type: 3}
       propertyPath: m_Mesh
       value: 

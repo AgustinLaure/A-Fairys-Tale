@@ -20,6 +20,7 @@ public class BasicProp : Prop
 
     private Coroutine highlightCoroutine = null;
 
+    private const string playerTag = "Player";
 
     private void Awake()
     {
@@ -44,25 +45,6 @@ public class BasicProp : Prop
                 highlightCoroutine = StartCoroutine(HighlightCoroutine(Random.Range(minTimeToHighlight, maxTimeToHighlight)));
             }
         }
-
-       //if (rendererObject.activeSelf && contourLowestThickness < contourHighestThickness)
-       //{
-       //    if (highlightCoroutine == null && contourSpriteRenderer.enabled)
-       //    {
-       //        highlightCoroutine = StartCoroutine(HighlightCoroutine(Random.Range(minTimeToHighlight, maxTimeToHighlight)));
-       //    }
-       //}
-       //
-       //if (!contourSpriteRenderer.enabled)
-       //{
-       //    if (highlightCoroutine != null)
-       //    {
-       //        StopCoroutine(highlightCoroutine);
-       //        highlightCoroutine = null;
-       //    }
-       //
-       //    contourMat.SetFloat(contourThicknessReference, contourLowestThickness);
-       //}
     }
 
     public override void SetHighlight(bool state)
