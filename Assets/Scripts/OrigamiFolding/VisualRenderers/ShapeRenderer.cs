@@ -9,6 +9,12 @@ public class ShapeRenderer : MonoBehaviour
     private MeshRenderer meshRenderer;
     private LineRenderer lineRenderer;
 
+    private GameObject shadowObject;
+    private MeshFilter shadowMeshFilter;
+    private MeshRenderer shadowMeshRenderer;
+
+    public Vector2 shadowOffset = new Vector2(0.08f, -0.08f);
+
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
@@ -18,12 +24,29 @@ public class ShapeRenderer : MonoBehaviour
         {
             meshFilter.mesh = new Mesh { name = "ShapeMesh" };
         }
+
+        shadowObject = new GameObject("DropShadow");
+        shadowObject.transform.SetParent(transform, false);
+        shadowMeshFilter = shadowObject.AddComponent<MeshFilter>();
+        shadowMeshRenderer = shadowObject.AddComponent<MeshRenderer>();
+        shadowMeshFilter.mesh = new Mesh { name = "ShadowMesh" };
+        shadowObject.SetActive(false);
     }
 
-    public void Setup(Material fillMat, Material borderMat = null, float borderWidth = 0f)
+    public void Setup(Material fillMat, Material borderMat = null, float borderWidth = 0f, Material shadowMat = null)
     {
         if (meshRenderer == null) meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = fillMat;
+
+        if (shadowMat != null && shadowMeshRenderer != null)
+        {
+            shadowMeshRenderer.material = shadowMat;
+            shadowObject.SetActive(true);
+        }
+        else if (shadowObject != null)
+        {
+            shadowObject.SetActive(false);
+        }
 
         if (borderMat != null)
         {
@@ -57,12 +80,23 @@ public class ShapeRenderer : MonoBehaviour
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
 
+        if (shadowObject != null && shadowObject.activeSelf)
+        {
+            Mesh sMesh = shadowMeshFilter.sharedMesh;
+            sMesh.Clear();
+
+            sMesh.vertices = shape.Select(v => new Vector3(v.x + shadowOffset.x, v.y + shadowOffset.y, fillZOffset + 0.005f)).ToArray();
+            sMesh.triangles = mesh.triangles;
+            sMesh.RecalculateNormals();
+            sMesh.RecalculateBounds();
+        }
+
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = shape.Count;
             for (int i = 0; i < shape.Count; i++)
             {
-                lineRenderer.SetPosition(i, new Vector3(shape[i].x, shape[i].y, 0f));
+                lineRenderer.SetPosition(i, new Vector3(shape[i].x, shape[i].y, fillZOffset - 0.001f));
             }
         }
     }

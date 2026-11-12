@@ -10,6 +10,8 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     [Header("References")]
     public Material paperMaterial;
+    public bool useShadow = true;
+    public Material shadowMaterial;
     public OrigamiFigure currentFigure;
 
     [Header("State")]
@@ -285,11 +287,12 @@ public class FoldManager : MonoSingleton<FoldManager>
     {
         while (previewRenderers.Count <= index)
         {
-            var go = new GameObject("PreviewFace");
-            go.transform.SetParent(transform);
-            var sr = go.AddComponent<ShapeRenderer>();
-            sr.Setup(paperMaterial);
-            previewRenderers.Add(sr);
+            GameObject gameObject = new GameObject("PreviewFace");
+            gameObject.transform.SetParent(transform);
+            ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
+            shapeRenderer.Setup(paperMaterial, null, 0f, (useShadow ? shadowMaterial : null));
+
+            previewRenderers.Add(shapeRenderer);
         }
 
         previewRenderers[index].gameObject.SetActive(true);
@@ -377,7 +380,7 @@ public class FoldManager : MonoSingleton<FoldManager>
         go.transform.SetParent(transform);
 
         var shapeRenderer = go.AddComponent<ShapeRenderer>();
-        shapeRenderer.Setup(paperMaterial);
+        shapeRenderer.Setup(paperMaterial, null, 0f, (useShadow ? shadowMaterial : null));
 
         var face = go.AddComponent<PaperFace>();
         face.vertices = verts;
