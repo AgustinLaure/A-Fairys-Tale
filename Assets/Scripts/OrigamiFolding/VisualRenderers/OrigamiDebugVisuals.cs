@@ -30,6 +30,15 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
 
     private void OnEnable()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+
+        showSnapPoints = true;
+        showDragMarkers = true;
+        showTargetLimits = true;
+        showCheckpoints = true;
+
+#endif
+
         if (toggleSnapPointsAction != null)
         {
             toggleSnapPointsAction.action.performed += ToggleSnapPoints;
@@ -85,7 +94,7 @@ public class OrigamiDebugVisuals : MonoSingleton<OrigamiDebugVisuals>
     {
         if (debugModeText == null) return;
 
-        if(!showSnapPoints && !showDragMarkers && !showTargetLimits && !showCheckpoints)
+        if (!showSnapPoints && !showDragMarkers && !showTargetLimits && !showCheckpoints)
         {
             debugModeText.text = "";
             return;

@@ -42,16 +42,16 @@ MonoBehaviour:
   - stepName: First Wing
     flipStep: 0
     targetShape:
-    - {x: -1, y: 4}
-    - {x: -1, y: -5}
-    - {x: 3, y: -5}
-    - {x: 3, y: 0}
-    - {x: 0, y: 3}
     - {x: 0, y: 5}
+    - {x: -5, y: 0}
+    - {x: -5, y: -5}
+    - {x: -2, y: -5}
+    - {x: 0.77, y: -6.15}
+    - {x: 2.69, y: -1.54}
     layersToGrab: 2
     layerCheckpoints:
-    - position: {x: 1, y: -2}
-      requiredLayers: 1
+    - position: {x: -0.25, y: -2}
+      requiredLayers: 3
   - stepName: Flip
     flipStep: 1
     targetShape: []
@@ -60,13 +60,13 @@ MonoBehaviour:
   - stepName: Second Wing
     flipStep: 0
     targetShape:
-    - {x: -5, y: 0}
-    - {x: -5, y: -5}
-    - {x: -1, y: -5}
-    - {x: -1, y: 4}
-    - {x: -2, y: 5}
-    - {x: -2, y: 3}
-    layersToGrab: 2
+    - {x: 0, y: 5}
+    - {x: -2.69, y: -1.54}
+    - {x: -0.77, y: -6.15}
+    - {x: 2, y: -5}
+    layersToGrab: 3
     layerCheckpoints:
-    - position: {x: -3, y: -2}
-      requiredLayers: 2
+    - position: {x: 0, y: -2}
+      requiredLayers: 6
+    - position: {x: 4, y: 0}
+      requiredLayers: 1

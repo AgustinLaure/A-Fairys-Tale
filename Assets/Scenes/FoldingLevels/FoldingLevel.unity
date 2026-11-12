@@ -1467,7 +1467,7 @@ MonoBehaviour:
   enablePointSnap: 1
   edgeDivisions: 3
   minPointDistance: 0.2
-  enableAngleSnap: 1
+  enableAngleSnap: 0
   angleSnapStep: 15
   angleSnapTolerance: 10
   minDragDistance: 0.2
