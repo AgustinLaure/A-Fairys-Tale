@@ -50,7 +50,7 @@ MonoBehaviour:
     - {x: -5, y: -5}
     layersToGrab: 1
     layerCheckpoints:
-    - position: {x: -0.75, y: -4}
+    - position: {x: -0.25, y: -4}
       requiredLayers: 3
   - stepName: Flip
     flipStep: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     - {x: -4, y: 0}
     - {x: 0, y: 4}
     - {x: 0, y: 5}
-    - {x: 0.5, y: 4}
+    - {x: 0.5, y: 4.5}
     - {x: 0.5, y: 0}
     - {x: 0.5, y: -5}
     - {x: -4, y: -5}

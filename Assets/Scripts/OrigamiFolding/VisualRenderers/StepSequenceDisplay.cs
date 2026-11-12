@@ -1,59 +1,112 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
 {
+    [Header("Behavior")]
+    public bool keepCurrentStepFirst = true;
+    public float slideSpeed = 8f;
+
     [Header("Layout Settings")]
     public float spacing = 2.5f;
     public float scaleMultiplier = 0.15f;
 
-    [Header("Line Settings")]
+    [Header("Visual Settings")]
     public float lineWidth = 0.4f;
     public Material lineMaterial;
+    public Material paperMaterial;
+    public float fillAlphaMultiplier = 0.6f;
 
     [Header("Colors")]
-    public Color pendingColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+    public Color pendingColor = new Color(0.5f, 0.5f, 0.5f, 0.75f);
     public Color activeColor = Color.white;
-    public Color completedColor = Color.green;
+    public Color completedColor = new Color(0.25f, 0.25f, 0.25f, 0.25f);
 
-    private List<ShapeBorderRenderer> stepIcons = new List<ShapeBorderRenderer>();
+    private class StepIconData
+    {
+        public Transform transform;
+        public ShapeRenderer renderer;
+    }
 
-    public void RenderSequence(OrigamiFigure figure, int currentIndex)
+    private List<StepIconData> stepIcons = new List<StepIconData>();
+    private List<Vector3> targetPositions = new List<Vector3>();
+
+    private void Update()
+    {
+        for (int i = 0; i < stepIcons.Count; i++)
+        {
+            if (stepIcons[i].transform != null)
+            {
+                stepIcons[i].transform.localPosition = Vector3.Lerp(
+                    stepIcons[i].transform.localPosition,
+                    targetPositions[i],
+                    Time.deltaTime * slideSpeed
+                );
+            }
+        }
+    }
+
+    public void RenderSequence(OrigamiFigure figure, int currentObjectiveIndex)
     {
         if (figure == null) return;
 
-        if (stepIcons.Count != figure.steps.Count)
+        int visualStepCount = figure.steps.Count(s => !s.flipStep);
+
+        bool isInitialSetup = false;
+
+        if (stepIcons.Count != visualStepCount)
         {
             ClearSequence();
-
-            float totalWidth = (figure.steps.Count - 1) * spacing;
-            float startX = -totalWidth / 2f;
+            isInitialSetup = true;
 
             for (int i = 0; i < figure.steps.Count; i++)
             {
-                GameObject go = new GameObject($"StepIcon_{i}");
-                go.transform.SetParent(transform);
+                if (figure.steps[i].flipStep) continue;
 
-                go.transform.localPosition = new Vector3(startX + (i * spacing), 0, 0);
-                go.transform.localScale = Vector3.one * scaleMultiplier;
+                GameObject gameObject = new GameObject($"StepIcon_{stepIcons.Count}");
+                gameObject.transform.SetParent(transform);
+                gameObject.transform.localScale = Vector3.one * scaleMultiplier;
 
-                ShapeBorderRenderer sbr = go.AddComponent<ShapeBorderRenderer>();
-                sbr.Setup(lineWidth * scaleMultiplier, lineMaterial);
+                ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
+                shapeRenderer.Setup(paperMaterial, lineMaterial, lineWidth * scaleMultiplier);
 
-                if (figure.steps[i].flipStep)
-                    sbr.DrawShape(new List<Vector2> { new Vector2(0, 5), new Vector2(-5, 0), new Vector2(0, -5), new Vector2(5, 0) });
-                else
-                    sbr.DrawShape(figure.steps[i].targetShape);
+                shapeRenderer.DrawShape(figure.steps[i].targetShape, null, 0.01f);
 
-                stepIcons.Add(sbr);
+                stepIcons.Add(new StepIconData { transform = gameObject.transform, renderer = shapeRenderer });
+                targetPositions.Add(Vector3.zero);
             }
         }
 
+        int activeIconIndex = 0;
+
+        for (int i = 0; i < currentObjectiveIndex && i < figure.steps.Count; i++)
+        {
+            if (!figure.steps[i].flipStep) activeIconIndex++;
+        }
+
+        float totalWidth = (stepIcons.Count - 1) * spacing;
+        float defaultStartX = -totalWidth / 2f;
+
         for (int i = 0; i < stepIcons.Count; i++)
         {
-            if (i < currentIndex) stepIcons[i].SetColor(completedColor);
-            else if (i == currentIndex) stepIcons[i].SetColor(activeColor);
-            else stepIcons[i].SetColor(pendingColor);
+            float targetX = keepCurrentStepFirst
+                ? (i - activeIconIndex) * spacing
+                : defaultStartX + (i * spacing);
+
+            targetPositions[i] = new Vector3(targetX, 0, 0);
+
+            if (isInitialSetup)
+            {
+                stepIcons[i].transform.localPosition = targetPositions[i];
+            }
+
+            Color stateColor;
+            if (i < activeIconIndex) stateColor = completedColor;
+            else if (i == activeIconIndex) stateColor = activeColor;
+            else stateColor = pendingColor;
+
+            stepIcons[i].renderer.SetColor(stateColor, fillAlphaMultiplier);
         }
     }
 
@@ -61,8 +114,9 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
     {
         foreach (var icon in stepIcons)
         {
-            if (icon != null) Destroy(icon.gameObject);
+            if (icon.transform != null) Destroy(icon.transform.gameObject);
         }
         stepIcons.Clear();
+        targetPositions.Clear();
     }
 }
