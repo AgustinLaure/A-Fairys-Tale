@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class LoadingScreen : MonoBehaviour
+public class LoadingScreen : MonoSingleton<LoadingScreen>
 {
     [SerializeField] private GameObject loadingVisualPanel;
 
