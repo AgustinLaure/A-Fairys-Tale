@@ -961,7 +961,7 @@
 							</PluginInnerObject>
 						</ObjectList>
 						<ObjectList Name="Entries">
-							<MultiSwitchEntry Name="" ID="{30D63898-FFA0-431E-9810-36D056AE6E8F}">
+							<MultiSwitchEntry Name="" ID="{6037477C-9861-4E51-A159-0144A9DD0CF4}">
 								<ReferenceList>
 									<Reference Name="AudioNode">
 										<ObjectRef Name="Menu" ID="{C31F4DFA-5F23-4A6F-A4F7-D2AA76711154}" WorkUnitID="{A34694F1-E656-4321-AC2E-27E578728E1B}"/>
@@ -979,7 +979,7 @@
 									</ObjectList>
 								</ObjectLists>
 							</MultiSwitchEntry>
-							<MultiSwitchEntry Name="" ID="{CF4B1785-45C7-4EDF-A860-791E00BAD959}">
+							<MultiSwitchEntry Name="" ID="{3AD49C3C-A6D7-4BD8-AB41-0D16DF476992}">
 								<ReferenceList>
 									<Reference Name="AudioNode">
 										<ObjectRef Name="Plane" ID="{996ABE77-259A-4AB1-88A4-E6CB57A954AF}" WorkUnitID="{A34694F1-E656-4321-AC2E-27E578728E1B}"/>

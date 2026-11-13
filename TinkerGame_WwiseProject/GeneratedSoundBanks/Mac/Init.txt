@@ -1,3 +1,11 @@
+State Group	ID	Name			Wwise Object Path	Notes
+	2782712965	Level			\Solar\Level	
+
+State	ID	Name	State Group			Notes
+	114672797	Plane	Level			
+	748895195	None	Level			
+	2607556080	Menu	Level			
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
 

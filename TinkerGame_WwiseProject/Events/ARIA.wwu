@@ -3,18 +3,100 @@
 	<Events>
 		<WorkUnit Name="ARIA" ID="{47B80597-BA6C-4E62-90EC-9E0DBA4F0246}" OwnerID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}" PersistMode="Nested">
 			<ChildrenList>
-				<Event Name="Jump" ID="{27BBF5CD-C26A-434D-AC5C-E030D6A84701}"/>
-				<Event Name="Landing_character" ID="{1BD35A79-4065-4A2F-A9BB-67194E27B2E1}"/>
-				<Event Name="Falling_object" ID="{F0D88B5B-DE4B-4E3F-A37C-5161579D354C}"/>
-				<Event Name="Landing_object" ID="{444BC9F3-19CD-48CD-A35F-F18FDEDE3146}"/>
-				<Event Name="Step" ID="{17FEE182-0336-469D-BFAF-AD719469A638}"/>
-				<Event Name="Bag" ID="{17ED814D-3DC4-4BD2-94C5-8C02670C7F36}"/>
-				<Event Name="Down_arrow" ID="{09E0467C-ECF8-4F78-94F0-92542D29EAB2}"/>
-				<Event Name="Left_arrow" ID="{070DD6AD-D531-46C0-8CDE-EB00F7C96A5F}"/>
-				<Event Name="Right_arrow" ID="{3F632FE2-1361-4E95-A3EA-CE469FFEF4A6}"/>
-				<Event Name="Up_arrow" ID="{277E7289-ED8B-49A2-AC49-20580C5ADB16}"/>
-				<Event Name="Confirm_craft" ID="{2F29C033-7397-491C-93B6-D12FF75CD434}"/>
-				<Event Name="Failed_craft" ID="{ADB41A97-C11A-448E-9C6F-79CA44D00F14}"/>
+				<Folder Name="FAIRY" ID="{A336EA97-F795-41DC-BCD7-3AD1F36C8A86}" ShortID="696403800">
+					<ChildrenList>
+						<Event Name="Bag" ID="{17ED814D-3DC4-4BD2-94C5-8C02670C7F36}"/>
+						<Event Name="Jump" ID="{27BBF5CD-C26A-434D-AC5C-E030D6A84701}"/>
+						<Event Name="Landing_character" ID="{1BD35A79-4065-4A2F-A9BB-67194E27B2E1}"/>
+						<Event Name="Steps" ID="{17FEE182-0336-469D-BFAF-AD719469A638}">
+							<ChildrenList>
+								<Action Name="" ID="{4A2C35E3-17F3-44CB-840F-881113036EAC}" ShortID="777494440">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="STEPS" ID="{0B0C83D0-F62C-4932-A6FC-62DE9BF72ACF}" WorkUnitID="{EDA905B6-B650-44E5-A032-A63C4979B815}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Folder Name="CRAFTING" ID="{DDADFC2E-082A-4702-A53A-78A88420C6B7}" ShortID="36739629">
+							<ChildrenList>
+								<Event Name="Failed_craft" ID="{ADB41A97-C11A-448E-9C6F-79CA44D00F14}">
+									<ChildrenList>
+										<Action Name="" ID="{01275EAF-8E95-4580-A3E3-968979BD7429}" ShortID="895911976">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="FAILED_CRAFTING" ID="{AEECDAA6-57AF-4775-8691-A187932A355E}" WorkUnitID="{EDA905B6-B650-44E5-A032-A63C4979B815}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Down_arrow" ID="{09E0467C-ECF8-4F78-94F0-92542D29EAB2}">
+									<ChildrenList>
+										<Action Name="" ID="{E36D078F-1B39-4EAA-93D8-C61B34BD6046}" ShortID="671033020">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DOWN_ARROW" ID="{8ABF1935-FFE4-45CD-A838-C9AC0FC62415}" WorkUnitID="{EDA905B6-B650-44E5-A032-A63C4979B815}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Left_arrow" ID="{070DD6AD-D531-46C0-8CDE-EB00F7C96A5F}">
+									<ChildrenList>
+										<Action Name="" ID="{18EE9C27-DC27-4A2B-916F-6E1C63B23478}" ShortID="560649589">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="LEFT_ARROW" ID="{DE8BB86F-686A-48E1-8333-3A54218B0F45}" WorkUnitID="{EDA905B6-B650-44E5-A032-A63C4979B815}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Right_arrow" ID="{3F632FE2-1361-4E95-A3EA-CE469FFEF4A6}">
+									<ChildrenList>
+										<Action Name="" ID="{272CCE1F-70EE-4172-9183-3B37DEB77288}" ShortID="425994057">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="RIGHT_ARROW" ID="{CD61F780-028A-41C8-92E8-5FF16FBD0097}" WorkUnitID="{EDA905B6-B650-44E5-A032-A63C4979B815}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Up_arrow" ID="{277E7289-ED8B-49A2-AC49-20580C5ADB16}">
+									<ChildrenList>
+										<Action Name="" ID="{42BD694D-57A4-4428-9291-605F2A33BBCE}" ShortID="554714444">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UP_ARROW" ID="{066E49B1-313E-4C0D-9553-BC89272DFD76}" WorkUnitID="{EDA905B6-B650-44E5-A032-A63C4979B815}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Craft_Frog" ID="{D22D4BB1-0EDF-48C2-91C3-DE4824E6B43B}"/>
+								<Event Name="Craft_Plane" ID="{8FA7EC15-EA4D-4021-86A8-977BB555F05B}"/>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="OBJECTS" ID="{0FCA3118-45F6-46D0-A532-511697D88C68}" ShortID="373453263">
+					<ChildrenList>
+						<Event Name="Falling_object" ID="{F0D88B5B-DE4B-4E3F-A37C-5161579D354C}"/>
+						<Event Name="Landing_object" ID="{444BC9F3-19CD-48CD-A35F-F18FDEDE3146}"/>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="AMBS" ID="{EC3BB1FA-B7DE-46CC-BC38-6A7763CE0288}" ShortID="8159697">
+					<ChildrenList>
+						<Event Name="AMBS" ID="{51EFD40B-77AD-4177-BAFE-673B107A4478}">
+							<ChildrenList>
+								<Action Name="" ID="{C6C7336A-20D0-46C7-9474-E11DB77FD1F0}" ShortID="66317410"/>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

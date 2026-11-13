@@ -1,6 +1,795 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{EDA905B6-B650-44E5-A032-A63C4979B815}" SchemaVersion="133">
 	<Containers>
-		<WorkUnit Name="ARIA" ID="{EDA905B6-B650-44E5-A032-A63C4979B815}" PersistMode="Standalone"/>
+		<WorkUnit Name="ARIA" ID="{EDA905B6-B650-44E5-A032-A63C4979B815}" PersistMode="Standalone">
+			<Comment>COSAS MARCADAS EN VERDE: CAMBIAR/ARREGLAR
+</Comment>
+			<ChildrenList>
+				<Folder Name="CRAFTING" ID="{A9364AF1-07FE-456E-B6A9-5D217E19384A}" ShortID="363154651">
+					<ChildrenList>
+						<RandomSequenceContainer Name="DOWN_ARROW" ID="{8ABF1935-FFE4-45CD-A838-C9AC0FC62415}" ShortID="892590427">
+							<PropertyList>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_CRAFT_DO3" ID="{7F486124-106C-40BA-998B-C2CAB543C882}" ShortID="232392390">
+									<PropertyList>
+										<Property Name="Weight" Type="Real64">
+											<ValueList>
+												<Value>60</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_DO3" ID="{836556AA-1A7C-4024-BAAB-0271D895712C}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_DO3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="447781197"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_DO3" ID="{836556AA-1A7C-4024-BAAB-0271D895712C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_CRAFT_DO3_STRONG" ID="{81D99327-4EAE-4234-8488-24A7F744D8E5}" ShortID="889124796">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_DO3_STRONG" ID="{0EC4016D-D242-43A3-8342-C3B5E11DFFC6}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_DO3_STRONG.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="621292212"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_DO3_STRONG" ID="{0EC4016D-D242-43A3-8342-C3B5E11DFFC6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="UP_ARROW" ID="{066E49B1-313E-4C0D-9553-BC89272DFD76}" ShortID="834226109">
+							<PropertyList>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_CRAFT_DO4" ID="{AE309F86-1D03-44B6-AF5A-66FDF80E7760}" ShortID="172615796">
+									<PropertyList>
+										<Property Name="Weight" Type="Real64">
+											<ValueList>
+												<Value>60</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_DO4" ID="{39FC33B9-A032-485A-9ECF-76933DEDAF47}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_DO4.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="474986506"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_DO4" ID="{39FC33B9-A032-485A-9ECF-76933DEDAF47}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_CRAFT_DO4_STRONG" ID="{561E8991-E9F6-4F77-B811-72FC99B28CDB}" ShortID="180880827">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_DO4_STRONG" ID="{BDD08FBB-E047-4CC8-BB3F-92F167EB46BD}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_DO4_STRONG.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="850365116"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_DO4_STRONG" ID="{BDD08FBB-E047-4CC8-BB3F-92F167EB46BD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="LEFT_ARROW" ID="{DE8BB86F-686A-48E1-8333-3A54218B0F45}" ShortID="599593156">
+							<PropertyList>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_CRAFT_FA3" ID="{9FA7387B-D550-474D-8B56-E80C56E40B41}" ShortID="651422190">
+									<PropertyList>
+										<Property Name="Weight" Type="Real64">
+											<ValueList>
+												<Value>60</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_FA3" ID="{19CC6EB9-C648-4654-A15B-EDA01582AB6B}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_FA3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1021329422"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_FA3" ID="{19CC6EB9-C648-4654-A15B-EDA01582AB6B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_CRAFT_FA3_STRONG" ID="{1962DFA5-72CD-4CC7-8358-3E7D2671A571}" ShortID="823535037">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_FA3_STRONG" ID="{3B40C125-8023-4E2D-B26B-241595BAFBAA}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_FA3_STRONG.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="559118960"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_FA3_STRONG" ID="{3B40C125-8023-4E2D-B26B-241595BAFBAA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="RIGHT_ARROW" ID="{CD61F780-028A-41C8-92E8-5FF16FBD0097}" ShortID="942632781">
+							<PropertyList>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_CRAFT_LAb3" ID="{A09BE4D6-A96B-436E-84DF-1E55E0A9E659}" ShortID="170997288">
+									<PropertyList>
+										<Property Name="Weight" Type="Real64">
+											<ValueList>
+												<Value>60</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_LAb3" ID="{5B3B71D2-9255-424B-9B99-99761E6CE31B}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_LAb3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="259482344"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_LAb3" ID="{5B3B71D2-9255-424B-9B99-99761E6CE31B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_CRAFT_LAb3_STRONG" ID="{5DD781E9-84AD-4A48-BD42-79FB0BE6C6D9}" ShortID="903267828">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_CRAFT_LAb3_STRONG" ID="{99E54AAF-DE74-409B-B0B6-FDC4FE1899BB}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_CRAFT_LAb3_STRONG.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="874863317"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_CRAFT_LAb3_STRONG" ID="{99E54AAF-DE74-409B-B0B6-FDC4FE1899BB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="FAILED_CRAFTING" ID="{AEECDAA6-57AF-4775-8691-A187932A355E}" ShortID="481110941">
+							<PropertyList>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_FAILED_CRAFTING" ID="{325C7A7B-B0A1-4186-AEBA-594816BA1D5C}" ShortID="443016312">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_FAILED_CRAFTING" ID="{BD5D4CD4-E106-4FE2-B2A6-836CDFAB2162}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.842"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="2.21101"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_FAILED_CRAFTING.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="5107588"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_FAILED_CRAFTING" ID="{BD5D4CD4-E106-4FE2-B2A6-836CDFAB2162}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_FAILED_CRAFTING2" ID="{7EE2EF4E-8D46-4517-9B45-1C8F4CD291BB}" ShortID="625973174">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_FAILED_CRAFTING2" ID="{902F2418-379A-4464-8F53-05A91DDDB970}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.43611"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.74709"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_FAILED_CRAFTING2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="580291203"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_FAILED_CRAFTING2" ID="{902F2418-379A-4464-8F53-05A91DDDB970}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="HADA" ID="{EEBFAFD6-7E53-4747-B959-D9B683F56359}" ShortID="97754833">
+					<ChildrenList>
+						<Sound Name="SFX_JUMP_V2" ID="{72503E1C-87E5-464E-85C8-DD431D2E414F}" ShortID="300406817">
+							<PropertyList>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>33</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{AB0CCEA6-2048-45D8-8D20-BE316A0A0ED3}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-6</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_JUMP_V2" ID="{6F962311-506A-48A9-914E-B9B294266FEE}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.10658"/>
+										<Property Name="FadeInShape" Type="int16" Value="4"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.48032"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.05605"/>
+										<Property Name="TrimEnd" Type="Real64" Value="1.20854"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SFX_JUMP_V2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="975903316"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_JUMP_V2" ID="{6F962311-506A-48A9-914E-B9B294266FEE}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_LANDING_V2" ID="{A6AF9015-F156-41A4-95A0-103E3E59AED8}" ShortID="967187830">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_LANDING_V2" ID="{9472889D-9C9E-4458-B8F6-1847F94DB247}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.01667"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.27589"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.49764"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SFX_LANDING_V2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="733050468"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_LANDING_V2" ID="{9472889D-9C9E-4458-B8F6-1847F94DB247}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<RandomSequenceContainer Name="STEPS" ID="{0B0C83D0-F62C-4932-A6FC-62DE9BF72ACF}" ShortID="424759725">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>21</Value>
+									</ValueList>
+								</Property>
+								<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>20</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_STEP1" ID="{80C5759A-C2D2-4FD0-BEB6-25676035F05E}" ShortID="725194383">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP1" ID="{605E853C-D198-4A8D-AF0D-E3D44BB946B3}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="428393214"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP1" ID="{605E853C-D198-4A8D-AF0D-E3D44BB946B3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_STEP3" ID="{454A76EA-F7F6-47BE-8423-3AFF456A32D8}" ShortID="133685733">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP3" ID="{AB7C0DA6-BE6D-4657-BFD9-B3991A7ACD4F}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="128503848"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP3" ID="{AB7C0DA6-BE6D-4657-BFD9-B3991A7ACD4F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_STEP4" ID="{2477AB0B-AAA4-4492-8F34-980CD78E6DC2}" ShortID="812201607">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP4" ID="{C13BE8FC-582E-46CE-92D8-1E68BBF0530F}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP4.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="690866110"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP4" ID="{C13BE8FC-582E-46CE-92D8-1E68BBF0530F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_STEP5" ID="{FBB6F196-C6D4-4E38-9A1F-04FC68AF2D5C}" ShortID="975054331">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP5" ID="{4A355CE6-7FF5-4B7D-BC1C-07BA402C863A}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.16158"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.37248"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP5.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="75011727"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP5" ID="{4A355CE6-7FF5-4B7D-BC1C-07BA402C863A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_STEP2" ID="{00DB61C9-61A5-42A6-8828-A3FE8CAB684A}" ShortID="199208287">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP2" ID="{5771B13F-513B-441A-89AB-CB4FA99EDE86}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="198981426"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP2" ID="{5771B13F-513B-441A-89AB-CB4FA99EDE86}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_STEP7" ID="{0524891F-F410-4CA8-92E8-2182E27FFD34}" ShortID="357861115">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP7" ID="{16B03200-DDCD-406E-A9C3-F306F4B44BD0}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.17237"/>
+												<Property Name="FadeOutShape" Type="int16" Value="6"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.45385"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP7.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="43209053"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP7" ID="{16B03200-DDCD-406E-A9C3-F306F4B44BD0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_STEP6" ID="{68D61639-C4DD-462F-9E79-93F7D07E91DB}" ShortID="178428645">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_STEP6" ID="{B45A181E-38E2-4F7D-9670-D761FE131493}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.10865"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.41649"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SFX_STEP6.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="743476564"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_STEP6" ID="{B45A181E-38E2-4F7D-9670-D761FE131493}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="AMBIENTES" ID="{60157A37-C069-4F16-8A44-26A7B3CDCB0A}" ShortID="265424888">
+					<ChildrenList>
+						<Sound Name="SFX__AMB1-St" ID="{E10A7C64-4E13-4CB1-AFDC-46CD4D10EFEF}" ShortID="581437378">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX__AMB1-St" ID="{53FD7FFA-56FE-4065-A36A-7B7D6352885B}">
+									<Language>SFX</Language>
+									<AudioFile>SFX__AMB1-St.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="144355519"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX__AMB1-St" ID="{53FD7FFA-56FE-4065-A36A-7B7D6352885B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX__AMB2-St" ID="{B63652B2-4899-4240-A869-E64B4454D2C9}" ShortID="370979899">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX__AMB2-St" ID="{6F768BEC-26DB-4BAC-A42F-44F7C7E575B5}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.93416"/>
+										<Property Name="LoopBegin" Type="Real64" Value="0.96081"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SFX__AMB2-St.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="338993078"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX__AMB2-St" ID="{6F768BEC-26DB-4BAC-A42F-44F7C7E575B5}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX__AMB3_FROGS-St" ID="{B101F90D-BDE8-4EE6-9C10-934A7CCE2548}" ShortID="222638920">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="4"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>10</Value>
+									</ValueList>
+								</Property>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>62</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MakeUpGain" Type="Real64">
+									<ValueList>
+										<Value>27</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX__AMB3_FROGS-St" ID="{57CBCF99-24E3-42EF-B15A-E67DF75D8B31}">
+									<Comment>AGREGARLE UN SHELVIN AL AUDIO, LAS RANAS SON MUY MOLESTAS
+</Comment>
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="3.25182"/>
+										<Property Name="LoopBegin" Type="Real64" Value="7.75434"/>
+										<Property Name="LoopEnd" Type="Real64" Value="90.05039"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SFX__AMB3_FROGS-St.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="661098498"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX__AMB3_FROGS-St" ID="{57CBCF99-24E3-42EF-B15A-E67DF75D8B31}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Containers>
 </WwiseDocument>
