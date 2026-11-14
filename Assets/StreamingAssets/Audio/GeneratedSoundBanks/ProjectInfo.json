@@ -3,7 +3,7 @@
   "Project": {
    "Name": "TinkerGame_WwiseProject",
    "GUID": "{E4943DAA-1BB9-4CA8-895F-72B29589CBC0}",
-   "Generator": "2025.1.11.9262"
+   "Generator": "2025.1.9.9197"
   },
   "CacheRoot": "../../../../TinkerGame_WwiseProject/.cache",
   "Platforms": [
@@ -31,6 +31,6 @@
     "UseAsStandIn": "true"
    }
   ],
-  "FileHash": "{F07F3F1C-547A-8677-4E8A-520E1203D7EC}"
+  "FileHash": "{03DEF32D-9BC3-2A68-2997-FBA3B5B09CC5}"
  }
 }

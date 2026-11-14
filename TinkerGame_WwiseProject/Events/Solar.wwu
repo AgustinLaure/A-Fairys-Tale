@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" SchemaVersion="133">
+<WwiseDocument Type="WorkUnit" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" SchemaVersion="133" RootDocumentID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}" ParentDocumentID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}">
 	<Events>
-		<WorkUnit Name="Solar" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" PersistMode="Standalone">
+		<WorkUnit Name="Solar" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" OwnerID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}" PersistMode="Nested">
 			<ChildrenList>
 				<Event Name="Object_pickup" ID="{34040BAB-30DE-4842-91D8-A40A3AA41650}"/>
 				<Event Name="Level_change" ID="{CFA5F59B-6FD5-4995-BFE0-C5512E62BB1B}"/>
@@ -23,6 +23,17 @@
 						<Event Name="Paperplane" ID="{A44A651A-01A9-427B-8E48-F4A694BF8E4C}"/>
 					</ChildrenList>
 				</Folder>
+				<Event Name="MX" ID="{73BE5F45-9DA6-43FB-9E4A-BCECCD7BC144}">
+					<ChildrenList>
+						<Action Name="" ID="{AA8FE02C-C227-4857-B132-F30D4AB6151D}" ShortID="497487269">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MX" ID="{3C773E47-0802-41F1-802D-C926FC12B517}" WorkUnitID="{A34694F1-E656-4321-AC2E-27E578728E1B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
