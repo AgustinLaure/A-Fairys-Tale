@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerToggleBookmark : MonoBehaviour
 {
@@ -65,7 +64,7 @@ public class PlayerToggleBookmark : MonoBehaviour
         toggleAction = inputHandler.playerInput.actions[toggleActionName];
 
         int hashesAdd = 0;
-        hashesAdd = (int)((gameManager.levelData as GameplayLevelData).level);
+        hashesAdd = (int)((gameManager.levelData as GameplayLevelData).levelId);
 
         noneState = new NoneState(this);
         toggleAction.performed += noneState.OnToggle;
