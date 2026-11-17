@@ -10567,13 +10567,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1164773746897579848, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
-      propertyPath: nonClickableAlpha
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 4019368295407401842, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_Name
       value: ResultScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470815983534688331, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
+      propertyPath: m_Alpha
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470815983534688331, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470815983534688331, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5236128397700083023, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_AnchorMax.y
