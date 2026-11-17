@@ -667,15 +667,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 53690d74c4e426149847db0569a4b9d5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4729,6 +4729,10 @@ PrefabInstance:
     - target: {fileID: 1439053626713585280, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_Name
       value: Introduction
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414925196170274918, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3132109143976658848, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_AnchorMax.y
