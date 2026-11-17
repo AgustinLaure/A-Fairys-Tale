@@ -81,6 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GiantMushroom
   animator: {fileID: 5031967068419832361}
   areaCollider: {fileID: 3854818469907871713}
+  headCenter: {fileID: 3863032819465409889}
+  pushImpulse: 4
 --- !u!1 &6499071721893447669
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 246185340823723700}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1001 &3609220158932136586
 PrefabInstance:
@@ -301,7 +304,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3334898030910860278}
-  m_Material: {fileID: 13400000, guid: 6a06741af358de944a2cc71bb779be89, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -69,6 +69,7 @@ public class ResultManager : MonoBehaviour
         gameObject.SetActive(true);
         loseScreen.SetActive(true);
 
+
         continueCanvasGroup.alpha = nonClickableAlpha;
         continueCanvasGroup.blocksRaycasts = false;
         continueCanvasGroup.interactable = false;

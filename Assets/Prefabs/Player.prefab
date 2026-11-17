@@ -502,7 +502,6 @@ MonoBehaviour:
   acceleration: 20
   terminalVelocity: 3
   icedMultiplier: 0.1
-  timePushed: 0.6
 --- !u!114 &3779262282732664929
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -667,15 +667,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 53690d74c4e426149847db0569a4b9d5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1025,7 +1025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 720071309963537788, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1439053626713585280, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_Name
@@ -1560,7 +1560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1693,7 +1693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8828963046298901051, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Name
@@ -2041,7 +2041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2567,7 +2567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 720071309963537788, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_fontSize
-      value: 66
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1439053626713585280, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_Name
@@ -3460,7 +3460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 720071309963537788, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_fontSize
-      value: 61.3
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1439053626713585280, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_Name
@@ -4041,7 +4041,7 @@ PrefabInstance:
     - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: d1d946132498661468528af741b4af78, type: 3}
+      objectReference: {fileID: 32900000, guid: 397950a3f00f7864ab7a6bb2437d77a3, type: 3}
     - target: {fileID: 1650484717881323811, guid: f82686d68263eb34bac98d82bb49b8c2, type: 3}
       propertyPath: m_ControlledAudioTrackCount
       value: 0
@@ -4726,9 +4726,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 720071309963537788, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1439053626713585280, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_Name
       value: Introduction
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414925196170274918, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3132109143976658848, guid: 4e04c498c66a2d6439cfd5a6eb1adedc, type: 3}
       propertyPath: m_AnchorMax.y
