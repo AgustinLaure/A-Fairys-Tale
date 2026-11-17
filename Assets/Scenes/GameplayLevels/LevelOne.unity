@@ -7167,10 +7167,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1164773746897579848, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
-      propertyPath: nonClickableAlpha
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 4019368295407401842, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_Name
       value: ResultScreen
@@ -8243,11 +8239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219683156023335954, guid: cb4020f5565fe8e488780e877d83e3b2, type: 3}
       propertyPath: phase1To2Time
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9219683156023335954, guid: cb4020f5565fe8e488780e877d83e3b2, type: 3}
       propertyPath: phase2To3Time
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9219683156023335954, guid: cb4020f5565fe8e488780e877d83e3b2, type: 3}
       propertyPath: phase3ToLoseTime
