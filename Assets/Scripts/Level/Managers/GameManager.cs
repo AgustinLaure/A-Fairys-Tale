@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class GameManager : MonoSingleton<GameManager>
 {
