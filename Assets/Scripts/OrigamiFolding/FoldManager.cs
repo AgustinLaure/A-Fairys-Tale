@@ -10,6 +10,8 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     [Header("References")]
     public Material paperMaterial;
+    public bool useShadow = true;
+    public Material shadowMaterial;
     public OrigamiFigure currentFigure;
 
     [Header("State")]
@@ -24,7 +26,7 @@ public class FoldManager : MonoSingleton<FoldManager>
     public bool IsComplete => currentFigure == null || currentObjectiveIndex >= currentFigure.steps.Count;
     public bool IsLevelActive { get; private set; }
 
-    private List<Mesh> previewMeshes = new List<Mesh>();
+    private List<ShapeRenderer> previewRenderers = new List<ShapeRenderer>();
 
     private void Awake()
     {
@@ -36,9 +38,9 @@ public class FoldManager : MonoSingleton<FoldManager>
     private void OnDestroy()
     {
         activeFaces.Clear();
-        if (previewMeshes != null)
+        if (previewRenderers != null)
         {
-            foreach (var m in previewMeshes) if (m != null) Destroy(m);
+            foreach (var m in previewRenderers) if (m != null) Destroy(m);
         }
     }
 
@@ -54,10 +56,10 @@ public class FoldManager : MonoSingleton<FoldManager>
         }
         activeFaces.Clear();
 
-        if (previewMeshes != null)
+        if (previewRenderers != null)
         {
-            foreach (var m in previewMeshes) if (m != null) Destroy(m);
-            previewMeshes.Clear();
+            foreach (var m in previewRenderers) if (m != null) Destroy(m);
+            previewRenderers.Clear();
         }
 
         if (paperSize.x <= 0.1f || paperSize.y <= 0.1f)
@@ -104,6 +106,8 @@ public class FoldManager : MonoSingleton<FoldManager>
         OrigamiDebugVisuals.Instance?.UpdateTargetLimits(currentTargetShape);
         OrigamiDebugVisuals.Instance?.UpdateCheckpoints(step.layerCheckpoints);
         OrigamiDebugVisuals.Instance?.SetTargetLimitColors(Color.red, Color.red);
+
+        StepSequenceDisplay.Instance?.RenderSequence(currentFigure, currentObjectiveIndex);
     }
 
     private System.Collections.IEnumerator FlipPaperCoroutine()
@@ -226,7 +230,7 @@ public class FoldManager : MonoSingleton<FoldManager>
         int meshIndex = 0;
         var candidateFaces = GetTargetedFaces(startLine, endLine);
 
-        foreach (var face in activeFaces) face.GetComponent<MeshRenderer>().enabled = false;
+        foreach (var face in activeFaces) face.gameObject.SetActive(false);
 
         foreach (var face in activeFaces)
         {
@@ -235,13 +239,9 @@ public class FoldManager : MonoSingleton<FoldManager>
                 if (CalculateSplit(face, startLine, endLine, out var leftV, out var leftUV, out var rightV, out var rightUV))
                 {
                     if (leftV.Count >= 3)
-                    {
                         UpdatePreviewMesh(meshIndex++, leftV, leftUV, face.transform.position.z);
-                    }
                     if (rightV.Count >= 3)
-                    {
                         UpdatePreviewMesh(meshIndex++, rightV, rightUV, face.transform.position.z - 0.01f * (activeFaces.Count + meshIndex));
-                    }
                 }
                 else
                 {
@@ -254,9 +254,9 @@ public class FoldManager : MonoSingleton<FoldManager>
             }
         }
 
-        for (int i = 0; i < meshIndex; i++)
+        for (int i = meshIndex; i < previewRenderers.Count; i++)
         {
-            Graphics.DrawMesh(previewMeshes[i], Matrix4x4.identity, paperMaterial, 0);
+            previewRenderers[i].gameObject.SetActive(false);
         }
     }
 
@@ -270,39 +270,46 @@ public class FoldManager : MonoSingleton<FoldManager>
         }
         activeFaces.Clear();
 
-        if (previewMeshes != null)
+        if (previewRenderers != null)
         {
-            foreach (var m in previewMeshes) if (m != null) Destroy(m);
-            previewMeshes.Clear();
+            foreach (var m in previewRenderers) if (m != null) Destroy(m);
+            previewRenderers.Clear();
         }
 
         OrigamiDebugVisuals.Instance?.UpdateTargetLimits(null);
         OrigamiDebugVisuals.Instance?.UpdateCheckpoints(null);
         OrigamiDebugVisuals.Instance?.UpdateSnapPoints(new List<Vector2>());
+
+        StepSequenceDisplay.Instance?.ClearSequence();
+    }
+
+    private void UpdatePreviewMesh(int index, List<Vector2> verts, List<Vector2> uvs, float zPos)
+    {
+        while (previewRenderers.Count <= index)
+        {
+            GameObject gameObject = new GameObject("PreviewFace");
+            gameObject.transform.SetParent(transform);
+            ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
+            shapeRenderer.Setup(paperMaterial, null, 0f, (useShadow ? shadowMaterial : null));
+
+            previewRenderers.Add(shapeRenderer);
+        }
+
+        previewRenderers[index].gameObject.SetActive(true);
+        previewRenderers[index].transform.position = new Vector3(0, 0, zPos);
+        previewRenderers[index].DrawShape(verts, uvs);
     }
 
     public void ClearPreview()
     {
         foreach (var face in activeFaces)
         {
-            if (face != null && face.GetComponent<MeshRenderer>() != null)
-                face.GetComponent<MeshRenderer>().enabled = true;
+            if (face != null) face.gameObject.SetActive(true);
         }
-    }
-
-    private void UpdatePreviewMesh(int index, List<Vector2> verts, List<Vector2> uvs, float zPos)
-    {
-        while (previewMeshes.Count <= index)
+        foreach (var preview in previewRenderers)
         {
-            previewMeshes.Add(new Mesh { name = "PreviewMesh" });
+            if (preview != null) preview.gameObject.SetActive(false);
         }
-
-        Mesh m = previewMeshes[index];
-        m.Clear();
-        m.vertices = verts.Select(v => new Vector3(v.x, v.y, zPos)).ToArray();
-        m.triangles = GeometryMath.TriangulateConvex(verts);
-        m.uv = verts.Select((v, i) => (uvs != null && i < uvs.Count) ? uvs[i] : v).ToArray();
-        m.RecalculateNormals();
     }
 
     private bool TrySplitAndReflectFace(PaperFace face, Vector2 start, Vector2 end, out PaperFace leftFace, out PaperFace rightFace)
@@ -371,7 +378,9 @@ public class FoldManager : MonoSingleton<FoldManager>
     {
         var go = new GameObject(name);
         go.transform.SetParent(transform);
-        go.AddComponent<MeshRenderer>().material = paperMaterial;
+
+        var shapeRenderer = go.AddComponent<ShapeRenderer>();
+        shapeRenderer.Setup(paperMaterial, null, 0f, (useShadow ? shadowMaterial : null));
 
         var face = go.AddComponent<PaperFace>();
         face.vertices = verts;
@@ -416,6 +425,9 @@ public class FoldManager : MonoSingleton<FoldManager>
         {
             eventBus.Raise<OnOrigamiFolded>(currentFigure);
             OrigamiDebugVisuals.Instance?.SetTargetLimitColors(Color.green, Color.green);
+
+            StepSequenceDisplay.Instance?.RenderSequence(currentFigure, currentFigure.steps.Count);
+
             Debug.Log("<color=#FFFF00>Origami Figure Complete!</color>");
         }
     }
