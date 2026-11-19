@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Paper Faire
-  productName: A Fairys Tale
+  productName: A Fairy's Tale
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 1}
