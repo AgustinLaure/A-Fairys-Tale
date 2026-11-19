@@ -27,8 +27,8 @@ public class FoldingLevelManager : LevelManager
     {
         if (activeFoldManager == null) Debug.LogError("No level manager setup");
 
-        activeFoldManager.currentFigure = (levelData as FoldingLevelData).objectiveFigure;
-        Debug.Log($"Seting up objective figure: {activeFoldManager.currentFigure}");
+        activeFoldManager.SetCurrentFigure((levelData as FoldingLevelData).objectiveFigure);
+        Debug.Log($"Seting up objective figure: {activeFoldManager.GetCurrentFigure()}");
         activeFoldManager.StartUp();
     }
 

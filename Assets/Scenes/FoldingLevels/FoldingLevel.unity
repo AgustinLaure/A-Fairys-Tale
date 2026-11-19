@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Plane
+  m_text: No Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 743a38b56630e4b46916ca2e7a9b6bf0, type: 2}
   m_sharedMaterial: {fileID: -1044127021470210141, guid: 743a38b56630e4b46916ca2e7a9b6bf0, type: 2}
@@ -2266,6 +2266,7 @@ MonoBehaviour:
   paperMaterial: {fileID: 2100000, guid: 8450716b1b28ec84197653e4872a8863, type: 2}
   useShadow: 1
   shadowMaterial: {fileID: 2100000, guid: 1bb7b8ff2d681484ca661384d49c85a5, type: 2}
+  nameText: {fileID: 193009986}
   currentFigure: {fileID: 0}
   activeFaces: []
 --- !u!1 &1792061565

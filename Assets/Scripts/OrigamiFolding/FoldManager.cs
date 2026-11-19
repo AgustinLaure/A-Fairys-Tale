@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class FoldManager : MonoSingleton<FoldManager>
@@ -12,7 +13,9 @@ public class FoldManager : MonoSingleton<FoldManager>
     public Material paperMaterial;
     public bool useShadow = true;
     public Material shadowMaterial;
-    public OrigamiFigure currentFigure;
+    public TMP_Text nameText;
+    [SerializeField]
+    private OrigamiFigure currentFigure;
 
     [Header("State")]
     public List<PaperFace> activeFaces = new List<PaperFace>();
@@ -27,6 +30,13 @@ public class FoldManager : MonoSingleton<FoldManager>
     public bool IsLevelActive { get; private set; }
 
     private List<ShapeRenderer> previewRenderers = new List<ShapeRenderer>();
+
+    public OrigamiFigure GetCurrentFigure() { return currentFigure; }
+    public void SetCurrentFigure(OrigamiFigure figure) 
+    { 
+        currentFigure = figure;
+        nameText.text = currentFigure.figureName;
+    }
 
     private void Awake()
     {
