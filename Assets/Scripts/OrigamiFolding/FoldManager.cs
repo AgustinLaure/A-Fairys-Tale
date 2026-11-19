@@ -18,7 +18,12 @@ public class FoldManager : MonoSingleton<FoldManager>
     private OrigamiFigure currentFigure;
 
     [Header("State")]
+    public int foldLimit = 15;
+    public int activerFacesLimit = 50;
     public List<PaperFace> activeFaces = new List<PaperFace>();
+    private int folds = 0;
+
+    public UiManager uiManager;
 
     private int currentObjectiveIndex = 0;
     private List<Vector2> currentTargetShape = new List<Vector2>();
@@ -191,6 +196,9 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     public void ProcessFold(Vector2 startLine, Vector2 endLine)
     {
+        if (folds >= foldLimit || activeFaces.Count >= activerFacesLimit) { FoldFailed(); return; };
+
+
         var candidateFaces = GetTargetedFaces(startLine, endLine);
         var newFaces = new List<PaperFace>();
         var facesToRemove = new List<PaperFace>();
@@ -217,6 +225,8 @@ public class FoldManager : MonoSingleton<FoldManager>
 
         activeFaces.AddRange(newFaces);
         EvaluateWinCondition();
+        
+        folds++;
     }
 
     private List<PaperFace> GetTargetedFaces(Vector2 startLine, Vector2 endLine)
@@ -268,6 +278,12 @@ public class FoldManager : MonoSingleton<FoldManager>
         {
             previewRenderers[i].gameObject.SetActive(false);
         }
+    }
+
+    public void FoldFailed()
+    {
+        Debug.LogError("Fold has been failed!");
+        uiManager.OnExit();
     }
 
     public void Deactivate()

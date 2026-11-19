@@ -2114,7 +2114,7 @@ MonoBehaviour:
   enableGridSnap: 1
   gridSpacing: 1
   enablePointSnap: 1
-  edgeDivisions: 3
+  edgeDivisions: 6
   minPointDistance: 0.2
   enableAngleSnap: 0
   angleSnapStep: 15
@@ -2268,7 +2268,10 @@ MonoBehaviour:
   shadowMaterial: {fileID: 2100000, guid: 1bb7b8ff2d681484ca661384d49c85a5, type: 2}
   nameText: {fileID: 193009986}
   currentFigure: {fileID: 0}
+  foldLimit: 20
+  activerFacesLimit: 50
   activeFaces: []
+  uiManager: {fileID: 0}
 --- !u!1 &1792061565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,7 +2560,7 @@ MonoBehaviour:
   keepCurrentStepFirst: 0
   slideSpeed: 8
   spacing: 5
-  backgroundScaleMultiplier: 12.5
+  backgroundScaleMultiplier: 10
   scaleMultiplier: 0.2
   backgroundPanel: {fileID: 4259284731726269268, guid: 853881e1f2b31d442bbea2414ee321dc, type: 3}
   backgroundDisplacement: {x: 0, y: 0, z: 0.5}
@@ -2567,7 +2570,7 @@ MonoBehaviour:
   fillAlphaMultiplier: 0.6
   pendingColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.74509805}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
-  completedColor: {r: 0, g: 0, b: 0, a: 0.11764706}
+  completedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.39215687}
 --- !u!1 &2060137290
 GameObject:
   m_ObjectHideFlags: 0
