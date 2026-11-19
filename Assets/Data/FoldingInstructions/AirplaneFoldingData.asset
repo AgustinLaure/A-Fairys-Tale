@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621d4242ffde8454c9a89307ffaa4e4b, type: 3}
   m_Name: AirplaneFoldingData
   m_EditorClassIdentifier: Assembly-CSharp::OrigamiFigure
-  figureName: Airplane Fold Instructions
+  figureName: Airplane
   startingShape:
     stepName: New step
     flipStep: 0
