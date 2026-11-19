@@ -36,7 +36,14 @@ public class PlayerDrop : MonoBehaviour
     {
         if (enabled)
         {
-            if (playerInventory.GetCurrentProp != null)
+            Prop currentProp = playerInventory.GetCurrentProp;
+
+            if (currentProp == null || !(currentProp as Origami).GetIsCrumpled)
+            {
+                return;
+            }
+
+            if (currentProp != null)
             {
                 if (dropCoroutine == null)
                 {
