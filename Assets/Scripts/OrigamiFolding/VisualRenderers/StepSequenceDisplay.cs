@@ -13,6 +13,8 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
     public float scaleMultiplier = 0.15f;
 
     [Header("Visual Settings")]
+    public GameObject backgroundPanel;
+    public Vector3 backgroundDisplacement = new Vector3(0.0f,0.0f,0.5f);
     public float lineWidth = 0.4f;
     public Material lineMaterial;
     public Material paperMaterial;
@@ -67,6 +69,11 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
                 GameObject gameObject = new GameObject($"StepIcon_{stepIcons.Count}");
                 gameObject.transform.SetParent(transform);
                 gameObject.transform.localScale = Vector3.one * scaleMultiplier;
+
+                GameObject bgGameObject = Instantiate(backgroundPanel);
+                bgGameObject.name = "Background";
+                bgGameObject.transform.SetParent(gameObject.transform);
+                bgGameObject.transform.position += backgroundDisplacement;
 
                 ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
                 shapeRenderer.Setup(paperMaterial, lineMaterial, lineWidth * scaleMultiplier);
