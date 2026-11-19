@@ -2557,8 +2557,8 @@ MonoBehaviour:
   keepCurrentStepFirst: 0
   slideSpeed: 8
   spacing: 5
-  backgroundScaleMultiplier: 1.75
-  scaleMultiplier: 0.15
+  backgroundScaleMultiplier: 12.5
+  scaleMultiplier: 0.2
   backgroundPanel: {fileID: 4259284731726269268, guid: 853881e1f2b31d442bbea2414ee321dc, type: 3}
   backgroundDisplacement: {x: 0, y: 0, z: 0.5}
   lineWidth: 0.4

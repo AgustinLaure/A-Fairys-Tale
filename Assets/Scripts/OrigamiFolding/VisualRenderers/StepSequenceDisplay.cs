@@ -15,7 +15,7 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
 
     [Header("Visual Settings")]
     public GameObject backgroundPanel;
-    public Vector3 backgroundDisplacement = new Vector3(0.0f,0.0f,0.5f);
+    public Vector3 backgroundDisplacement = new Vector3(0.0f, 0.0f, 0.5f);
     public float lineWidth = 0.4f;
     public Material lineMaterial;
     public Material paperMaterial;
@@ -30,6 +30,7 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
     {
         public Transform transform;
         public ShapeRenderer renderer;
+        public SpriteRenderer bgRenderer;
     }
 
     private List<StepIconData> stepIcons = new List<StepIconData>();
@@ -71,18 +72,20 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
                 gameObject.transform.SetParent(transform);
                 gameObject.transform.localScale = Vector3.one * scaleMultiplier;
 
+                ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
+                shapeRenderer.Setup(paperMaterial, lineMaterial, lineWidth * scaleMultiplier);
+
+                shapeRenderer.DrawShape(figure.steps[i].targetShape, null, 0.01f);
+
                 GameObject bgGameObject = Instantiate(backgroundPanel);
                 bgGameObject.name = "Background";
                 bgGameObject.transform.SetParent(gameObject.transform);
                 bgGameObject.transform.position += backgroundDisplacement;
                 bgGameObject.transform.localScale = Vector3.one * backgroundScaleMultiplier;
 
-                ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
-                shapeRenderer.Setup(paperMaterial, lineMaterial, lineWidth * scaleMultiplier);
+                SpriteRenderer bgSpriteenderer = bgGameObject.GetComponent<SpriteRenderer>();
 
-                shapeRenderer.DrawShape(figure.steps[i].targetShape, null, 0.01f);
-
-                stepIcons.Add(new StepIconData { transform = gameObject.transform, renderer = shapeRenderer });
+                stepIcons.Add(new StepIconData { transform = gameObject.transform, renderer = shapeRenderer, bgRenderer = bgSpriteenderer });
                 targetPositions.Add(Vector3.zero);
             }
         }
@@ -116,6 +119,7 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
             else stateColor = pendingColor;
 
             stepIcons[i].renderer.SetColor(stateColor, fillAlphaMultiplier);
+            stepIcons[i].bgRenderer.color = stateColor;
         }
     }
 
