@@ -74,6 +74,7 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
                 bgGameObject.name = "Background";
                 bgGameObject.transform.SetParent(gameObject.transform);
                 bgGameObject.transform.position += backgroundDisplacement;
+                bgGameObject.transform.localScale = Vector3.one * scaleMultiplier;
 
                 ShapeRenderer shapeRenderer = gameObject.AddComponent<ShapeRenderer>();
                 shapeRenderer.Setup(paperMaterial, lineMaterial, lineWidth * scaleMultiplier);
