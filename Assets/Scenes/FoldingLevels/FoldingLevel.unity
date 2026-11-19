@@ -2553,12 +2553,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94100008c9edb734c8552e41a4d8ea98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StepSequenceDisplay
-  dontDestroyOnLoad: 1
-  keepCurrentStepFirst: 1
+  dontDestroyOnLoad: 0
+  keepCurrentStepFirst: 0
   slideSpeed: 8
-  spacing: 2.5
+  spacing: 5
+  backgroundScaleMultiplier: 1.75
   scaleMultiplier: 0.15
-  backgroundPanel: {fileID: 0}
+  backgroundPanel: {fileID: 4259284731726269268, guid: 853881e1f2b31d442bbea2414ee321dc, type: 3}
   backgroundDisplacement: {x: 0, y: 0, z: 0.5}
   lineWidth: 0.4
   lineMaterial: {fileID: 2100000, guid: 32deb9407bf78bd4fb810f2d1c4d5eaf, type: 2}
