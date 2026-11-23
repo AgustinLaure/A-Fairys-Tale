@@ -17,7 +17,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button foxPlayButton;
     [SerializeField] private Button birdContinueButton;
     [SerializeField] private Button foxCotinueButton;
-    [SerializeField] private Button muteButton;
 
     [SerializeField] private CanvasGroup mainMenuCanvasGroup;
     [SerializeField] private CanvasGroup creditsCanvasGroup;
@@ -58,7 +57,6 @@ public class MainMenuManager : MonoBehaviour
 
         controlsButton.onClick.AddListener(HandleControlsPressed);
         creditsButton.onClick.AddListener(HandleCreditsPressed);
-        muteButton.onClick.AddListener(HandleMutePressed);
         creditsBackButton.onClick.AddListener(HandleCreditsBackPressed);
         controlsBackButton.onClick.AddListener(HandleControlsBackPressed);
         birdPlayButton.onClick.AddListener(HandleBirdPlay);
@@ -135,20 +133,6 @@ public class MainMenuManager : MonoBehaviour
         OnLevelButtonClicked(levels[1]);
     }
 
-    private void HandleMutePressed()
-    {
-        gameManager.IsMuted = !gameManager.IsMuted;
-
-        if (gameManager.IsMuted)
-        {
-            //AkUnitySoundEngine.SetState("Global_Audio_State", "Muted");
-        }
-        else
-        {
-            //AkUnitySoundEngine.SetState("Global_Audio_State", "Normal");
-        }
-    }
-
     private IEnumerator CreditsPlayVideoCoroutine()
     {
         creditsVideoPlayer.time = 0f;
@@ -207,7 +191,6 @@ public class MainMenuManager : MonoBehaviour
     {
         controlsButton.onClick.RemoveListener(HandleControlsPressed);
         creditsButton.onClick.RemoveListener(HandleCreditsPressed);
-        muteButton.onClick.RemoveListener(HandleMutePressed);
         creditsBackButton.onClick.RemoveListener(HandleCreditsBackPressed);
         controlsBackButton.onClick.RemoveListener(HandleControlsBackPressed);
         birdPlayButton.onClick.RemoveListener(HandleBirdPlay);

@@ -71,7 +71,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37, y: -5.379883}
+  m_AnchoredPosition: {x: 18, y: -43}
   m_SizeDelta: {x: 442.19995, y: 57.700012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7324327226510642681
@@ -112,6 +112,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Title
       objectReference: {fileID: 0}
+    - target: {fileID: 9075685959772230709, guid: 4e165fe624359764fbdefe804198b384, type: 3}
+      propertyPath: m_fontSize
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 9075685959772230709, guid: 4e165fe624359764fbdefe804198b384, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 9157825216363468506, guid: 4e165fe624359764fbdefe804198b384, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -138,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157825216363468506, guid: 4e165fe624359764fbdefe804198b384, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 440.6
       objectReference: {fileID: 0}
     - target: {fileID: 9157825216363468506, guid: 4e165fe624359764fbdefe804198b384, type: 3}
       propertyPath: m_SizeDelta.y
@@ -210,6 +218,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6311651783445855733}
     m_Modifications:
+    - target: {fileID: 1979230938639937910, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4222822588463648534, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_Name
       value: LevelButtonPrefab
@@ -294,19 +306,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6524587513581360963, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 720071309963537788}
     - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_text
       value: Aircraft folding............
       objectReference: {fileID: 0}
     - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
       propertyPath: m_fontSize
-      value: 58.5
+      value: 55.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+--- !u!114 &720071309963537788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8283880475290391129, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}
+  m_PrefabInstance: {fileID: 8865463880397750053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &3132109143976658848 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5800364493390395525, guid: 9d0fadf1f27482147a726df1d76d58a4, type: 3}

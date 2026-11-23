@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -13,7 +12,7 @@ public class GameManager : MonoSingleton<GameManager>
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
 
-    public bool IsMuted { set; get; }
+    public bool IsMuted { get; private set; }
     private EventBus eventBus;
 
     public Action OnSceneChangeStart;
@@ -23,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Start()
     {
         eventBus = ServiceLocator.Instance.GetService<EventBus>();
+        eventBus.Subscribe<OnToggleMute>((Action)HandleToggleMute);
     }
 
     public void SetActiveLevelManager(LevelManager levelManager)
@@ -71,6 +71,20 @@ public class GameManager : MonoSingleton<GameManager>
         StartCoroutine(LoadSceneAsync(name));
     }
 
+    private void HandleToggleMute()
+    {
+        IsMuted = !IsMuted;
+
+        if (IsMuted)
+        {
+            //mute logic
+        }
+        else
+        {
+            //unmute logic
+        }
+    }
+
     IEnumerator LoadSceneAsync(string name)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
@@ -86,5 +100,10 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         loadingScreen.Hide();
+    }
+
+    private void OnDestroy()
+    {
+        eventBus.Unsubscribe<OnToggleMute>((Action)HandleToggleMute);
     }
 }
