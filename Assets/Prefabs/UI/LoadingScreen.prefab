@@ -275,7 +275,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &7096053921183686340
 MonoBehaviour:
@@ -362,4 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5789a21cab1f7f64e91831c06bf28bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingScreen
+  dontDestroyOnLoad: 1
   loadingVisualPanel: {fileID: 7486547146936388033}
+  extraLoadTime: 0
