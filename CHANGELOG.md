@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.11.0] - 2026-11-17
+
+### New
+
+- Art result screen.
+- Paper shadows.
+
+### Changes
+
+- Updated the credits video.
+- Minor bug fixes.
+- Added background and font colors.
+- Different level markers.
+- Extended loading screen time.
+- Fixed a loading screen bug.
+- Added level two map limits.
+- Adjusted aircraft folding.
+- Player collisions now use continuous detection.
+- Fixed transparencies in level two's second layer.
+- Fixed a prop bug.
+- Fixed the level two giant mushroom bug.
+- Updated paper rendering.
+
 ## [0.10.0] - 2026-11-11
 
 ### New
@@ -30,6 +53,7 @@
 - Fixed an inventory bug.
 - Fixed a mole puzzle bug.
 - Fixed UI scaling at different resolutions.
+- Fixed level two bugs.
 
 ## [0.9.0] - 2026-11-03
 

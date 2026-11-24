@@ -1180,6 +1180,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleSnapPoints",
+                    "type": "Button",
+                    "id": "84cf87fc-b947-4014-b775-b63953e806e7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleDragMarkers",
+                    "type": "Button",
+                    "id": "73cbd7ef-3f3b-49a8-8eff-d4c61f235259",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleTargetLimits",
+                    "type": "Button",
+                    "id": "d959ac7f-75a5-4e16-99a4-a5c27e8ddb4d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1202,6 +1229,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlayerPreviousLayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4cfe563a-308c-4766-aae4-094c2df60e96",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleSnapPoints",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4999f8dd-3bf2-4a93-ab01-1436c7006e6f",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleDragMarkers",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6873a8e-05e1-44ef-ad3b-55e429c33f63",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleTargetLimits",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
