@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MolePuzzle : MonoBehaviour
 {
@@ -60,6 +59,7 @@ public class MolePuzzle : MonoBehaviour
         eventBus.Subscribe<OnActivateMole>((Action)HandleActivateMole);
         eventBus.Subscribe<OnMoleSwapped>((Action<OnMoleSwapped>)HandleMoleSwapped);
         eventBus.Subscribe<OnMoleShowAnimFinished>((Action)HandleMoleShowAnimFinish);
+        eventBus.Subscribe<OnLose>((Action)HandleOnLose);
 
         if (isPuzzleActive)
         {
@@ -75,6 +75,15 @@ public class MolePuzzle : MonoBehaviour
             }
 
             isPuzzleActive = true;
+        }
+    }
+
+    private void HandleOnLose()
+    {
+        foreach (Mole mole in moles)
+        {
+            mole.SetState(false);
+            mole.SetShouldToggle = true;
         }
     }
 
