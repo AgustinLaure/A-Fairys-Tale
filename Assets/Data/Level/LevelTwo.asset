@@ -17,6 +17,6 @@ MonoBehaviour:
   levelName: LevelTwo
   sceneName: LevelTwo
   narratorPhrases:
-  - Phrase 1
-  - Phrase 2
+  - Someone might be living in that little hole over there. Should we say hello?
+  - That fox won't move unless you catch his attention...
   level: 0

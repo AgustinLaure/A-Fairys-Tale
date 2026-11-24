@@ -2674,6 +2674,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3763624739049782778, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2713,6 +2717,11 @@ PrefabInstance:
     - target: {fileID: 4520854333663030302, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028543308408534806, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: m_text
+      value: '''The breeze is nice''... Is what I would have said if I could actually
+        feel it. Sigh...'
       objectReference: {fileID: 0}
     - target: {fileID: 8939352708626583075, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
       propertyPath: m_Name
