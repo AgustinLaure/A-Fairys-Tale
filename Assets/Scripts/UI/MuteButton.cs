@@ -29,7 +29,7 @@ public class MuteButton : MonoBehaviour
 
     private void HandleClick()
     {
-        eventBus.Raise<OnToggleMute>();
+        gameManager.HandleToggleMute();
         image.sprite = gameManager.IsMuted ? mutedImaged : unmutedImaged;
     }
 
