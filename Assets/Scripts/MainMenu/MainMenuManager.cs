@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -16,7 +17,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button birdPlayButton;
     [SerializeField] private Button foxPlayButton;
     [SerializeField] private Button birdContinueButton;
-    [SerializeField] private Button foxCotinueButton;
+    [SerializeField] private Button foxContinueButton;
+    [SerializeField] private Button exitButton;
 
     [SerializeField] private CanvasGroup mainMenuCanvasGroup;
     [SerializeField] private CanvasGroup creditsCanvasGroup;
@@ -62,7 +64,8 @@ public class MainMenuManager : MonoBehaviour
         birdPlayButton.onClick.AddListener(HandleBirdPlay);
         foxPlayButton.onClick.AddListener(HandleFoxPlay);
         birdContinueButton.onClick.AddListener(HandleBirdContinueButton);
-        foxCotinueButton.onClick.AddListener(HandleFoxContinueButton);
+        foxContinueButton.onClick.AddListener(HandleFoxContinueButton);
+        exitButton.onClick.AddListener(HandleExitButton);
 
         creditsVideoPlayer.Play();
         creditsVideoPlayer.Stop();
@@ -133,6 +136,15 @@ public class MainMenuManager : MonoBehaviour
         OnLevelButtonClicked(levels[1]);
     }
 
+    private void HandleExitButton()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     private IEnumerator CreditsPlayVideoCoroutine()
     {
         creditsVideoPlayer.time = 0f;
@@ -196,6 +208,7 @@ public class MainMenuManager : MonoBehaviour
         birdPlayButton.onClick.RemoveListener(HandleBirdPlay);
         foxPlayButton.onClick.RemoveListener(HandleFoxPlay);
         birdContinueButton.onClick.RemoveListener(HandleBirdContinueButton);
-        foxCotinueButton.onClick.RemoveListener(HandleFoxContinueButton);
+        foxContinueButton.onClick.RemoveListener(HandleFoxContinueButton);
+        exitButton.onClick.RemoveListener(HandleExitButton);
     }
 }
