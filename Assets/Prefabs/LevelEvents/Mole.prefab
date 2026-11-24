@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3816849976063281918}
   - component: {fileID: 1064823733630568428}
   - component: {fileID: 6383364496085089668}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: PlayerDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 2616383809591334949}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &5603583647424850629
 GameObject:
@@ -559,7 +560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3973962409005317360
 Transform:
   m_ObjectHideFlags: 0
