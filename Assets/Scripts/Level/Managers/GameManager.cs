@@ -101,9 +101,4 @@ public class GameManager : MonoSingleton<GameManager>
 
         loadingScreen.Hide();
     }
-
-    private void OnDestroy()
-    {
-        eventBus.Unsubscribe<OnToggleMute>((Action)HandleToggleMute);
-    }
 }
