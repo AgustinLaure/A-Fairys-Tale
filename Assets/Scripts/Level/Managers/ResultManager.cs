@@ -131,6 +131,7 @@ public class ResultManager : MonoBehaviour
 
     private void HandleContinueButton()
     {
+        BootStrapper.OnReset();
         ServiceLocator.Instance.GetService<GameManager>().levelManager.GoToNextLevel();
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class FoldManager : MonoSingleton<FoldManager>
@@ -12,10 +13,17 @@ public class FoldManager : MonoSingleton<FoldManager>
     public Material paperMaterial;
     public bool useShadow = true;
     public Material shadowMaterial;
-    public OrigamiFigure currentFigure;
+    public TMP_Text nameText;
+    [SerializeField]
+    private OrigamiFigure currentFigure;
 
     [Header("State")]
+    public int foldLimit = 15;
+    public int activerFacesLimit = 50;
     public List<PaperFace> activeFaces = new List<PaperFace>();
+    private int folds = 0;
+
+    public UiManager uiManager;
 
     private int currentObjectiveIndex = 0;
     private List<Vector2> currentTargetShape = new List<Vector2>();
@@ -27,6 +35,13 @@ public class FoldManager : MonoSingleton<FoldManager>
     public bool IsLevelActive { get; private set; }
 
     private List<ShapeRenderer> previewRenderers = new List<ShapeRenderer>();
+
+    public OrigamiFigure GetCurrentFigure() { return currentFigure; }
+    public void SetCurrentFigure(OrigamiFigure figure) 
+    { 
+        currentFigure = figure;
+        nameText.text = currentFigure.figureName;
+    }
 
     private void Awake()
     {
@@ -181,6 +196,9 @@ public class FoldManager : MonoSingleton<FoldManager>
 
     public void ProcessFold(Vector2 startLine, Vector2 endLine)
     {
+        if (folds >= foldLimit || activeFaces.Count >= activerFacesLimit) { FoldFailed(); return; };
+
+
         var candidateFaces = GetTargetedFaces(startLine, endLine);
         var newFaces = new List<PaperFace>();
         var facesToRemove = new List<PaperFace>();
@@ -207,6 +225,8 @@ public class FoldManager : MonoSingleton<FoldManager>
 
         activeFaces.AddRange(newFaces);
         EvaluateWinCondition();
+        
+        folds++;
     }
 
     private List<PaperFace> GetTargetedFaces(Vector2 startLine, Vector2 endLine)
@@ -258,6 +278,12 @@ public class FoldManager : MonoSingleton<FoldManager>
         {
             previewRenderers[i].gameObject.SetActive(false);
         }
+    }
+
+    public void FoldFailed()
+    {
+        Debug.LogError("Fold has been failed!");
+        uiManager.OnExit();
     }
 
     public void Deactivate()

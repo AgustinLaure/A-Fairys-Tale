@@ -41,6 +41,8 @@ public abstract class Origami : Prop
 
     public bool GetIsCrumpleable { get { return isCrumpleable; } }
 
+    public bool GetIsCrumpled { get { return isCrumpled; } }
+
     public OrigamiPool SetOrigamiPool { set { origamiPool = value; } }
 
     protected override void Start()

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -16,8 +17,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button birdPlayButton;
     [SerializeField] private Button foxPlayButton;
     [SerializeField] private Button birdContinueButton;
-    [SerializeField] private Button foxCotinueButton;
-    [SerializeField] private Button muteButton;
+    [SerializeField] private Button foxContinueButton;
+    [SerializeField] private Button exitButton;
 
     [SerializeField] private CanvasGroup mainMenuCanvasGroup;
     [SerializeField] private CanvasGroup creditsCanvasGroup;
@@ -58,13 +59,13 @@ public class MainMenuManager : MonoBehaviour
 
         controlsButton.onClick.AddListener(HandleControlsPressed);
         creditsButton.onClick.AddListener(HandleCreditsPressed);
-        muteButton.onClick.AddListener(HandleMutePressed);
         creditsBackButton.onClick.AddListener(HandleCreditsBackPressed);
         controlsBackButton.onClick.AddListener(HandleControlsBackPressed);
         birdPlayButton.onClick.AddListener(HandleBirdPlay);
         foxPlayButton.onClick.AddListener(HandleFoxPlay);
         birdContinueButton.onClick.AddListener(HandleBirdContinueButton);
-        foxCotinueButton.onClick.AddListener(HandleFoxContinueButton);
+        foxContinueButton.onClick.AddListener(HandleFoxContinueButton);
+        exitButton.onClick.AddListener(HandleExitButton);
 
         creditsVideoPlayer.Play();
         creditsVideoPlayer.Stop();
@@ -135,18 +136,13 @@ public class MainMenuManager : MonoBehaviour
         OnLevelButtonClicked(levels[1]);
     }
 
-    private void HandleMutePressed()
+    private void HandleExitButton()
     {
-        gameManager.IsMuted = !gameManager.IsMuted;
-
-        if (gameManager.IsMuted)
-        {
-            //AkUnitySoundEngine.SetState("Global_Audio_State", "Muted");
-        }
-        else
-        {
-            //AkUnitySoundEngine.SetState("Global_Audio_State", "Normal");
-        }
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private IEnumerator CreditsPlayVideoCoroutine()
@@ -207,12 +203,12 @@ public class MainMenuManager : MonoBehaviour
     {
         controlsButton.onClick.RemoveListener(HandleControlsPressed);
         creditsButton.onClick.RemoveListener(HandleCreditsPressed);
-        muteButton.onClick.RemoveListener(HandleMutePressed);
         creditsBackButton.onClick.RemoveListener(HandleCreditsBackPressed);
         controlsBackButton.onClick.RemoveListener(HandleControlsBackPressed);
         birdPlayButton.onClick.RemoveListener(HandleBirdPlay);
         foxPlayButton.onClick.RemoveListener(HandleFoxPlay);
         birdContinueButton.onClick.RemoveListener(HandleBirdContinueButton);
-        foxCotinueButton.onClick.RemoveListener(HandleFoxContinueButton);
+        foxContinueButton.onClick.RemoveListener(HandleFoxContinueButton);
+        exitButton.onClick.RemoveListener(HandleExitButton);
     }
 }

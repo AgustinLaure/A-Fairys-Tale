@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.12.0] - 2026-11-24
+
+### New
+
+- Narrator texts.
+- Fox level lose condition and text.
+- Fox level introduction art.
+- Bird level introduction.
+- Exit button.
+
+### Changes
+
+- Art for the main menu, pause, controls, loading and win screens.
+- Updated background art.
+- Reworked the folding UI steps, labels and fonts.
+- Removed the folding reference image.
+- Added a limit to folds and active faces.
+- Changed the credits back button opacity.
+- Updated the product name to the full game name.
+- Fixed the mute button.
+- Fixed a level transition bug.
+- Fixed an origami dropping bug.
+
 ## [0.11.0] - 2026-11-17
 
 ### New

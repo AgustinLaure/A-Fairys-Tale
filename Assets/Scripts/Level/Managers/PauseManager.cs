@@ -29,20 +29,6 @@ public class PauseManager : MonoBehaviour
         levelManager.TogglePause();
     }
 
-    public void OnToggleSound()
-    {
-        gameManager.IsMuted = !gameManager.IsMuted;
-
-        if (gameManager.IsMuted)
-        {
-            //AkUnitySoundEngine.SetState("Global_Audio_State", "Muted");
-        }
-        else
-        {
-            //AkUnitySoundEngine.SetState("Global_Audio_State", "Normal");
-        }
-    }
-
     public void OnControls()
     {
         if (fadeCoroutine == null)

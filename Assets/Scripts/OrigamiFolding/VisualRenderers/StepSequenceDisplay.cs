@@ -10,9 +10,12 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
 
     [Header("Layout Settings")]
     public float spacing = 2.5f;
+    public float backgroundScaleMultiplier = 2.0f;
     public float scaleMultiplier = 0.15f;
 
     [Header("Visual Settings")]
+    public GameObject backgroundPanel;
+    public Vector3 backgroundDisplacement = new Vector3(0.0f, 0.0f, 0.5f);
     public float lineWidth = 0.4f;
     public Material lineMaterial;
     public Material paperMaterial;
@@ -27,6 +30,7 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
     {
         public Transform transform;
         public ShapeRenderer renderer;
+        public SpriteRenderer bgRenderer;
     }
 
     private List<StepIconData> stepIcons = new List<StepIconData>();
@@ -73,7 +77,15 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
 
                 shapeRenderer.DrawShape(figure.steps[i].targetShape, null, 0.01f);
 
-                stepIcons.Add(new StepIconData { transform = gameObject.transform, renderer = shapeRenderer });
+                GameObject bgGameObject = Instantiate(backgroundPanel);
+                bgGameObject.name = "Background";
+                bgGameObject.transform.SetParent(gameObject.transform);
+                bgGameObject.transform.position += backgroundDisplacement;
+                bgGameObject.transform.localScale = Vector3.one * backgroundScaleMultiplier;
+
+                SpriteRenderer bgSpriteenderer = bgGameObject.GetComponent<SpriteRenderer>();
+
+                stepIcons.Add(new StepIconData { transform = gameObject.transform, renderer = shapeRenderer, bgRenderer = bgSpriteenderer });
                 targetPositions.Add(Vector3.zero);
             }
         }
@@ -107,6 +119,7 @@ public class StepSequenceDisplay : MonoSingleton<StepSequenceDisplay>
             else stateColor = pendingColor;
 
             stepIcons[i].renderer.SetColor(stateColor, fillAlphaMultiplier);
+            stepIcons[i].bgRenderer.color = stateColor;
         }
     }
 

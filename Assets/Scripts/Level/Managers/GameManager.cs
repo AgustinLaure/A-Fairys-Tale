@@ -12,17 +12,11 @@ public class GameManager : MonoSingleton<GameManager>
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
 
-    public bool IsMuted { set; get; }
-    private EventBus eventBus;
+    public bool IsMuted { get; private set; }
 
     public Action OnSceneChangeStart;
 
     public LoadingScreen loadingScreen;
-
-    private void Start()
-    {
-        eventBus = ServiceLocator.Instance.GetService<EventBus>();
-    }
 
     public void SetActiveLevelManager(LevelManager levelManager)
     {
@@ -68,6 +62,20 @@ public class GameManager : MonoSingleton<GameManager>
         loadingScreen.extraLoadTime = loadTime;
 
         StartCoroutine(LoadSceneAsync(name));
+    }
+
+    public void HandleToggleMute()
+    {
+        IsMuted = !IsMuted;
+
+        if (IsMuted)
+        {
+            //mute logic
+        }
+        else
+        {
+            //unmute logic
+        }
     }
 
     IEnumerator LoadSceneAsync(string name)
