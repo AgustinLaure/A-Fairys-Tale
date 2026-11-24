@@ -10547,6 +10547,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6363823338736834, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 34229788225849056, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10577,12 +10581,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 787914864785044788, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3107390473288270965, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 2127084708062225910}
+    - target: {fileID: 4002481711948503783, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -53
+      objectReference: {fileID: 0}
     - target: {fileID: 4019368295407401842, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_Name
       value: ResultScreen
@@ -10667,6 +10675,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 1bab993891fd4d74d84b76b59a2ce91d, type: 3}
+    - target: {fileID: 7249387998612666031, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a57362907255ea44ea8d6364c95f0918, type: 3}
     - target: {fileID: 7494605190076637208, guid: fabe3bd773ce3804db2bfa3c56a15711, type: 3}
       propertyPath: m_TargetGraphic
       value: 
