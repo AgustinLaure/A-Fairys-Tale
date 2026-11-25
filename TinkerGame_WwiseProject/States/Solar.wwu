@@ -3,11 +3,12 @@
 	<States>
 		<WorkUnit Name="Solar" ID="{4ED2DCFD-4693-42D1-861B-0785057E042C}" PersistMode="Standalone">
 			<ChildrenList>
-				<StateGroup Name="Level" ID="{3E31E6F3-AEDA-4B00-BB83-B3B30F60957A}">
+				<StateGroup Name="MX_State" ID="{3E31E6F3-AEDA-4B00-BB83-B3B30F60957A}">
 					<ChildrenList>
 						<State Name="None" ID="{6C329C88-665A-435A-9F54-C7CF9BBF1DB6}"/>
 						<State Name="Menu" ID="{FC7E28F7-F329-4B57-A7C5-7BA83BFD0397}"/>
-						<State Name="Plane" ID="{A24C9E2F-C8D6-4FFC-9D2D-4FD39B0A9E5C}"/>
+						<State Name="Folding" ID="{A24C9E2F-C8D6-4FFC-9D2D-4FD39B0A9E5C}"/>
+						<State Name="Gameplay" ID="{279DAC17-DB17-4913-BA9F-E97CF482C945}"/>
 					</ChildrenList>
 				</StateGroup>
 			</ChildrenList>

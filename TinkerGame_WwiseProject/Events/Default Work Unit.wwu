@@ -4,6 +4,7 @@
 		<WorkUnit Name="Default Work Unit" ID="{56C9CC7A-4A56-493A-904C-56B65AFB3036}" PersistMode="Standalone">
 			<ChildrenList>
 				<WorkUnit Name="ARIA" ID="{47B80597-BA6C-4E62-90EC-9E0DBA4F0246}" PersistMode="Reference"/>
+				<WorkUnit Name="Solar" ID="{54D9F245-91D3-49A7-9373-C7A97C2B1E19}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
