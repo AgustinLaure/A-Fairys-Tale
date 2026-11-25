@@ -1258,6 +1258,63 @@
 						</ObjectList>
 					</ObjectLists>
 				</MusicSwitchContainer>
+				<Sound Name="SFX_Grab" ID="{32CD14AF-DB88-4EAB-9DF2-95E54C574C37}" ShortID="861689859">
+					<PropertyList>
+						<Property Name="Lowpass" Type="int16">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{D350970A-95C2-45FE-84F1-0C72052BFE84}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="3"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{AEAC3CBD-DA61-4EEA-8EF0-3A5EDC1AC814}">
+										<PropertyList>
+											<Property Name="Max" Type="Real64" Value="100"/>
+											<Property Name="Min" Type="Real64" Value="-100"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{61536535-147B-468A-8F3E-289CD0D8DF37}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="WHSH_Wood Whoosh Slicing 01_PSE_ODE_SMh32" ID="{2462B803-4C14-4A2B-85CE-3058040DB0A3}">
+							<PropertyList>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimBegin" Type="Real64" Value="0.14115"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{27A99372-CB67-4916-AF17-D30902E2B362}"/>
+								</Reference>
+							</ReferenceList>
+							<Language>SFX</Language>
+							<AudioFile>WHSH_Wood Whoosh Slicing 01_PSE_ODE_SMh32.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="653599094"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="WHSH_Wood Whoosh Slicing 01_PSE_ODE_SMh32" ID="{2462B803-4C14-4A2B-85CE-3058040DB0A3}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</Containers>
