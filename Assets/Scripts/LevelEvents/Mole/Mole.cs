@@ -24,6 +24,7 @@ public class Mole : MonoBehaviour
     private List<Mole> neighbors = new List<Mole>();
 
     private const string playerTag = "Player";
+    private const string aircraftTag = "Aircraft";
 
     private Coroutine moveCoroutine = null;
 
@@ -143,6 +144,11 @@ public class Mole : MonoBehaviour
             {
                 SwapState();
             }
+        }
+
+        if (collider.GetComponentInParent<Origami>() != null)
+        {
+            eventBus.Raise<OnLose>();
         }
     }
 
