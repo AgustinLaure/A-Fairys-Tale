@@ -13,8 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID AMBS = 3537656742U;
+        static const AkUniqueID AMB1 = 3537656804U;
         static const AkUniqueID BAG = 513390133U;
+        static const AkUniqueID BIRD = 1544377644U;
         static const AkUniqueID CRAFT_FROG = 3111418502U;
         static const AkUniqueID CRAFT_PLANE = 836781738U;
         static const AkUniqueID DOWN_ARROW = 2769177551U;
@@ -26,6 +27,8 @@ namespace AK
         static const AkUniqueID LANDING_OBJECT = 333435048U;
         static const AkUniqueID LEFT_ARROW = 2306322336U;
         static const AkUniqueID LEVEL_CHANGE = 3354685448U;
+        static const AkUniqueID LITTLECASCADE = 3962657337U;
+        static const AkUniqueID MX = 1685527054U;
         static const AkUniqueID NARRATOR = 3272864290U;
         static const AkUniqueID OBJECT_PICKUP = 3492552507U;
         static const AkUniqueID PAPERPLANE = 610481649U;
@@ -43,17 +46,18 @@ namespace AK
 
     namespace STATES
     {
-        namespace LEVEL
+        namespace MX_STATE
         {
-            static const AkUniqueID GROUP = 2782712965U;
+            static const AkUniqueID GROUP = 3401741472U;
 
             namespace STATE
             {
+                static const AkUniqueID FOLDING = 488247572U;
+                static const AkUniqueID GAMEPLAY = 89505537U;
                 static const AkUniqueID MENU = 2607556080U;
                 static const AkUniqueID NONE = 748895195U;
-                static const AkUniqueID PLANE = 114672797U;
             } // namespace STATE
-        } // namespace LEVEL
+        } // namespace MX_STATE
 
     } // namespace STATES
 

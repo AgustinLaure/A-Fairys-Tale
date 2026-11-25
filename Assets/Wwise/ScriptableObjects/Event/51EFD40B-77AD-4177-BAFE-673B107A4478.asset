@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6828d441fcde57344b94e894e03c3670, type: 3}
   m_Name: 51EFD40B-77AD-4177-BAFE-673B107A4478
   m_EditorClassIdentifier: AK.Wwise.Unity.API.WwiseTypes::WwiseEventReference
-  objectName: AMBS
-  id: 3537656742
+  objectName: AMB1
+  id: 3537656804
   guid: 51EFD40B-77AD-4177-BAFE-673B107A4478
-  IsInUserDefinedSoundBank: 1
+  IsInUserDefinedSoundBank: 0
