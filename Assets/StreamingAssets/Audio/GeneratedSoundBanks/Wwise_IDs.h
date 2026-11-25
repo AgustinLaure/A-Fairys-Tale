@@ -13,8 +13,10 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID AMBS = 3537656742U;
         static const AkUniqueID BAG = 513390133U;
-        static const AkUniqueID CONFIRM_CRAFT = 4215744644U;
+        static const AkUniqueID CRAFT_FROG = 3111418502U;
+        static const AkUniqueID CRAFT_PLANE = 836781738U;
         static const AkUniqueID DOWN_ARROW = 2769177551U;
         static const AkUniqueID FAILED_CRAFT = 2205997529U;
         static const AkUniqueID FALLING_OBJECT = 1792490428U;
@@ -24,14 +26,13 @@ namespace AK
         static const AkUniqueID LANDING_OBJECT = 333435048U;
         static const AkUniqueID LEFT_ARROW = 2306322336U;
         static const AkUniqueID LEVEL_CHANGE = 3354685448U;
-        static const AkUniqueID MX = 1685527054U;
         static const AkUniqueID NARRATOR = 3272864290U;
         static const AkUniqueID OBJECT_PICKUP = 3492552507U;
         static const AkUniqueID PAPERPLANE = 610481649U;
         static const AkUniqueID PAPERPLANE_HIT = 759833779U;
         static const AkUniqueID PLANE_CHANGE = 2344998400U;
         static const AkUniqueID RIGHT_ARROW = 497650671U;
-        static const AkUniqueID STEP = 621108255U;
+        static const AkUniqueID STEPS = 1718617278U;
         static const AkUniqueID UI_CLICK = 2249769530U;
         static const AkUniqueID UI_FILTER = 2465147784U;
         static const AkUniqueID UI_HOVER = 2118900976U;
@@ -42,18 +43,17 @@ namespace AK
 
     namespace STATES
     {
-        namespace MX_STATE
+        namespace LEVEL
         {
-            static const AkUniqueID GROUP = 3401741472U;
+            static const AkUniqueID GROUP = 2782712965U;
 
             namespace STATE
             {
-                static const AkUniqueID FOLDING = 488247572U;
-                static const AkUniqueID GAMEPLAY = 89505537U;
                 static const AkUniqueID MENU = 2607556080U;
                 static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID PLANE = 114672797U;
             } // namespace STATE
-        } // namespace MX_STATE
+        } // namespace LEVEL
 
     } // namespace STATES
 

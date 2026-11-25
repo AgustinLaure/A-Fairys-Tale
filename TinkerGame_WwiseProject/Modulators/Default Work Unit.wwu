@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{6D833CD2-0F5E-4BFA-BA8E-050974B93655}" SchemaVersion="133">
 	<Modulators>
-		<WorkUnit Name="Default Work Unit" ID="{6D833CD2-0F5E-4BFA-BA8E-050974B93655}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{6D833CD2-0F5E-4BFA-BA8E-050974B93655}" PersistMode="Standalone">
+			<ChildrenList>
+				<ModulatorLfo Name="New Modulator LFO" ID="{1F27E833-2135-4FD9-B8C1-EB587B661A99}" ShortID="400777277">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="LfoAttack" Type="Real64" Value="0.62"/>
+						<Property Name="LfoFrequency" Type="Real64" Value="0.68"/>
+						<Property Name="LfoSmoothing" Type="Real64" Value="100"/>
+						<Property Name="LfoWaveform" Type="int32" Value="5"/>
+						<Property Name="ModulatorScope" Type="int32" Value="0"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+				</ModulatorLfo>
+			</ChildrenList>
+		</WorkUnit>
 	</Modulators>
 </WwiseDocument>
