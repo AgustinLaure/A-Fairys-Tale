@@ -69,6 +69,7 @@ public class ResultManager : MonoBehaviour
         gameObject.SetActive(true);
         loseScreen.SetActive(true);
 
+
         continueCanvasGroup.alpha = nonClickableAlpha;
         continueCanvasGroup.blocksRaycasts = false;
         continueCanvasGroup.interactable = false;
@@ -130,6 +131,7 @@ public class ResultManager : MonoBehaviour
 
     private void HandleContinueButton()
     {
+        BootStrapper.OnReset();
         ServiceLocator.Instance.GetService<GameManager>().levelManager.GoToNextLevel();
     }
 
