@@ -548,6 +548,7 @@ MonoBehaviour:
   accel: 2
   accelDuration: 0.5
   timeToEnablePlayerCollision: 0.5
+  rotationThreshold: 0.5
 --- !u!114 &6442757648225872884
 MonoBehaviour:
   m_ObjectHideFlags: 0
