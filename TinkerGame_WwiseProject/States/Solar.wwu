@@ -9,6 +9,8 @@
 						<State Name="Menu" ID="{FC7E28F7-F329-4B57-A7C5-7BA83BFD0397}"/>
 						<State Name="Folding" ID="{A24C9E2F-C8D6-4FFC-9D2D-4FD39B0A9E5C}"/>
 						<State Name="Gameplay" ID="{279DAC17-DB17-4913-BA9F-E97CF482C945}"/>
+						<State Name="Win" ID="{B1764BCB-8166-4844-BF41-B05DD84D8789}"/>
+						<State Name="Lose" ID="{B2F52190-EFC8-4E78-8355-D4D6F50CFAEF}"/>
 					</ChildrenList>
 				</StateGroup>
 			</ChildrenList>
