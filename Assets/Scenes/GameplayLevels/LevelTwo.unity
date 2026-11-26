@@ -2718,6 +2718,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7009084519781453642, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
+      propertyPath: timeToSpeech
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8028543308408534806, guid: 3297c3dd0331f8548a43658c431e0502, type: 3}
       propertyPath: m_text
       value: '''The breeze is nice''... Is what I would have said if I could actually

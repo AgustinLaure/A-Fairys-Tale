@@ -19,6 +19,7 @@ public class Aircraft : Origami
     [SerializeField] private float accel;
     [SerializeField] private float accelDuration;
     [SerializeField] private float timeToEnablePlayerCollision;
+    [SerializeField] private float rotationThreshold;
 
     private Vector3 direction;
     private bool shouldLaunch = false;
@@ -33,6 +34,7 @@ public class Aircraft : Origami
 
     private const ForceMode launchForceMode = ForceMode.VelocityChange;
     private const ForceMode accelForceMode = ForceMode.Acceleration;
+
 
     private void Awake()
     {
@@ -129,11 +131,11 @@ public class Aircraft : Origami
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
         Quaternion desiredRotation = Quaternion.identity;
 
-        if (mouseWorldPosition.x > transform.position.x)
+        if (mouseWorldPosition.x > transform.position.x + rotationThreshold)
         {
             desiredRotation = facingLeftRotation;
         }
-        else
+        else if (mouseWorldPosition.x < transform.position.x - rotationThreshold)
         {
             desiredRotation = facingRightRotation;
         }

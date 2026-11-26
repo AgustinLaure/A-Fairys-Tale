@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 9036503030798017181}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &2659847004453762537
 GameObject:
@@ -273,7 +274,7 @@ MonoBehaviour:
   endPath: {fileID: 8396579155023123758}
   propPoint: {fileID: 5632890027483731970}
   trace: {fileID: 0}
-  flySpeed: 1.3
+  flySpeed: 1.5
   flyAwaySpeed: 2
   timeToDisappear: 5
   traceFadeTime: 0.3
@@ -452,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 314974141402601704}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &5769580614952403785
 GameObject:
@@ -648,6 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 6197449394579645867}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &8554481571181995059
 GameObject:
@@ -932,6 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 4755234738103265902}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!114 &8396579155023123758 stripped
 MonoBehaviour:
@@ -1047,6 +1051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 5871758775958744977}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!212 &5871758775958744977 stripped
 SpriteRenderer:

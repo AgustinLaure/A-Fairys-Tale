@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 2393072491211012998}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &1548125369824607528
 GameObject:
@@ -211,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 6906300994684516807}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &3560317816690251242
 GameObject:
@@ -240,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 3560317816690251242}
   serializedVersion: 2
   m_LocalRotation: {x: -0.036418255, y: -0.00000023841855, z: -0.24109511, w: 0.96981794}
-  m_LocalPosition: {x: -0.000000029702282, y: 0, z: 0.0000000044866257}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.049271308, y: 0.049271308, z: 0.049271308}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -340,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 2252484845012506447}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &3676085118666247488
 GameObject:
@@ -365,8 +368,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3676085118666247488}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.027631994, y: -0.7073297, z: -0.03721915, w: 0.70536226}
-  m_LocalPosition: {x: -0.000000029802322, y: 0.000000059604645, z: -5.453664e-10}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.8188784e-12}
   m_LocalScale: {x: 0.38482, y: 0.38482, z: 0.38482}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -374,7 +377,7 @@ Transform:
   - {fileID: 3250485964296531115}
   - {fileID: 4469534054174142513}
   m_Father: {fileID: 5781515152257543998}
-  m_LocalEulerAnglesHint: {x: -0.783, y: -90.124, z: -5.256}
+  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 0}
 --- !u!1 &6215112692334841694
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5781515152257543998
 Transform:
   m_ObjectHideFlags: 0
@@ -545,6 +548,7 @@ MonoBehaviour:
   accel: 2
   accelDuration: 0.5
   timeToEnablePlayerCollision: 0.5
+  rotationThreshold: 0.5
 --- !u!114 &6442757648225872884
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -300,5 +300,5 @@ MonoBehaviour:
   text: {fileID: 8028543308408534806}
   textCanvasGroup: {fileID: 3763624739049782778}
   textShownTime: 2
-  timeToSpeech: 20
+  timeToSpeech: 2
   textFadeTime: 0.7

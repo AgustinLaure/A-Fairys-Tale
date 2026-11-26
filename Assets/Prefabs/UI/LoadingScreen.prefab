@@ -364,4 +364,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoadingScreen
   dontDestroyOnLoad: 1
   loadingVisualPanel: {fileID: 7486547146936388033}
-  extraLoadTime: 0
+  extraLoadTime: 3

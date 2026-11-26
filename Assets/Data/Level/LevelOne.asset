@@ -17,6 +17,7 @@ MonoBehaviour:
   levelName: LevelOne
   sceneName: LevelOne
   narratorPhrases:
-  - Someone might be living in that little hole over there. Should we say hello?
-  - That fox won't move unless you catch his attention...
+  - Whoops! The wood is kind of slippery. Be careful where you step on, darling
+  - Uh oh! The flower seems a bit unstable... you should hurry
+  - Tic tac! Sorry, I'm a bit bored...
   level: 1
