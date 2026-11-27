@@ -11094,70 +11094,6 @@ MeshRenderer:
   m_SortingOrder: 120
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &1500215586
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3955455319766554627, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_Name
-      value: MusicManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.55272
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.55272
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5606479215579223662, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8578841316772952347, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      propertyPath: data.WwiseObjectReference
-      value: 
-      objectReference: {fileID: 11400000, guid: ed2301c259fd86a4c8b81a8c00d66e77, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3955455319766554627, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1876848440}
-  m_SourcePrefab: {fileID: 100100000, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
 --- !u!1 &1506210804
 GameObject:
   m_ObjectHideFlags: 0
@@ -13875,35 +13811,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8602174193005726798, guid: acc5d088e09234948be31a354c04b545, type: 3}
   m_PrefabInstance: {fileID: 1870867999}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1876848436 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3955455319766554627, guid: 454bb1458ca80914dbaaa4cf50c318f7, type: 3}
-  m_PrefabInstance: {fileID: 1500215586}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1876848440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876848436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2e85a407b8cdf04ab298f94924c2c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MusicStateChange
-  WinState:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: eeabfcaaa9be936499cc05c44e48972e, type: 2}
-  LoseState:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5053ae23c80b1bb47b6ce87c35bdf1e2, type: 2}
 --- !u!1 &1884900447
 GameObject:
   m_ObjectHideFlags: 0
@@ -15673,4 +15580,3 @@ SceneRoots:
   - {fileID: 932561072}
   - {fileID: 859898373}
   - {fileID: 1096681512}
-  - {fileID: 1500215586}

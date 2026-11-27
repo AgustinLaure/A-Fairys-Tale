@@ -16,6 +16,8 @@ public static class BootStrapper
         serviceLocator.AddServiceAsGameObject<InputHandler>(null);
         serviceLocator.AddServiceAsGameObject<GameManager>(null);
 
+        serviceLocator.AddServiceFromPrefab<MusicPlayer>(Resources.Load<GameObject>("MusicManager"), true);
+
         //CreateMonoSingletonGameObject<CheatManager>();
     }
 
@@ -42,7 +44,12 @@ public static class BootStrapper
 
     public static void OnReset()
     {
+        EventBus eventBus = serviceLocator.GetService<EventBus>();
+        MusicPlayer musicPlayer = serviceLocator.GetService<MusicPlayer>();
+
         serviceLocator.GetService<CompositePool>().Clear();
-        serviceLocator.GetService<EventBus>().Clear();
+        eventBus.Clear();
+
+        musicPlayer.OnRestart();
     }
 }

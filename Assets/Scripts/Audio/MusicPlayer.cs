@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using UnityEngine.SceneManagement;
 
 public class MusicPlayer : MonoBehaviour
 {
@@ -28,29 +27,29 @@ public class MusicPlayer : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        //Suscribimos el metodo HandleSceneLoad a la "Action" sceneLoaded de SceneManager
-        SceneManager.sceneLoaded += HandleSceneLoad;
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
+        OnRestart();
     }
     private void Start()
     {
         serviceLocator = ServiceLocator.Instance;
         eventBus = serviceLocator.GetService<EventBus>();
 
+        MenuState.SetValue();
         music.Post(gameObject);
-
     }
-    private void HandleSceneLoad(Scene scene, LoadSceneMode mode)
+    private void HandleSceneLoad(OnSceneLoaded data)
     {
-        if (scene.name == "MainMenu")
+        if (data.sceneName == "MainMenu")
         {
             MenuState.SetValue();
         }
-        else if (scene.name.StartsWith("Folding"))
+        else if (data.sceneName.StartsWith("Folding"))
         {
             FoldState.SetValue();
             Debug.Log("Folding");
         }
-        else if (scene.name.StartsWith("Level"))
+        else if (data.sceneName.StartsWith("Level"))
         {
             PlayState.SetValue();
             eventBus.Subscribe<OnWin>((Action)ChangeToWinState);
@@ -69,10 +68,14 @@ public class MusicPlayer : MonoBehaviour
         levelEnded = true;
         LoseState.SetValue();
     }
+
+    public void OnRestart()
+    {
+        eventBus.Subscribe<OnSceneLoaded>((Action<OnSceneLoaded>)HandleSceneLoad);
+    }
+
     private void OnDestroy()
     {
-        //Desuscribimos el metodo HandleSceneLoad a la "Action" sceneLoaded de SceneManager.
-        SceneManager.sceneLoaded -= HandleSceneLoad;
+
     }
 }
-

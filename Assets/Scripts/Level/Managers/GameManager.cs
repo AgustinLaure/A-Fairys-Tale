@@ -58,8 +58,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         Debug.Log("Started level " + activeLevelData.levelName);
 
-
-        LoadScene(activeLevelData.sceneName, (activeLevelData.GetLevelType() == LevelType.Gameplay) ? GameplayLevelManager.extraLevelLoadTime : 0.0f);
+        LoadScene(activeLevelData.sceneName, (activeLevelData.GetLevelType() == LevelType.Gameplay) ? GameplayLevelManager.extraLevelLoadTime : GameplayLevelManager.extraLevelLoadTime * 0.7f);
     }
 
     public void LoadScene(string name, float loadTime = 0.0f)
@@ -94,11 +93,19 @@ public class GameManager : MonoSingleton<GameManager>
 
         Time.timeScale = 0f;
 
+        bool hasRaisedEvent = false;
+
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
 
             loadingScreen.UpdateProgress(progress);
+
+            if (!hasRaisedEvent && progress > 0.2f)
+            {
+                eventBus.Raise<OnSceneLoaded>(name);
+                hasRaisedEvent = true;
+            }
 
             yield return null;
         }
