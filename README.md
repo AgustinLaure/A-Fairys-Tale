@@ -4,7 +4,7 @@
 
 # A Fairy's Tale
 
-A Fairy's Tale is a 2.5D puzzle adventure where paper comes to life within the pages of a whimsical, animal-filled storybook. You play as a lost fairy trying to make her way back home. Guide the tiny fairy through beautifully illustrated challenges, using your wit to assist troubled wildlife peacefully. Lose yourself in this beautifully crafted world full of delicate details and captivating environment.
+A Fairy's Tale is a 2.5D puzzle adventure where paper comes to life within the pages of a whimsical, animal-filled storybook. You play as a lost fairy trying to make her way back home. Guide her through charming, illustrated puzzles and use your wits to aid troubled wildlife. Lose yourself in a world brimming with delicate details and enchanting scenery. 
 
 This is a game being developed by students from <a href="https://www.imagecampus.edu.ar/">Image Campus</a>
 
