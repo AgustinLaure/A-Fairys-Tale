@@ -10,6 +10,8 @@ public class LoadingScreen : MonoSingleton<LoadingScreen>
     private GameManager gameManager;
     public float extraLoadTime = 0.0f;
 
+    public Coroutine WaitForLoadingCoroutine { get; private set; }
+
     void Start()
     {
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
@@ -20,23 +22,20 @@ public class LoadingScreen : MonoSingleton<LoadingScreen>
         gameManager.loadingScreen = this;
     }
 
-   public void UpdateProgress(float progress)
+    public void UpdateProgress(float progress)
     {
 
     }
 
 
-   public void Show()
+    public void Show()
     {
         loadingVisualPanel.SetActive(true);
     }
 
-    public void Hide() 
+    public void Hide()
     {
-
-        StartCoroutine(WaitForLoading());
-
-        loadingVisualPanel.SetActive(false);
+        WaitForLoadingCoroutine = StartCoroutine(WaitForLoading());
     }
 
     IEnumerator WaitForLoading()
@@ -45,15 +44,17 @@ public class LoadingScreen : MonoSingleton<LoadingScreen>
 
         float loadTime = extraLoadTime;
 
-        while(loadTime > 0.0f)
+        while (loadTime > 0.0f)
         {
-            loadTime -= Time.deltaTime;
+            loadTime -= Time.unscaledDeltaTime;
             yield return null;
         }
 
         Debug.Log("Extra load time reset");
         extraLoadTime = 0.0f;
 
-        yield return null;
+        loadingVisualPanel.SetActive(false);
+
+        WaitForLoadingCoroutine = null;
     }
 }

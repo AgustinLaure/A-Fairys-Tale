@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c8a2bbc10b13d2149b5045e12f3d86fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7b31ee2e11da3e45819b98924aebea3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c8a2bbc10b13d2149b5045e12f3d86fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7b31ee2e11da3e45819b98924aebea3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2005,7 +2005,7 @@ PrefabInstance:
     - target: {fileID: 48360305204209507, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 45d3bfce4b3746b4382d0ada31e5ff64, type: 3}
+      objectReference: {fileID: 21300000, guid: f5a27cf61dbed494692eb8a8d259db58, type: 3}
     - target: {fileID: 361994322933860154, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_text
       value: Jump
@@ -2691,7 +2691,7 @@ PrefabInstance:
     - target: {fileID: 48360305204209507, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3f07e3f66423a3546b0d0e745e425ee3, type: 3}
+      objectReference: {fileID: 21300000, guid: 2f49c3938b28a434f92bf3e88c105688, type: 3}
     - target: {fileID: 361994322933860154, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_text
       value: Pick up
@@ -3118,7 +3118,7 @@ PrefabInstance:
     - target: {fileID: 48360305204209507, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 63dc31214b1ccbf4e92d74fe0375c3ab, type: 3}
+      objectReference: {fileID: 21300000, guid: 7829b39113e426344b31dfb643b45559, type: 3}
     - target: {fileID: 361994322933860154, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -3548,7 +3548,7 @@ PrefabInstance:
     - target: {fileID: 48360305204209507, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d6b908eed3f8dc148a4ed6dd0da680aa, type: 3}
+      objectReference: {fileID: 21300000, guid: 0fba530e68ba256468bba1420db667d8, type: 3}
     - target: {fileID: 361994322933860154, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_text
       value: Use origami
@@ -3896,7 +3896,7 @@ PrefabInstance:
     - target: {fileID: 48360305204209507, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 744a99e2cf90c1b4d8affd37f5a0cb6a, type: 3}
+      objectReference: {fileID: 21300000, guid: 9316edb0ad023b04498d2143aa47f3fa, type: 3}
     - target: {fileID: 361994322933860154, guid: 32e88aca2d1275840908a34b6205a0d9, type: 3}
       propertyPath: m_text
       value: Drop

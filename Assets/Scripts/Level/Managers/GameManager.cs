@@ -9,6 +9,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private LevelManager activeLevelManager;
 
+    private EventBus eventBus;
+
     public LevelManager levelManager { get { return activeLevelManager; } }
     public LevelData levelData { get { return activeLevelData; } }
 
@@ -17,6 +19,11 @@ public class GameManager : MonoSingleton<GameManager>
     public Action OnSceneChangeStart;
 
     public LoadingScreen loadingScreen;
+
+    private void Start()
+    {
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
+    }
 
     public void SetActiveLevelManager(LevelManager levelManager)
     {
@@ -83,6 +90,10 @@ public class GameManager : MonoSingleton<GameManager>
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         loadingScreen.Show();
 
+        eventBus.Raise<OnPause>(true);
+
+        Time.timeScale = 0f;
+
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
@@ -93,5 +104,14 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         loadingScreen.Hide();
+
+        while (loadingScreen.WaitForLoadingCoroutine != null)
+        {
+            yield return null;
+        }
+
+        Time.timeScale = 1f;
+
+        eventBus.Raise<OnPause>(false);
     }
 }

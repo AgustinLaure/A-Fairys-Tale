@@ -39,7 +39,7 @@ public class PlayerDrop : MonoBehaviour
             Prop currentProp = playerInventory.GetCurrentProp;
             Origami currentPropAsOrigami = currentProp as Origami;
 
-            if (currentProp == null || (currentPropAsOrigami != null && currentPropAsOrigami.GetIsCrumpled))
+            if (currentProp == null || (currentPropAsOrigami != null && !currentPropAsOrigami.GetIsCrumpled))
             {
                 return;
             }
