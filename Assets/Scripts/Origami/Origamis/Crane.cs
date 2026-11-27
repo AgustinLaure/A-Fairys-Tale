@@ -168,7 +168,7 @@ public class Crane : Origami
             flyCoroutine = StartCoroutine(FlyCoroutine());
         }
 
-        eventBus.Raise<OnOrigamiUsed>();
+        eventBus.Raise<OnOrigamiUsed>(tag);
 
         sphereCollider.gameObject.layer = baseLayer;
 

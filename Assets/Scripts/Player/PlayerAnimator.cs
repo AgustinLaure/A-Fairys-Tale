@@ -634,6 +634,8 @@ public class PlayerAnimator : MonoBehaviour
         {
             playerAnimator.armature.animation.timeScale = playerAnimator.landToIdleAnimMult;
             playerAnimator.armature.animation.Play(PlayerAnimator.landToIdleAnim, 1);
+
+            playerAnimator.eventBus.Raise<OnPlayerLandAnimFinished>();
         }
 
         public override void Update()
@@ -685,6 +687,8 @@ public class PlayerAnimator : MonoBehaviour
         {
             playerAnimator.armature.animation.timeScale = playerAnimator.landToWalkAnimMult;
             playerAnimator.armature.animation.Play(PlayerAnimator.landToWalkAnim, 1);
+
+            playerAnimator.eventBus.Raise<OnPlayerLandAnimFinished>();
         }
 
         public override void Update()

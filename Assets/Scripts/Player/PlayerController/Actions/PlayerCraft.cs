@@ -134,6 +134,8 @@ public class PlayerCraft : MonoBehaviour
                 move = Move.Down;
             }
 
+            eventBus.Raise<OnCraftMove>(move);
+
             AddMove(move);
         }
     }

@@ -8,12 +8,15 @@ public class PlayerUseProp : MonoBehaviour
     private InputHandler inputHandle;
     private InputAction usePropAction;
 
+    private EventBus eventBus;
+
 #if UNITY_EDITOR
     private bool isGameFocusedThisFrame = false;
 #endif
 
     private void Start()
     {
+        eventBus = ServiceLocator.Instance.GetService<EventBus>();
         inputHandle = ServiceLocator.Instance.GetService<InputHandler>();
         usePropAction = inputHandle.playerInput.actions["UseProp"];
 

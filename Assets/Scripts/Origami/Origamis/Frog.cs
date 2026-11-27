@@ -77,7 +77,7 @@ public class Frog : Origami
 
         yield return new WaitUntil(() => dropAnimFinished);
 
-        eventBus.Raise<OnOrigamiUsed>();
+        eventBus.Raise<OnOrigamiUsed>(tag);
 
         Enable();
         Launch();

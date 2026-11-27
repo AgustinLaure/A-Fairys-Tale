@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 9036503030798017181}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &4720311483658818617
 GameObject:
@@ -143,7 +144,7 @@ GameObject:
   - component: {fileID: 1012843883258360534}
   m_Layer: 9
   m_Name: Frog
-  m_TagString: Untagged
+  m_TagString: Frog
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 314974141402601704}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &6391290373599510479
 GameObject:
@@ -485,6 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadingSprite
   fadeLayerSprite: {fileID: 6197449394579645867}
+  shouldntDarken: 0
   teleportable: 0
 --- !u!1 &8554481571181995059
 GameObject:

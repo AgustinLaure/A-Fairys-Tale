@@ -187,7 +187,7 @@ public class Aircraft : Origami
         Enable();
         Launch();
 
-        eventBus.Raise<OnOrigamiUsed>();
+        eventBus.Raise<OnOrigamiUsed>(tag);
 
         yield return new WaitForSeconds(timeToEnablePlayerCollision);
 
